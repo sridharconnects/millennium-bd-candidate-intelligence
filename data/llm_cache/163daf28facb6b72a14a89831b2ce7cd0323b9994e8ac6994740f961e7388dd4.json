@@ -1,0 +1,186 @@
+{
+ "data": {
+  "full_name": {
+   "value": "Priya Nakamura",
+   "quote": "Priya Nakamura"
+  },
+  "email": {
+   "value": null,
+   "quote": null
+  },
+  "phone": {
+   "value": null,
+   "quote": null
+  },
+  "home_address": {
+   "value": null,
+   "quote": null
+  },
+  "location_current": {
+   "value": null,
+   "quote": null
+  },
+  "headline": {
+   "value": "Lead Healthcare Analyst",
+   "quote": "ICICI Securities - Lead Healthcare Analyst -May'23 to till date"
+  },
+  "summary": {
+   "value": "I have been covering the healthcare sector for 9years, currently employed with ICICI Securities. Coverage includes 25 healthcare stocks spread across different sub segments of healthcare / pharmaceutical value chain.",
+   "quote": "I have been covering the healthcare sector for 9years, currently employed with ICICI Securities. Coverage includes 25 healthcare stocks spread across different sub segments of healthcare / pharmaceutical value chain."
+  },
+  "marital_status": {
+   "value": "Married",
+   "quote": "Marital Status - Married"
+  },
+  "work_authorization": {
+   "value": null,
+   "quote": null
+  },
+  "education": [
+   {
+    "institution": {
+     "value": "Mumbai Institute of Management Studies (MIMS)",
+     "quote": "Mumbai Institute of Management Studies (MIMS)"
+    },
+    "degree_raw": {
+     "value": "MBA- Finance",
+     "quote": "MBA- Finance"
+    },
+    "field_of_study": {
+     "value": "Finance",
+     "quote": "MBA- Finance"
+    },
+    "graduation_year": {
+     "value": 2013,
+     "quote": "2011-13"
+    },
+    "gpa_raw": {
+     "value": null,
+     "quote": null
+    },
+    "location": {
+     "value": null,
+     "quote": null
+    },
+    "honors": []
+   },
+   {
+    "institution": {
+     "value": "University of Pune",
+     "quote": "University of Pune"
+    },
+    "degree_raw": {
+     "value": "MCOM",
+     "quote": "MCOM"
+    },
+    "field_of_study": {
+     "value": null,
+     "quote": null
+    },
+    "graduation_year": {
+     "value": 2013,
+     "quote": "2013"
+    },
+    "gpa_raw": {
+     "value": null,
+     "quote": null
+    },
+    "location": {
+     "value": null,
+     "quote": null
+    },
+    "honors": []
+   },
+   {
+    "institution": {
+     "value": "Thakur College of Commerce",
+     "quote": "Thakur College of Commerce"
+    },
+    "degree_raw": {
+     "value": "B.M.S",
+     "quote": "B.M.S"
+    },
+    "field_of_study": {
+     "value": null,
+     "quote": null
+    },
+    "graduation_year": {
+     "value": 2007,
+     "quote": "2007"
+    },
+    "gpa_raw": {
+     "value": null,
+     "quote": null
+    },
+    "location": {
+     "value": null,
+     "quote": null
+    },
+    "honors": []
+   },
+   {
+    "institution": {
+     "value": "Jai Hind College",
+     "quote": "Jai Hind College"
+    },
+    "degree_raw": {
+     "value": "HSC",
+     "quote": "HSC"
+    },
+    "field_of_study": {
+     "value": null,
+     "quote": null
+    },
+    "graduation_year": {
+     "value": 2004,
+     "quote": "2004"
+    },
+    "gpa_raw": {
+     "value": null,
+     "quote": null
+    },
+    "location": {
+     "value": null,
+     "quote": null
+    },
+    "honors": []
+   },
+   {
+    "institution": {
+     "value": "Modern High School and Junior College",
+     "quote": "Modern High School and Junior College"
+    },
+    "degree_raw": {
+     "value": "SSC",
+     "quote": "SSC"
+    },
+    "field_of_study": {
+     "value": null,
+     "quote": null
+    },
+    "graduation_year": {
+     "value": 2002,
+     "quote": "2002"
+    },
+    "gpa_raw": {
+     "value": null,
+     "quote": null
+    },
+    "location": {
+     "value": null,
+     "quote": null
+    },
+    "honors": []
+   }
+  ],
+  "certifications": [],
+  "languages": [],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"full_name\": {\n    \"value\": \"Priya Nakamura\",\n    \"quote\": \"Priya Nakamura\"\n  },\n  \"email\": {\n    \"value\": null,\n    \"quote\": null\n  },\n  \"phone\": {\n    \"value\": null,\n    \"quote\": null\n  },\n  \"home_address\": {\n    \"value\": null,\n    \"quote\": null\n  },\n  \"location_current\": {\n    \"value\": null,\n    \"quote\": null\n  },\n  \"headline\": {\n    \"value\": \"Lead Healthcare Analyst\",\n    \"quote\": \"ICICI Securities - Lead Healthcare Analyst -May'23 to till date\"\n  },\n  \"summary\": {\n    \"value\": \"I have been covering the healthcare sector for 9years, currently employed with ICICI Securities. Coverage includes 25 healthcare stocks spread across different sub segments of healthcare / pharmaceutical value chain.\",\n    \"quote\": \"I have been covering the healthcare sector for 9years, currently employed with ICICI Securities. Coverage includes 25 healthcare stocks spread across different sub segments of healthcare / pharmaceutical value chain.\"\n  },\n  \"marital_status\": {\n    \"value\": \"Married\",\n    \"quote\": \"Marital Status - Married\"\n  },\n  \"work_authorization\": {\n    \"value\": null,\n    \"quote\": null\n  },\n  \"education\": [\n    {\n      \"institution\": {\n        \"value\": \"Mumbai Institute of Management Studies (MIMS)\",\n        \"quote\": \"Mumbai Institute of Management Studies (MIMS)\"\n      },\n      \"degree_raw\": {\n        \"value\": \"MBA- Finance\",\n        \"quote\": \"MBA- Finance\"\n      },\n      \"field_of_study\": {\n        \"value\": \"Finance\",\n        \"quote\": \"MBA- Finance\"\n      },\n      \"graduation_year\": {\n        \"value\": 2013,\n        \"quote\": \"2011-13\"\n      },\n      \"gpa_raw\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"honors\": []\n    },\n    {\n      \"institution\": {\n        \"value\": \"University of Pune\",\n        \"quote\": \"University of Pune\"\n      },\n      \"degree_raw\": {\n        \"value\": \"MCOM\",\n        \"quote\": \"MCOM\"\n      },\n      \"field_of_study\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"graduation_year\": {\n        \"value\": 2013,\n        \"quote\": \"2013\"\n      },\n      \"gpa_raw\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"honors\": []\n    },\n    {\n      \"institution\": {\n        \"value\": \"Thakur College of Commerce\",\n        \"quote\": \"Thakur College of Commerce\"\n      },\n      \"degree_raw\": {\n        \"value\": \"B.M.S\",\n        \"quote\": \"B.M.S\"\n      },\n      \"field_of_study\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"graduation_year\": {\n        \"value\": 2007,\n        \"quote\": \"2007\"\n      },\n      \"gpa_raw\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"honors\": []\n    },\n    {\n      \"institution\": {\n        \"value\": \"Jai Hind College\",\n        \"quote\": \"Jai Hind College\"\n      },\n      \"degree_raw\": {\n        \"value\": \"HSC\",\n        \"quote\": \"HSC\"\n      },\n      \"field_of_study\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"graduation_year\": {\n        \"value\": 2004,\n        \"quote\": \"2004\"\n      },\n      \"gpa_raw\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"honors\": []\n    },\n    {\n      \"institution\": {\n        \"value\": \"Modern High School and Junior College\",\n        \"quote\": \"Modern High School and Junior College\"\n      },\n      \"degree_raw\": {\n        \"value\": \"SSC\",\n        \"quote\": \"SSC\"\n      },\n      \"field_of_study\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"graduation_year\": {\n        \"value\": 2002,\n        \"quote\": \"2002\"\n      },\n      \"gpa_raw\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"honors\": []\n    }\n  ],\n  \"certifications\": [],\n  \"languages\": [],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 2358,
+ "tokens_out": 1281,
+ "latency_ms": 11620,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "identity"
+}

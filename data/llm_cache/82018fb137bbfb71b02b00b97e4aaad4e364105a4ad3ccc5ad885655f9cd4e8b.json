@@ -1,0 +1,214 @@
+{
+ "data": {
+  "employment": [
+   {
+    "employer_raw": {
+     "value": "Cinctive Capital Management",
+     "quote": "Cinctive Capital Management, New York, NY"
+    },
+    "title_raw": {
+     "value": "Investment Analyst",
+     "quote": "Investment Analyst"
+    },
+    "location": {
+     "value": "New York, NY",
+     "quote": "New York, NY"
+    },
+    "start": {
+     "value": "2021-09",
+     "quote": "Sep 2021"
+    },
+    "end": {
+     "value": "present",
+     "quote": "Present"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "highlights": [
+     {
+      "value": "Work directly with portfolio managers to deploy long/short equity strategy across ~75 Technology/Media stocks under coverage (with primary focus on cloud computing and digital advertising sectors)",
+      "quote": "Work directly with portfolio managers to deploy long/short equity strategy across ~75 Technology/Media stocks under coverage (with primary focus on cloud computing and digital advertising sectors)"
+     },
+     {
+      "value": "Source investment ideas through fundamental research, financial KPI analysis, alternative data tracking, and macroeconomic trend analysis across covered sectors",
+      "quote": "Source investment ideas through fundamental research, financial KPI analysis, alternative data tracking, and macroeconomic trend analysis across covered sectors"
+     },
+     {
+      "value": "Conduct quarterly management meetings to discuss strategic initiatives, growth opportunities, operational efficiency programs, and competitive positioning within industry verticals",
+      "quote": "Conduct quarterly management meetings to discuss strategic initiatives, growth opportunities, operational efficiency programs, and competitive positioning within industry verticals"
+     },
+     {
+      "value": "Develop tactical trading strategies around earnings events and create detailed investment previews highlighting recommended actions based on consensus expectations, proprietary data analysis, valuation metrics, and catalyst timing",
+      "quote": "Develop tactical trading strategies around earnings events and create detailed investment previews highlighting recommended actions based on consensus expectations, proprietary data analysis, valuation metrics, and catalyst timing"
+     },
+     {
+      "value": "Coverage includes leading technology companies across cloud infrastructure, e-commerce platforms, digital advertising, streaming services, enterprise software, mobility platforms, online marketplaces, social media, and digital entertainment sectors",
+      "quote": "Coverage includes leading technology companies across cloud infrastructure, e-commerce platforms, digital advertising, streaming services, enterprise software, mobility platforms, online marketplaces, social media, and digital entertainment sectors"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Goldman Sachs",
+     "quote": "Goldman Sachs, New York, NY"
+    },
+    "title_raw": {
+     "value": "Equity Research, U.S. Internet & Interactive Entertainment - Associate",
+     "quote": "Equity Research, U.S. Internet & Interactive Entertainment - Associate"
+    },
+    "location": {
+     "value": "New York, NY",
+     "quote": "New York, NY"
+    },
+    "start": {
+     "value": "2019-02",
+     "quote": "Feb 2019"
+    },
+    "end": {
+     "value": "2021-09",
+     "quote": "Sep 2021"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "highlights": [
+     {
+      "value": "Supporting coverage of technology and media sectors for Institutional Investor ranked equity analyst team covering 40+ stocks with over $4.5 trillion in combined market capitalization",
+      "quote": "Supporting coverage of technology and media sectors for Institutional Investor ranked equity analyst team covering 40+ stocks with over $4.5 trillion in combined market capitalization"
+     },
+     {
+      "value": "Built comprehensive financial models and conducted fundamental analysis to generate investment recommendations using DCF, comparable company, and sum-of-the-parts valuation methodologies",
+      "quote": "Built comprehensive financial models and conducted fundamental analysis to generate investment recommendations using DCF, comparable company, and sum-of-the-parts valuation methodologies"
+     },
+     {
+      "value": "Maintained relationships with institutional investor clients including hedge funds and mutual funds, providing sector insights, company-specific research, and investment forecasting to support their decision-making processes",
+      "quote": "Maintained relationships with institutional investor clients including hedge funds and mutual funds, providing sector insights, company-specific research, and investment forecasting to support their decision-making processes"
+     },
+     {
+      "value": "Supported IPO due diligence for eight investment banking transactions, contributing to pre-marketing investor education, financial model construction, valuation analysis, and research coverage initiation",
+      "quote": "Supported IPO due diligence for eight investment banking transactions, contributing to pre-marketing investor education, financial model construction, valuation analysis, and research coverage initiation"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "J.P. Morgan Asset Management",
+     "quote": "J.P. Morgan Asset Management, New York, NY"
+    },
+    "title_raw": {
+     "value": "U.S. Equity, Business Management - Associate",
+     "quote": "U.S. Equity, Business Management - Associate"
+    },
+    "location": {
+     "value": "New York, NY",
+     "quote": "New York, NY"
+    },
+    "start": {
+     "value": "2017-07",
+     "quote": "Jul 2017"
+    },
+    "end": {
+     "value": "2019-02",
+     "quote": "Feb 2019"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "highlights": [
+     {
+      "value": "Coordinated research vendor relationships for 120+ Portfolio Managers and Research Analysts across 180+ external research providers, implementing process improvements following regulatory changes",
+      "quote": "Coordinated research vendor relationships for 120+ Portfolio Managers and Research Analysts across 180+ external research providers, implementing process improvements following regulatory changes"
+     },
+     {
+      "value": "Analyzed assets under management and capital flows with Chief Investment Officers to determine optimal capacity targets and strategic positioning across 50+ active investment strategies",
+      "quote": "Analyzed assets under management and capital flows with Chief Investment Officers to determine optimal capacity targets and strategic positioning across 50+ active investment strategies"
+     },
+     {
+      "value": "Managed vendor relationships with research networks, data providers, and analytics platforms to enhance investment decision-making capabilities",
+      "quote": "Managed vendor relationships with research networks, data providers, and analytics platforms to enhance investment decision-making capabilities"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "J.P. Morgan Chase & Co.",
+     "quote": "J.P. Morgan Chase & Co., New York, NY"
+    },
+    "title_raw": {
+     "value": "Office of the CFO, Strategy and Analytics - Analyst",
+     "quote": "Office of the CFO, Strategy and Analytics - Analyst"
+    },
+    "location": {
+     "value": "New York, NY",
+     "quote": "New York, NY"
+    },
+    "start": {
+     "value": "2016-05",
+     "quote": "May 2016"
+    },
+    "end": {
+     "value": "2017-07",
+     "quote": "Jul 2017"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "highlights": [
+     {
+      "value": "Analyzed the firm's expense drivers (such as strategic investments, headcount growth, and location presence) and partnered with business lines to forecast a three year budget that aligned with the CFO's key priorities",
+      "quote": "Analyzed the firm's expense drivers (such as strategic investments, headcount growth, and location presence) and partnered with business lines to forecast a three year budget that aligned with the CFO's key priorities"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "PwC",
+     "quote": "PwC, New York, NY"
+    },
+    "title_raw": {
+     "value": "Corporate Development & Transaction Services (CDTS) - Analyst",
+     "quote": "Corporate Development & Transaction Services (CDTS) - Analyst"
+    },
+    "location": {
+     "value": "New York, NY",
+     "quote": "New York, NY"
+    },
+    "start": {
+     "value": "2014-08",
+     "quote": "Aug 2014"
+    },
+    "end": {
+     "value": "2016-05",
+     "quote": "May 2016"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "highlights": [
+     {
+      "value": "Developed comprehensive financial models (P&L, balance sheet, cash flow projections) supporting origination of complex client engagements and strategic transaction advisory services",
+      "quote": "Developed comprehensive financial models (P&L, balance sheet, cash flow projections) supporting origination of complex client engagements and strategic transaction advisory services"
+     }
+    ]
+   }
+  ],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"employment\": [\n    {\n      \"employer_raw\": {\n        \"value\": \"Cinctive Capital Management\",\n        \"quote\": \"Cinctive Capital Management, New York, NY\"\n      },\n      \"title_raw\": {\n        \"value\": \"Investment Analyst\",\n        \"quote\": \"Investment Analyst\"\n      },\n      \"location\": {\n        \"value\": \"New York, NY\",\n        \"quote\": \"New York, NY\"\n      },\n      \"start\": {\n        \"value\": \"2021-09\",\n        \"quote\": \"Sep 2021\"\n      },\n      \"end\": {\n        \"value\": \"present\",\n        \"quote\": \"Present\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Work directly with portfolio managers to deploy long/short equity strategy across ~75 Technology/Media stocks under coverage (with primary focus on cloud computing and digital advertising sectors)\",\n          \"quote\": \"Work directly with portfolio managers to deploy long/short equity strategy across ~75 Technology/Media stocks under coverage (with primary focus on cloud computing and digital advertising sectors)\"\n        },\n        {\n          \"value\": \"Source investment ideas through fundamental research, financial KPI analysis, alternative data tracking, and macroeconomic trend analysis across covered sectors\",\n          \"quote\": \"Source investment ideas through fundamental research, financial KPI analysis, alternative data tracking, and macroeconomic trend analysis across covered sectors\"\n        },\n        {\n          \"value\": \"Conduct quarterly management meetings to discuss strategic initiatives, growth opportunities, operational efficiency programs, and competitive positioning within industry verticals\",\n          \"quote\": \"Conduct quarterly management meetings to discuss strategic initiatives, growth opportunities, operational efficiency programs, and competitive positioning within industry verticals\"\n        },\n        {\n          \"value\": \"Develop tactical trading strategies around earnings events and create detailed investment previews highlighting recommended actions based on consensus expectations, proprietary data analysis, valuation metrics, and catalyst timing\",\n          \"quote\": \"Develop tactical trading strategies around earnings events and create detailed investment previews highlighting recommended actions based on consensus expectations, proprietary data analysis, valuation metrics, and catalyst timing\"\n        },\n        {\n          \"value\": \"Coverage includes leading technology companies across cloud infrastructure, e-commerce platforms, digital advertising, streaming services, enterprise software, mobility platforms, online marketplaces, social media, and digital entertainment sectors\",\n          \"quote\": \"Coverage includes leading technology companies across cloud infrastructure, e-commerce platforms, digital advertising, streaming services, enterprise software, mobility platforms, online marketplaces, social media, and digital entertainment sectors\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Goldman Sachs\",\n        \"quote\": \"Goldman Sachs, New York, NY\"\n      },\n      \"title_raw\": {\n        \"value\": \"Equity Research, U.S. Internet & Interactive Entertainment - Associate\",\n        \"quote\": \"Equity Research, U.S. Internet & Interactive Entertainment - Associate\"\n      },\n      \"location\": {\n        \"value\": \"New York, NY\",\n        \"quote\": \"New York, NY\"\n      },\n      \"start\": {\n        \"value\": \"2019-02\",\n        \"quote\": \"Feb 2019\"\n      },\n      \"end\": {\n        \"value\": \"2021-09\",\n        \"quote\": \"Sep 2021\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Supporting coverage of technology and media sectors for Institutional Investor ranked equity analyst team covering 40+ stocks with over $4.5 trillion in combined market capitalization\",\n          \"quote\": \"Supporting coverage of technology and media sectors for Institutional Investor ranked equity analyst team covering 40+ stocks with over $4.5 trillion in combined market capitalization\"\n        },\n        {\n          \"value\": \"Built comprehensive financial models and conducted fundamental analysis to generate investment recommendations using DCF, comparable company, and sum-of-the-parts valuation methodologies\",\n          \"quote\": \"Built comprehensive financial models and conducted fundamental analysis to generate investment recommendations using DCF, comparable company, and sum-of-the-parts valuation methodologies\"\n        },\n        {\n          \"value\": \"Maintained relationships with institutional investor clients including hedge funds and mutual funds, providing sector insights, company-specific research, and investment forecasting to support their decision-making processes\",\n          \"quote\": \"Maintained relationships with institutional investor clients including hedge funds and mutual funds, providing sector insights, company-specific research, and investment forecasting to support their decision-making processes\"\n        },\n        {\n          \"value\": \"Supported IPO due diligence for eight investment banking transactions, contributing to pre-marketing investor education, financial model construction, valuation analysis, and research coverage initiation\",\n          \"quote\": \"Supported IPO due diligence for eight investment banking transactions, contributing to pre-marketing investor education, financial model construction, valuation analysis, and research coverage initiation\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"J.P. Morgan Asset Management\",\n        \"quote\": \"J.P. Morgan Asset Management, New York, NY\"\n      },\n      \"title_raw\": {\n        \"value\": \"U.S. Equity, Business Management - Associate\",\n        \"quote\": \"U.S. Equity, Business Management - Associate\"\n      },\n      \"location\": {\n        \"value\": \"New York, NY\",\n        \"quote\": \"New York, NY\"\n      },\n      \"start\": {\n        \"value\": \"2017-07\",\n        \"quote\": \"Jul 2017\"\n      },\n      \"end\": {\n        \"value\": \"2019-02\",\n        \"quote\": \"Feb 2019\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Coordinated research vendor relationships for 120+ Portfolio Managers and Research Analysts across 180+ external research providers, implementing process improvements following regulatory changes\",\n          \"quote\": \"Coordinated research vendor relationships for 120+ Portfolio Managers and Research Analysts across 180+ external research providers, implementing process improvements following regulatory changes\"\n        },\n        {\n          \"value\": \"Analyzed assets under management and capital flows with Chief Investment Officers to determine optimal capacity targets and strategic positioning across 50+ active investment strategies\",\n          \"quote\": \"Analyzed assets under management and capital flows with Chief Investment Officers to determine optimal capacity targets and strategic positioning across 50+ active investment strategies\"\n        },\n        {\n          \"value\": \"Managed vendor relationships with research networks, data providers, and analytics platforms to enhance investment decision-making capabilities\",\n          \"quote\": \"Managed vendor relationships with research networks, data providers, and analytics platforms to enhance investment decision-making capabilities\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"J.P. Morgan Chase & Co.\",\n        \"quote\": \"J.P. Morgan Chase & Co., New York, NY\"\n      },\n      \"title_raw\": {\n        \"value\": \"Office of the CFO, Strategy and Analytics - Analyst\",\n        \"quote\": \"Office of the CFO, Strategy and Analytics - Analyst\"\n      },\n      \"location\": {\n        \"value\": \"New York, NY\",\n        \"quote\": \"New York, NY\"\n      },\n      \"start\": {\n        \"value\": \"2016-05\",\n        \"quote\": \"May 2016\"\n      },\n      \"end\": {\n        \"value\": \"2017-07\",\n        \"quote\": \"Jul 2017\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Analyzed the firm's expense drivers (such as strategic investments, headcount growth, and location presence) and partnered with business lines to forecast a three year budget that aligned with the CFO's key priorities\",\n          \"quote\": \"Analyzed the firm's expense drivers (such as strategic investments, headcount growth, and location presence) and partnered with business lines to forecast a three year budget that aligned with the CFO's key priorities\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"PwC\",\n        \"quote\": \"PwC, New York, NY\"\n      },\n      \"title_raw\": {\n        \"value\": \"Corporate Development & Transaction Services (CDTS) - Analyst\",\n        \"quote\": \"Corporate Development & Transaction Services (CDTS) - Analyst\"\n      },\n      \"location\": {\n        \"value\": \"New York, NY\",\n        \"quote\": \"New York, NY\"\n      },\n      \"start\": {\n        \"value\": \"2014-08\",\n        \"quote\": \"Aug 2014\"\n      },\n      \"end\": {\n        \"value\": \"2016-05\",\n        \"quote\": \"May 2016\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Developed comprehensive financial models (P&L, balance sheet, cash flow projections) supporting origination of complex client engagements and strategic transaction advisory services\",\n          \"quote\": \"Developed comprehensive financial models (P&L, balance sheet, cash flow projections) supporting origination of complex client engagements and strategic transaction advisory services\"\n        }\n      ]\n    }\n  ],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 1835,
+ "tokens_out": 2327,
+ "latency_ms": 19114,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "employment"
+}

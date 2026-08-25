@@ -1,0 +1,143 @@
+{
+ "data": {
+  "full_name": {
+   "value": "Omar El-Hassan",
+   "quote": "Omar El-Hassan"
+  },
+  "email": {
+   "value": "o.elhassan15@gmail.com",
+   "quote": "o.elhassan15@gmail.com"
+  },
+  "phone": {
+   "value": "+ 33678924531",
+   "quote": "+ 33678924531"
+  },
+  "home_address": {
+   "value": null,
+   "quote": null
+  },
+  "location_current": {
+   "value": "Paris, France",
+   "quote": "Paris, France"
+  },
+  "headline": {
+   "value": "Quantitative Developer - BNP Paribas CIB",
+   "quote": "Quantitative Developer - BNP Paribas CIB"
+  },
+  "summary": {
+   "value": null,
+   "quote": null
+  },
+  "marital_status": {
+   "value": null,
+   "quote": null
+  },
+  "work_authorization": {
+   "value": null,
+   "quote": null
+  },
+  "education": [
+   {
+    "institution": {
+     "value": "INSA Lyon",
+     "quote": "INSA Lyon"
+    },
+    "degree_raw": {
+     "value": "Diplôme d'Ingénieur",
+     "quote": "Diplôme d'Ingénieur"
+    },
+    "field_of_study": {
+     "value": "Financial Engineering",
+     "quote": "Financial\nEngineering"
+    },
+    "graduation_year": {
+     "value": 2022,
+     "quote": "From September 2019 to September 2022"
+    },
+    "gpa_raw": {
+     "value": null,
+     "quote": null
+    },
+    "location": {
+     "value": "France",
+     "quote": "France"
+    },
+    "honors": []
+   },
+   {
+    "institution": {
+     "value": "Universite Lyon",
+     "quote": "Universite Lyon"
+    },
+    "degree_raw": {
+     "value": "Master's degree",
+     "quote": "Master's degree"
+    },
+    "field_of_study": {
+     "value": "Quantitative Finance",
+     "quote": "Quantitative Finance"
+    },
+    "graduation_year": {
+     "value": 2022,
+     "quote": "From September 2021 to September 2022"
+    },
+    "gpa_raw": {
+     "value": null,
+     "quote": null
+    },
+    "location": {
+     "value": "France",
+     "quote": "France"
+    },
+    "honors": []
+   },
+   {
+    "institution": {
+     "value": "École Royale Navale",
+     "quote": "École Royale Navale"
+    },
+    "degree_raw": {
+     "value": "Preparatory Classes",
+     "quote": "Preparatory Classes"
+    },
+    "field_of_study": {
+     "value": "Mathematics and Physics",
+     "quote": "Mathematics and Physics"
+    },
+    "graduation_year": {
+     "value": 2019,
+     "quote": "From September 2017 to July 2019"
+    },
+    "gpa_raw": {
+     "value": null,
+     "quote": null
+    },
+    "location": {
+     "value": "Casablanca, Morocco",
+     "quote": "Casablanca, Morocco"
+    },
+    "honors": []
+   }
+  ],
+  "certifications": [],
+  "languages": [
+   {
+    "language": "English",
+    "proficiency": null,
+    "quote": "English"
+   },
+   {
+    "language": "Arabic",
+    "proficiency": null,
+    "quote": "Arabic"
+   }
+  ],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"full_name\": {\n    \"value\": \"Omar El-Hassan\",\n    \"quote\": \"Omar El-Hassan\"\n  },\n  \"email\": {\n    \"value\": \"o.elhassan15@gmail.com\",\n    \"quote\": \"o.elhassan15@gmail.com\"\n  },\n  \"phone\": {\n    \"value\": \"+ 33678924531\",\n    \"quote\": \"+ 33678924531\"\n  },\n  \"home_address\": {\n    \"value\": null,\n    \"quote\": null\n  },\n  \"location_current\": {\n    \"value\": \"Paris, France\",\n    \"quote\": \"Paris, France\"\n  },\n  \"headline\": {\n    \"value\": \"Quantitative Developer - BNP Paribas CIB\",\n    \"quote\": \"Quantitative Developer - BNP Paribas CIB\"\n  },\n  \"summary\": {\n    \"value\": null,\n    \"quote\": null\n  },\n  \"marital_status\": {\n    \"value\": null,\n    \"quote\": null\n  },\n  \"work_authorization\": {\n    \"value\": null,\n    \"quote\": null\n  },\n  \"education\": [\n    {\n      \"institution\": {\n        \"value\": \"INSA Lyon\",\n        \"quote\": \"INSA Lyon\"\n      },\n      \"degree_raw\": {\n        \"value\": \"Diplôme d'Ingénieur\",\n        \"quote\": \"Diplôme d'Ingénieur\"\n      },\n      \"field_of_study\": {\n        \"value\": \"Financial Engineering\",\n        \"quote\": \"Financial\\nEngineering\"\n      },\n      \"graduation_year\": {\n        \"value\": 2022,\n        \"quote\": \"From September 2019 to September 2022\"\n      },\n      \"gpa_raw\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"location\": {\n        \"value\": \"France\",\n        \"quote\": \"France\"\n      },\n      \"honors\": []\n    },\n    {\n      \"institution\": {\n        \"value\": \"Universite Lyon\",\n        \"quote\": \"Universite Lyon\"\n      },\n      \"degree_raw\": {\n        \"value\": \"Master's degree\",\n        \"quote\": \"Master's degree\"\n      },\n      \"field_of_study\": {\n        \"value\": \"Quantitative Finance\",\n        \"quote\": \"Quantitative Finance\"\n      },\n      \"graduation_year\": {\n        \"value\": 2022,\n        \"quote\": \"From September 2021 to September 2022\"\n      },\n      \"gpa_raw\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"location\": {\n        \"value\": \"France\",\n        \"quote\": \"France\"\n      },\n      \"honors\": []\n    },\n    {\n      \"institution\": {\n        \"value\": \"École Royale Navale\",\n        \"quote\": \"École Royale Navale\"\n      },\n      \"degree_raw\": {\n        \"value\": \"Preparatory Classes\",\n        \"quote\": \"Preparatory Classes\"\n      },\n      \"field_of_study\": {\n        \"value\": \"Mathematics and Physics\",\n        \"quote\": \"Mathematics and Physics\"\n      },\n      \"graduation_year\": {\n        \"value\": 2019,\n        \"quote\": \"From September 2017 to July 2019\"\n      },\n      \"gpa_raw\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"location\": {\n        \"value\": \"Casablanca, Morocco\",\n        \"quote\": \"Casablanca, Morocco\"\n      },\n      \"honors\": []\n    }\n  ],\n  \"certifications\": [],\n  \"languages\": [\n    {\n      \"language\": \"English\",\n      \"proficiency\": null,\n      \"quote\": \"English\"\n    },\n    {\n      \"language\": \"Arabic\",\n      \"proficiency\": null,\n      \"quote\": \"Arabic\"\n    }\n  ],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 1681,
+ "tokens_out": 1009,
+ "latency_ms": 9513,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "identity"
+}

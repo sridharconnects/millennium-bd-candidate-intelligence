@@ -1,0 +1,243 @@
+{
+ "data": {
+  "employment": [
+   {
+    "employer_raw": {
+     "value": "Bank of China Hong Kong",
+     "quote": "Bank of China Hong Kong"
+    },
+    "title_raw": {
+     "value": "Investment Analyst",
+     "quote": "Investment Analyst"
+    },
+    "location": {
+     "value": null,
+     "quote": "Hong Kong"
+    },
+    "start": {
+     "value": "2021-06",
+     "quote": "June.2021"
+    },
+    "end": {
+     "value": "2023-09",
+     "quote": "Sep.2023"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "highlights": [
+     {
+      "value": "Conduct comprehensive quantitative analysis on large-scale Asian equity datasets to provide statistical support for portfolio managers. Analyze market trends, sector rotations, and statistical anomalies, delivering actionable insights for investment decision-making and strategy optimization.",
+      "quote": "Conduct comprehensive quantitative analysis on large-scale Asian equity datasets to provide statistical support for portfolio managers."
+     },
+     {
+      "value": "Independently developed, constructed and actively managed a multi-factor quantitative model focusing on Greater China technology equities, achieving superior risk-adjusted returns with Sharpe ratio of 1.8+ over 12-month period.",
+      "quote": "Independently developed, constructed and actively managed a multi-factor quantitative model focusing on Greater China technology equities, achieving superior risk-adjusted returns with Sharpe ratio of 1.8+ over 12-month period."
+     },
+     {
+      "value": "Established automated market surveillance system to monitor real-time market conditions, news sentiment, and macro events to identify investment opportunities and manage portfolio risk exposures.",
+      "quote": "Established automated market surveillance system to monitor real-time market conditions, news sentiment, and macro events to identify investment opportunities and manage portfolio risk exposures."
+     },
+     {
+      "value": "Conducted rigorous backtesting and performance attribution analysis of systematic trading strategies, utilizing advanced statistical methods and machine learning techniques to enhance strategy performance and risk management.",
+      "quote": "Conducted rigorous backtesting and performance attribution analysis of systematic trading strategies, utilizing advanced statistical methods and machine learning techniques"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Bank of China Hong Kong",
+     "quote": "Bank of China Hong Kong"
+    },
+    "title_raw": {
+     "value": "Investment Intern",
+     "quote": "Investment Intern"
+    },
+    "location": {
+     "value": null,
+     "quote": null
+    },
+    "start": {
+     "value": "2019-12",
+     "quote": "Dec.2019"
+    },
+    "end": {
+     "value": "2021-05",
+     "quote": "May.2021"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": true,
+    "highlights": [
+     {
+      "value": "Performed comprehensive research on Asian technology and healthcare sectors, covering 15+ sub-industries and 35+ companies across Greater China markets.",
+      "quote": "Performed comprehensive research on Asian technology and healthcare sectors, covering 15+ sub-industries and 35+ companies across Greater China markets."
+     },
+     {
+      "value": "Supported investment team by conducting expert interviews, analyzing financial statements, building DCF and relative valuation models, and preparing detailed investment research reports for portfolio review.",
+      "quote": "Supported investment team by conducting expert interviews, analyzing financial statements, building DCF and relative valuation models, and preparing detailed investment research reports"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Chinese University of Hong Kong",
+     "quote": "Chinese University of Hong Kong"
+    },
+    "title_raw": {
+     "value": "Research Assistant (Economics Area)",
+     "quote": "Research Assistant (Economics Area)"
+    },
+    "location": {
+     "value": "Hong Kong",
+     "quote": "Hong Kong"
+    },
+    "start": {
+     "value": "2019-03",
+     "quote": "Mar.2019"
+    },
+    "end": {
+     "value": "2021-03",
+     "quote": "Mar.2021"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "highlights": [
+     {
+      "value": "Efficiently processed and analyzed over 200,000 historical Asian market firm-level data points using Python and R, conducting comprehensive statistical analysis for academic research. Implemented advanced data processing techniques resulting in 25x improvement in research team computational efficiency.",
+      "quote": "Efficiently processed and analyzed over 200,000 historical Asian market firm-level data points using Python and R, conducting comprehensive statistical analysis for academic research."
+     },
+     {
+      "value": "Utilized Python and GIS mapping tools to analyze regional economic activity data from satellite imagery, generating 400+ analytical outputs including statistical reports and visualization packages for publication.",
+      "quote": "Utilized Python and GIS mapping tools to analyze regional economic activity data from satellite imagery, generating 400+ analytical outputs including statistical reports and visualization packages"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Meridian Asia Capital",
+     "quote": "Meridian Asia Capital"
+    },
+    "title_raw": {
+     "value": "Finance Market Department Intern (Chinese Bond and Equity Market)",
+     "quote": "Finance Market Department Intern (Chinese Bond and Equity Market)"
+    },
+    "location": {
+     "value": "Jiangxi, China",
+     "quote": "Jiangxi, China"
+    },
+    "start": {
+     "value": "2019-07",
+     "quote": "Jul.2019"
+    },
+    "end": {
+     "value": "2019-08",
+     "quote": "Aug.2019"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": true,
+    "highlights": [
+     {
+      "value": "Conducted thorough investigation and analysis of equity information, resulting in the preparation of two comprehensive Equity Pledge Business Investigation Reports.",
+      "quote": "Conducted thorough investigation and analysis of equity information, resulting in the preparation of two comprehensive Equity Pledge Business Investigation Reports."
+     },
+     {
+      "value": "Assisted in company research and played a key role in drafting Bill Credit Investigation Reports.",
+      "quote": "Assisted in company research and played a key role in drafting Bill Credit Investigation Reports."
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Fujia Aid Teaching Society",
+     "quote": "Fujia Aid Teaching Society"
+    },
+    "title_raw": {
+     "value": "Vice President & Head of Public Relations Team",
+     "quote": "Vice President & Head of Public Relations Team"
+    },
+    "location": {
+     "value": "Hong Kong",
+     "quote": "Hong Kong"
+    },
+    "start": {
+     "value": "2019-09",
+     "quote": "Sep.2019"
+    },
+    "end": {
+     "value": "2020-06",
+     "quote": "Jun.2020"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "highlights": [
+     {
+      "value": "Developed strategic initiatives for the organization and supervised two regional programs: Guangzhou Rural Education Project and Shenzhen Migrant Children Support Initiative.",
+      "quote": "Developed strategic initiatives for the organization and supervised two regional programs: Guangzhou Rural Education Project and Shenzhen Migrant Children Support Initiative."
+     },
+     {
+      "value": "Led organizational marketing efforts across CUHK campus, increasing membership by 40% and creating educational video content to expand community engagement and awareness.",
+      "quote": "Led organizational marketing efforts across CUHK campus, increasing membership by 40% and creating educational video content to expand community engagement and awareness."
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "University Swimming Club",
+     "quote": "University Swimming Club"
+    },
+    "title_raw": {
+     "value": "Head of Promotion Team",
+     "quote": "Head of Promotion Team"
+    },
+    "location": {
+     "value": "Hong Kong",
+     "quote": "Hong Kong"
+    },
+    "start": {
+     "value": "2018-09",
+     "quote": "Sep.2018"
+    },
+    "end": {
+     "value": "2019-09",
+     "quote": "Sep.2019"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "highlights": [
+     {
+      "value": "Managed promotional activities for the swimming club, collaborating with multiple student organizations to coordinate events including Inter-University Swimming Gala (80+ participants) and Water Safety Workshop series.",
+      "quote": "Managed promotional activities for the swimming club, collaborating with multiple student organizations to coordinate events including Inter-University Swimming Gala (80+ participants)"
+     },
+     {
+      "value": "Developed and maintained digital communication platforms including WeChat groups and Instagram accounts to enhance member engagement and information dissemination.",
+      "quote": "Developed and maintained digital communication platforms including WeChat groups and Instagram accounts to enhance member engagement and information dissemination."
+     }
+    ]
+   }
+  ],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"employment\": [\n    {\n      \"employer_raw\": {\n        \"value\": \"Bank of China Hong Kong\",\n        \"quote\": \"Bank of China Hong Kong\"\n      },\n      \"title_raw\": {\n        \"value\": \"Investment Analyst\",\n        \"quote\": \"Investment Analyst\"\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": \"Hong Kong\"\n      },\n      \"start\": {\n        \"value\": \"2021-06\",\n        \"quote\": \"June.2021\"\n      },\n      \"end\": {\n        \"value\": \"2023-09\",\n        \"quote\": \"Sep.2023\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Conduct comprehensive quantitative analysis on large-scale Asian equity datasets to provide statistical support for portfolio managers. Analyze market trends, sector rotations, and statistical anomalies, delivering actionable insights for investment decision-making and strategy optimization.\",\n          \"quote\": \"Conduct comprehensive quantitative analysis on large-scale Asian equity datasets to provide statistical support for portfolio managers.\"\n        },\n        {\n          \"value\": \"Independently developed, constructed and actively managed a multi-factor quantitative model focusing on Greater China technology equities, achieving superior risk-adjusted returns with Sharpe ratio of 1.8+ over 12-month period.\",\n          \"quote\": \"Independently developed, constructed and actively managed a multi-factor quantitative model focusing on Greater China technology equities, achieving superior risk-adjusted returns with Sharpe ratio of 1.8+ over 12-month period.\"\n        },\n        {\n          \"value\": \"Established automated market surveillance system to monitor real-time market conditions, news sentiment, and macro events to identify investment opportunities and manage portfolio risk exposures.\",\n          \"quote\": \"Established automated market surveillance system to monitor real-time market conditions, news sentiment, and macro events to identify investment opportunities and manage portfolio risk exposures.\"\n        },\n        {\n          \"value\": \"Conducted rigorous backtesting and performance attribution analysis of systematic trading strategies, utilizing advanced statistical methods and machine learning techniques to enhance strategy performance and risk management.\",\n          \"quote\": \"Conducted rigorous backtesting and performance attribution analysis of systematic trading strategies, utilizing advanced statistical methods and machine learning techniques\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Bank of China Hong Kong\",\n        \"quote\": \"Bank of China Hong Kong\"\n      },\n      \"title_raw\": {\n        \"value\": \"Investment Intern\",\n        \"quote\": \"Investment Intern\"\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"start\": {\n        \"value\": \"2019-12\",\n        \"quote\": \"Dec.2019\"\n      },\n      \"end\": {\n        \"value\": \"2021-05\",\n        \"quote\": \"May.2021\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": true,\n      \"highlights\": [\n        {\n          \"value\": \"Performed comprehensive research on Asian technology and healthcare sectors, covering 15+ sub-industries and 35+ companies across Greater China markets.\",\n          \"quote\": \"Performed comprehensive research on Asian technology and healthcare sectors, covering 15+ sub-industries and 35+ companies across Greater China markets.\"\n        },\n        {\n          \"value\": \"Supported investment team by conducting expert interviews, analyzing financial statements, building DCF and relative valuation models, and preparing detailed investment research reports for portfolio review.\",\n          \"quote\": \"Supported investment team by conducting expert interviews, analyzing financial statements, building DCF and relative valuation models, and preparing detailed investment research reports\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Chinese University of Hong Kong\",\n        \"quote\": \"Chinese University of Hong Kong\"\n      },\n      \"title_raw\": {\n        \"value\": \"Research Assistant (Economics Area)\",\n        \"quote\": \"Research Assistant (Economics Area)\"\n      },\n      \"location\": {\n        \"value\": \"Hong Kong\",\n        \"quote\": \"Hong Kong\"\n      },\n      \"start\": {\n        \"value\": \"2019-03\",\n        \"quote\": \"Mar.2019\"\n      },\n      \"end\": {\n        \"value\": \"2021-03\",\n        \"quote\": \"Mar.2021\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Efficiently processed and analyzed over 200,000 historical Asian market firm-level data points using Python and R, conducting comprehensive statistical analysis for academic research. Implemented advanced data processing techniques resulting in 25x improvement in research team computational efficiency.\",\n          \"quote\": \"Efficiently processed and analyzed over 200,000 historical Asian market firm-level data points using Python and R, conducting comprehensive statistical analysis for academic research.\"\n        },\n        {\n          \"value\": \"Utilized Python and GIS mapping tools to analyze regional economic activity data from satellite imagery, generating 400+ analytical outputs including statistical reports and visualization packages for publication.\",\n          \"quote\": \"Utilized Python and GIS mapping tools to analyze regional economic activity data from satellite imagery, generating 400+ analytical outputs including statistical reports and visualization packages\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Meridian Asia Capital\",\n        \"quote\": \"Meridian Asia Capital\"\n      },\n      \"title_raw\": {\n        \"value\": \"Finance Market Department Intern (Chinese Bond and Equity Market)\",\n        \"quote\": \"Finance Market Department Intern (Chinese Bond and Equity Market)\"\n      },\n      \"location\": {\n        \"value\": \"Jiangxi, China\",\n        \"quote\": \"Jiangxi, China\"\n      },\n      \"start\": {\n        \"value\": \"2019-07\",\n        \"quote\": \"Jul.2019\"\n      },\n      \"end\": {\n        \"value\": \"2019-08\",\n        \"quote\": \"Aug.2019\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": true,\n      \"highlights\": [\n        {\n          \"value\": \"Conducted thorough investigation and analysis of equity information, resulting in the preparation of two comprehensive Equity Pledge Business Investigation Reports.\",\n          \"quote\": \"Conducted thorough investigation and analysis of equity information, resulting in the preparation of two comprehensive Equity Pledge Business Investigation Reports.\"\n        },\n        {\n          \"value\": \"Assisted in company research and played a key role in drafting Bill Credit Investigation Reports.\",\n          \"quote\": \"Assisted in company research and played a key role in drafting Bill Credit Investigation Reports.\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Fujia Aid Teaching Society\",\n        \"quote\": \"Fujia Aid Teaching Society\"\n      },\n      \"title_raw\": {\n        \"value\": \"Vice President & Head of Public Relations Team\",\n        \"quote\": \"Vice President & Head of Public Relations Team\"\n      },\n      \"location\": {\n        \"value\": \"Hong Kong\",\n        \"quote\": \"Hong Kong\"\n      },\n      \"start\": {\n        \"value\": \"2019-09\",\n        \"quote\": \"Sep.2019\"\n      },\n      \"end\": {\n        \"value\": \"2020-06\",\n        \"quote\": \"Jun.2020\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Developed strategic initiatives for the organization and supervised two regional programs: Guangzhou Rural Education Project and Shenzhen Migrant Children Support Initiative.\",\n          \"quote\": \"Developed strategic initiatives for the organization and supervised two regional programs: Guangzhou Rural Education Project and Shenzhen Migrant Children Support Initiative.\"\n        },\n        {\n          \"value\": \"Led organizational marketing efforts across CUHK campus, increasing membership by 40% and creating educational video content to expand community engagement and awareness.\",\n          \"quote\": \"Led organizational marketing efforts across CUHK campus, increasing membership by 40% and creating educational video content to expand community engagement and awareness.\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"University Swimming Club\",\n        \"quote\": \"University Swimming Club\"\n      },\n      \"title_raw\": {\n        \"value\": \"Head of Promotion Team\",\n        \"quote\": \"Head of Promotion Team\"\n      },\n      \"location\": {\n        \"value\": \"Hong Kong\",\n        \"quote\": \"Hong Kong\"\n      },\n      \"start\": {\n        \"value\": \"2018-09\",\n        \"quote\": \"Sep.2018\"\n      },\n      \"end\": {\n        \"value\": \"2019-09\",\n        \"quote\": \"Sep.2019\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Managed promotional activities for the swimming club, collaborating with multiple student organizations to coordinate events including Inter-University Swimming Gala (80+ participants) and Water Safety Workshop series.\",\n          \"quote\": \"Managed promotional activities for the swimming club, collaborating with multiple student organizations to coordinate events including Inter-University Swimming Gala (80+ participants)\"\n        },\n        {\n          \"value\": \"Developed and maintained digital communication platforms including WeChat groups and Instagram accounts to enhance member engagement and information dissemination.\",\n          \"quote\": \"Developed and maintained digital communication platforms including WeChat groups and Instagram accounts to enhance member engagement and information dissemination.\"\n        }\n      ]\n    }\n  ],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 1884,
+ "tokens_out": 2403,
+ "latency_ms": 19865,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "employment"
+}

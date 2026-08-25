@@ -1,0 +1,170 @@
+{
+ "data": {
+  "full_name": {
+   "value": "Viktor Sharat",
+   "quote": "Viktor Sharat-MBAPROFESSIONAL EXPERIENCE"
+  },
+  "email": {
+   "value": null,
+   "quote": ""
+  },
+  "phone": {
+   "value": null,
+   "quote": ""
+  },
+  "home_address": {
+   "value": null,
+   "quote": ""
+  },
+  "location_current": {
+   "value": null,
+   "quote": ""
+  },
+  "headline": {
+   "value": "Research Analyst",
+   "quote": "Designation | Research Analyst | Key Role | Covering Pharmaceuticals and Specialty Chemicals"
+  },
+  "summary": {
+   "value": null,
+   "quote": ""
+  },
+  "marital_status": {
+   "value": null,
+   "quote": ""
+  },
+  "work_authorization": {
+   "value": null,
+   "quote": ""
+  },
+  "education": [
+   {
+    "institution": {
+     "value": "Mumbai Institute of Management Studies and Research",
+     "quote": "Mumbai Institute of Management Studies and Research"
+    },
+    "degree_raw": {
+     "value": "PGDM",
+     "quote": "PGDM"
+    },
+    "field_of_study": {
+     "value": null,
+     "quote": ""
+    },
+    "graduation_year": {
+     "value": 2015,
+     "quote": "2015"
+    },
+    "gpa_raw": {
+     "value": "2.5/4",
+     "quote": "2.5/4"
+    },
+    "location": {
+     "value": null,
+     "quote": ""
+    },
+    "honors": []
+   },
+   {
+    "institution": {
+     "value": "Padmashree Dr.D.Y.Patil Institute of Biotechnology and Bioinformatics, Navi Mumbai",
+     "quote": "Padmashree Dr.D.Y.Patil Institute of Biotechnology and Bioinformatics, Navi Mumbai"
+    },
+    "degree_raw": {
+     "value": "M.Tech(Integrated)",
+     "quote": "M.Tech(Integrated)"
+    },
+    "field_of_study": {
+     "value": null,
+     "quote": ""
+    },
+    "graduation_year": {
+     "value": 2010,
+     "quote": "2010"
+    },
+    "gpa_raw": {
+     "value": "68%",
+     "quote": "68%"
+    },
+    "location": {
+     "value": null,
+     "quote": ""
+    },
+    "honors": []
+   },
+   {
+    "institution": {
+     "value": "Bharti Vidyapeeth junior college, Navi Mumbai",
+     "quote": "Bharti Vidyapeeth junior college, Navi Mumbai"
+    },
+    "degree_raw": {
+     "value": "HSC",
+     "quote": "HSC"
+    },
+    "field_of_study": {
+     "value": null,
+     "quote": ""
+    },
+    "graduation_year": {
+     "value": 2006,
+     "quote": "2006"
+    },
+    "gpa_raw": {
+     "value": "72%",
+     "quote": "72%"
+    },
+    "location": {
+     "value": null,
+     "quote": ""
+    },
+    "honors": []
+   },
+   {
+    "institution": {
+     "value": "Don Bosco High School, Navi Mumbai",
+     "quote": "Don Bosco High School, Navi Mumbai"
+    },
+    "degree_raw": {
+     "value": "SSC",
+     "quote": "SSC"
+    },
+    "field_of_study": {
+     "value": null,
+     "quote": ""
+    },
+    "graduation_year": {
+     "value": 2004,
+     "quote": "2004"
+    },
+    "gpa_raw": {
+     "value": "73%",
+     "quote": "73%"
+    },
+    "location": {
+     "value": null,
+     "quote": ""
+    },
+    "honors": []
+   }
+  ],
+  "certifications": [
+   {
+    "name": {
+     "value": "Chartered Financial Analyst Level 3",
+     "quote": "Successfully completed Chartered Financial Analyst Level 3 (CFA, USA)"
+    },
+    "year": {
+     "value": null,
+     "quote": ""
+    }
+   }
+  ],
+  "languages": [],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"full_name\": {\n    \"value\": \"Viktor Sharat\",\n    \"quote\": \"Viktor Sharat-MBAPROFESSIONAL EXPERIENCE\"\n  },\n  \"email\": {\n    \"value\": null,\n    \"quote\": \"\"\n  },\n  \"phone\": {\n    \"value\": null,\n    \"quote\": \"\"\n  },\n  \"home_address\": {\n    \"value\": null,\n    \"quote\": \"\"\n  },\n  \"location_current\": {\n    \"value\": null,\n    \"quote\": \"\"\n  },\n  \"headline\": {\n    \"value\": \"Research Analyst\",\n    \"quote\": \"Designation | Research Analyst | Key Role | Covering Pharmaceuticals and Specialty Chemicals\"\n  },\n  \"summary\": {\n    \"value\": null,\n    \"quote\": \"\"\n  },\n  \"marital_status\": {\n    \"value\": null,\n    \"quote\": \"\"\n  },\n  \"work_authorization\": {\n    \"value\": null,\n    \"quote\": \"\"\n  },\n  \"education\": [\n    {\n      \"institution\": {\n        \"value\": \"Mumbai Institute of Management Studies and Research\",\n        \"quote\": \"Mumbai Institute of Management Studies and Research\"\n      },\n      \"degree_raw\": {\n        \"value\": \"PGDM\",\n        \"quote\": \"PGDM\"\n      },\n      \"field_of_study\": {\n        \"value\": null,\n        \"quote\": \"\"\n      },\n      \"graduation_year\": {\n        \"value\": 2015,\n        \"quote\": \"2015\"\n      },\n      \"gpa_raw\": {\n        \"value\": \"2.5/4\",\n        \"quote\": \"2.5/4\"\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": \"\"\n      },\n      \"honors\": []\n    },\n    {\n      \"institution\": {\n        \"value\": \"Padmashree Dr.D.Y.Patil Institute of Biotechnology and Bioinformatics, Navi Mumbai\",\n        \"quote\": \"Padmashree Dr.D.Y.Patil Institute of Biotechnology and Bioinformatics, Navi Mumbai\"\n      },\n      \"degree_raw\": {\n        \"value\": \"M.Tech(Integrated)\",\n        \"quote\": \"M.Tech(Integrated)\"\n      },\n      \"field_of_study\": {\n        \"value\": null,\n        \"quote\": \"\"\n      },\n      \"graduation_year\": {\n        \"value\": 2010,\n        \"quote\": \"2010\"\n      },\n      \"gpa_raw\": {\n        \"value\": \"68%\",\n        \"quote\": \"68%\"\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": \"\"\n      },\n      \"honors\": []\n    },\n    {\n      \"institution\": {\n        \"value\": \"Bharti Vidyapeeth junior college, Navi Mumbai\",\n        \"quote\": \"Bharti Vidyapeeth junior college, Navi Mumbai\"\n      },\n      \"degree_raw\": {\n        \"value\": \"HSC\",\n        \"quote\": \"HSC\"\n      },\n      \"field_of_study\": {\n        \"value\": null,\n        \"quote\": \"\"\n      },\n      \"graduation_year\": {\n        \"value\": 2006,\n        \"quote\": \"2006\"\n      },\n      \"gpa_raw\": {\n        \"value\": \"72%\",\n        \"quote\": \"72%\"\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": \"\"\n      },\n      \"honors\": []\n    },\n    {\n      \"institution\": {\n        \"value\": \"Don Bosco High School, Navi Mumbai\",\n        \"quote\": \"Don Bosco High School, Navi Mumbai\"\n      },\n      \"degree_raw\": {\n        \"value\": \"SSC\",\n        \"quote\": \"SSC\"\n      },\n      \"field_of_study\": {\n        \"value\": null,\n        \"quote\": \"\"\n      },\n      \"graduation_year\": {\n        \"value\": 2004,\n        \"quote\": \"2004\"\n      },\n      \"gpa_raw\": {\n        \"value\": \"73%\",\n        \"quote\": \"73%\"\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": \"\"\n      },\n      \"honors\": []\n    }\n  ],\n  \"certifications\": [\n    {\n      \"name\": {\n        \"value\": \"Chartered Financial Analyst Level 3\",\n        \"quote\": \"Successfully completed Chartered Financial Analyst Level 3 (CFA, USA)\"\n      },\n      \"year\": {\n        \"value\": null,\n        \"quote\": \"\"\n      }\n    }\n  ],\n  \"languages\": [],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 1978,
+ "tokens_out": 1192,
+ "latency_ms": 11991,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "identity"
+}

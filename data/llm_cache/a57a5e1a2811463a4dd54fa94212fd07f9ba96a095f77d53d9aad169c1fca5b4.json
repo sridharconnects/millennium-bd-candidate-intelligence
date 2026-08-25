@@ -1,0 +1,107 @@
+{
+ "data": {
+  "strategies": [
+   {
+    "label": "equity_long_short",
+    "confidence": 0.85,
+    "rationale": "Develops investment recommendations on publicly traded companies through fundamental research at Vanguard",
+    "quote": "Develops investment recommendations on publicly traded companies through fundamental research including financial modeling",
+    "low_support": false
+   }
+  ],
+  "sectors": [
+   {
+    "label": "healthcare",
+    "confidence": 0.9,
+    "rationale": "Explicitly covers healthcare companies in current equity research role",
+    "quote": "focused on healthcare, consumer discretionary an telecom companies",
+    "low_support": false
+   },
+   {
+    "label": "consumer",
+    "confidence": 0.9,
+    "rationale": "Covers consumer discretionary companies in current equity research role and extensive consumer work at Bain",
+    "quote": "focused on healthcare, consumer discretionary an telecom companies",
+    "low_support": false
+   },
+   {
+    "label": "communications",
+    "confidence": 0.85,
+    "rationale": "Covers telecom companies in current equity research role",
+    "quote": "focused on healthcare, consumer discretionary an telecom companies",
+    "low_support": false
+   }
+  ],
+  "quant_fundamental": {
+   "label": "fundamental",
+   "confidence": 0.95,
+   "rationale": "Explicitly performs fundamental research including financial modeling at Vanguard",
+   "quote": "fundamental research including financial modeling and proprietary studies"
+  },
+  "feeder_path": {
+   "label": "consulting",
+   "confidence": 0.95,
+   "rationale": "First substantive professional role was as Business Analyst at Bain & Company from 2016-2019",
+   "quote": "Business Analyst 2016 - 2019",
+   "low_support": false
+  },
+  "geography_primary": {
+   "value": "United Kingdom",
+   "quote": "Boston, USA / London, United Kingdom"
+  },
+  "skills": [
+   {
+    "name": "Financial Modeling",
+    "depth": "core",
+    "quote": "fundamental research including financial modeling and proprietary studies"
+   },
+   {
+    "name": "Python",
+    "depth": "mentioned",
+    "quote": "Programming: Python, R, Advanced Excel/VBA"
+   },
+   {
+    "name": "R",
+    "depth": "mentioned",
+    "quote": "Programming: Python, R, Advanced Excel/VBA"
+   },
+   {
+    "name": "Excel/VBA",
+    "depth": "applied",
+    "quote": "Advanced Excel/VBA"
+   },
+   {
+    "name": "Equity Research",
+    "depth": "core",
+    "quote": "Equity Research Analyst August/2021 - Present"
+   },
+   {
+    "name": "Valuation",
+    "depth": "core",
+    "quote": "Develops investment recommendations on publicly traded companies"
+   },
+   {
+    "name": "Strategic Sourcing",
+    "depth": "applied",
+    "quote": "Implemented strategic sourcing transformation at major grocery chain"
+   },
+   {
+    "name": "Dynamic Pricing",
+    "depth": "applied",
+    "quote": "Built a dynamic pricing tool for a major consumer electronics company"
+   },
+   {
+    "name": "Process Optimization",
+    "depth": "applied",
+    "quote": "Redesigned customer service processes for major retail chain"
+   }
+  ],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"strategies\": [\n    {\n      \"label\": \"equity_long_short\",\n      \"confidence\": 0.85,\n      \"rationale\": \"Develops investment recommendations on publicly traded companies through fundamental research at Vanguard\",\n      \"quote\": \"Develops investment recommendations on publicly traded companies through fundamental research including financial modeling\",\n      \"low_support\": false\n    }\n  ],\n  \"sectors\": [\n    {\n      \"label\": \"healthcare\",\n      \"confidence\": 0.9,\n      \"rationale\": \"Explicitly covers healthcare companies in current equity research role\",\n      \"quote\": \"focused on healthcare, consumer discretionary an telecom companies\",\n      \"low_support\": false\n    },\n    {\n      \"label\": \"consumer\",\n      \"confidence\": 0.9,\n      \"rationale\": \"Covers consumer discretionary companies in current equity research role and extensive consumer work at Bain\",\n      \"quote\": \"focused on healthcare, consumer discretionary an telecom companies\",\n      \"low_support\": false\n    },\n    {\n      \"label\": \"communications\",\n      \"confidence\": 0.85,\n      \"rationale\": \"Covers telecom companies in current equity research role\",\n      \"quote\": \"focused on healthcare, consumer discretionary an telecom companies\",\n      \"low_support\": false\n    }\n  ],\n  \"quant_fundamental\": {\n    \"label\": \"fundamental\",\n    \"confidence\": 0.95,\n    \"rationale\": \"Explicitly performs fundamental research including financial modeling at Vanguard\",\n    \"quote\": \"fundamental research including financial modeling and proprietary studies\"\n  },\n  \"feeder_path\": {\n    \"label\": \"consulting\",\n    \"confidence\": 0.95,\n    \"rationale\": \"First substantive professional role was as Business Analyst at Bain & Company from 2016-2019\",\n    \"quote\": \"Business Analyst 2016 - 2019\",\n    \"low_support\": false\n  },\n  \"geography_primary\": {\n    \"value\": \"United Kingdom\",\n    \"quote\": \"Boston, USA / London, United Kingdom\"\n  },\n  \"skills\": [\n    {\n      \"name\": \"Financial Modeling\",\n      \"depth\": \"core\",\n      \"quote\": \"fundamental research including financial modeling and proprietary studies\"\n    },\n    {\n      \"name\": \"Python\",\n      \"depth\": \"mentioned\",\n      \"quote\": \"Programming: Python, R, Advanced Excel/VBA\"\n    },\n    {\n      \"name\": \"R\",\n      \"depth\": \"mentioned\",\n      \"quote\": \"Programming: Python, R, Advanced Excel/VBA\"\n    },\n    {\n      \"name\": \"Excel/VBA\",\n      \"depth\": \"applied\",\n      \"quote\": \"Advanced Excel/VBA\"\n    },\n    {\n      \"name\": \"Equity Research\",\n      \"depth\": \"core\",\n      \"quote\": \"Equity Research Analyst August/2021 - Present\"\n    },\n    {\n      \"name\": \"Valuation\",\n      \"depth\": \"core\",\n      \"quote\": \"Develops investment recommendations on publicly traded companies\"\n    },\n    {\n      \"name\": \"Strategic Sourcing\",\n      \"depth\": \"applied\",\n      \"quote\": \"Implemented strategic sourcing transformation at major grocery chain\"\n    },\n    {\n      \"name\": \"Dynamic Pricing\",\n      \"depth\": \"applied\",\n      \"quote\": \"Built a dynamic pricing tool for a major consumer electronics company\"\n    },\n    {\n      \"name\": \"Process Optimization\",\n      \"depth\": \"applied\",\n      \"quote\": \"Redesigned customer service processes for major retail chain\"\n    }\n  ],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 1958,
+ "tokens_out": 887,
+ "latency_ms": 10416,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "profile"
+}

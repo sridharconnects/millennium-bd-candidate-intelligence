@@ -1,0 +1,197 @@
+{
+ "data": {
+  "employment": [
+   {
+    "employer_raw": {
+     "value": "Coatue Management",
+     "quote": "Coatue Management"
+    },
+    "title_raw": {
+     "value": "Healthcare Analyst, Investment Team",
+     "quote": "Healthcare Analyst, Investment Team"
+    },
+    "location": {
+     "value": "New York, NY",
+     "quote": "New York, NY"
+    },
+    "start": {
+     "value": "2019-10",
+     "quote": "October 2019"
+    },
+    "end": {
+     "value": "present",
+     "quote": "Present"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "highlights": [
+     {
+      "value": "Managed public (long/short) and private (growth/venture) healthcare investment portfolio at $40B multi-strategy platform",
+      "quote": "Managed public (long/short) and private (growth/venture) healthcare investment portfolio at $40B multi-strategy platform"
+     },
+     {
+      "value": "Provided comprehensive sector coverage across Life Sciences Tools & Diagnostics, MedTech, Therapeutics & Services with primary specialization in Digital Health & AI-enabled diagnostics (60% time allocation)",
+      "quote": "Provided comprehensive sector coverage across Life Sciences Tools & Diagnostics, MedTech, Therapeutics & Services with primary specialization in Digital Health & AI-enabled diagnostics (60% time allocation)"
+     },
+     {
+      "value": "Generated 340bps of outperformance versus healthcare sector benchmarks with 85% hit rate on long recommendations",
+      "quote": "Generated 340bps of outperformance versus healthcare sector benchmarks with 85% hit rate on long recommendations"
+     },
+     {
+      "value": "Served as Board Observer at two portfolio companies: MedFlow Diagnostics and GeneTech Analytics, having sourced and co-led the latter's $150M Series B financing round",
+      "quote": "Served as Board Observer at two portfolio companies: MedFlow Diagnostics and GeneTech Analytics, having sourced and co-led the latter's $150M Series B financing round"
+     },
+     {
+      "value": "Led due diligence on 12 potential investments with total transaction value of $2.1B across public and private healthcare opportunities",
+      "quote": "Led due diligence on 12 potential investments with total transaction value of $2.1B across public and private healthcare opportunities"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Goldman Sachs",
+     "quote": "Goldman Sachs"
+    },
+    "title_raw": {
+     "value": "Senior Associate, Investment Team",
+     "quote": "Senior Associate, Investment Team"
+    },
+    "location": {
+     "value": "New York, NY",
+     "quote": "New York, NY"
+    },
+    "start": {
+     "value": "2019-01",
+     "quote": "January 2019"
+    },
+    "end": {
+     "value": "2019-09",
+     "quote": "September 2019"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "highlights": [
+     {
+      "value": "Responsible for investment diligence, underwriting & asset management for $18B platform's $4.2B strategy focused on structured credit, growth equity and royalty financings in public and private companies",
+      "quote": "Responsible for investment diligence, underwriting & asset management for $18B platform's $4.2B strategy focused on structured credit, growth equity and royalty financings in public and private companies"
+     },
+     {
+      "value": "Created comprehensive financial models, investment analyses and board presentations while collaborating with third-party consultants, medical experts, and regulatory advisors",
+      "quote": "Created comprehensive financial models, investment analyses and board presentations while collaborating with third-party consultants, medical experts, and regulatory advisors"
+     },
+     {
+      "value": "Presented investment recommendations to senior investment committee, portfolio managers and limited partner advisory boards",
+      "quote": "Presented investment recommendations to senior investment committee, portfolio managers and limited partner advisory boards"
+     },
+     {
+      "value": "Generated 280bps of outperformance versus healthcare benchmarks across 9 active investments during tenure",
+      "quote": "Generated 280bps of outperformance versus healthcare benchmarks across 9 active investments during tenure"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Goldman Sachs",
+     "quote": "Goldman Sachs"
+    },
+    "title_raw": {
+     "value": "Associate, Investment Team",
+     "quote": "Associate, Investment Team"
+    },
+    "location": {
+     "value": "New York, NY",
+     "quote": "New York, NY"
+    },
+    "start": {
+     "value": "2017-04",
+     "quote": "April 2017"
+    },
+    "end": {
+     "value": "2018-12",
+     "quote": "December 2018"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "highlights": [
+     {
+      "value": "Responsible for investment diligence, underwriting & asset management for $18B platform's $4.2B strategy focused on structured credit, growth equity and royalty financings in public and private companies",
+      "quote": "Responsible for investment diligence, underwriting & asset management for $18B platform's $4.2B strategy focused on structured credit, growth equity and royalty financings in public and private companies"
+     },
+     {
+      "value": "Created comprehensive financial models, investment analyses and board presentations while collaborating with third-party consultants, medical experts, and regulatory advisors",
+      "quote": "Created comprehensive financial models, investment analyses and board presentations while collaborating with third-party consultants, medical experts, and regulatory advisors"
+     },
+     {
+      "value": "Presented investment recommendations to senior investment committee, portfolio managers and limited partner advisory boards",
+      "quote": "Presented investment recommendations to senior investment committee, portfolio managers and limited partner advisory boards"
+     },
+     {
+      "value": "Generated 280bps of outperformance versus healthcare benchmarks across 9 active investments during tenure",
+      "quote": "Generated 280bps of outperformance versus healthcare benchmarks across 9 active investments during tenure"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Credit Suisse",
+     "quote": "Credit Suisse"
+    },
+    "title_raw": {
+     "value": "Analyst, Healthcare Investment Banking Group",
+     "quote": "Analyst, Healthcare Investment Banking Group"
+    },
+    "location": {
+     "value": "New York, NY",
+     "quote": "New York, NY"
+    },
+    "start": {
+     "value": "2013-06",
+     "quote": "June 2013"
+    },
+    "end": {
+     "value": "2015-03",
+     "quote": "March 2015"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "highlights": [
+     {
+      "value": "Provided client coverage in therapeutics, medical devices and healthcare services for acquisitions and financings across mid-cap and large-cap healthcare companies",
+      "quote": "Provided client coverage in therapeutics, medical devices and healthcare services for acquisitions and financings across mid-cap and large-cap healthcare companies"
+     },
+     {
+      "value": "Responsible for financial modeling and creating presentations on corporate valuation, transaction implications and industry dynamics for colleagues, management teams, investors, rating agencies and internal committees",
+      "quote": "Responsible for financial modeling and creating presentations on corporate valuation, transaction implications and industry dynamics for colleagues, management teams, investors, rating agencies and internal committees"
+     },
+     {
+      "value": "Recognized for outstanding performance with invitation to Healthcare Investment Banking recruiting committee for 2013 summer analyst class",
+      "quote": "Recognized for outstanding performance with invitation to Healthcare Investment Banking recruiting committee for 2013 summer analyst class"
+     },
+     {
+      "value": "Executed 8 transactions with combined deal value of $12B+ across M&A, IPOs, and follow-on offerings",
+      "quote": "Executed 8 transactions with combined deal value of $12B+ across M&A, IPOs, and follow-on offerings"
+     }
+    ]
+   }
+  ],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"employment\": [\n    {\n      \"employer_raw\": {\n        \"value\": \"Coatue Management\",\n        \"quote\": \"Coatue Management\"\n      },\n      \"title_raw\": {\n        \"value\": \"Healthcare Analyst, Investment Team\",\n        \"quote\": \"Healthcare Analyst, Investment Team\"\n      },\n      \"location\": {\n        \"value\": \"New York, NY\",\n        \"quote\": \"New York, NY\"\n      },\n      \"start\": {\n        \"value\": \"2019-10\",\n        \"quote\": \"October 2019\"\n      },\n      \"end\": {\n        \"value\": \"present\",\n        \"quote\": \"Present\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Managed public (long/short) and private (growth/venture) healthcare investment portfolio at $40B multi-strategy platform\",\n          \"quote\": \"Managed public (long/short) and private (growth/venture) healthcare investment portfolio at $40B multi-strategy platform\"\n        },\n        {\n          \"value\": \"Provided comprehensive sector coverage across Life Sciences Tools & Diagnostics, MedTech, Therapeutics & Services with primary specialization in Digital Health & AI-enabled diagnostics (60% time allocation)\",\n          \"quote\": \"Provided comprehensive sector coverage across Life Sciences Tools & Diagnostics, MedTech, Therapeutics & Services with primary specialization in Digital Health & AI-enabled diagnostics (60% time allocation)\"\n        },\n        {\n          \"value\": \"Generated 340bps of outperformance versus healthcare sector benchmarks with 85% hit rate on long recommendations\",\n          \"quote\": \"Generated 340bps of outperformance versus healthcare sector benchmarks with 85% hit rate on long recommendations\"\n        },\n        {\n          \"value\": \"Served as Board Observer at two portfolio companies: MedFlow Diagnostics and GeneTech Analytics, having sourced and co-led the latter's $150M Series B financing round\",\n          \"quote\": \"Served as Board Observer at two portfolio companies: MedFlow Diagnostics and GeneTech Analytics, having sourced and co-led the latter's $150M Series B financing round\"\n        },\n        {\n          \"value\": \"Led due diligence on 12 potential investments with total transaction value of $2.1B across public and private healthcare opportunities\",\n          \"quote\": \"Led due diligence on 12 potential investments with total transaction value of $2.1B across public and private healthcare opportunities\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Goldman Sachs\",\n        \"quote\": \"Goldman Sachs\"\n      },\n      \"title_raw\": {\n        \"value\": \"Senior Associate, Investment Team\",\n        \"quote\": \"Senior Associate, Investment Team\"\n      },\n      \"location\": {\n        \"value\": \"New York, NY\",\n        \"quote\": \"New York, NY\"\n      },\n      \"start\": {\n        \"value\": \"2019-01\",\n        \"quote\": \"January 2019\"\n      },\n      \"end\": {\n        \"value\": \"2019-09\",\n        \"quote\": \"September 2019\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Responsible for investment diligence, underwriting & asset management for $18B platform's $4.2B strategy focused on structured credit, growth equity and royalty financings in public and private companies\",\n          \"quote\": \"Responsible for investment diligence, underwriting & asset management for $18B platform's $4.2B strategy focused on structured credit, growth equity and royalty financings in public and private companies\"\n        },\n        {\n          \"value\": \"Created comprehensive financial models, investment analyses and board presentations while collaborating with third-party consultants, medical experts, and regulatory advisors\",\n          \"quote\": \"Created comprehensive financial models, investment analyses and board presentations while collaborating with third-party consultants, medical experts, and regulatory advisors\"\n        },\n        {\n          \"value\": \"Presented investment recommendations to senior investment committee, portfolio managers and limited partner advisory boards\",\n          \"quote\": \"Presented investment recommendations to senior investment committee, portfolio managers and limited partner advisory boards\"\n        },\n        {\n          \"value\": \"Generated 280bps of outperformance versus healthcare benchmarks across 9 active investments during tenure\",\n          \"quote\": \"Generated 280bps of outperformance versus healthcare benchmarks across 9 active investments during tenure\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Goldman Sachs\",\n        \"quote\": \"Goldman Sachs\"\n      },\n      \"title_raw\": {\n        \"value\": \"Associate, Investment Team\",\n        \"quote\": \"Associate, Investment Team\"\n      },\n      \"location\": {\n        \"value\": \"New York, NY\",\n        \"quote\": \"New York, NY\"\n      },\n      \"start\": {\n        \"value\": \"2017-04\",\n        \"quote\": \"April 2017\"\n      },\n      \"end\": {\n        \"value\": \"2018-12\",\n        \"quote\": \"December 2018\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Responsible for investment diligence, underwriting & asset management for $18B platform's $4.2B strategy focused on structured credit, growth equity and royalty financings in public and private companies\",\n          \"quote\": \"Responsible for investment diligence, underwriting & asset management for $18B platform's $4.2B strategy focused on structured credit, growth equity and royalty financings in public and private companies\"\n        },\n        {\n          \"value\": \"Created comprehensive financial models, investment analyses and board presentations while collaborating with third-party consultants, medical experts, and regulatory advisors\",\n          \"quote\": \"Created comprehensive financial models, investment analyses and board presentations while collaborating with third-party consultants, medical experts, and regulatory advisors\"\n        },\n        {\n          \"value\": \"Presented investment recommendations to senior investment committee, portfolio managers and limited partner advisory boards\",\n          \"quote\": \"Presented investment recommendations to senior investment committee, portfolio managers and limited partner advisory boards\"\n        },\n        {\n          \"value\": \"Generated 280bps of outperformance versus healthcare benchmarks across 9 active investments during tenure\",\n          \"quote\": \"Generated 280bps of outperformance versus healthcare benchmarks across 9 active investments during tenure\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Credit Suisse\",\n        \"quote\": \"Credit Suisse\"\n      },\n      \"title_raw\": {\n        \"value\": \"Analyst, Healthcare Investment Banking Group\",\n        \"quote\": \"Analyst, Healthcare Investment Banking Group\"\n      },\n      \"location\": {\n        \"value\": \"New York, NY\",\n        \"quote\": \"New York, NY\"\n      },\n      \"start\": {\n        \"value\": \"2013-06\",\n        \"quote\": \"June 2013\"\n      },\n      \"end\": {\n        \"value\": \"2015-03\",\n        \"quote\": \"March 2015\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Provided client coverage in therapeutics, medical devices and healthcare services for acquisitions and financings across mid-cap and large-cap healthcare companies\",\n          \"quote\": \"Provided client coverage in therapeutics, medical devices and healthcare services for acquisitions and financings across mid-cap and large-cap healthcare companies\"\n        },\n        {\n          \"value\": \"Responsible for financial modeling and creating presentations on corporate valuation, transaction implications and industry dynamics for colleagues, management teams, investors, rating agencies and internal committees\",\n          \"quote\": \"Responsible for financial modeling and creating presentations on corporate valuation, transaction implications and industry dynamics for colleagues, management teams, investors, rating agencies and internal committees\"\n        },\n        {\n          \"value\": \"Recognized for outstanding performance with invitation to Healthcare Investment Banking recruiting committee for 2013 summer analyst class\",\n          \"quote\": \"Recognized for outstanding performance with invitation to Healthcare Investment Banking recruiting committee for 2013 summer analyst class\"\n        },\n        {\n          \"value\": \"Executed 8 transactions with combined deal value of $12B+ across M&A, IPOs, and follow-on offerings\",\n          \"quote\": \"Executed 8 transactions with combined deal value of $12B+ across M&A, IPOs, and follow-on offerings\"\n        }\n      ]\n    }\n  ],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 1765,
+ "tokens_out": 2164,
+ "latency_ms": 17894,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "employment"
+}

@@ -1,0 +1,11 @@
+{
+ "data": {
+  "ready": true
+ },
+ "raw_text": "{\n  \"ready\": true\n}",
+ "tokens_in": 21,
+ "tokens_out": 11,
+ "latency_ms": 1907,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "preflight"
+}

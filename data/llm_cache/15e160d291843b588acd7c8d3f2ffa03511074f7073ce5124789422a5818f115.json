@@ -1,0 +1,122 @@
+{
+ "data": {
+  "full_name": {
+   "value": "Michael Rodriguez",
+   "quote": "Michael Rodriguez, CFA"
+  },
+  "email": {
+   "value": "mrodriguez84@gmail.com",
+   "quote": "mrodriguez84@gmail.com"
+  },
+  "phone": {
+   "value": "317.441.1999",
+   "quote": "317.441.1999"
+  },
+  "home_address": {
+   "value": "600 Congress St. #208 Boston, MA 01125",
+   "quote": "600 Congress St. #208 Boston, MA 01125"
+  },
+  "location_current": {
+   "value": "Boston, MA",
+   "quote": "600 Congress St. #208 Boston, MA 01125"
+  },
+  "headline": {
+   "value": "Analyst, Consumer Internet & Software",
+   "quote": "Analyst, Consumer Internet & Software"
+  },
+  "summary": {
+   "value": null,
+   "quote": ""
+  },
+  "marital_status": {
+   "value": null,
+   "quote": ""
+  },
+  "work_authorization": {
+   "value": null,
+   "quote": ""
+  },
+  "education": [
+   {
+    "institution": {
+     "value": "University of Michigan, Ross School of Business",
+     "quote": "University of Michigan, Ross School of Business- Ann Arbor, MI"
+    },
+    "degree_raw": {
+     "value": "Bachelor of Science in Business",
+     "quote": "Bachelor of Science in Business"
+    },
+    "field_of_study": {
+     "value": "Finance",
+     "quote": "Major: Finance"
+    },
+    "graduation_year": {
+     "value": 2017,
+     "quote": "May 2017"
+    },
+    "gpa_raw": {
+     "value": "3.5/4.0",
+     "quote": "GPA: 3.5/4.0"
+    },
+    "location": {
+     "value": "Ann Arbor, MI",
+     "quote": "Ann Arbor, MI"
+    },
+    "honors": [
+     "Business Leadership Program: Selected as one of 120 Ross students out of a class of 1,200 admitted into competitive program based on leadership potential and academic performance to complete advanced integrative coursework",
+     "Merit Scholar Program: Awarded partial scholarship by selective Ross program recognizing academic excellence and leadership through active participation in community service programs and peer mentoring"
+    ]
+   }
+  ],
+  "certifications": [
+   {
+    "name": {
+     "value": "CFA Charterholder",
+     "quote": "CFA Charterholder: Passed Level III in June 2021"
+    },
+    "year": {
+     "value": 2021,
+     "quote": "June 2021"
+    }
+   },
+   {
+    "name": {
+     "value": "Series 7",
+     "quote": "Series 7, 63 and 87 licenses"
+    },
+    "year": {
+     "value": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": {
+     "value": "Series 63",
+     "quote": "Series 7, 63 and 87 licenses"
+    },
+    "year": {
+     "value": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": {
+     "value": "Series 87",
+     "quote": "Series 7, 63 and 87 licenses"
+    },
+    "year": {
+     "value": null,
+     "quote": ""
+    }
+   }
+  ],
+  "languages": [],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"full_name\": {\n    \"value\": \"Michael Rodriguez\",\n    \"quote\": \"Michael Rodriguez, CFA\"\n  },\n  \"email\": {\n    \"value\": \"mrodriguez84@gmail.com\",\n    \"quote\": \"mrodriguez84@gmail.com\"\n  },\n  \"phone\": {\n    \"value\": \"317.441.1999\",\n    \"quote\": \"317.441.1999\"\n  },\n  \"home_address\": {\n    \"value\": \"600 Congress St. #208 Boston, MA 01125\",\n    \"quote\": \"600 Congress St. #208 Boston, MA 01125\"\n  },\n  \"location_current\": {\n    \"value\": \"Boston, MA\",\n    \"quote\": \"600 Congress St. #208 Boston, MA 01125\"\n  },\n  \"headline\": {\n    \"value\": \"Analyst, Consumer Internet & Software\",\n    \"quote\": \"Analyst, Consumer Internet & Software\"\n  },\n  \"summary\": {\n    \"value\": null,\n    \"quote\": \"\"\n  },\n  \"marital_status\": {\n    \"value\": null,\n    \"quote\": \"\"\n  },\n  \"work_authorization\": {\n    \"value\": null,\n    \"quote\": \"\"\n  },\n  \"education\": [\n    {\n      \"institution\": {\n        \"value\": \"University of Michigan, Ross School of Business\",\n        \"quote\": \"University of Michigan, Ross School of Business- Ann Arbor, MI\"\n      },\n      \"degree_raw\": {\n        \"value\": \"Bachelor of Science in Business\",\n        \"quote\": \"Bachelor of Science in Business\"\n      },\n      \"field_of_study\": {\n        \"value\": \"Finance\",\n        \"quote\": \"Major: Finance\"\n      },\n      \"graduation_year\": {\n        \"value\": 2017,\n        \"quote\": \"May 2017\"\n      },\n      \"gpa_raw\": {\n        \"value\": \"3.5/4.0\",\n        \"quote\": \"GPA: 3.5/4.0\"\n      },\n      \"location\": {\n        \"value\": \"Ann Arbor, MI\",\n        \"quote\": \"Ann Arbor, MI\"\n      },\n      \"honors\": [\n        \"Business Leadership Program: Selected as one of 120 Ross students out of a class of 1,200 admitted into competitive program based on leadership potential and academic performance to complete advanced integrative coursework\",\n        \"Merit Scholar Program: Awarded partial scholarship by selective Ross program recognizing academic excellence and leadership through active participation in community service programs and peer mentoring\"\n      ]\n    }\n  ],\n  \"certifications\": [\n    {\n      \"name\": {\n        \"value\": \"CFA Charterholder\",\n        \"quote\": \"CFA Charterholder: Passed Level III in June 2021\"\n      },\n      \"year\": {\n        \"value\": 2021,\n        \"quote\": \"June 2021\"\n      }\n    },\n    {\n      \"name\": {\n        \"value\": \"Series 7\",\n        \"quote\": \"Series 7, 63 and 87 licenses\"\n      },\n      \"year\": {\n        \"value\": null,\n        \"quote\": \"\"\n      }\n    },\n    {\n      \"name\": {\n        \"value\": \"Series 63\",\n        \"quote\": \"Series 7, 63 and 87 licenses\"\n      },\n      \"year\": {\n        \"value\": null,\n        \"quote\": \"\"\n      }\n    },\n    {\n      \"name\": {\n        \"value\": \"Series 87\",\n        \"quote\": \"Series 7, 63 and 87 licenses\"\n      },\n      \"year\": {\n        \"value\": null,\n        \"quote\": \"\"\n      }\n    }\n  ],\n  \"languages\": [],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 2049,
+ "tokens_out": 940,
+ "latency_ms": 9625,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "identity"
+}

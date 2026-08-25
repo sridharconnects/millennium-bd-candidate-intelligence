@@ -1,0 +1,68 @@
+{
+  "run_id": "5ae958e3c6d7",
+  "generated_at": "2026-08-23T06:36:15+00:00",
+  "git_sha": "no-git",
+  "python": "3.12.4",
+  "schema_version": "1.3.0",
+  "taxonomy_version": "1.2.0",
+  "extractor": "llm",
+  "llm_provider": "anthropic",
+  "llm_model": "claude-sonnet-4-5-20250929",
+  "NOTE": null,
+  "demo_mode": true,
+  "documents": 10,
+  "succeeded": 0,
+  "failed": [
+    {
+      "file": "Chen Li (Alex).docx",
+      "error": "DEMO_MODE=1 and no cached response for stage 'identity' (key 36b59b944ba7). Run the pipeline once with DEMO_MODE=0 and an API key to populate the cache."
+    },
+    {
+      "file": "MARINA SILVA COSTA.docx",
+      "error": "DEMO_MODE=1 and no cached response for stage 'identity' (key f944e01afb5b). Run the pipeline once with DEMO_MODE=0 and an API key to populate the cache."
+    },
+    {
+      "file": "Marcus Chen-Rodriguez Resume.docx",
+      "error": "DEMO_MODE=1 and no cached response for stage 'identity' (key 2be3ac8e2339). Run the pipeline once with DEMO_MODE=0 and an API key to populate the cache."
+    },
+    {
+      "file": "Michael Rodriguez, CFA.docx",
+      "error": "DEMO_MODE=1 and no cached response for stage 'identity' (key 15e160d29184). Run the pipeline once with DEMO_MODE=0 and an API key to populate the cache."
+    },
+    {
+      "file": "Omar El-Hassan 202405.pdf",
+      "error": "DEMO_MODE=1 and no cached response for stage 'identity' (key 64ec73e0b187). Run the pipeline once with DEMO_MODE=0 and an API key to populate the cache."
+    },
+    {
+      "file": "Priya Nakamura_sellside_healthcare_RLTM.docx",
+      "error": "DEMO_MODE=1 and no cached response for stage 'identity' (key 163daf28facb). Run the pipeline once with DEMO_MODE=0 and an API key to populate the cache."
+    },
+    {
+      "file": "RYAN PATEL - Resume.pdf",
+      "error": "DEMO_MODE=1 and no cached response for stage 'identity' (key a0dabf15496b). Run the pipeline once with DEMO_MODE=0 and an API key to populate the cache."
+    },
+    {
+      "file": "Vikram Shah.docx",
+      "error": "DEMO_MODE=1 and no cached response for stage 'identity' (key 95aff3c6ee73). Run the pipeline once with DEMO_MODE=0 and an API key to populate the cache."
+    },
+    {
+      "file": "Viktor Sharat.docx",
+      "error": "DEMO_MODE=1 and no cached response for stage 'identity' (key d02a3d8a64f1). Run the pipeline once with DEMO_MODE=0 and an API key to populate the cache."
+    },
+    {
+      "file": "Zara Al-Rashid.docx",
+      "error": "DEMO_MODE=1 and no cached response for stage 'identity' (key c71a5d361360). Run the pipeline once with DEMO_MODE=0 and an API key to populate the cache."
+    }
+  ],
+  "needs_review": 0,
+  "elapsed_s": 0.15,
+  "throughput_docs_per_min": 4083.2,
+  "llm_calls": 0,
+  "llm_cache_hits": 0,
+  "tokens_in": 0,
+  "tokens_out": 0,
+  "cost_usd": 0.0,
+  "cost_per_doc_usd": 0.0,
+  "per_stage_llm": {},
+  "is_synthetic": false
+}

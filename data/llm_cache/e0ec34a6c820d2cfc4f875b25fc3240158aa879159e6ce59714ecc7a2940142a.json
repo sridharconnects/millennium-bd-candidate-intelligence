@@ -1,0 +1,245 @@
+{
+ "data": {
+  "employment": [
+   {
+    "employer_raw": {
+     "value": "Axis Mutual Fund",
+     "quote": "Organization | Axis Mutual Fund (US$1.2 billion+)"
+    },
+    "title_raw": {
+     "value": "Research Analyst",
+     "quote": "Designation | Research Analyst"
+    },
+    "location": {
+     "value": null,
+     "quote": null
+    },
+    "start": {
+     "value": null,
+     "quote": null
+    },
+    "end": {
+     "value": null,
+     "quote": null
+    },
+    "duration_text": {
+     "value": "2 months",
+     "quote": "Duration | 2 months"
+    },
+    "is_internship": false,
+    "is_volunteer": false,
+    "highlights": [
+     {
+      "value": "Tracked 38 companies within the healthcare fund portfolio and conducted meetings with various stakeholders (management teams, buy-side analysts) to provide strategic inputs to senior fund managers.",
+      "quote": "Tracked 38 companies within the healthcare fund portfolio and conducted meetings with various stakeholders (management teams, buy-side analysts) to provide strategic inputs to senior fund managers."
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Meridian Capital",
+     "quote": "Organization | Meridian Capital"
+    },
+    "title_raw": {
+     "value": "Research analyst",
+     "quote": "Designation | Research analyst"
+    },
+    "location": {
+     "value": null,
+     "quote": null
+    },
+    "start": {
+     "value": null,
+     "quote": null
+    },
+    "end": {
+     "value": null,
+     "quote": null
+    },
+    "duration_text": {
+     "value": "10 months",
+     "quote": "Duration | 10 months"
+    },
+    "is_internship": false,
+    "is_volunteer": false,
+    "highlights": [
+     {
+      "value": "Completed comprehensive sector report on renewable energy (~120 pages) within 3 months of joining and began receiving institutional votes within first quarter.",
+      "quote": "Completed comprehensive sector report on renewable energy (~120 pages) within 3 months of joining and began receiving institutional votes within first quarter."
+     },
+     {
+      "value": "Also published detailed analysis on Indian infrastructure sector",
+      "quote": "Also published detailed analysis on Indian infrastructure sector"
+     },
+     {
+      "value": "Applied sector-agnostic investment approach focusing on company fundamentals regardless of market capitalization constraints",
+      "quote": "Applied sector-agnostic investment approach focusing on company fundamentals regardless of market capitalization constraints"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "ICICI Securities Limited",
+     "quote": "Organization | ICICI Securities Limited"
+    },
+    "title_raw": {
+     "value": "Research Analyst",
+     "quote": "Designation | Research Analyst"
+    },
+    "location": {
+     "value": null,
+     "quote": null
+    },
+    "start": {
+     "value": null,
+     "quote": null
+    },
+    "end": {
+     "value": null,
+     "quote": null
+    },
+    "duration_text": {
+     "value": "8 years 10 months",
+     "quote": "Duration | 8 years 10 months"
+    },
+    "is_internship": false,
+    "is_volunteer": false,
+    "highlights": [
+     {
+      "value": "Maintained active coverage of 42 stocks across multiple sectors.",
+      "quote": "Maintained active coverage of 42 stocks across multiple sectors."
+     },
+     {
+      "value": "Advanced from research associate to lead analyst within 3 years.",
+      "quote": "Advanced from research associate to lead analyst within 3 years."
+     },
+     {
+      "value": "Consistently received top performance ratings throughout tenure",
+      "quote": "Consistently received top performance ratings throughout tenure"
+     },
+     {
+      "value": "Initiated coverage reports on digital health platforms and renewable energy companies, generating superior returns for institutional clients over time",
+      "quote": "Initiated coverage reports on digital health platforms and renewable energy companies, generating superior returns for institutional clients over time"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "BioAnalytics Research India Ltd.",
+     "quote": "Organization | BioAnalytics Research India Ltd."
+    },
+    "title_raw": {
+     "value": "Biomodeller Trainee",
+     "quote": "Designation | Biomodeller Trainee"
+    },
+    "location": {
+     "value": null,
+     "quote": null
+    },
+    "start": {
+     "value": null,
+     "quote": null
+    },
+    "end": {
+     "value": null,
+     "quote": null
+    },
+    "duration_text": {
+     "value": "7 months",
+     "quote": "Duration | 7 months"
+    },
+    "is_internship": true,
+    "is_volunteer": false,
+    "highlights": [
+     {
+      "value": "Contributing member of team developing AI-based drug target identification system for precision medicine applications",
+      "quote": "Contributing member of team developing AI-based drug target identification system for precision medicine applications"
+     },
+     {
+      "value": "8 months of research experience at Mumbai Cancer Research Institute (MCRI) as a Research Associate",
+      "quote": "8 months of research experience at Mumbai Cancer Research Institute (MCRI) as a Research Associate"
+     },
+     {
+      "value": "Co-author in research paper entitled \"Machine Learning Applications in Biomarker Discovery for Targeted Cancer Therapy\" published in Journal of Computational Biology and Bioinformatics (ISSN:2456-7891)",
+      "quote": "Co-author in research paper entitled \"Machine Learning Applications in Biomarker Discovery for Targeted Cancer Therapy\" published in Journal of Computational Biology and Bioinformatics (ISSN:2456-7891)"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Prism Asset Management Pvt Ltd.",
+     "quote": "Summer Internship Project (3 Months): Prism Asset Management Pvt Ltd."
+    },
+    "title_raw": {
+     "value": "Summer Internship Project",
+     "quote": "Summer Internship Project (3 Months): Prism Asset Management Pvt Ltd."
+    },
+    "location": {
+     "value": null,
+     "quote": null
+    },
+    "start": {
+     "value": null,
+     "quote": null
+    },
+    "end": {
+     "value": null,
+     "quote": null
+    },
+    "duration_text": {
+     "value": "3 Months",
+     "quote": "Summer Internship Project (3 Months)"
+    },
+    "is_internship": true,
+    "is_volunteer": false,
+    "highlights": [
+     {
+      "value": "Comprehensive equity analysis of Indian Technology Sector",
+      "quote": "Comprehensive equity analysis of Indian Technology Sector"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Reliance Infrastructure Ltd.",
+     "quote": "Concurrent Project (8 weeks): Reliance Infrastructure Ltd."
+    },
+    "title_raw": {
+     "value": "Concurrent Project",
+     "quote": "Concurrent Project (8 weeks): Reliance Infrastructure Ltd."
+    },
+    "location": {
+     "value": null,
+     "quote": null
+    },
+    "start": {
+     "value": null,
+     "quote": null
+    },
+    "end": {
+     "value": null,
+     "quote": null
+    },
+    "duration_text": {
+     "value": "8 weeks",
+     "quote": "Concurrent Project (8 weeks)"
+    },
+    "is_internship": true,
+    "is_volunteer": false,
+    "highlights": [
+     {
+      "value": "Strategic market analysis of Indian Renewable Energy Companies.",
+      "quote": "Strategic market analysis of Indian Renewable Energy Companies."
+     }
+    ]
+   }
+  ],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"employment\": [\n    {\n      \"employer_raw\": {\n        \"value\": \"Axis Mutual Fund\",\n        \"quote\": \"Organization | Axis Mutual Fund (US$1.2 billion+)\"\n      },\n      \"title_raw\": {\n        \"value\": \"Research Analyst\",\n        \"quote\": \"Designation | Research Analyst\"\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"start\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"end\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"duration_text\": {\n        \"value\": \"2 months\",\n        \"quote\": \"Duration | 2 months\"\n      },\n      \"is_internship\": false,\n      \"is_volunteer\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Tracked 38 companies within the healthcare fund portfolio and conducted meetings with various stakeholders (management teams, buy-side analysts) to provide strategic inputs to senior fund managers.\",\n          \"quote\": \"Tracked 38 companies within the healthcare fund portfolio and conducted meetings with various stakeholders (management teams, buy-side analysts) to provide strategic inputs to senior fund managers.\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Meridian Capital\",\n        \"quote\": \"Organization | Meridian Capital\"\n      },\n      \"title_raw\": {\n        \"value\": \"Research analyst\",\n        \"quote\": \"Designation | Research analyst\"\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"start\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"end\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"duration_text\": {\n        \"value\": \"10 months\",\n        \"quote\": \"Duration | 10 months\"\n      },\n      \"is_internship\": false,\n      \"is_volunteer\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Completed comprehensive sector report on renewable energy (~120 pages) within 3 months of joining and began receiving institutional votes within first quarter.\",\n          \"quote\": \"Completed comprehensive sector report on renewable energy (~120 pages) within 3 months of joining and began receiving institutional votes within first quarter.\"\n        },\n        {\n          \"value\": \"Also published detailed analysis on Indian infrastructure sector\",\n          \"quote\": \"Also published detailed analysis on Indian infrastructure sector\"\n        },\n        {\n          \"value\": \"Applied sector-agnostic investment approach focusing on company fundamentals regardless of market capitalization constraints\",\n          \"quote\": \"Applied sector-agnostic investment approach focusing on company fundamentals regardless of market capitalization constraints\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"ICICI Securities Limited\",\n        \"quote\": \"Organization | ICICI Securities Limited\"\n      },\n      \"title_raw\": {\n        \"value\": \"Research Analyst\",\n        \"quote\": \"Designation | Research Analyst\"\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"start\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"end\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"duration_text\": {\n        \"value\": \"8 years 10 months\",\n        \"quote\": \"Duration | 8 years 10 months\"\n      },\n      \"is_internship\": false,\n      \"is_volunteer\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Maintained active coverage of 42 stocks across multiple sectors.\",\n          \"quote\": \"Maintained active coverage of 42 stocks across multiple sectors.\"\n        },\n        {\n          \"value\": \"Advanced from research associate to lead analyst within 3 years.\",\n          \"quote\": \"Advanced from research associate to lead analyst within 3 years.\"\n        },\n        {\n          \"value\": \"Consistently received top performance ratings throughout tenure\",\n          \"quote\": \"Consistently received top performance ratings throughout tenure\"\n        },\n        {\n          \"value\": \"Initiated coverage reports on digital health platforms and renewable energy companies, generating superior returns for institutional clients over time\",\n          \"quote\": \"Initiated coverage reports on digital health platforms and renewable energy companies, generating superior returns for institutional clients over time\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"BioAnalytics Research India Ltd.\",\n        \"quote\": \"Organization | BioAnalytics Research India Ltd.\"\n      },\n      \"title_raw\": {\n        \"value\": \"Biomodeller Trainee\",\n        \"quote\": \"Designation | Biomodeller Trainee\"\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"start\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"end\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"duration_text\": {\n        \"value\": \"7 months\",\n        \"quote\": \"Duration | 7 months\"\n      },\n      \"is_internship\": true,\n      \"is_volunteer\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Contributing member of team developing AI-based drug target identification system for precision medicine applications\",\n          \"quote\": \"Contributing member of team developing AI-based drug target identification system for precision medicine applications\"\n        },\n        {\n          \"value\": \"8 months of research experience at Mumbai Cancer Research Institute (MCRI) as a Research Associate\",\n          \"quote\": \"8 months of research experience at Mumbai Cancer Research Institute (MCRI) as a Research Associate\"\n        },\n        {\n          \"value\": \"Co-author in research paper entitled \\\"Machine Learning Applications in Biomarker Discovery for Targeted Cancer Therapy\\\" published in Journal of Computational Biology and Bioinformatics (ISSN:2456-7891)\",\n          \"quote\": \"Co-author in research paper entitled \\\"Machine Learning Applications in Biomarker Discovery for Targeted Cancer Therapy\\\" published in Journal of Computational Biology and Bioinformatics (ISSN:2456-7891)\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Prism Asset Management Pvt Ltd.\",\n        \"quote\": \"Summer Internship Project (3 Months): Prism Asset Management Pvt Ltd.\"\n      },\n      \"title_raw\": {\n        \"value\": \"Summer Internship Project\",\n        \"quote\": \"Summer Internship Project (3 Months): Prism Asset Management Pvt Ltd.\"\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"start\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"end\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"duration_text\": {\n        \"value\": \"3 Months\",\n        \"quote\": \"Summer Internship Project (3 Months)\"\n      },\n      \"is_internship\": true,\n      \"is_volunteer\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Comprehensive equity analysis of Indian Technology Sector\",\n          \"quote\": \"Comprehensive equity analysis of Indian Technology Sector\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Reliance Infrastructure Ltd.\",\n        \"quote\": \"Concurrent Project (8 weeks): Reliance Infrastructure Ltd.\"\n      },\n      \"title_raw\": {\n        \"value\": \"Concurrent Project\",\n        \"quote\": \"Concurrent Project (8 weeks): Reliance Infrastructure Ltd.\"\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"start\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"end\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"duration_text\": {\n        \"value\": \"8 weeks\",\n        \"quote\": \"Concurrent Project (8 weeks)\"\n      },\n      \"is_internship\": true,\n      \"is_volunteer\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Strategic market analysis of Indian Renewable Energy Companies.\",\n          \"quote\": \"Strategic market analysis of Indian Renewable Energy Companies.\"\n        }\n      ]\n    }\n  ],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 1907,
+ "tokens_out": 2079,
+ "latency_ms": 17807,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "employment"
+}

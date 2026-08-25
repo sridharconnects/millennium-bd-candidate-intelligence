@@ -1,0 +1,238 @@
+{
+ "data": {
+  "employment": [
+   {
+    "employer_raw": {
+     "value": "MIT Sloan School of Management",
+     "quote": "MIT SLOAN SCHOOL OF MANAGEMENT"
+    },
+    "title_raw": {
+     "value": "Investment Management Club Co-President",
+     "quote": "Investment Management Club Co-President"
+    },
+    "location": {
+     "value": "Cambridge, MA, United States",
+     "quote": "Cambridge, MA, United States"
+    },
+    "start": {
+     "value": "2019-08",
+     "quote": "August/2019"
+    },
+    "end": {
+     "value": "2021-05",
+     "quote": "May/2021"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "is_volunteer": true,
+    "highlights": []
+   },
+   {
+    "employer_raw": {
+     "value": "MIT Sloan School of Management",
+     "quote": "MIT SLOAN SCHOOL OF MANAGEMENT"
+    },
+    "title_raw": {
+     "value": "Latin America Conference 2020 organizer",
+     "quote": "Latin America Conference 2020 organizer"
+    },
+    "location": {
+     "value": "Cambridge, MA, United States",
+     "quote": "Cambridge, MA, United States"
+    },
+    "start": {
+     "value": "2019-08",
+     "quote": "August/2019"
+    },
+    "end": {
+     "value": "2021-05",
+     "quote": "May/2021"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "is_volunteer": true,
+    "highlights": []
+   },
+   {
+    "employer_raw": {
+     "value": "Fundacao Getulio Vargas",
+     "quote": "FUNDACAO GETULIO VARGAS"
+    },
+    "title_raw": {
+     "value": "Manager of CJE-FF - a student-run equity fund - and the Investment Committee",
+     "quote": "Manager of CJE-FF - a student-run equity fund - and the Investment Committee"
+    },
+    "location": {
+     "value": "Sao Paulo, Brazil",
+     "quote": "Sao Paulo, Brazil"
+    },
+    "start": {
+     "value": "2013",
+     "quote": "2013"
+    },
+    "end": {
+     "value": "2016",
+     "quote": "2016"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "is_volunteer": true,
+    "highlights": []
+   },
+   {
+    "employer_raw": {
+     "value": "Vanguard Group",
+     "quote": "VANGUARD GROUP"
+    },
+    "title_raw": {
+     "value": "Equity Research Analyst",
+     "quote": "Equity Research Analyst"
+    },
+    "location": {
+     "value": "Boston, USA / London, United Kingdom",
+     "quote": "Boston, USA / London, United Kingdom"
+    },
+    "start": {
+     "value": "2021-08",
+     "quote": "August/2021"
+    },
+    "end": {
+     "value": "present",
+     "quote": "Present"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "is_volunteer": false,
+    "highlights": [
+     {
+      "value": "Develops investment recommendations on publicly traded companies through fundamental research including financial modeling and proprietary studies, focused on healthcare, consumer discretionary an telecom companies operating primarily in emerging Latam and EMEA.",
+      "quote": "Develops investment recommendations on publicly traded companies through fundamental research including financial modeling and proprietary studies, focused on healthcare, consumer discretionary an telecom companies operating primarily in emerging Latam and EMEA."
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Vanguard Group",
+     "quote": "VANGUARD GROUP"
+    },
+    "title_raw": {
+     "value": "Equity Research Summer Analyst",
+     "quote": "Equity Research Summer Analyst"
+    },
+    "location": {
+     "value": "Boston, USA / London, United Kingdom",
+     "quote": "Boston, USA / London, United Kingdom"
+    },
+    "start": {
+     "value": "2020-06",
+     "quote": "June/2020"
+    },
+    "end": {
+     "value": "2020-08",
+     "quote": "August/2020"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": true,
+    "is_volunteer": false,
+    "highlights": [
+     {
+      "value": "Developed investment recommendations on water technology publicly traded companies through fundamental research including financial modeling and proprietary studies",
+      "quote": "Developed investment recommendations on water technology publicly traded companies through fundamental research including financial modeling and proprietary studies"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Bain & Company",
+     "quote": "BAIN & COMPANY"
+    },
+    "title_raw": {
+     "value": "Business Analyst",
+     "quote": "Business Analyst"
+    },
+    "location": {
+     "value": "Sao Paulo, Brazil",
+     "quote": "Sao Paulo, Brazil"
+    },
+    "start": {
+     "value": "2016",
+     "quote": "2016"
+    },
+    "end": {
+     "value": "2019",
+     "quote": "2019"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "is_volunteer": false,
+    "highlights": [
+     {
+      "value": "Analyzed growth potential of e-commerce sales at major electronics retailer by proposing and estimating the impact of digital transformation initiatives such as omnichannel strategy, enhanced product recommendations and optimized logistics network",
+      "quote": "Analyzed growth potential of e-commerce sales at major electronics retailer by proposing and estimating the impact of digital transformation initiatives such as omnichannel strategy, enhanced product recommendations and optimized logistics network"
+     },
+     {
+      "value": "Examined market and consumer trends affecting retail technology company for next 8 years, by consulting industry expert networks and identifying best practices; strategic framework was published in internal knowledge repository",
+      "quote": "Examined market and consumer trends affecting retail technology company for next 8 years, by consulting industry expert networks and identifying best practices; strategic framework was published in internal knowledge repository"
+     },
+     {
+      "value": "Built a dynamic pricing tool for a major consumer electronics company, to recommend price adjustments for each of the 35 main product categories, across 4 distribution channels and 180+ regional markets",
+      "quote": "Built a dynamic pricing tool for a major consumer electronics company, to recommend price adjustments for each of the 35 main product categories, across 4 distribution channels and 180+ regional markets"
+     },
+     {
+      "value": "Redesigned customer service processes for major retail chain, creating standardized protocols, optimizing staffing levels, and developing workforce scheduling tool; during pilot implementation, coached store managers to ensure successful change management",
+      "quote": "Redesigned customer service processes for major retail chain, creating standardized protocols, optimizing staffing levels, and developing workforce scheduling tool; during pilot implementation, coached store managers to ensure successful change management"
+     },
+     {
+      "value": "Implemented strategic sourcing transformation at major grocery chain, leading cross-functional teams of 3-4 client members in each product category to deliver ~4 percentage points of gross margin improvement",
+      "quote": "Implemented strategic sourcing transformation at major grocery chain, leading cross-functional teams of 3-4 client members in each product category to deliver ~4 percentage points of gross margin improvement"
+     },
+     {
+      "value": "Supervised progress of initiatives in supply chain optimization engagement for retail client, and in digital transformation program for logistics provider, managing junior client teams and ensuring execution excellence",
+      "quote": "Supervised progress of initiatives in supply chain optimization engagement for retail client, and in digital transformation program for logistics provider, managing junior client teams and ensuring execution excellence"
+     },
+     {
+      "value": "Developed a recommendation for a major infrastructure player regarding entrance in a new segment, by mapping main players, margins, current and potential market size, capabilities required, and investment needed",
+      "quote": "Developed a recommendation for a major infrastructure player regarding entrance in a new segment, by mapping main players, margins, current and potential market size, capabilities required, and investment needed"
+     },
+     {
+      "value": "Investigated structure and functioning of more than 15 loyalty programs, by interviewing colleagues from all over the world, and reaching out to market experts, to redesign loyalty program of a banking client",
+      "quote": "Investigated structure and functioning of more than 15 loyalty programs, by interviewing colleagues from all over the world, and reaching out to market experts, to redesign loyalty program of a banking client"
+     },
+     {
+      "value": "Managed progress of 200+ initiatives in a large-scale lean manufacturing engagement for an aerospace player, by coordinating work of directors and managers of the company",
+      "quote": "Managed progress of 200+ initiatives in a large-scale lean manufacturing engagement for an aerospace player, by coordinating work of directors and managers of the company"
+     },
+     {
+      "value": "Led launch of McKinsey's first case competition, receiving 3.300 applications to an in-person event that mobilized +50 consultants from McKinsey Brazil",
+      "quote": "Led launch of McKinsey's first case competition, receiving 3.300 applications to an in-person event that mobilized +50 consultants from McKinsey Brazil"
+     }
+    ]
+   }
+  ],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"employment\": [\n    {\n      \"employer_raw\": {\n        \"value\": \"MIT Sloan School of Management\",\n        \"quote\": \"MIT SLOAN SCHOOL OF MANAGEMENT\"\n      },\n      \"title_raw\": {\n        \"value\": \"Investment Management Club Co-President\",\n        \"quote\": \"Investment Management Club Co-President\"\n      },\n      \"location\": {\n        \"value\": \"Cambridge, MA, United States\",\n        \"quote\": \"Cambridge, MA, United States\"\n      },\n      \"start\": {\n        \"value\": \"2019-08\",\n        \"quote\": \"August/2019\"\n      },\n      \"end\": {\n        \"value\": \"2021-05\",\n        \"quote\": \"May/2021\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"is_volunteer\": true,\n      \"highlights\": []\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"MIT Sloan School of Management\",\n        \"quote\": \"MIT SLOAN SCHOOL OF MANAGEMENT\"\n      },\n      \"title_raw\": {\n        \"value\": \"Latin America Conference 2020 organizer\",\n        \"quote\": \"Latin America Conference 2020 organizer\"\n      },\n      \"location\": {\n        \"value\": \"Cambridge, MA, United States\",\n        \"quote\": \"Cambridge, MA, United States\"\n      },\n      \"start\": {\n        \"value\": \"2019-08\",\n        \"quote\": \"August/2019\"\n      },\n      \"end\": {\n        \"value\": \"2021-05\",\n        \"quote\": \"May/2021\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"is_volunteer\": true,\n      \"highlights\": []\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Fundacao Getulio Vargas\",\n        \"quote\": \"FUNDACAO GETULIO VARGAS\"\n      },\n      \"title_raw\": {\n        \"value\": \"Manager of CJE-FF - a student-run equity fund - and the Investment Committee\",\n        \"quote\": \"Manager of CJE-FF - a student-run equity fund - and the Investment Committee\"\n      },\n      \"location\": {\n        \"value\": \"Sao Paulo, Brazil\",\n        \"quote\": \"Sao Paulo, Brazil\"\n      },\n      \"start\": {\n        \"value\": \"2013\",\n        \"quote\": \"2013\"\n      },\n      \"end\": {\n        \"value\": \"2016\",\n        \"quote\": \"2016\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"is_volunteer\": true,\n      \"highlights\": []\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Vanguard Group\",\n        \"quote\": \"VANGUARD GROUP\"\n      },\n      \"title_raw\": {\n        \"value\": \"Equity Research Analyst\",\n        \"quote\": \"Equity Research Analyst\"\n      },\n      \"location\": {\n        \"value\": \"Boston, USA / London, United Kingdom\",\n        \"quote\": \"Boston, USA / London, United Kingdom\"\n      },\n      \"start\": {\n        \"value\": \"2021-08\",\n        \"quote\": \"August/2021\"\n      },\n      \"end\": {\n        \"value\": \"present\",\n        \"quote\": \"Present\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"is_volunteer\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Develops investment recommendations on publicly traded companies through fundamental research including financial modeling and proprietary studies, focused on healthcare, consumer discretionary an telecom companies operating primarily in emerging Latam and EMEA.\",\n          \"quote\": \"Develops investment recommendations on publicly traded companies through fundamental research including financial modeling and proprietary studies, focused on healthcare, consumer discretionary an telecom companies operating primarily in emerging Latam and EMEA.\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Vanguard Group\",\n        \"quote\": \"VANGUARD GROUP\"\n      },\n      \"title_raw\": {\n        \"value\": \"Equity Research Summer Analyst\",\n        \"quote\": \"Equity Research Summer Analyst\"\n      },\n      \"location\": {\n        \"value\": \"Boston, USA / London, United Kingdom\",\n        \"quote\": \"Boston, USA / London, United Kingdom\"\n      },\n      \"start\": {\n        \"value\": \"2020-06\",\n        \"quote\": \"June/2020\"\n      },\n      \"end\": {\n        \"value\": \"2020-08\",\n        \"quote\": \"August/2020\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": true,\n      \"is_volunteer\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Developed investment recommendations on water technology publicly traded companies through fundamental research including financial modeling and proprietary studies\",\n          \"quote\": \"Developed investment recommendations on water technology publicly traded companies through fundamental research including financial modeling and proprietary studies\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Bain & Company\",\n        \"quote\": \"BAIN & COMPANY\"\n      },\n      \"title_raw\": {\n        \"value\": \"Business Analyst\",\n        \"quote\": \"Business Analyst\"\n      },\n      \"location\": {\n        \"value\": \"Sao Paulo, Brazil\",\n        \"quote\": \"Sao Paulo, Brazil\"\n      },\n      \"start\": {\n        \"value\": \"2016\",\n        \"quote\": \"2016\"\n      },\n      \"end\": {\n        \"value\": \"2019\",\n        \"quote\": \"2019\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"is_volunteer\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Analyzed growth potential of e-commerce sales at major electronics retailer by proposing and estimating the impact of digital transformation initiatives such as omnichannel strategy, enhanced product recommendations and optimized logistics network\",\n          \"quote\": \"Analyzed growth potential of e-commerce sales at major electronics retailer by proposing and estimating the impact of digital transformation initiatives such as omnichannel strategy, enhanced product recommendations and optimized logistics network\"\n        },\n        {\n          \"value\": \"Examined market and consumer trends affecting retail technology company for next 8 years, by consulting industry expert networks and identifying best practices; strategic framework was published in internal knowledge repository\",\n          \"quote\": \"Examined market and consumer trends affecting retail technology company for next 8 years, by consulting industry expert networks and identifying best practices; strategic framework was published in internal knowledge repository\"\n        },\n        {\n          \"value\": \"Built a dynamic pricing tool for a major consumer electronics company, to recommend price adjustments for each of the 35 main product categories, across 4 distribution channels and 180+ regional markets\",\n          \"quote\": \"Built a dynamic pricing tool for a major consumer electronics company, to recommend price adjustments for each of the 35 main product categories, across 4 distribution channels and 180+ regional markets\"\n        },\n        {\n          \"value\": \"Redesigned customer service processes for major retail chain, creating standardized protocols, optimizing staffing levels, and developing workforce scheduling tool; during pilot implementation, coached store managers to ensure successful change management\",\n          \"quote\": \"Redesigned customer service processes for major retail chain, creating standardized protocols, optimizing staffing levels, and developing workforce scheduling tool; during pilot implementation, coached store managers to ensure successful change management\"\n        },\n        {\n          \"value\": \"Implemented strategic sourcing transformation at major grocery chain, leading cross-functional teams of 3-4 client members in each product category to deliver ~4 percentage points of gross margin improvement\",\n          \"quote\": \"Implemented strategic sourcing transformation at major grocery chain, leading cross-functional teams of 3-4 client members in each product category to deliver ~4 percentage points of gross margin improvement\"\n        },\n        {\n          \"value\": \"Supervised progress of initiatives in supply chain optimization engagement for retail client, and in digital transformation program for logistics provider, managing junior client teams and ensuring execution excellence\",\n          \"quote\": \"Supervised progress of initiatives in supply chain optimization engagement for retail client, and in digital transformation program for logistics provider, managing junior client teams and ensuring execution excellence\"\n        },\n        {\n          \"value\": \"Developed a recommendation for a major infrastructure player regarding entrance in a new segment, by mapping main players, margins, current and potential market size, capabilities required, and investment needed\",\n          \"quote\": \"Developed a recommendation for a major infrastructure player regarding entrance in a new segment, by mapping main players, margins, current and potential market size, capabilities required, and investment needed\"\n        },\n        {\n          \"value\": \"Investigated structure and functioning of more than 15 loyalty programs, by interviewing colleagues from all over the world, and reaching out to market experts, to redesign loyalty program of a banking client\",\n          \"quote\": \"Investigated structure and functioning of more than 15 loyalty programs, by interviewing colleagues from all over the world, and reaching out to market experts, to redesign loyalty program of a banking client\"\n        },\n        {\n          \"value\": \"Managed progress of 200+ initiatives in a large-scale lean manufacturing engagement for an aerospace player, by coordinating work of directors and managers of the company\",\n          \"quote\": \"Managed progress of 200+ initiatives in a large-scale lean manufacturing engagement for an aerospace player, by coordinating work of directors and managers of the company\"\n        },\n        {\n          \"value\": \"Led launch of McKinsey's first case competition, receiving 3.300 applications to an in-person event that mobilized +50 consultants from McKinsey Brazil\",\n          \"quote\": \"Led launch of McKinsey's first case competition, receiving 3.300 applications to an in-person event that mobilized +50 consultants from McKinsey Brazil\"\n        }\n      ]\n    }\n  ],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 1897,
+ "tokens_out": 2512,
+ "latency_ms": 22072,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "employment"
+}

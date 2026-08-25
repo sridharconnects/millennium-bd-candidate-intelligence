@@ -1,0 +1,94 @@
+{
+ "data": {
+  "strategies": [
+   {
+    "label": "equity_long_short",
+    "confidence": 0.9,
+    "rationale": "Lead analyst publishing equity research ratings with price targets on healthcare stocks",
+    "quote": "Generate investment ideas and publish equity research ratings with price targets on Indian healthcare sector companies",
+    "low_support": false
+   }
+  ],
+  "sectors": [
+   {
+    "label": "healthcare",
+    "confidence": 0.95,
+    "rationale": "Lead analyst covering pharmaceuticals and healthcare sector across multiple firms for 8+ years",
+    "quote": "Lead Analyst - Pharmaceuticals and Healthcare",
+    "low_support": false
+   }
+  ],
+  "quant_fundamental": {
+   "label": "fundamental",
+   "confidence": 0.9,
+   "rationale": "Equity research analyst publishing ratings, price targets, thematic reports, and attending company meetings - classic fundamental research",
+   "quote": "Published sector thematic reports on Indian generics expansion, digital health initiatives, respiratory drug market",
+   "quote_secondary": "Attended meetings & calls with company IRs, institutional investors, & industry experts"
+  },
+  "feeder_path": {
+   "label": "sellside_research",
+   "confidence": 0.95,
+   "rationale": "Career began in sellside equity research at JP Morgan and DataFlow Research after finance PGDM",
+   "quote": "J.P. Morgan Securities, London Equity Research Associate Sep-'13",
+   "quote_secondary": "DataFlow Research India Pvt. Limited, Noida Manager - Equity Research May-'15"
+  },
+  "geography_primary": {
+   "value": "India",
+   "quote": "Meridian Research Partners Lead Analyst - Pharmaceuticals and Healthcare May'22 to till now"
+  },
+  "skills": [
+   {
+    "name": "Bloomberg",
+    "depth": "core",
+    "quote": "Proficient in using MS Office as well as financial databases like Bloomberg, Factset, and Reuters"
+   },
+   {
+    "name": "FactSet",
+    "depth": "core",
+    "quote": "Proficient in using MS Office as well as financial databases like Bloomberg, Factset, and Reuters"
+   },
+   {
+    "name": "Equity Research",
+    "depth": "core",
+    "quote": "Generate investment ideas and publish equity research ratings with price targets"
+   },
+   {
+    "name": "Financial Modeling",
+    "depth": "core",
+    "quote": "publish equity research ratings with price targets on Indian healthcare sector companies across 28 stocks under coverage"
+   },
+   {
+    "name": "Healthcare Industry Analysis",
+    "depth": "core",
+    "quote": "Published sector thematic reports on Indian generics expansion, digital health initiatives, respiratory drug market, and healthcare policy reforms"
+   },
+   {
+    "name": "FDA Database",
+    "depth": "applied",
+    "quote": "Well versed with healthcare related databases like FDA, MedPAC, CMS, WHO, German DRG, USRDS, and PubMed"
+   },
+   {
+    "name": "CMS Database",
+    "depth": "applied",
+    "quote": "Well versed with healthcare related databases like FDA, MedPAC, CMS, WHO, German DRG, USRDS, and PubMed"
+   },
+   {
+    "name": "PubMed",
+    "depth": "applied",
+    "quote": "Well versed with healthcare related databases like FDA, MedPAC, CMS, WHO, German DRG, USRDS, and PubMed"
+   },
+   {
+    "name": "Investor Relations",
+    "depth": "applied",
+    "quote": "Attended meetings & calls with company IRs, institutional investors, & industry experts"
+   }
+  ],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"strategies\": [\n    {\n      \"label\": \"equity_long_short\",\n      \"confidence\": 0.9,\n      \"rationale\": \"Lead analyst publishing equity research ratings with price targets on healthcare stocks\",\n      \"quote\": \"Generate investment ideas and publish equity research ratings with price targets on Indian healthcare sector companies\",\n      \"low_support\": false\n    }\n  ],\n  \"sectors\": [\n    {\n      \"label\": \"healthcare\",\n      \"confidence\": 0.95,\n      \"rationale\": \"Lead analyst covering pharmaceuticals and healthcare sector across multiple firms for 8+ years\",\n      \"quote\": \"Lead Analyst - Pharmaceuticals and Healthcare\",\n      \"low_support\": false\n    }\n  ],\n  \"quant_fundamental\": {\n    \"label\": \"fundamental\",\n    \"confidence\": 0.9,\n    \"rationale\": \"Equity research analyst publishing ratings, price targets, thematic reports, and attending company meetings - classic fundamental research\",\n    \"quote\": \"Published sector thematic reports on Indian generics expansion, digital health initiatives, respiratory drug market\",\n    \"quote_secondary\": \"Attended meetings & calls with company IRs, institutional investors, & industry experts\"\n  },\n  \"feeder_path\": {\n    \"label\": \"sellside_research\",\n    \"confidence\": 0.95,\n    \"rationale\": \"Career began in sellside equity research at JP Morgan and DataFlow Research after finance PGDM\",\n    \"quote\": \"J.P. Morgan Securities, London Equity Research Associate Sep-'13\",\n    \"quote_secondary\": \"DataFlow Research India Pvt. Limited, Noida Manager - Equity Research May-'15\"\n  },\n  \"geography_primary\": {\n    \"value\": \"India\",\n    \"quote\": \"Meridian Research Partners Lead Analyst - Pharmaceuticals and Healthcare May'22 to till now\"\n  },\n  \"skills\": [\n    {\n      \"name\": \"Bloomberg\",\n      \"depth\": \"core\",\n      \"quote\": \"Proficient in using MS Office as well as financial databases like Bloomberg, Factset, and Reuters\"\n    },\n    {\n      \"name\": \"FactSet\",\n      \"depth\": \"core\",\n      \"quote\": \"Proficient in using MS Office as well as financial databases like Bloomberg, Factset, and Reuters\"\n    },\n    {\n      \"name\": \"Equity Research\",\n      \"depth\": \"core\",\n      \"quote\": \"Generate investment ideas and publish equity research ratings with price targets\"\n    },\n    {\n      \"name\": \"Financial Modeling\",\n      \"depth\": \"core\",\n      \"quote\": \"publish equity research ratings with price targets on Indian healthcare sector companies across 28 stocks under coverage\"\n    },\n    {\n      \"name\": \"Healthcare Industry Analysis\",\n      \"depth\": \"core\",\n      \"quote\": \"Published sector thematic reports on Indian generics expansion, digital health initiatives, respiratory drug market, and healthcare policy reforms\"\n    },\n    {\n      \"name\": \"FDA Database\",\n      \"depth\": \"applied\",\n      \"quote\": \"Well versed with healthcare related databases like FDA, MedPAC, CMS, WHO, German DRG, USRDS, and PubMed\"\n    },\n    {\n      \"name\": \"CMS Database\",\n      \"depth\": \"applied\",\n      \"quote\": \"Well versed with healthcare related databases like FDA, MedPAC, CMS, WHO, German DRG, USRDS, and PubMed\"\n    },\n    {\n      \"name\": \"PubMed\",\n      \"depth\": \"applied\",\n      \"quote\": \"Well versed with healthcare related databases like FDA, MedPAC, CMS, WHO, German DRG, USRDS, and PubMed\"\n    },\n    {\n      \"name\": \"Investor Relations\",\n      \"depth\": \"applied\",\n      \"quote\": \"Attended meetings & calls with company IRs, institutional investors, & industry experts\"\n    }\n  ],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 2105,
+ "tokens_out": 959,
+ "latency_ms": 11568,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "profile"
+}

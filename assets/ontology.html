@@ -1,0 +1,352 @@
+<meta charset="utf-8">
+<title>Candidate Ontology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B1220; --ink-2:#101A2C; --paper:#F4F1E9; --paper-2:#EAE5D8;
+    --line:#26324A; --line-soft:#1B2537;
+    --verified:#14B8A6; --verified-soft:#0E7C71;
+    --defend:#D97706; --muted:#7C8AA5; --muted-2:#54627F;
+    --text:#E7ECF6; --text-dim:#AEB9CE;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--ink); color:var(--text);
+    font-family:"Inter",-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size:28px 28px;
+    background-position:center top;
+  }
+  .wrap{max-width:1180px; margin:0 auto; padding:56px 32px 72px;}
+
+  .eyebrow{
+    font-family:"IBM Plex Mono","SFMono-Regular",Menlo,Consolas,monospace; font-size:12px;
+    letter-spacing:.14em; text-transform:uppercase; color:var(--verified);
+    display:flex; align-items:center; gap:10px; margin-bottom:18px;
+  }
+  .eyebrow::before{content:""; width:7px; height:7px; border-radius:50%;
+    background:var(--verified); box-shadow:0 0 0 3px rgba(20,184,166,.18);}
+
+  h1{
+    font-family:"Archivo","Helvetica Neue",Arial,sans-serif; font-weight:800; font-size:clamp(34px,4.4vw,58px);
+    line-height:1.03; letter-spacing:-0.015em; margin:0 0 18px; max-width:820px;
+    text-wrap:balance; color:var(--text);
+  }
+  h1 em{font-style:normal; color:var(--verified);}
+  .sub{
+    font-size:16.5px; line-height:1.6; color:var(--text-dim); max-width:640px;
+    margin:0 0 44px;
+  }
+  .sub code{
+    font-family:"IBM Plex Mono","SFMono-Regular",Menlo,monospace; font-size:14px; background:var(--ink-2);
+    border:1px solid var(--line); padding:1px 6px; border-radius:4px; color:var(--verified);
+  }
+
+  figure{margin:0;}
+  .stage{
+    background:var(--ink-2); border:1px solid var(--line); border-radius:10px;
+    padding:8px 8px 4px;
+  }
+  svg{display:block; width:100%; height:auto;}
+  figcaption{
+    font-size:13.5px; line-height:1.55; color:var(--text-dim); max-width:760px;
+    margin:20px 2px 0; font-family:"Inter",sans-serif;
+  }
+  figcaption b{color:var(--text); font-weight:600;}
+
+  .legend{
+    display:flex; flex-wrap:wrap; gap:22px 34px; margin-top:38px; padding-top:26px;
+    border-top:1px solid var(--line);
+  }
+  .legend-item{display:flex; align-items:flex-start; gap:10px; max-width:260px;}
+  .legend-swatch{width:11px; height:11px; border-radius:3px; margin-top:4px; flex-shrink:0;}
+  .legend-title{
+    font-family:"IBM Plex Mono","SFMono-Regular",monospace; font-size:11.5px; letter-spacing:.05em;
+    text-transform:uppercase; color:var(--text); margin-bottom:3px;
+  }
+  .legend-body{font-size:13px; line-height:1.5; color:var(--muted);}
+
+  .stats{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px; margin-top:40px;
+    background:var(--line); border:1px solid var(--line); border-radius:10px; overflow:hidden;
+  }
+  .stat{background:var(--ink-2); padding:16px 18px;}
+  .stat .v{
+    font-family:"IBM Plex Mono","SFMono-Regular",monospace; font-size:22px; font-weight:600; color:var(--verified);
+    font-variant-numeric:tabular-nums;
+  }
+  .stat .l{font-size:11.5px; color:var(--muted); margin-top:4px; letter-spacing:.03em;}
+
+  @media (max-width:720px){
+    .stats{grid-template-columns:repeat(2,1fr);}
+    .wrap{padding:36px 18px 56px;}
+  }
+</style>
+
+<div class="wrap">
+  <div class="eyebrow">Millennium BD &middot; Candidate Intelligence</div>
+  <h1>Every claim is a thread<br>back to a <em>source span.</em></h1>
+  <p class="sub">
+    Ten resumes go in — mangled ligatures, merged table cells, a company named inside
+    a bullet that isn't the employer. What comes out is a queryable ontology where
+    nothing is asserted without a quote, and nothing gets a quote without a match
+    in <code>doc.text</code>.
+  </p>
+
+  <figure>
+    <div class="stage">
+      <svg viewBox="0 0 1180 900" role="img"
+           aria-label="Diagram: resumes flow through ingest, sanitize, parse, ground, classify and validate stages, each labeled with the real data contract it passes, converging into a candidate ontology plane where object nodes for Candidate, Employer, Skill, Strategy and Evidence Span are connected by labeled relationship edges; a floating card shows one verified candidate record, and two action pills read from the ontology.">
+
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--verified)"/>
+          </marker>
+          <marker id="arrow-muted" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted-2)"/>
+          </marker>
+        </defs>
+
+        <!-- ============================================================ ZONE 1 : intake -->
+        <text x="40" y="38" font-family="IBM Plex Mono, monospace" font-size="11.5"
+              letter-spacing="2" fill="var(--muted)">RESUMES — UNTRUSTED INPUT</text>
+
+        <g font-family="IBM Plex Mono, monospace" font-size="10.5">
+          <!-- fanned paper cards -->
+          <g transform="translate(90,54) rotate(-6)">
+            <rect x="0" y="0" width="150" height="92" rx="4" fill="var(--paper)" stroke="var(--paper-2)"/>
+            <rect x="12" y="14" width="90" height="6" fill="#C9C2AE"/>
+            <rect x="12" y="26" width="126" height="3" fill="#DAD4C2"/>
+            <rect x="12" y="33" width="126" height="3" fill="#DAD4C2"/>
+            <rect x="12" y="40" width="80" height="3" fill="#DAD4C2"/>
+            <text x="12" y="72" fill="var(--defend)" font-size="8.5">QuanƟtaƟve → Quantitative</text>
+            <text x="12" y="83" fill="#8A8368" font-size="8">2-col PDF, repaired</text>
+          </g>
+          <g transform="translate(255,44) rotate(3)">
+            <rect x="0" y="0" width="150" height="92" rx="4" fill="var(--paper)" stroke="var(--paper-2)"/>
+            <rect x="12" y="14" width="100" height="6" fill="#C9C2AE"/>
+            <rect x="12" y="26" width="126" height="3" fill="#DAD4C2"/>
+            <rect x="12" y="33" width="126" height="3" fill="#DAD4C2"/>
+            <rect x="12" y="40" width="70" height="3" fill="#DAD4C2"/>
+            <text x="12" y="72" fill="var(--defend)" font-size="8.5">"8y 10mo" — no dates</text>
+            <text x="12" y="83" fill="#8A8368" font-size="8">duration only, not invented</text>
+          </g>
+          <g transform="translate(420,52) rotate(-2)">
+            <rect x="0" y="0" width="150" height="92" rx="4" fill="var(--paper)" stroke="var(--paper-2)"/>
+            <rect x="12" y="14" width="95" height="6" fill="#C9C2AE"/>
+            <rect x="12" y="26" width="126" height="3" fill="#DAD4C2"/>
+            <rect x="12" y="33" width="126" height="3" fill="#DAD4C2"/>
+            <rect x="12" y="40" width="90" height="3" fill="#DAD4C2"/>
+            <text x="12" y="72" fill="var(--defend)" font-size="8.5">"McKinsey" — in a bullet,</text>
+            <text x="12" y="83" fill="#8A8368" font-size="8">not the employer heading</text>
+          </g>
+          <g transform="translate(585,45) rotate(5)">
+            <rect x="0" y="0" width="150" height="92" rx="4" fill="var(--paper)" stroke="var(--paper-2)"/>
+            <rect x="12" y="14" width="85" height="6" fill="#C9C2AE"/>
+            <rect x="12" y="26" width="126" height="3" fill="#DAD4C2"/>
+            <rect x="12" y="33" width="126" height="3" fill="#DAD4C2"/>
+            <rect x="12" y="40" width="100" height="3" fill="#DAD4C2"/>
+            <text x="12" y="72" fill="#B91C1C" font-size="8.5">white-on-white payload</text>
+            <text x="12" y="83" fill="#8A8368" font-size="8">detected, neutralised</text>
+          </g>
+        </g>
+
+        <!-- ============================================================ ZONE 2 : pipeline -->
+        <g font-family="IBM Plex Mono, monospace">
+          <text x="40" y="196" font-size="11.5" letter-spacing="2" fill="var(--muted)">PIPELINE — SEVEN AGENTS, ONE CONTRACT</text>
+
+          <!-- stage nodes -->
+          <!-- INGEST -->
+          <rect x="70" y="216" width="120" height="54" rx="7" fill="var(--ink-2)" stroke="var(--line)"/>
+          <text x="130" y="240" text-anchor="middle" font-size="12" font-weight="600" fill="var(--text)">INGEST</text>
+          <text x="130" y="256" text-anchor="middle" font-size="8.5" fill="var(--muted)">layout repair</text>
+
+          <!-- SANITIZE -->
+          <rect x="235" y="216" width="120" height="54" rx="7" fill="var(--ink-2)" stroke="var(--defend)" stroke-opacity="0.55"/>
+          <text x="295" y="240" text-anchor="middle" font-size="12" font-weight="600" fill="var(--text)">SANITIZE</text>
+          <text x="295" y="256" text-anchor="middle" font-size="8.5" fill="var(--defend)">injection scan</text>
+
+          <!-- PARSE (LLM) -->
+          <rect x="400" y="216" width="130" height="54" rx="7" fill="var(--ink-2)" stroke="var(--verified)"/>
+          <text x="465" y="237" text-anchor="middle" font-size="12" font-weight="600" fill="var(--text)">PARSE</text>
+          <text x="465" y="250" text-anchor="middle" font-size="8" fill="var(--verified)">Claude API · no tools</text>
+          <text x="465" y="261" text-anchor="middle" font-size="7.5" fill="var(--muted)">quote required</text>
+
+          <!-- GROUND -->
+          <rect x="570" y="216" width="120" height="54" rx="7" fill="var(--ink-2)" stroke="var(--line)"/>
+          <text x="630" y="237" text-anchor="middle" font-size="12" font-weight="600" fill="var(--text)">GROUND</text>
+          <text x="630" y="251" text-anchor="middle" font-size="8" fill="var(--muted)">verify or</text>
+          <text x="630" y="261" text-anchor="middle" font-size="8" fill="var(--defend)">ABSTAIN</text>
+
+          <!-- CLASSIFY -->
+          <rect x="730" y="216" width="120" height="54" rx="7" fill="var(--ink-2)" stroke="var(--line)"/>
+          <text x="790" y="240" text-anchor="middle" font-size="12" font-weight="600" fill="var(--text)">CLASSIFY</text>
+          <text x="790" y="256" text-anchor="middle" font-size="8.5" fill="var(--muted)">closed taxonomy</text>
+
+          <!-- VALIDATE -->
+          <rect x="895" y="216" width="120" height="54" rx="7" fill="var(--ink-2)" stroke="var(--line)"/>
+          <text x="955" y="240" text-anchor="middle" font-size="12" font-weight="600" fill="var(--text)">VALIDATE</text>
+          <text x="955" y="256" text-anchor="middle" font-size="8.5" fill="var(--muted)">dates · gaps</text>
+
+          <!-- arrows + real data-contract labels -->
+          <line x1="190" y1="243" x2="231" y2="243" stroke="var(--muted-2)" stroke-width="1.4" marker-end="url(#arrow-muted)"/>
+          <text x="210" y="234" text-anchor="middle" font-size="7.5" fill="var(--muted)">raw_text</text>
+
+          <line x1="355" y1="243" x2="396" y2="243" stroke="var(--muted-2)" stroke-width="1.4" marker-end="url(#arrow-muted)"/>
+          <text x="375" y="234" text-anchor="middle" font-size="7.5" fill="var(--muted)">clean_text</text>
+
+          <line x1="530" y1="243" x2="566" y2="243" stroke="var(--verified)" stroke-width="1.6" marker-end="url(#arrow)"/>
+          <text x="548" y="234" text-anchor="middle" font-size="7.5" fill="var(--verified)">quote + value</text>
+
+          <line x1="690" y1="243" x2="726" y2="243" stroke="var(--muted-2)" stroke-width="1.4" marker-end="url(#arrow-muted)"/>
+          <text x="708" y="234" text-anchor="middle" font-size="7.2" fill="var(--muted)">verified field</text>
+
+          <line x1="850" y1="243" x2="891" y2="243" stroke="var(--muted-2)" stroke-width="1.4" marker-end="url(#arrow-muted)"/>
+          <text x="870" y="234" text-anchor="middle" font-size="7.5" fill="var(--muted)">label + span</text>
+
+          <text x="1015" y="248" font-size="8.5" fill="var(--verified)" font-weight="600">CandidateProfile</text>
+        </g>
+
+        <!-- evidence threads: the signature motif -- a claim's provenance, pinned from its
+             source document straight through to the ontology, routed AROUND the pipeline row
+             (not through it) so it reads as its own layer rather than blending into the
+             pipeline's own arrows. Warm paper tone ties each thread back to its document card;
+             a small pin dot marks each end so the connection reads as deliberate, not ambient. -->
+        <g fill="none">
+          <path d="M165,150 Q 140,320 300,468" stroke="var(--paper)" stroke-width="1.3" stroke-dasharray="1 5" opacity="0.8"/>
+          <path d="M330,140 Q 350,320 430,468" stroke="var(--paper)" stroke-width="1.3" stroke-dasharray="1 5" opacity="0.8"/>
+          <path d="M495,148 Q 540,320 600,468" stroke="var(--paper)" stroke-width="1.3" stroke-dasharray="1 5" opacity="0.8"/>
+          <path d="M660,141 Q 700,320 760,468" stroke="var(--paper)" stroke-width="1.3" stroke-dasharray="1 5" opacity="0.8"/>
+          <g fill="var(--paper)" opacity="0.9">
+            <circle cx="165" cy="150" r="2.6"/><circle cx="300" cy="468" r="2.6"/>
+            <circle cx="330" cy="140" r="2.6"/><circle cx="430" cy="468" r="2.6"/>
+            <circle cx="495" cy="148" r="2.6"/><circle cx="600" cy="468" r="2.6"/>
+            <circle cx="660" cy="141" r="2.6"/><circle cx="760" cy="468" r="2.6"/>
+          </g>
+        </g>
+
+        <!-- ============================================================ ZONE 3 : platform plane -->
+        <g>
+          <!-- flattened perspective ground plane -->
+          <polygon points="150,470 1030,470 900,760 280,760"
+                   fill="var(--ink-2)" stroke="var(--line)" stroke-width="1.4"/>
+          <!-- receding grid lines for depth -->
+          <g stroke="var(--line-soft)" stroke-width="1">
+            <line x1="150" y1="470" x2="280" y2="760"/>
+            <line x1="326" y1="470" x2="400" y2="760"/>
+            <line x1="502" y1="470" x2="520" y2="760"/>
+            <line x1="678" y1="470" x2="640" y2="760"/>
+            <line x1="854" y1="470" x2="760" y2="760"/>
+            <line x1="1030" y1="470" x2="900" y2="760"/>
+          </g>
+
+          <!-- object nodes -->
+          <!-- CANDIDATE (centre, emphasised) -->
+          <circle cx="600" cy="600" r="34" fill="var(--ink)" stroke="var(--verified)" stroke-width="2"/>
+          <text x="600" y="596" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="var(--text)" font-weight="600">CANDIDATE</text>
+          <text x="600" y="609" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="var(--verified)">verified</text>
+
+          <!-- EMPLOYER -->
+          <circle cx="420" cy="540" r="24" fill="var(--ink)" stroke="var(--line)" stroke-width="1.4"/>
+          <text x="420" y="544" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" fill="var(--text-dim)">EMPLOYER</text>
+
+          <!-- SKILL -->
+          <circle cx="760" cy="545" r="24" fill="var(--ink)" stroke="var(--line)" stroke-width="1.4"/>
+          <text x="760" y="549" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" fill="var(--text-dim)">SKILL</text>
+
+          <!-- STRATEGY -->
+          <circle cx="700" cy="680" r="24" fill="var(--ink)" stroke="var(--line)" stroke-width="1.4"/>
+          <text x="700" y="676" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="var(--text-dim)">STRATEGY</text>
+
+          <!-- EVIDENCE SPAN -->
+          <rect x="455" y="655" width="90" height="34" rx="5" fill="var(--paper)" stroke="var(--paper-2)"/>
+          <text x="500" y="668" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7" fill="#5C5642">EVIDENCE</text>
+          <text x="500" y="679" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7" fill="#5C5642">SPAN</text>
+
+          <!-- relationship edges, labeled with real taxonomy relations -->
+          <g font-family="IBM Plex Mono, monospace" font-size="7.5" fill="var(--verified)">
+            <line x1="443" y1="558" x2="577" y2="588" stroke="var(--verified)" stroke-width="1.2"/>
+            <text x="470" y="558" transform="rotate(-14 470 558)">WORKED_AT</text>
+
+            <line x1="737" y1="557" x2="623" y2="590" stroke="var(--verified)" stroke-width="1.2"/>
+            <text x="690" y="558" transform="rotate(13 690 558)">HAS_SKILL</text>
+
+            <line x1="680" y1="662" x2="616" y2="618" stroke="var(--verified)" stroke-width="1.2"/>
+            <text x="628" y="655" transform="rotate(-38 628 655)">COVERS</text>
+
+            <line x1="566" y1="642" x2="580" y2="622" stroke="var(--verified)" stroke-width="1.2" stroke-dasharray="1 3"/>
+            <text x="512" y="638" font-size="7">GROUNDED_BY</text>
+          </g>
+
+          <text x="590" y="800" text-anchor="middle" font-family="IBM Plex Mono, monospace"
+                font-size="13" letter-spacing="4" fill="var(--muted)">CANDIDATE ONTOLOGY</text>
+        </g>
+
+        <!-- action pills, mirroring a recruiter's real read actions -->
+        <g font-family="IBM Plex Mono, monospace" font-size="9.5">
+          <rect x="128" y="392" width="164" height="30" rx="15" fill="var(--ink)" stroke="var(--verified)"/>
+          <text x="210" y="411" text-anchor="middle" fill="var(--verified)">RANK FOR REQUISITION</text>
+          <path d="M210,422 Q 300,455 420,478" stroke="var(--verified)" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+
+          <rect x="838" y="392" width="180" height="30" rx="15" fill="var(--ink)" stroke="var(--verified)"/>
+          <text x="928" y="411" text-anchor="middle" fill="var(--verified)">DETECT COVERAGE GAP</text>
+          <path d="M928,422 Q 850,455 770,478" stroke="var(--verified)" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+        </g>
+
+        <!-- floating verification card, off-axis -->
+        <g transform="translate(830,540)">
+          <rect x="0" y="0" width="188" height="128" rx="8" fill="var(--paper)" stroke="var(--paper-2)"/>
+          <text x="14" y="24" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="700" fill="#332F22">CANDIDATE №0007</text>
+          <line x1="14" y1="33" x2="174" y2="33" stroke="var(--paper-2)"/>
+          <g font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#6B6450">
+            <text x="14" y="52">Region</text><text x="174" y="52" text-anchor="end" fill="#332F22">APAC</text>
+            <text x="14" y="70">Seniority</text><text x="174" y="70" text-anchor="end" fill="#332F22">L4</text>
+            <text x="14" y="88">Feeder path</text><text x="174" y="88" text-anchor="end" fill="#332F22">Sell-side</text>
+          </g>
+          <line x1="14" y1="97" x2="174" y2="97" stroke="var(--paper-2)"/>
+          <text x="14" y="116" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#6B6450">Evidence coverage</text>
+          <text x="174" y="116" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="700" fill="var(--verified-soft)">94%</text>
+        </g>
+
+      </svg>
+    </div>
+    <figcaption>
+      <b>What this shows:</b> the real pipeline sequence in <code>orchestrator.py</code> — ingest,
+      sanitise, parse, ground, classify, validate — labeled with the actual data each stage hands
+      the next. Dotted threads trace a claim from its source document through grounding into the
+      ontology plane below; a value that can't be threaded back is abstained, not asserted.
+      Relationship edges (<code>WORKED_AT</code>, <code>HAS_SKILL</code>, <code>GROUNDED_BY</code>)
+      are the real taxonomy this repository ships, not placeholders.
+    </figcaption>
+  </figure>
+
+  <div class="legend">
+    <div class="legend-item">
+      <div class="legend-swatch" style="background:var(--verified)"></div>
+      <div><div class="legend-title">Verified</div><div class="legend-body">Span located in the source document — exact, normalised, or fuzzy at 0.92.</div></div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-swatch" style="background:var(--defend)"></div>
+      <div><div class="legend-title">Defended</div><div class="legend-body">A repair or a neutralised injection attempt — logged, never silent.</div></div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-swatch" style="background:var(--paper)"></div>
+      <div><div class="legend-title">Evidence</div><div class="legend-body">Paper: the source document and the exact span a claim points back to.</div></div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-swatch" style="background:var(--muted-2)"></div>
+      <div><div class="legend-title">Structural</div><div class="legend-body">A pipeline hop or an unverified value — present, not yet trusted.</div></div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="v">0.0%</div><div class="l">hallucination rate, live LLM parse</div></div>
+    <div class="stat"><div class="v">88.1%</div><div class="l">evidence coverage</div></div>
+    <div class="stat"><div class="v">0.829</div><div class="l">hybrid retrieval nDCG@10</div></div>
+    <div class="stat"><div class="v">11.2ms</div><div class="l">p50 search @ 500 candidates</div></div>
+  </div>
+</div>

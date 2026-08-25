@@ -1,0 +1,241 @@
+{
+ "data": {
+  "employment": [
+   {
+    "employer_raw": {
+     "value": "Meridian Research Partners",
+     "quote": "Meridian Research Partners"
+    },
+    "title_raw": {
+     "value": "Lead Analyst - Pharmaceuticals and Healthcare",
+     "quote": "Lead Analyst - Pharmaceuticals and Healthcare"
+    },
+    "location": {
+     "value": null,
+     "quote": null
+    },
+    "start": {
+     "value": "2022-05",
+     "quote": "May'22"
+    },
+    "end": {
+     "value": "present",
+     "quote": "till now"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "is_volunteer": false,
+    "highlights": [
+     {
+      "value": "Generate investment ideas and publish equity research ratings with price targets on Indian healthcare sector companies across 28 stocks under coverage",
+      "quote": "Generate investment ideas and publish equity research ratings with price targets on Indian healthcare sector companies across 28 stocks under coverage"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Prism Financial Services",
+     "quote": "Prism Financial Services"
+    },
+    "title_raw": {
+     "value": "Lead Analyst - Pharmaceuticals and Healthcare",
+     "quote": "Lead Analyst - Pharmaceuticals and Healthcare"
+    },
+    "location": {
+     "value": null,
+     "quote": null
+    },
+    "start": {
+     "value": "2020-10",
+     "quote": "Oct-'20"
+    },
+    "end": {
+     "value": "2022-04",
+     "quote": "Apr'22"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "is_volunteer": false,
+    "highlights": [
+     {
+      "value": "Voted by top domestic institutional investors: Axis Mutual Fund, SBI Mutual Fund, Nippon Life Asset Management, ICICI Prudential MF, Aditya Birla Sun Life MF, Reliance MF, LIC MF, Mirae Asset MF, Invesco MF, and Sundaram MF",
+      "quote": "Voted by top domestic institutional investors: Axis Mutual Fund, SBI Mutual Fund, Nippon Life Asset Management, ICICI Prudential MF, Aditya Birla Sun Life MF, Reliance MF, LIC MF, Mirae Asset MF, Invesco MF, and Sundaram MF"
+     },
+     {
+      "value": "Investment recommendation adopted by major institutional client resulting in 35% increase in brokerage commission revenue",
+      "quote": "Investment recommendation adopted by major institutional client resulting in 35% increase in brokerage commission revenue"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Kotak Securities",
+     "quote": "Kotak Securities"
+    },
+    "title_raw": {
+     "value": "Lead Analyst - Pharmaceuticals and Healthcare",
+     "quote": "Lead Analyst - Pharmaceuticals and Healthcare"
+    },
+    "location": {
+     "value": null,
+     "quote": null
+    },
+    "start": {
+     "value": "2018-04",
+     "quote": "Apr-'18"
+    },
+    "end": {
+     "value": "2020-04",
+     "quote": "Apr-'20"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "is_volunteer": false,
+    "highlights": [
+     {
+      "value": "Published sector thematic reports on Indian generics expansion, digital health initiatives, respiratory drug market, and healthcare policy reforms",
+      "quote": "Published sector thematic reports on Indian generics expansion, digital health initiatives, respiratory drug market, and healthcare policy reforms"
+     },
+     {
+      "value": "Organized healthcare policy conference in Mumbai covering regulatory changes, generic drug policies, and government health initiatives with key policymakers",
+      "quote": "Organized healthcare policy conference in Mumbai covering regulatory changes, generic drug policies, and government health initiatives with key policymakers"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "DataFlow Research India Pvt. Limited, Noida",
+     "quote": "DataFlow Research India Pvt. Limited, Noida"
+    },
+    "title_raw": {
+     "value": "Manager - Equity Research",
+     "quote": "Manager - Equity Research"
+    },
+    "location": {
+     "value": "Noida",
+     "quote": "Noida"
+    },
+    "start": {
+     "value": "2015-05",
+     "quote": "May-'15"
+    },
+    "end": {
+     "value": "2018-03",
+     "quote": "Mar- '18"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "is_volunteer": false,
+    "highlights": [
+     {
+      "value": "Member, U.S. Healthcare Services ER team (Institutional Investor (II) Runner up) at Leerink Partners",
+      "quote": "Member, U.S. Healthcare Services ER team (Institutional Investor (II) Runner up) at Leerink Partners"
+     },
+     {
+      "value": "Awarded \"Excellence in Research\" recognition for superior analytical work and report quality (2015)",
+      "quote": "Awarded \"Excellence in Research\" recognition for superior analytical work and report quality (2015)"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "J.P. Morgan Securities, London",
+     "quote": "J.P. Morgan Securities, London"
+    },
+    "title_raw": {
+     "value": "Equity Research Associate",
+     "quote": "Equity Research Associate"
+    },
+    "location": {
+     "value": "London",
+     "quote": "London"
+    },
+    "start": {
+     "value": "2013-09",
+     "quote": "Sep-'13"
+    },
+    "end": {
+     "value": "2014-11",
+     "quote": "Nov-'14"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "is_volunteer": false,
+    "highlights": [
+     {
+      "value": "Assist in team transition during replacement of a research associate and to work closely with the team",
+      "quote": "Assist in team transition during replacement of a research associate and to work closely with the team"
+     },
+     {
+      "value": "Attended meetings & calls with company IRs, institutional investors, & industry experts",
+      "quote": "Attended meetings & calls with company IRs, institutional investors, & industry experts"
+     },
+     {
+      "value": "Attended a company investor day at LSE and prepared a key takeaways note for publication",
+      "quote": "Attended a company investor day at LSE and prepared a key takeaways note for publication"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Cipla Pharmaceuticals, Mumbai",
+     "quote": "Cipla Pharmaceuticals, Mumbai"
+    },
+    "title_raw": {
+     "value": "Summer Intern",
+     "quote": "Summer Intern"
+    },
+    "location": {
+     "value": "Mumbai",
+     "quote": "Mumbai"
+    },
+    "start": {
+     "value": "2011-04",
+     "quote": "Apr-'11"
+    },
+    "end": {
+     "value": "2011-05",
+     "quote": "May-'11"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": true,
+    "is_volunteer": false,
+    "highlights": [
+     {
+      "value": "Competitive Positioning strategy for newly launched generic Calpol T using MDS (Perceptual Mapping)",
+      "quote": "Competitive Positioning strategy for newly launched generic Calpol T using MDS (Perceptual Mapping)"
+     },
+     {
+      "value": "Formulated competitive positioning strategy & communication tactics as a result of which Calpol T had overtaken more than 90 brands in same category and is currently holding the 2nd rank",
+      "quote": "Formulated competitive positioning strategy & communication tactics as a result of which Calpol T had overtaken more than 90 brands in same category and is currently holding the 2nd rank"
+     }
+    ]
+   }
+  ],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"employment\": [\n    {\n      \"employer_raw\": {\n        \"value\": \"Meridian Research Partners\",\n        \"quote\": \"Meridian Research Partners\"\n      },\n      \"title_raw\": {\n        \"value\": \"Lead Analyst - Pharmaceuticals and Healthcare\",\n        \"quote\": \"Lead Analyst - Pharmaceuticals and Healthcare\"\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"start\": {\n        \"value\": \"2022-05\",\n        \"quote\": \"May'22\"\n      },\n      \"end\": {\n        \"value\": \"present\",\n        \"quote\": \"till now\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"is_volunteer\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Generate investment ideas and publish equity research ratings with price targets on Indian healthcare sector companies across 28 stocks under coverage\",\n          \"quote\": \"Generate investment ideas and publish equity research ratings with price targets on Indian healthcare sector companies across 28 stocks under coverage\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Prism Financial Services\",\n        \"quote\": \"Prism Financial Services\"\n      },\n      \"title_raw\": {\n        \"value\": \"Lead Analyst - Pharmaceuticals and Healthcare\",\n        \"quote\": \"Lead Analyst - Pharmaceuticals and Healthcare\"\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"start\": {\n        \"value\": \"2020-10\",\n        \"quote\": \"Oct-'20\"\n      },\n      \"end\": {\n        \"value\": \"2022-04\",\n        \"quote\": \"Apr'22\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"is_volunteer\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Voted by top domestic institutional investors: Axis Mutual Fund, SBI Mutual Fund, Nippon Life Asset Management, ICICI Prudential MF, Aditya Birla Sun Life MF, Reliance MF, LIC MF, Mirae Asset MF, Invesco MF, and Sundaram MF\",\n          \"quote\": \"Voted by top domestic institutional investors: Axis Mutual Fund, SBI Mutual Fund, Nippon Life Asset Management, ICICI Prudential MF, Aditya Birla Sun Life MF, Reliance MF, LIC MF, Mirae Asset MF, Invesco MF, and Sundaram MF\"\n        },\n        {\n          \"value\": \"Investment recommendation adopted by major institutional client resulting in 35% increase in brokerage commission revenue\",\n          \"quote\": \"Investment recommendation adopted by major institutional client resulting in 35% increase in brokerage commission revenue\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Kotak Securities\",\n        \"quote\": \"Kotak Securities\"\n      },\n      \"title_raw\": {\n        \"value\": \"Lead Analyst - Pharmaceuticals and Healthcare\",\n        \"quote\": \"Lead Analyst - Pharmaceuticals and Healthcare\"\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"start\": {\n        \"value\": \"2018-04\",\n        \"quote\": \"Apr-'18\"\n      },\n      \"end\": {\n        \"value\": \"2020-04\",\n        \"quote\": \"Apr-'20\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"is_volunteer\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Published sector thematic reports on Indian generics expansion, digital health initiatives, respiratory drug market, and healthcare policy reforms\",\n          \"quote\": \"Published sector thematic reports on Indian generics expansion, digital health initiatives, respiratory drug market, and healthcare policy reforms\"\n        },\n        {\n          \"value\": \"Organized healthcare policy conference in Mumbai covering regulatory changes, generic drug policies, and government health initiatives with key policymakers\",\n          \"quote\": \"Organized healthcare policy conference in Mumbai covering regulatory changes, generic drug policies, and government health initiatives with key policymakers\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"DataFlow Research India Pvt. Limited, Noida\",\n        \"quote\": \"DataFlow Research India Pvt. Limited, Noida\"\n      },\n      \"title_raw\": {\n        \"value\": \"Manager - Equity Research\",\n        \"quote\": \"Manager - Equity Research\"\n      },\n      \"location\": {\n        \"value\": \"Noida\",\n        \"quote\": \"Noida\"\n      },\n      \"start\": {\n        \"value\": \"2015-05\",\n        \"quote\": \"May-'15\"\n      },\n      \"end\": {\n        \"value\": \"2018-03\",\n        \"quote\": \"Mar- '18\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"is_volunteer\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Member, U.S. Healthcare Services ER team (Institutional Investor (II) Runner up) at Leerink Partners\",\n          \"quote\": \"Member, U.S. Healthcare Services ER team (Institutional Investor (II) Runner up) at Leerink Partners\"\n        },\n        {\n          \"value\": \"Awarded \\\"Excellence in Research\\\" recognition for superior analytical work and report quality (2015)\",\n          \"quote\": \"Awarded \\\"Excellence in Research\\\" recognition for superior analytical work and report quality (2015)\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"J.P. Morgan Securities, London\",\n        \"quote\": \"J.P. Morgan Securities, London\"\n      },\n      \"title_raw\": {\n        \"value\": \"Equity Research Associate\",\n        \"quote\": \"Equity Research Associate\"\n      },\n      \"location\": {\n        \"value\": \"London\",\n        \"quote\": \"London\"\n      },\n      \"start\": {\n        \"value\": \"2013-09\",\n        \"quote\": \"Sep-'13\"\n      },\n      \"end\": {\n        \"value\": \"2014-11\",\n        \"quote\": \"Nov-'14\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"is_volunteer\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Assist in team transition during replacement of a research associate and to work closely with the team\",\n          \"quote\": \"Assist in team transition during replacement of a research associate and to work closely with the team\"\n        },\n        {\n          \"value\": \"Attended meetings & calls with company IRs, institutional investors, & industry experts\",\n          \"quote\": \"Attended meetings & calls with company IRs, institutional investors, & industry experts\"\n        },\n        {\n          \"value\": \"Attended a company investor day at LSE and prepared a key takeaways note for publication\",\n          \"quote\": \"Attended a company investor day at LSE and prepared a key takeaways note for publication\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Cipla Pharmaceuticals, Mumbai\",\n        \"quote\": \"Cipla Pharmaceuticals, Mumbai\"\n      },\n      \"title_raw\": {\n        \"value\": \"Summer Intern\",\n        \"quote\": \"Summer Intern\"\n      },\n      \"location\": {\n        \"value\": \"Mumbai\",\n        \"quote\": \"Mumbai\"\n      },\n      \"start\": {\n        \"value\": \"2011-04\",\n        \"quote\": \"Apr-'11\"\n      },\n      \"end\": {\n        \"value\": \"2011-05\",\n        \"quote\": \"May-'11\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": true,\n      \"is_volunteer\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Competitive Positioning strategy for newly launched generic Calpol T using MDS (Perceptual Mapping)\",\n          \"quote\": \"Competitive Positioning strategy for newly launched generic Calpol T using MDS (Perceptual Mapping)\"\n        },\n        {\n          \"value\": \"Formulated competitive positioning strategy & communication tactics as a result of which Calpol T had overtaken more than 90 brands in same category and is currently holding the 2nd rank\",\n          \"quote\": \"Formulated competitive positioning strategy & communication tactics as a result of which Calpol T had overtaken more than 90 brands in same category and is currently holding the 2nd rank\"\n        }\n      ]\n    }\n  ],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 2044,
+ "tokens_out": 2244,
+ "latency_ms": 18671,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "employment"
+}

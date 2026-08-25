@@ -1,0 +1,41 @@
+candidate_id,seq,employer_raw,employer_canonical,employer_tier,title,seniority_level,location,start,end,start_status,end_status,duration_months,is_current,is_internship,n_highlights,evidence_page,evidence_char_start
+39fb62eab66a5034,0,Bank of China Hong Kong,Bank of China,Regional Broker / Other,Investment Analyst,3,,2021-06,2023-09,verified,verified,27,False,False,4,,445
+39fb62eab66a5034,1,Chinese University of Hong Kong Hong Kong,Chinese University OF Hong Kong Hong Kong,Unknown,Research Assistant (Economics Area),3,,2019-03,2021-03,verified,verified,24,False,False,5,,1851
+39fb62eab66a5034,2,"Meridian Asia Capital Jiangxi, China","Meridian Asia Jiangxi, China",Unknown,Finance Market Department Intern (Chinese Bond and Equity Market),1,,2019-07,2019-08,verified,verified,1,False,True,2,,2467
+39fb62eab66a5034,3,LEADERSHIP AND INVOLVEMENT Fujia Aid Teaching Society Hong Kong,Leadership AND Involvement Fujia AID Teaching Society Hong Kong,Unknown,Vice President & Head of Public Relations Team,7,,2019-09,2020-06,verified,verified,9,False,False,2,,2857
+39fb62eab66a5034,4,Investment Intern,Investment Intern,Unknown,,3,,2019-12,2021-05,verified,verified,17,False,True,2,,1452
+39fb62eab66a5034,5,University Swimming Club Hong Kong,University Swimming Club Hong Kong,Unknown,Head of Promotion Team,7,,2018-09,2019-09,verified,verified,12,False,False,2,,3338
+31b604248140fd1b,0,"VANGUARD GROUP Boston, USA / London, United Kingdom",Vanguard,Long-Only / Asset Mgmt,Equity Research Analyst August/,4,,2021,present,verified,verified,62,True,False,3,,443
+31b604248140fd1b,1,"BAIN & COMPANY Sao Paulo, Brazil",Bain & Company,MBB Consulting,Business Analyst,3,,2016,2019,verified,verified,36,False,False,5,,1024
+6af5686564dbbb2a,0,"Coatue Management New York, NY",Coatue Management,Hedge Fund / PE,"Healthcare Analyst, Investment Team",3,,2019-10,present,verified,verified,82,True,False,5,,78
+6af5686564dbbb2a,1,"Goldman Sachs New York, NY",Goldman Sachs,Bulge Bracket,"Senior Associate, Investment Team",4,,2019-01,2019-09,verified,verified,8,False,False,0,,911
+6af5686564dbbb2a,2,"Associate, Investment Team","Associate, Investment Team",Unknown,,3,,2017-04,2018-12,verified,verified,20,False,False,4,,945
+6af5686564dbbb2a,3,"Analyst, Healthcare Investment Banking Group","Analyst, Healthcare Investment Banking",Unknown,,3,,2013-06,2015-03,verified,verified,21,False,False,4,,1692
+3e9b46a397616de2,0,"Fidelity Asset Management - Boston, MA",Fidelity,Long-Only / Asset Mgmt,"Analyst, Consumer Internet & Software",3,,2022-05,present,verified,verified,51,True,False,3,,1080
+3e9b46a397616de2,1,"William Blair, Equity Research - Chicago, IL",William Blair,Elite Boutique,"Associate, TMT",4,,2019-04,2022-01,verified,verified,33,False,False,4,,1550
+3e9b46a397616de2,2,"William Blair, Fixed Income Sales & Trading -- Chicago, IL",William Blair,Elite Boutique,Jr. Desk Analyst,3,,2018-04,2019-04,verified,verified,12,False,False,3,,2183
+3e9b46a397616de2,3,"Guaranteed Rate, Mortgage Trading - Chicago, IL","Guaranteed Rate, Mortgage Trading - Chicago, IL",Unknown,Capital Markets Analyst,3,,2017-07,2018-03,verified,verified,8,False,False,1,,2705
+3e9b46a397616de2,4,"Magnetar Capital Management, Summer Intern- Evanston, IL",Magnetar Capital,Hedge Fund / PE,,3,,2016-05,2016-08,verified,verified,3,False,True,1,,2993
+7ee7c4909d5aa2dc,0,"Quantitative Developer - BNP Paribas CIB Paris, France",BNP Paribas,Bulge Bracket,"R&D Front Office Fixed Income team, quantitative development in the pricing",3,,2022-05,,verified,abstained,51,True,False,2,,31
+2fe654610aa00d06,0,ICICI Securities - Lead Healthcare Analyst,ICICI Securities,Regional Broker / Other,,3,,2023-05,present,verified,verified,39,True,False,3,,273
+2fe654610aa00d06,1,J.P. Morgan Chase - Lead Healthcare Analyst,J.P. Morgan,Bulge Bracket,Formal coverage includes 22 companies across the healthcare value chain.,3,,2021-09,2023-05,verified,verified,20,False,False,3,,735
+2fe654610aa00d06,2,Jardine Lloyd Thompson - Lead Pharma Analyst,Jardine Lloyd Thompson,Regional Broker / Other,,3,,2020-01,2021-09,verified,verified,20,False,False,3,,1085
+2fe654610aa00d06,3,Centrum Broking Ltd - Research Analyst,Centrum Broking,Regional Broker / Other,,3,,2017-01,2019-12,verified,verified,35,False,False,5,,1552
+2fe654610aa00d06,4,Morgan Stanley - Equity Research Analyst,Morgan Stanley,Bulge Bracket,,3,,2015-10,2016-12,verified,verified,14,False,False,4,,2862
+2fe654610aa00d06,5,Transparent Value - Equity Research Analyst,Transparent Value,Regional Broker / Other,RED LANE TALENT MANAGEMENT,3,,2013-10,2015-10,verified,verified,24,False,False,4,,3797
+c0a2c9e2c03785e7,0,"Investment Professional, Generalist - Soft Catalyst & Fundamental Long/Short","Investment Professional, Generalist - Soft Catalyst & Fundamental Long/short",Unknown,,3,,2023-03,present,verified,verified,41,True,False,5,,176
+c0a2c9e2c03785e7,1,Co-Founder,Founder,Unknown,underserved communities,3,,2017-01,present,verified,verified,115,True,False,4,,3476
+c0a2c9e2c03785e7,2,"Investment Analyst, Consumer & TMT - North53 Capital",North53 Capital,Multi-Manager Pod Shop,Capital,3,,2021-09,2022-08,verified,verified,11,False,False,5,,1202
+c0a2c9e2c03785e7,3,Associate - Private Equity,Associate - Private Equity,Unknown,industries,3,,2019-08,2021-08,verified,verified,24,False,False,4,,2213
+c0a2c9e2c03785e7,4,Summer 2016;,Summer 2016;,Unknown,Competition,3,,2017-07,2019-07,verified,verified,24,False,False,4,,2854
+c0a2c9e2c03785e7,5,"President, Alumni Relations Chair, Finance Committee","President, Alumni Relations Chair, Finance Committee",Unknown,,3,,2014-02,2017-05,verified,verified,39,False,False,2,,3887
+8d634b54d8648e8e,0,"Cinctive Capital Management, New York, NY",Cinctive Capital,Multi-Manager Pod Shop,Investment Analyst,4,,2021-09,present,verified,verified,59,True,False,5,,71
+8d634b54d8648e8e,1,"Goldman Sachs, New York, NY",Goldman Sachs,Bulge Bracket,"Equity Research, U.S. Internet & Interactive Entertainment - Associate",4,,2019-02,2021-09,verified,verified,31,False,False,5,,1170
+8d634b54d8648e8e,2,"J.P. Morgan Asset Management, New York, NY",J.P. Morgan Asset Management,Long-Only / Asset Mgmt,"U.S. Equity, Business Management - Associate",4,,2017-07,2019-02,verified,verified,19,False,False,3,,2089
+8d634b54d8648e8e,3,"J.P. Morgan Chase & Co., New York, NY",J.P. Morgan,Bulge Bracket,"Office of the CFO, Strategy and Analytics - Analyst",3,,2016-05,2017-07,verified,verified,14,False,False,2,,2723
+8d634b54d8648e8e,4,"PwC, New York, NY",PwC,Big 4,Corporate Development & Transaction Services (CDTS) - Analyst,3,,2014-08,2016-05,verified,verified,21,False,False,2,,3053
+c3b30be3fbf03368,0,Meridian Research Partners Lead Analyst - Pharmaceuticals and Healthcare,Meridian Research Lead Analyst - Pharmaceuticals AND Healthcare,Unknown,Responsibilities,3,,2022-05,present,verified,verified,51,True,False,1,,453
+c3b30be3fbf03368,1,Prism Financial Services Lead Analyst - Pharmaceuticals and Healthcare,Prism Financial Services Lead Analyst - Pharmaceuticals AND Healthcare,Unknown,Key achievements,3,,2020-10,2022-04,verified,verified,18,False,False,2,,713
+c3b30be3fbf03368,2,Kotak Securities Lead Analyst - Pharmaceuticals and Healthcare,Kotak Securities,Regional Broker / Other,Key achievements,3,,2018-04,2020-04,verified,verified,24,False,False,2,,1165
+c3b30be3fbf03368,3,"DataFlow Research India Pvt. Limited, Noida Manager - Equity Research",DataFlow Research,Regional Broker / Other,Responsibilities,3,,2015-05,2018-03,verified,verified,34,False,False,5,,1575
+c3b30be3fbf03368,4,Attended a company investor day at LSE and prepared a key takeaways note for publication,EY,Big 4,"Cipla Pharmaceuticals, Mumbai Summer Intern",1,,2011-04,2011-05,verified,verified,1,False,True,2,,2206

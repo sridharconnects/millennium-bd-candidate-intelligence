@@ -1,0 +1,52 @@
+{
+  "run_id": "8681e5cdfdbb",
+  "generated_at": "2026-08-25T14:37:42+00:00",
+  "git_sha": "no-git",
+  "python": "3.12.4",
+  "schema_version": "1.3.0",
+  "taxonomy_version": "1.2.0",
+  "extractor": "llm",
+  "llm_provider": "anthropic",
+  "llm_model": "claude-sonnet-4-5-20250929",
+  "NOTE": null,
+  "demo_mode": true,
+  "documents": 10,
+  "succeeded": 10,
+  "failed": [],
+  "needs_review": 8,
+  "elapsed_s": 0.46,
+  "throughput_docs_per_min": 1316.2,
+  "llm_calls": 30,
+  "llm_cache_hits": 30,
+  "tokens_in": 61098,
+  "tokens_out": 42949,
+  "cost_usd": 0.0,
+  "cost_per_doc_usd": 0.0,
+  "per_stage_llm": {
+    "identity": {
+      "calls": 10,
+      "tokens_in": 20636,
+      "tokens_out": 9598,
+      "cost_usd": 0.0,
+      "latency_ms": 95119,
+      "cache_hits": 10
+    },
+    "employment": {
+      "calls": 10,
+      "tokens_in": 19926,
+      "tokens_out": 23996,
+      "cost_usd": 0.0,
+      "latency_ms": 204235,
+      "cache_hits": 10
+    },
+    "profile": {
+      "calls": 10,
+      "tokens_in": 20536,
+      "tokens_out": 9355,
+      "cost_usd": 0.0,
+      "latency_ms": 121309,
+      "cache_hits": 10
+    }
+  },
+  "is_synthetic": false
+}

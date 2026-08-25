@@ -1,0 +1,108 @@
+{
+ "data": {
+  "strategies": [
+   {
+    "label": "equity_long_short",
+    "confidence": 0.95,
+    "rationale": "Managed public long/short healthcare portfolio at multi-strategy platform",
+    "quote": "Managed public (long/short) and private (growth/venture) healthcare investment portfolio",
+    "low_support": false
+   },
+   {
+    "label": "private_markets",
+    "confidence": 0.9,
+    "rationale": "Sourced and co-led Series B financing, served as Board Observer at portfolio companies",
+    "quote": "sourced and co-led the latter's $150M Series B financing round",
+    "low_support": false
+   },
+   {
+    "label": "credit_long_short",
+    "confidence": 0.85,
+    "rationale": "Worked on structured credit strategy at Goldman Sachs",
+    "quote": "$4.2B strategy focused on structured credit, growth equity and royalty financings",
+    "low_support": false
+   },
+   {
+    "label": "multi_strategy",
+    "confidence": 0.8,
+    "rationale": "Worked at multi-strategy platform covering both public and private investments",
+    "quote": "$40B multi-strategy platform",
+    "low_support": false
+   }
+  ],
+  "sectors": [
+   {
+    "label": "healthcare",
+    "confidence": 0.98,
+    "rationale": "Comprehensive healthcare sector coverage across multiple subsectors as primary focus throughout career",
+    "quote": "comprehensive sector coverage across Life Sciences Tools & Diagnostics, MedTech, Therapeutics & Services",
+    "low_support": false
+   }
+  ],
+  "quant_fundamental": {
+   "label": "fundamental",
+   "confidence": 0.95,
+   "rationale": "Focus on fundamental analysis, due diligence, financial modeling, and industry expertise rather than quantitative strategies",
+   "quote": "Led due diligence on 12 potential investments with total transaction value of $2.1B"
+  },
+  "feeder_path": {
+   "label": "ibd_analyst_program",
+   "confidence": 0.98,
+   "rationale": "Started career in Credit Suisse Healthcare Investment Banking Group as analyst",
+   "quote": "Analyst, Healthcare Investment Banking Group June 2013 - March 2015"
+  },
+  "geography_primary": {
+   "value": "United States",
+   "quote": "New York, NY"
+  },
+  "skills": [
+   {
+    "name": "Financial Modeling",
+    "depth": "core",
+    "quote": "Created comprehensive financial models, investment analyses and board presentations"
+   },
+   {
+    "name": "Healthcare Industry Expertise",
+    "depth": "core",
+    "quote": "healthcare industry domain expertise"
+   },
+   {
+    "name": "Due Diligence",
+    "depth": "core",
+    "quote": "Led due diligence on 12 potential investments with total transaction value of $2.1B"
+   },
+   {
+    "name": "Investment Analysis",
+    "depth": "core",
+    "quote": "Financial modeling & analysis"
+   },
+   {
+    "name": "Public Equities",
+    "depth": "core",
+    "quote": "public equities"
+   },
+   {
+    "name": "Private Transactions",
+    "depth": "core",
+    "quote": "private transactions"
+   },
+   {
+    "name": "Board Governance",
+    "depth": "applied",
+    "quote": "Served as Board Observer at two portfolio companies"
+   },
+   {
+    "name": "Valuation",
+    "depth": "applied",
+    "quote": "presentations on corporate valuation, transaction implications and industry dynamics"
+   }
+  ],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"strategies\": [\n    {\n      \"label\": \"equity_long_short\",\n      \"confidence\": 0.95,\n      \"rationale\": \"Managed public long/short healthcare portfolio at multi-strategy platform\",\n      \"quote\": \"Managed public (long/short) and private (growth/venture) healthcare investment portfolio\",\n      \"low_support\": false\n    },\n    {\n      \"label\": \"private_markets\",\n      \"confidence\": 0.9,\n      \"rationale\": \"Sourced and co-led Series B financing, served as Board Observer at portfolio companies\",\n      \"quote\": \"sourced and co-led the latter's $150M Series B financing round\",\n      \"low_support\": false\n    },\n    {\n      \"label\": \"credit_long_short\",\n      \"confidence\": 0.85,\n      \"rationale\": \"Worked on structured credit strategy at Goldman Sachs\",\n      \"quote\": \"$4.2B strategy focused on structured credit, growth equity and royalty financings\",\n      \"low_support\": false\n    },\n    {\n      \"label\": \"multi_strategy\",\n      \"confidence\": 0.8,\n      \"rationale\": \"Worked at multi-strategy platform covering both public and private investments\",\n      \"quote\": \"$40B multi-strategy platform\",\n      \"low_support\": false\n    }\n  ],\n  \"sectors\": [\n    {\n      \"label\": \"healthcare\",\n      \"confidence\": 0.98,\n      \"rationale\": \"Comprehensive healthcare sector coverage across multiple subsectors as primary focus throughout career\",\n      \"quote\": \"comprehensive sector coverage across Life Sciences Tools & Diagnostics, MedTech, Therapeutics & Services\",\n      \"low_support\": false\n    }\n  ],\n  \"quant_fundamental\": {\n    \"label\": \"fundamental\",\n    \"confidence\": 0.95,\n    \"rationale\": \"Focus on fundamental analysis, due diligence, financial modeling, and industry expertise rather than quantitative strategies\",\n    \"quote\": \"Led due diligence on 12 potential investments with total transaction value of $2.1B\"\n  },\n  \"feeder_path\": {\n    \"label\": \"ibd_analyst_program\",\n    \"confidence\": 0.98,\n    \"rationale\": \"Started career in Credit Suisse Healthcare Investment Banking Group as analyst\",\n    \"quote\": \"Analyst, Healthcare Investment Banking Group June 2013 - March 2015\"\n  },\n  \"geography_primary\": {\n    \"value\": \"United States\",\n    \"quote\": \"New York, NY\"\n  },\n  \"skills\": [\n    {\n      \"name\": \"Financial Modeling\",\n      \"depth\": \"core\",\n      \"quote\": \"Created comprehensive financial models, investment analyses and board presentations\"\n    },\n    {\n      \"name\": \"Healthcare Industry Expertise\",\n      \"depth\": \"core\",\n      \"quote\": \"healthcare industry domain expertise\"\n    },\n    {\n      \"name\": \"Due Diligence\",\n      \"depth\": \"core\",\n      \"quote\": \"Led due diligence on 12 potential investments with total transaction value of $2.1B\"\n    },\n    {\n      \"name\": \"Investment Analysis\",\n      \"depth\": \"core\",\n      \"quote\": \"Financial modeling & analysis\"\n    },\n    {\n      \"name\": \"Public Equities\",\n      \"depth\": \"core\",\n      \"quote\": \"public equities\"\n    },\n    {\n      \"name\": \"Private Transactions\",\n      \"depth\": \"core\",\n      \"quote\": \"private transactions\"\n    },\n    {\n      \"name\": \"Board Governance\",\n      \"depth\": \"applied\",\n      \"quote\": \"Served as Board Observer at two portfolio companies\"\n    },\n    {\n      \"name\": \"Valuation\",\n      \"depth\": \"applied\",\n      \"quote\": \"presentations on corporate valuation, transaction implications and industry dynamics\"\n    }\n  ],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 1976,
+ "tokens_out": 948,
+ "latency_ms": 11927,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "profile"
+}

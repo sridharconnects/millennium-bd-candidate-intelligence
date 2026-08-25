@@ -1,0 +1,128 @@
+{
+ "data": {
+  "strategies": [
+   {
+    "label": "quantitative_research",
+    "confidence": 0.9,
+    "rationale": "Developed multi-factor quantitative model and conducted systematic strategy backtesting with statistical methods",
+    "quote": "Independently developed, constructed and actively managed a multi-factor quantitative model focusing on Greater China technology equities",
+    "low_support": false
+   },
+   {
+    "label": "equity_long_short",
+    "confidence": 0.85,
+    "rationale": "Managed equity portfolio with quantitative model achieving risk-adjusted returns, conducted equity analysis",
+    "quote": "actively managed a multi-factor quantitative model focusing on Greater China technology equities, achieving superior risk-adjusted returns",
+    "low_support": false
+   },
+   {
+    "label": "statistical_arbitrage",
+    "confidence": 0.7,
+    "rationale": "Analyzed statistical anomalies and conducted backtesting of systematic trading strategies",
+    "quote": "Analyze market trends, sector rotations, and statistical anomalies",
+    "low_support": true
+   }
+  ],
+  "sectors": [
+   {
+    "label": "technology",
+    "confidence": 0.95,
+    "rationale": "Focused quantitative model on technology equities and performed comprehensive research on Asian technology sector",
+    "quote": "multi-factor quantitative model focusing on Greater China technology equities",
+    "low_support": false
+   },
+   {
+    "label": "healthcare",
+    "confidence": 0.8,
+    "rationale": "Performed comprehensive research covering healthcare sector across Greater China markets",
+    "quote": "Performed comprehensive research on Asian technology and healthcare sectors",
+    "low_support": false
+   }
+  ],
+  "quant_fundamental": {
+   "label": "hybrid",
+   "confidence": 0.85,
+   "rationale": "Combined quantitative multi-factor modeling with fundamental equity research including DCF models and financial statement analysis",
+   "quote": "analyzing financial statements, building DCF and relative valuation models"
+  },
+  "feeder_path": {
+   "label": "buyside_lateral",
+   "confidence": 0.9,
+   "rationale": "Started career as investment intern at Bank of China Hong Kong, progressing to investment analyst role",
+   "quote": "Investment Intern Dec.2019 - May.2021"
+  },
+  "geography_primary": {
+   "value": "Hong Kong",
+   "quote": "Bank of China Hong Kong"
+  },
+  "skills": [
+   {
+    "name": "Python",
+    "depth": "core",
+    "quote": "processed and analyzed over 200,000 historical Asian market firm-level data points using Python"
+   },
+   {
+    "name": "R",
+    "depth": "applied",
+    "quote": "using Python and R, conducting comprehensive statistical analysis"
+   },
+   {
+    "name": "SQL",
+    "depth": "mentioned",
+    "quote": "SQL"
+   },
+   {
+    "name": "Machine Learning",
+    "depth": "applied",
+    "quote": "utilizing advanced statistical methods and machine learning techniques to enhance strategy performance"
+   },
+   {
+    "name": "Quantitative Modeling",
+    "depth": "core",
+    "quote": "Independently developed, constructed and actively managed a multi-factor quantitative model"
+   },
+   {
+    "name": "Backtesting",
+    "depth": "core",
+    "quote": "Conducted rigorous backtesting and performance attribution analysis of systematic trading strategies"
+   },
+   {
+    "name": "Statistical Analysis",
+    "depth": "core",
+    "quote": "Conduct comprehensive quantitative analysis on large-scale Asian equity datasets to provide statistical support"
+   },
+   {
+    "name": "Bloomberg Terminal",
+    "depth": "mentioned",
+    "quote": "Bloomberg Terminal"
+   },
+   {
+    "name": "Excel VBA",
+    "depth": "mentioned",
+    "quote": "Excel with VBA"
+   },
+   {
+    "name": "DCF Valuation",
+    "depth": "applied",
+    "quote": "building DCF and relative valuation models"
+   },
+   {
+    "name": "Financial Statement Analysis",
+    "depth": "applied",
+    "quote": "analyzing financial statements"
+   },
+   {
+    "name": "Risk Management",
+    "depth": "applied",
+    "quote": "manage portfolio risk exposures"
+   }
+  ],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"strategies\": [\n    {\n      \"label\": \"quantitative_research\",\n      \"confidence\": 0.9,\n      \"rationale\": \"Developed multi-factor quantitative model and conducted systematic strategy backtesting with statistical methods\",\n      \"quote\": \"Independently developed, constructed and actively managed a multi-factor quantitative model focusing on Greater China technology equities\",\n      \"low_support\": false\n    },\n    {\n      \"label\": \"equity_long_short\",\n      \"confidence\": 0.85,\n      \"rationale\": \"Managed equity portfolio with quantitative model achieving risk-adjusted returns, conducted equity analysis\",\n      \"quote\": \"actively managed a multi-factor quantitative model focusing on Greater China technology equities, achieving superior risk-adjusted returns\",\n      \"low_support\": false\n    },\n    {\n      \"label\": \"statistical_arbitrage\",\n      \"confidence\": 0.7,\n      \"rationale\": \"Analyzed statistical anomalies and conducted backtesting of systematic trading strategies\",\n      \"quote\": \"Analyze market trends, sector rotations, and statistical anomalies\",\n      \"low_support\": true\n    }\n  ],\n  \"sectors\": [\n    {\n      \"label\": \"technology\",\n      \"confidence\": 0.95,\n      \"rationale\": \"Focused quantitative model on technology equities and performed comprehensive research on Asian technology sector\",\n      \"quote\": \"multi-factor quantitative model focusing on Greater China technology equities\",\n      \"low_support\": false\n    },\n    {\n      \"label\": \"healthcare\",\n      \"confidence\": 0.8,\n      \"rationale\": \"Performed comprehensive research covering healthcare sector across Greater China markets\",\n      \"quote\": \"Performed comprehensive research on Asian technology and healthcare sectors\",\n      \"low_support\": false\n    }\n  ],\n  \"quant_fundamental\": {\n    \"label\": \"hybrid\",\n    \"confidence\": 0.85,\n    \"rationale\": \"Combined quantitative multi-factor modeling with fundamental equity research including DCF models and financial statement analysis\",\n    \"quote\": \"analyzing financial statements, building DCF and relative valuation models\"\n  },\n  \"feeder_path\": {\n    \"label\": \"buyside_lateral\",\n    \"confidence\": 0.9,\n    \"rationale\": \"Started career as investment intern at Bank of China Hong Kong, progressing to investment analyst role\",\n    \"quote\": \"Investment Intern Dec.2019 - May.2021\"\n  },\n  \"geography_primary\": {\n    \"value\": \"Hong Kong\",\n    \"quote\": \"Bank of China Hong Kong\"\n  },\n  \"skills\": [\n    {\n      \"name\": \"Python\",\n      \"depth\": \"core\",\n      \"quote\": \"processed and analyzed over 200,000 historical Asian market firm-level data points using Python\"\n    },\n    {\n      \"name\": \"R\",\n      \"depth\": \"applied\",\n      \"quote\": \"using Python and R, conducting comprehensive statistical analysis\"\n    },\n    {\n      \"name\": \"SQL\",\n      \"depth\": \"mentioned\",\n      \"quote\": \"SQL\"\n    },\n    {\n      \"name\": \"Machine Learning\",\n      \"depth\": \"applied\",\n      \"quote\": \"utilizing advanced statistical methods and machine learning techniques to enhance strategy performance\"\n    },\n    {\n      \"name\": \"Quantitative Modeling\",\n      \"depth\": \"core\",\n      \"quote\": \"Independently developed, constructed and actively managed a multi-factor quantitative model\"\n    },\n    {\n      \"name\": \"Backtesting\",\n      \"depth\": \"core\",\n      \"quote\": \"Conducted rigorous backtesting and performance attribution analysis of systematic trading strategies\"\n    },\n    {\n      \"name\": \"Statistical Analysis\",\n      \"depth\": \"core\",\n      \"quote\": \"Conduct comprehensive quantitative analysis on large-scale Asian equity datasets to provide statistical support\"\n    },\n    {\n      \"name\": \"Bloomberg Terminal\",\n      \"depth\": \"mentioned\",\n      \"quote\": \"Bloomberg Terminal\"\n    },\n    {\n      \"name\": \"Excel VBA\",\n      \"depth\": \"mentioned\",\n      \"quote\": \"Excel with VBA\"\n    },\n    {\n      \"name\": \"DCF Valuation\",\n      \"depth\": \"applied\",\n      \"quote\": \"building DCF and relative valuation models\"\n    },\n    {\n      \"name\": \"Financial Statement Analysis\",\n      \"depth\": \"applied\",\n      \"quote\": \"analyzing financial statements\"\n    },\n    {\n      \"name\": \"Risk Management\",\n      \"depth\": \"applied\",\n      \"quote\": \"manage portfolio risk exposures\"\n    }\n  ],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 2095,
+ "tokens_out": 1109,
+ "latency_ms": 13937,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "profile"
+}

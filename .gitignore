@@ -1,0 +1,12 @@
+.env
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+data/artifacts/state/
+data/index/
+data/candidates.sqlite
+.venv/
+venv/
+.pytest_cache/
+.claude/

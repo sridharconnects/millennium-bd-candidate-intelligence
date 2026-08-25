@@ -1,0 +1,121 @@
+{
+ "data": {
+  "full_name": {
+   "value": "Chen Li (Alex)",
+   "quote": "Chen Li (Alex)"
+  },
+  "email": {
+   "value": "Alex_chen2024@gmail.com",
+   "quote": "Alex_chen2024@gmail.com"
+  },
+  "phone": {
+   "value": "+852 65478923",
+   "quote": "+852 65478923"
+  },
+  "home_address": {
+   "value": null,
+   "quote": null
+  },
+  "location_current": {
+   "value": "Hong Kong",
+   "quote": "University of Hong Kong Hong Kong"
+  },
+  "headline": {
+   "value": "Investment Analyst",
+   "quote": "Investment Analyst June.2021 - Sep.2023"
+  },
+  "summary": {
+   "value": null,
+   "quote": null
+  },
+  "marital_status": {
+   "value": null,
+   "quote": null
+  },
+  "work_authorization": {
+   "value": null,
+   "quote": null
+  },
+  "education": [
+   {
+    "institution": {
+     "value": "University of Hong Kong",
+     "quote": "University of Hong Kong Hong Kong"
+    },
+    "degree_raw": {
+     "value": "Master of Science in Financial Technology",
+     "quote": "Master of Science in Financial Technology"
+    },
+    "field_of_study": {
+     "value": "Financial Technology",
+     "quote": "Financial Technology"
+    },
+    "graduation_year": {
+     "value": 2023,
+     "quote": "Sept.2021 - Jul.2023"
+    },
+    "gpa_raw": {
+     "value": null,
+     "quote": null
+    },
+    "location": {
+     "value": "Hong Kong",
+     "quote": "University of Hong Kong Hong Kong"
+    },
+    "honors": []
+   },
+   {
+    "institution": {
+     "value": "University of Hong Kong",
+     "quote": "University of Hong Kong Hong Kong"
+    },
+    "degree_raw": {
+     "value": "Bachelor of Business Administration (Finance)",
+     "quote": "Bachelor of Business Administration (Finance)"
+    },
+    "field_of_study": {
+     "value": "Finance",
+     "quote": "(Finance)"
+    },
+    "graduation_year": {
+     "value": 2021,
+     "quote": "Sept.2017 - Jul.2021"
+    },
+    "gpa_raw": {
+     "value": null,
+     "quote": null
+    },
+    "location": {
+     "value": "Hong Kong",
+     "quote": "University of Hong Kong Hong Kong"
+    },
+    "honors": []
+   }
+  ],
+  "certifications": [],
+  "languages": [
+   {
+    "language": "English",
+    "proficiency": "fluent",
+    "quote": "English (fluent)"
+   },
+   {
+    "language": "Chinese (Mandarin)",
+    "proficiency": "native",
+    "quote": "Chinese (Mandarin: native"
+   },
+   {
+    "language": "Cantonese",
+    "proficiency": "fluent",
+    "quote": "Cantonese: fluent)"
+   }
+  ],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"full_name\": {\n    \"value\": \"Chen Li (Alex)\",\n    \"quote\": \"Chen Li (Alex)\"\n  },\n  \"email\": {\n    \"value\": \"Alex_chen2024@gmail.com\",\n    \"quote\": \"Alex_chen2024@gmail.com\"\n  },\n  \"phone\": {\n    \"value\": \"+852 65478923\",\n    \"quote\": \"+852 65478923\"\n  },\n  \"home_address\": {\n    \"value\": null,\n    \"quote\": null\n  },\n  \"location_current\": {\n    \"value\": \"Hong Kong\",\n    \"quote\": \"University of Hong Kong Hong Kong\"\n  },\n  \"headline\": {\n    \"value\": \"Investment Analyst\",\n    \"quote\": \"Investment Analyst June.2021 - Sep.2023\"\n  },\n  \"summary\": {\n    \"value\": null,\n    \"quote\": null\n  },\n  \"marital_status\": {\n    \"value\": null,\n    \"quote\": null\n  },\n  \"work_authorization\": {\n    \"value\": null,\n    \"quote\": null\n  },\n  \"education\": [\n    {\n      \"institution\": {\n        \"value\": \"University of Hong Kong\",\n        \"quote\": \"University of Hong Kong Hong Kong\"\n      },\n      \"degree_raw\": {\n        \"value\": \"Master of Science in Financial Technology\",\n        \"quote\": \"Master of Science in Financial Technology\"\n      },\n      \"field_of_study\": {\n        \"value\": \"Financial Technology\",\n        \"quote\": \"Financial Technology\"\n      },\n      \"graduation_year\": {\n        \"value\": 2023,\n        \"quote\": \"Sept.2021 - Jul.2023\"\n      },\n      \"gpa_raw\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"location\": {\n        \"value\": \"Hong Kong\",\n        \"quote\": \"University of Hong Kong Hong Kong\"\n      },\n      \"honors\": []\n    },\n    {\n      \"institution\": {\n        \"value\": \"University of Hong Kong\",\n        \"quote\": \"University of Hong Kong Hong Kong\"\n      },\n      \"degree_raw\": {\n        \"value\": \"Bachelor of Business Administration (Finance)\",\n        \"quote\": \"Bachelor of Business Administration (Finance)\"\n      },\n      \"field_of_study\": {\n        \"value\": \"Finance\",\n        \"quote\": \"(Finance)\"\n      },\n      \"graduation_year\": {\n        \"value\": 2021,\n        \"quote\": \"Sept.2017 - Jul.2021\"\n      },\n      \"gpa_raw\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"location\": {\n        \"value\": \"Hong Kong\",\n        \"quote\": \"University of Hong Kong Hong Kong\"\n      },\n      \"honors\": []\n    }\n  ],\n  \"certifications\": [],\n  \"languages\": [\n    {\n      \"language\": \"English\",\n      \"proficiency\": \"fluent\",\n      \"quote\": \"English (fluent)\"\n    },\n    {\n      \"language\": \"Chinese (Mandarin)\",\n      \"proficiency\": \"native\",\n      \"quote\": \"Chinese (Mandarin: native\"\n    },\n    {\n      \"language\": \"Cantonese\",\n      \"proficiency\": \"fluent\",\n      \"quote\": \"Cantonese: fluent)\"\n    }\n  ],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 2105,
+ "tokens_out": 839,
+ "latency_ms": 8815,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "identity"
+}

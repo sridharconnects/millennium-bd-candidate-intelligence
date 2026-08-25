@@ -1,0 +1,51 @@
+Omar El-Hassan 
+Work experience 
+QuanƟtaƟve Developer ― BNP Paribas CIB Paris, France 
+Since May 2022 
+R&D Front Oﬃce Fixed Income team, quanƟtaƟve development in the pricing 
+library (C++) : 
+o.elhassan15@gmail.com
+ + 33678924531 
+Languages 
+English 
+Arabic 
+IntroducƟon of a new model (one factor Gaussian copula model) 
+IT skills 
+Implement a new exoƟc payoﬀ (local spread opƟon) 
+ImplementaƟon of new features for trading desks (Scenario analysis, 
+C++ 
+Greeks computaƟon, ...) 
+Internship - April 2022 to August 2022 : 
+Built automated tesƟng framework in C# for derivaƟves pricing validaƟon 
+QuanƟtaƟve Strategist - Intern ― Société Générale - SGATS (SGCIB) 
+Rabat, Morocco 
+From June 2021 to August 2021 
+Development and back tesƟng of momentum-based trading strategies 
+Performance opƟmizaƟon of yield curve construcƟon algorithms 
+EducaƟon 
+Diplôme d'Ingénieur ― INSA Lyon France 
+From September 2019 to September 2022 Financial 
+Engineering 
+Some academic projects : 
+C# / .NET 
+Python 
+Java 
+R 
+SQL 
+MongoDB 
+Machine Learning 
+Excel 
+QuanƟƟve skills 
+StochasƟc calculus 
+Probability theory 
+Monte Carlo pricer for european and american opƟons (C++)                                     StaƟsƟcs 
+Backtester applicaƟon for a systemaƟc strategie (C#) 
+Neural Network : implementaƟon based on gradient descent Monte Carlo algorithm (C#) 
+Master's degree ― Universite Lyon France 
+From September 2021 to September 2022 
+QuanƟtaƟve Finance 
+Courses: StochasƟc calculs, DiﬀerenƟal equaƟons, Probability theory, StaƟsƟcs , 
+Monte Carlo, Modern Porƞolio Theory 
+Preparatory Classes ― École Royale Navale Casablanca, Morocco 
+From September 2017 to July 2019 
+MathemaƟcs and Physics 

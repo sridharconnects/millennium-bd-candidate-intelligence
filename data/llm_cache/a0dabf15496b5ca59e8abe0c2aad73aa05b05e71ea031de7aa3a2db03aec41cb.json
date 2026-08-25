@@ -1,0 +1,84 @@
+{
+ "data": {
+  "full_name": {
+   "value": "RYAN PATEL",
+   "quote": "RYAN PATEL"
+  },
+  "email": {
+   "value": "ryan.patel0403@gmail.com",
+   "quote": "ryan.patel0403@gmail.com"
+  },
+  "phone": {
+   "value": "+1 (516) 523-3113",
+   "quote": "+1 (516) 523-3113"
+  },
+  "home_address": {
+   "value": "342 Atlantic Avenue, Apartment 4B, Brooklyn, NY 11201",
+   "quote": "342 Atlantic Avenue, Apartment 4B, Brooklyn, NY 11201"
+  },
+  "location_current": {
+   "value": "Brooklyn, NY",
+   "quote": "342 Atlantic Avenue, Apartment 4B, Brooklyn, NY 11201"
+  },
+  "headline": {
+   "value": "Investment Professional, Generalist - Soft Catalyst & Fundamental Long/Short",
+   "quote": "Investment Professional, Generalist - Soft Catalyst & Fundamental Long/Short"
+  },
+  "summary": {
+   "value": null,
+   "quote": ""
+  },
+  "marital_status": {
+   "value": null,
+   "quote": ""
+  },
+  "work_authorization": {
+   "value": null,
+   "quote": ""
+  },
+  "education": [
+   {
+    "institution": {
+     "value": "Columbia Business School, Columbia University",
+     "quote": "Columbia Business School, Columbia University"
+    },
+    "degree_raw": {
+     "value": "Bachelor of Science in Business",
+     "quote": "Bachelor of Science in Business"
+    },
+    "field_of_study": {
+     "value": "Concentration in Finance and International Business, Minor in Statistics",
+     "quote": "Concentration in Finance and International Business, Minor in Statistics"
+    },
+    "graduation_year": {
+     "value": 2017,
+     "quote": "Sep 2013 - May 2017"
+    },
+    "gpa_raw": {
+     "value": "3.61/4.00",
+     "quote": "GPA: 3.61/4.00"
+    },
+    "location": {
+     "value": "New York, NY",
+     "quote": "New York, NY"
+    },
+    "honors": [
+     "Dean's Merit Scholarship (awarded for all four years)",
+     "Student Leadership Excellence Award (awarded to top 3 graduating seniors)",
+     "Academic Achievement Recognition",
+     "Finalist in Goldman Sachs Investment Banking Case Competition",
+     "Winner of Morgan Stanley Financial Markets Challenge"
+    ]
+   }
+  ],
+  "certifications": [],
+  "languages": [],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"full_name\": {\n    \"value\": \"RYAN PATEL\",\n    \"quote\": \"RYAN PATEL\"\n  },\n  \"email\": {\n    \"value\": \"ryan.patel0403@gmail.com\",\n    \"quote\": \"ryan.patel0403@gmail.com\"\n  },\n  \"phone\": {\n    \"value\": \"+1 (516) 523-3113\",\n    \"quote\": \"+1 (516) 523-3113\"\n  },\n  \"home_address\": {\n    \"value\": \"342 Atlantic Avenue, Apartment 4B, Brooklyn, NY 11201\",\n    \"quote\": \"342 Atlantic Avenue, Apartment 4B, Brooklyn, NY 11201\"\n  },\n  \"location_current\": {\n    \"value\": \"Brooklyn, NY\",\n    \"quote\": \"342 Atlantic Avenue, Apartment 4B, Brooklyn, NY 11201\"\n  },\n  \"headline\": {\n    \"value\": \"Investment Professional, Generalist - Soft Catalyst & Fundamental Long/Short\",\n    \"quote\": \"Investment Professional, Generalist - Soft Catalyst & Fundamental Long/Short\"\n  },\n  \"summary\": {\n    \"value\": null,\n    \"quote\": \"\"\n  },\n  \"marital_status\": {\n    \"value\": null,\n    \"quote\": \"\"\n  },\n  \"work_authorization\": {\n    \"value\": null,\n    \"quote\": \"\"\n  },\n  \"education\": [\n    {\n      \"institution\": {\n        \"value\": \"Columbia Business School, Columbia University\",\n        \"quote\": \"Columbia Business School, Columbia University\"\n      },\n      \"degree_raw\": {\n        \"value\": \"Bachelor of Science in Business\",\n        \"quote\": \"Bachelor of Science in Business\"\n      },\n      \"field_of_study\": {\n        \"value\": \"Concentration in Finance and International Business, Minor in Statistics\",\n        \"quote\": \"Concentration in Finance and International Business, Minor in Statistics\"\n      },\n      \"graduation_year\": {\n        \"value\": 2017,\n        \"quote\": \"Sep 2013 - May 2017\"\n      },\n      \"gpa_raw\": {\n        \"value\": \"3.61/4.00\",\n        \"quote\": \"GPA: 3.61/4.00\"\n      },\n      \"location\": {\n        \"value\": \"New York, NY\",\n        \"quote\": \"New York, NY\"\n      },\n      \"honors\": [\n        \"Dean's Merit Scholarship (awarded for all four years)\",\n        \"Student Leadership Excellence Award (awarded to top 3 graduating seniors)\",\n        \"Academic Achievement Recognition\",\n        \"Finalist in Goldman Sachs Investment Banking Case Competition\",\n        \"Winner of Morgan Stanley Financial Markets Challenge\"\n      ]\n    }\n  ],\n  \"certifications\": [],\n  \"languages\": [],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 2340,
+ "tokens_out": 699,
+ "latency_ms": 6869,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "identity"
+}

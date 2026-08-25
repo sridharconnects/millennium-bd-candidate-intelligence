@@ -1,0 +1,107 @@
+{
+ "data": {
+  "full_name": {
+   "value": "Marcus Chen-Rodriguez",
+   "quote": "Marcus Chen-Rodriguez"
+  },
+  "email": {
+   "value": "rchen@hotmail",
+   "quote": "rchen@hotmail"
+  },
+  "phone": {
+   "value": "(745) 156-1879",
+   "quote": "(745) 156-1879"
+  },
+  "home_address": {
+   "value": null,
+   "quote": null
+  },
+  "location_current": {
+   "value": "New York, NY",
+   "quote": "New York, NY"
+  },
+  "headline": {
+   "value": "Healthcare Analyst, Investment Team",
+   "quote": "Healthcare Analyst, Investment Team"
+  },
+  "summary": {
+   "value": null,
+   "quote": null
+  },
+  "marital_status": {
+   "value": null,
+   "quote": null
+  },
+  "work_authorization": {
+   "value": null,
+   "quote": null
+  },
+  "education": [
+   {
+    "institution": {
+     "value": "Harvard University",
+     "quote": "Harvard University"
+    },
+    "degree_raw": {
+     "value": "Bachelor of Arts in Economics",
+     "quote": "Bachelor of Arts in Economics"
+    },
+    "field_of_study": {
+     "value": "Economics, Secondary in Molecular Biology",
+     "quote": "Economics, Secondary in Molecular Biology"
+    },
+    "graduation_year": {
+     "value": 2013,
+     "quote": "Class of 2013"
+    },
+    "gpa_raw": {
+     "value": null,
+     "quote": null
+    },
+    "location": {
+     "value": "Cambridge, MA",
+     "quote": "Cambridge, MA"
+    },
+    "honors": [
+     "Magna Cum Laude"
+    ]
+   },
+   {
+    "institution": {
+     "value": "Stanford University",
+     "quote": "Stanford University"
+    },
+    "degree_raw": {
+     "value": "Summer Program: Healthcare Innovation, Biotechnology Commercialization",
+     "quote": "Summer Program: Healthcare Innovation, Biotechnology Commercialization"
+    },
+    "field_of_study": {
+     "value": "Healthcare Innovation, Biotechnology Commercialization",
+     "quote": "Healthcare Innovation, Biotechnology Commercialization"
+    },
+    "graduation_year": {
+     "value": null,
+     "quote": null
+    },
+    "gpa_raw": {
+     "value": null,
+     "quote": null
+    },
+    "location": {
+     "value": null,
+     "quote": null
+    },
+    "honors": []
+   }
+  ],
+  "certifications": [],
+  "languages": [],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"full_name\": {\n    \"value\": \"Marcus Chen-Rodriguez\",\n    \"quote\": \"Marcus Chen-Rodriguez\"\n  },\n  \"email\": {\n    \"value\": \"rchen@hotmail\",\n    \"quote\": \"rchen@hotmail\"\n  },\n  \"phone\": {\n    \"value\": \"(745) 156-1879\",\n    \"quote\": \"(745) 156-1879\"\n  },\n  \"home_address\": {\n    \"value\": null,\n    \"quote\": null\n  },\n  \"location_current\": {\n    \"value\": \"New York, NY\",\n    \"quote\": \"New York, NY\"\n  },\n  \"headline\": {\n    \"value\": \"Healthcare Analyst, Investment Team\",\n    \"quote\": \"Healthcare Analyst, Investment Team\"\n  },\n  \"summary\": {\n    \"value\": null,\n    \"quote\": null\n  },\n  \"marital_status\": {\n    \"value\": null,\n    \"quote\": null\n  },\n  \"work_authorization\": {\n    \"value\": null,\n    \"quote\": null\n  },\n  \"education\": [\n    {\n      \"institution\": {\n        \"value\": \"Harvard University\",\n        \"quote\": \"Harvard University\"\n      },\n      \"degree_raw\": {\n        \"value\": \"Bachelor of Arts in Economics\",\n        \"quote\": \"Bachelor of Arts in Economics\"\n      },\n      \"field_of_study\": {\n        \"value\": \"Economics, Secondary in Molecular Biology\",\n        \"quote\": \"Economics, Secondary in Molecular Biology\"\n      },\n      \"graduation_year\": {\n        \"value\": 2013,\n        \"quote\": \"Class of 2013\"\n      },\n      \"gpa_raw\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"location\": {\n        \"value\": \"Cambridge, MA\",\n        \"quote\": \"Cambridge, MA\"\n      },\n      \"honors\": [\n        \"Magna Cum Laude\"\n      ]\n    },\n    {\n      \"institution\": {\n        \"value\": \"Stanford University\",\n        \"quote\": \"Stanford University\"\n      },\n      \"degree_raw\": {\n        \"value\": \"Summer Program: Healthcare Innovation, Biotechnology Commercialization\",\n        \"quote\": \"Summer Program: Healthcare Innovation, Biotechnology Commercialization\"\n      },\n      \"field_of_study\": {\n        \"value\": \"Healthcare Innovation, Biotechnology Commercialization\",\n        \"quote\": \"Healthcare Innovation, Biotechnology Commercialization\"\n      },\n      \"graduation_year\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"gpa_raw\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"honors\": []\n    }\n  ],\n  \"certifications\": [],\n  \"languages\": [],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 1986,
+ "tokens_out": 724,
+ "latency_ms": 7855,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "identity"
+}

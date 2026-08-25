@@ -1,0 +1,265 @@
+{
+ "data": {
+  "employment": [
+   {
+    "employer_raw": {
+     "value": "ICICI Securities",
+     "quote": "ICICI Securities - Lead Healthcare Analyst"
+    },
+    "title_raw": {
+     "value": "Lead Healthcare Analyst",
+     "quote": "ICICI Securities - Lead Healthcare Analyst"
+    },
+    "location": {
+     "value": null,
+     "quote": null
+    },
+    "start": {
+     "value": "2023-05",
+     "quote": "May'23"
+    },
+    "end": {
+     "value": "present",
+     "quote": "till date"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "highlights": [
+     {
+      "value": "Extensive coverage of 32 companies spread across all segments (pharma, hospital, diagnostics and medical devices) of the listed Indian healthcare universe.",
+      "quote": "Extensive coverage of 32 companies spread across all segments (pharma, hospital, diagnostics and medical devices) of the listed Indian healthcare universe."
+     },
+     {
+      "value": "Actively managed primary fund raise for Jupiter Hospital, Innova Captab, Entero Healthcare and AKUMS.",
+      "quote": "Actively managed primary fund raise for Jupiter Hospital, Innova Captab, Entero Healthcare and AKUMS."
+     },
+     {
+      "value": "Periodical meetings with industry participants (listed & unlisted) to get a perspective of industry and key functioning areas of a company.",
+      "quote": "Periodical meetings with industry participants (listed & unlisted) to get a perspective of industry and key functioning areas of a company."
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "J.P. Morgan Chase",
+     "quote": "J.P. Morgan Chase - Lead Healthcare Analyst"
+    },
+    "title_raw": {
+     "value": "Lead Healthcare Analyst",
+     "quote": "J.P. Morgan Chase - Lead Healthcare Analyst"
+    },
+    "location": {
+     "value": null,
+     "quote": null
+    },
+    "start": {
+     "value": "2021-09",
+     "quote": "Sep'21"
+    },
+    "end": {
+     "value": "2023-05",
+     "quote": "Mayr'23"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "highlights": [
+     {
+      "value": "Formal coverage includes 22 companies across the healthcare value chain.",
+      "quote": "Formal coverage includes 22 companies across the healthcare value chain."
+     },
+     {
+      "value": "Periodical meetings with industry experts to get a perspective of industry and key functioning areas of a company.",
+      "quote": "Periodical meetings with industry experts to get a perspective of industry and key functioning areas of a company."
+     },
+     {
+      "value": "Arranged corporate meetings/road shows, connect senior management of companies with key investors.",
+      "quote": "Arranged corporate meetings/road shows, connect senior management of companies with key investors."
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Jardine Lloyd Thompson",
+     "quote": "Jardine Lloyd Thompson - Lead Pharma Analyst"
+    },
+    "title_raw": {
+     "value": "Lead Pharma Analyst",
+     "quote": "Jardine Lloyd Thompson - Lead Pharma Analyst"
+    },
+    "location": {
+     "value": null,
+     "quote": null
+    },
+    "start": {
+     "value": "2020-01",
+     "quote": "Jan'20"
+    },
+    "end": {
+     "value": "2021-09",
+     "quote": "Sep'21"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "highlights": [
+     {
+      "value": "Started my journey as a Lead Analyst at Anand Rathi with 17 pharma companies under direct coverage. Portfolio consisted of a blend of large and mid-cap companies.",
+      "quote": "Started my journey as a Lead Analyst at Anand Rathi with 17 pharma companies under direct coverage. Portfolio consisted of a blend of large and mid-cap companies.."
+     },
+     {
+      "value": "Periodically update clients on corporate actions, news flow related to companies and events/updates pertaining to Healthcare sector globally",
+      "quote": "Periodically update clients on corporate actions, news flow related to companies and events/updates pertaining to Healthcare sector globally"
+     },
+     {
+      "value": "Arranged corporate meetings/road shows, connect senior management of companies with key investors.",
+      "quote": "Arranged corporate meetings/road shows, connect senior management of companies with key investors."
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Centrum Broking Ltd",
+     "quote": "Centrum Broking Ltd - Research Analyst"
+    },
+    "title_raw": {
+     "value": "Research Analyst",
+     "quote": "Centrum Broking Ltd - Research Analyst"
+    },
+    "location": {
+     "value": null,
+     "quote": null
+    },
+    "start": {
+     "value": "2017-01",
+     "quote": "Jan'17"
+    },
+    "end": {
+     "value": "2019-12",
+     "quote": "Dec'19"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "highlights": [
+     {
+      "value": "Focused approach towards analyzing and recommending differentiated and undervalued investment opportunities to institutional clients.",
+      "quote": "Focused approach towards analyzing and recommending differentiated and undervalued investment opportunities to institutional clients."
+     },
+     {
+      "value": "Built extensive domain expertise in the pharmaceutical sector and consistently published high-quality research including initiation reports, sector outlook pieces, quarterly earnings analysis, and thematic investment reports.",
+      "quote": "Built extensive domain expertise in the pharmaceutical sector and consistently published high-quality research including initiation reports, sector outlook pieces, quarterly earnings analysis, and thematic investment reports."
+     },
+     {
+      "value": "Companies under direct coverage include MediCore Pharmaceuticals, Apex Lifesciences, BioGenex Labs, Zenith Therapeutics, Prism Pharma, VitalMed Industries, GlobalCare India, InnovaPharm Solutions, LifeTech Laboratories, Precision Biopharma, NexGen Medicines, and Quantum Healthcare Limited.",
+      "quote": "Companies under direct coverage include MediCore Pharmaceuticals, Apex Lifesciences, BioGenex Labs, Zenith Therapeutics, Prism Pharma, VitalMed Industries, GlobalCare India, InnovaPharm Solutions, LifeTech Laboratories, Precision Biopharma, NexGen Medicines, and Quantum Healthcare Limited."
+     },
+     {
+      "value": "Supported senior analyst coverage of large-cap pharmaceutical companies through financial modeling, competitive analysis, and research report preparation for blue-chip healthcare names.",
+      "quote": "Supported senior analyst coverage of large-cap pharmaceutical companies through financial modeling, competitive analysis, and research report preparation for blue-chip healthcare names."
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Morgan Stanley",
+     "quote": "Morgan Stanley - Equity Research Analyst"
+    },
+    "title_raw": {
+     "value": "Equity Research Analyst",
+     "quote": "Morgan Stanley - Equity Research Analyst"
+    },
+    "location": {
+     "value": null,
+     "quote": null
+    },
+    "start": {
+     "value": "2015-10",
+     "quote": "Oct'15"
+    },
+    "end": {
+     "value": "2016-12",
+     "quote": "Dec'16"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "highlights": [
+     {
+      "value": "Covered mid and small cap companies in the Indian pharmaceutical and speciality chemical space.",
+      "quote": "Covered mid and small cap companies in the Indian pharmaceutical and speciality chemical space."
+     },
+     {
+      "value": "Build up financial models by getting details from interaction with company management and in depth analysis of various ratios and other financial parameters.",
+      "quote": "Build up financial models by getting details from interaction with company management and in depth analysis of various ratios and other financial parameters."
+     },
+     {
+      "value": "My portfolio consisted of mid-cap pharmaceutical and speciality chemical companies like Syngene International, Neuland Laboratories, Strides Shasun, Thyrocare, Dr LalPathlabs, Aarti Industries and Navin Fluorine.",
+      "quote": "My portfolio consisted of mid-cap pharmaceutical and speciality chemical companies like Syngene International, Neuland Laboratories, Strides Shasun, Thyrocare, Dr LalPathlabs, Aarti Industries and Navin Fluorine."
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Transparent Value",
+     "quote": "Transparent Value - Equity Research Analyst"
+    },
+    "title_raw": {
+     "value": "Equity Research Analyst",
+     "quote": "Transparent Value - Equity Research Analyst"
+    },
+    "location": {
+     "value": null,
+     "quote": null
+    },
+    "start": {
+     "value": "2013-10",
+     "quote": "Oct'13"
+    },
+    "end": {
+     "value": "2015-10",
+     "quote": "Oct'15"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "highlights": [
+     {
+      "value": "Analysed companies by reading financials & press release published by company, thoroughly understand the dynamics of the sector covered and understand the key drivers affecting a particular company for building better quality models.",
+      "quote": "Analysed companies by reading financials & press release published by company, thoroughly understand the dynamics of the sector covered and understand the key drivers affecting a particular company for building better quality models."
+     },
+     {
+      "value": "Write earnings report for a company based on the outcome of the models build.",
+      "quote": "Write earnings report for a company based on the outcome of the models build."
+     },
+     {
+      "value": "My portfolio consisted of 25 US and European large-cap pharmaceutical companies like Gilead Sciences, Zimmer Biomet Holding, Hospital Corporation of America, GSK and Meda AB.",
+      "quote": "My portfolio consisted of 25 US and European large-cap pharmaceutical companies like Gilead Sciences, Zimmer Biomet Holding, Hospital Corporation of America, GSK and Meda AB."
+     }
+    ]
+   }
+  ],
+  "suspicious_content": [
+   "Started my journey as a Lead Analyst at Anand Rathi with 17 pharma companies under direct coverage"
+  ]
+ },
+ "raw_text": "{\n  \"employment\": [\n    {\n      \"employer_raw\": {\n        \"value\": \"ICICI Securities\",\n        \"quote\": \"ICICI Securities - Lead Healthcare Analyst\"\n      },\n      \"title_raw\": {\n        \"value\": \"Lead Healthcare Analyst\",\n        \"quote\": \"ICICI Securities - Lead Healthcare Analyst\"\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"start\": {\n        \"value\": \"2023-05\",\n        \"quote\": \"May'23\"\n      },\n      \"end\": {\n        \"value\": \"present\",\n        \"quote\": \"till date\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Extensive coverage of 32 companies spread across all segments (pharma, hospital, diagnostics and medical devices) of the listed Indian healthcare universe.\",\n          \"quote\": \"Extensive coverage of 32 companies spread across all segments (pharma, hospital, diagnostics and medical devices) of the listed Indian healthcare universe.\"\n        },\n        {\n          \"value\": \"Actively managed primary fund raise for Jupiter Hospital, Innova Captab, Entero Healthcare and AKUMS.\",\n          \"quote\": \"Actively managed primary fund raise for Jupiter Hospital, Innova Captab, Entero Healthcare and AKUMS.\"\n        },\n        {\n          \"value\": \"Periodical meetings with industry participants (listed & unlisted) to get a perspective of industry and key functioning areas of a company.\",\n          \"quote\": \"Periodical meetings with industry participants (listed & unlisted) to get a perspective of industry and key functioning areas of a company.\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"J.P. Morgan Chase\",\n        \"quote\": \"J.P. Morgan Chase - Lead Healthcare Analyst\"\n      },\n      \"title_raw\": {\n        \"value\": \"Lead Healthcare Analyst\",\n        \"quote\": \"J.P. Morgan Chase - Lead Healthcare Analyst\"\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"start\": {\n        \"value\": \"2021-09\",\n        \"quote\": \"Sep'21\"\n      },\n      \"end\": {\n        \"value\": \"2023-05\",\n        \"quote\": \"Mayr'23\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Formal coverage includes 22 companies across the healthcare value chain.\",\n          \"quote\": \"Formal coverage includes 22 companies across the healthcare value chain.\"\n        },\n        {\n          \"value\": \"Periodical meetings with industry experts to get a perspective of industry and key functioning areas of a company.\",\n          \"quote\": \"Periodical meetings with industry experts to get a perspective of industry and key functioning areas of a company.\"\n        },\n        {\n          \"value\": \"Arranged corporate meetings/road shows, connect senior management of companies with key investors.\",\n          \"quote\": \"Arranged corporate meetings/road shows, connect senior management of companies with key investors.\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Jardine Lloyd Thompson\",\n        \"quote\": \"Jardine Lloyd Thompson - Lead Pharma Analyst\"\n      },\n      \"title_raw\": {\n        \"value\": \"Lead Pharma Analyst\",\n        \"quote\": \"Jardine Lloyd Thompson - Lead Pharma Analyst\"\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"start\": {\n        \"value\": \"2020-01\",\n        \"quote\": \"Jan'20\"\n      },\n      \"end\": {\n        \"value\": \"2021-09\",\n        \"quote\": \"Sep'21\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Started my journey as a Lead Analyst at Anand Rathi with 17 pharma companies under direct coverage. Portfolio consisted of a blend of large and mid-cap companies.\",\n          \"quote\": \"Started my journey as a Lead Analyst at Anand Rathi with 17 pharma companies under direct coverage. Portfolio consisted of a blend of large and mid-cap companies..\"\n        },\n        {\n          \"value\": \"Periodically update clients on corporate actions, news flow related to companies and events/updates pertaining to Healthcare sector globally\",\n          \"quote\": \"Periodically update clients on corporate actions, news flow related to companies and events/updates pertaining to Healthcare sector globally\"\n        },\n        {\n          \"value\": \"Arranged corporate meetings/road shows, connect senior management of companies with key investors.\",\n          \"quote\": \"Arranged corporate meetings/road shows, connect senior management of companies with key investors.\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Centrum Broking Ltd\",\n        \"quote\": \"Centrum Broking Ltd - Research Analyst\"\n      },\n      \"title_raw\": {\n        \"value\": \"Research Analyst\",\n        \"quote\": \"Centrum Broking Ltd - Research Analyst\"\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"start\": {\n        \"value\": \"2017-01\",\n        \"quote\": \"Jan'17\"\n      },\n      \"end\": {\n        \"value\": \"2019-12\",\n        \"quote\": \"Dec'19\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Focused approach towards analyzing and recommending differentiated and undervalued investment opportunities to institutional clients.\",\n          \"quote\": \"Focused approach towards analyzing and recommending differentiated and undervalued investment opportunities to institutional clients.\"\n        },\n        {\n          \"value\": \"Built extensive domain expertise in the pharmaceutical sector and consistently published high-quality research including initiation reports, sector outlook pieces, quarterly earnings analysis, and thematic investment reports.\",\n          \"quote\": \"Built extensive domain expertise in the pharmaceutical sector and consistently published high-quality research including initiation reports, sector outlook pieces, quarterly earnings analysis, and thematic investment reports.\"\n        },\n        {\n          \"value\": \"Companies under direct coverage include MediCore Pharmaceuticals, Apex Lifesciences, BioGenex Labs, Zenith Therapeutics, Prism Pharma, VitalMed Industries, GlobalCare India, InnovaPharm Solutions, LifeTech Laboratories, Precision Biopharma, NexGen Medicines, and Quantum Healthcare Limited.\",\n          \"quote\": \"Companies under direct coverage include MediCore Pharmaceuticals, Apex Lifesciences, BioGenex Labs, Zenith Therapeutics, Prism Pharma, VitalMed Industries, GlobalCare India, InnovaPharm Solutions, LifeTech Laboratories, Precision Biopharma, NexGen Medicines, and Quantum Healthcare Limited.\"\n        },\n        {\n          \"value\": \"Supported senior analyst coverage of large-cap pharmaceutical companies through financial modeling, competitive analysis, and research report preparation for blue-chip healthcare names.\",\n          \"quote\": \"Supported senior analyst coverage of large-cap pharmaceutical companies through financial modeling, competitive analysis, and research report preparation for blue-chip healthcare names.\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Morgan Stanley\",\n        \"quote\": \"Morgan Stanley - Equity Research Analyst\"\n      },\n      \"title_raw\": {\n        \"value\": \"Equity Research Analyst\",\n        \"quote\": \"Morgan Stanley - Equity Research Analyst\"\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"start\": {\n        \"value\": \"2015-10\",\n        \"quote\": \"Oct'15\"\n      },\n      \"end\": {\n        \"value\": \"2016-12\",\n        \"quote\": \"Dec'16\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Covered mid and small cap companies in the Indian pharmaceutical and speciality chemical space.\",\n          \"quote\": \"Covered mid and small cap companies in the Indian pharmaceutical and speciality chemical space.\"\n        },\n        {\n          \"value\": \"Build up financial models by getting details from interaction with company management and in depth analysis of various ratios and other financial parameters.\",\n          \"quote\": \"Build up financial models by getting details from interaction with company management and in depth analysis of various ratios and other financial parameters.\"\n        },\n        {\n          \"value\": \"My portfolio consisted of mid-cap pharmaceutical and speciality chemical companies like Syngene International, Neuland Laboratories, Strides Shasun, Thyrocare, Dr LalPathlabs, Aarti Industries and Navin Fluorine.\",\n          \"quote\": \"My portfolio consisted of mid-cap pharmaceutical and speciality chemical companies like Syngene International, Neuland Laboratories, Strides Shasun, Thyrocare, Dr LalPathlabs, Aarti Industries and Navin Fluorine.\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Transparent Value\",\n        \"quote\": \"Transparent Value - Equity Research Analyst\"\n      },\n      \"title_raw\": {\n        \"value\": \"Equity Research Analyst\",\n        \"quote\": \"Transparent Value - Equity Research Analyst\"\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"start\": {\n        \"value\": \"2013-10\",\n        \"quote\": \"Oct'13\"\n      },\n      \"end\": {\n        \"value\": \"2015-10\",\n        \"quote\": \"Oct'15\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Analysed companies by reading financials & press release published by company, thoroughly understand the dynamics of the sector covered and understand the key drivers affecting a particular company for building better quality models.\",\n          \"quote\": \"Analysed companies by reading financials & press release published by company, thoroughly understand the dynamics of the sector covered and understand the key drivers affecting a particular company for building better quality models.\"\n        },\n        {\n          \"value\": \"Write earnings report for a company based on the outcome of the models build.\",\n          \"quote\": \"Write earnings report for a company based on the outcome of the models build.\"\n        },\n        {\n          \"value\": \"My portfolio consisted of 25 US and European large-cap pharmaceutical companies like Gilead Sciences, Zimmer Biomet Holding, Hospital Corporation of America, GSK and Meda AB.\",\n          \"quote\": \"My portfolio consisted of 25 US and European large-cap pharmaceutical companies like Gilead Sciences, Zimmer Biomet Holding, Hospital Corporation of America, GSK and Meda AB.\"\n        }\n      ]\n    }\n  ],\n  \"suspicious_content\": [\n    \"Started my journey as a Lead Analyst at Anand Rathi with 17 pharma companies under direct coverage\"\n  ]\n}",
+ "tokens_in": 2137,
+ "tokens_out": 2814,
+ "latency_ms": 25710,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "employment"
+}

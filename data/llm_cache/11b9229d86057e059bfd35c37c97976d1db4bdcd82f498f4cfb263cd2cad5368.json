@@ -1,0 +1,84 @@
+{
+ "data": {
+  "strategies": [
+   {
+    "label": "equity_long_short",
+    "confidence": 0.85,
+    "rationale": "Candidate has 9+ years covering healthcare stocks for institutional clients at sell-side firms, providing buy/sell recommendations",
+    "quote": "Focused approach towards analyzing and recommending differentiated and undervalued investment opportunities to institutional clients",
+    "low_support": false
+   }
+  ],
+  "sectors": [
+   {
+    "label": "healthcare",
+    "confidence": 0.95,
+    "rationale": "Core focus throughout entire career covering pharmaceutical, hospital, diagnostics and medical devices companies",
+    "quote": "I have been covering the healthcare sector for 9years",
+    "low_support": false
+   }
+  ],
+  "quant_fundamental": {
+   "label": "fundamental",
+   "confidence": 0.9,
+   "rationale": "Work involves company meetings, management interactions, financial modeling, and fundamental analysis rather than quantitative strategies",
+   "quote": "Periodical meetings with industry participants (listed & unlisted) to get a perspective of industry and key functioning areas of a company",
+   "low_support": false
+  },
+  "feeder_path": {
+   "label": "sellside_research",
+   "confidence": 0.95,
+   "rationale": "Started career as equity research analyst at Transparent Value in 2013, progressed through sell-side research roles",
+   "quote": "Transparent Value - Equity Research Analyst - Oct'13 to Oct'15",
+   "low_support": false
+  },
+  "geography_primary": {
+   "value": "India",
+   "quote": "listed Indian healthcare universe"
+  },
+  "skills": [
+   {
+    "name": "Financial Modeling",
+    "depth": "core",
+    "quote": "Build up financial models by getting details from interaction with company management"
+   },
+   {
+    "name": "Equity Research",
+    "depth": "core",
+    "quote": "consistently published high-quality research including initiation reports, sector outlook pieces, quarterly earnings analysis"
+   },
+   {
+    "name": "Company Management Interaction",
+    "depth": "core",
+    "quote": "Periodical meetings with industry participants (listed & unlisted) to get a perspective of industry"
+   },
+   {
+    "name": "IPO Analysis",
+    "depth": "applied",
+    "quote": "Actively managed primary fund raise for Jupiter Hospital, Innova Captab, Entero Healthcare and AKUMS"
+   },
+   {
+    "name": "Regulatory Analysis",
+    "depth": "applied",
+    "quote": "critical industry issues including regulatory compliance with USFDA, EMA and domestic authorities"
+   },
+   {
+    "name": "Competitive Analysis",
+    "depth": "applied",
+    "quote": "competitive positioning analysis, and patent cliff assessments"
+   },
+   {
+    "name": "Valuation",
+    "depth": "applied",
+    "quote": "various parameters of value investing and sensibly highlight them in the report"
+   }
+  ],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"strategies\": [\n    {\n      \"label\": \"equity_long_short\",\n      \"confidence\": 0.85,\n      \"rationale\": \"Candidate has 9+ years covering healthcare stocks for institutional clients at sell-side firms, providing buy/sell recommendations\",\n      \"quote\": \"Focused approach towards analyzing and recommending differentiated and undervalued investment opportunities to institutional clients\",\n      \"low_support\": false\n    }\n  ],\n  \"sectors\": [\n    {\n      \"label\": \"healthcare\",\n      \"confidence\": 0.95,\n      \"rationale\": \"Core focus throughout entire career covering pharmaceutical, hospital, diagnostics and medical devices companies\",\n      \"quote\": \"I have been covering the healthcare sector for 9years\",\n      \"low_support\": false\n    }\n  ],\n  \"quant_fundamental\": {\n    \"label\": \"fundamental\",\n    \"confidence\": 0.9,\n    \"rationale\": \"Work involves company meetings, management interactions, financial modeling, and fundamental analysis rather than quantitative strategies\",\n    \"quote\": \"Periodical meetings with industry participants (listed & unlisted) to get a perspective of industry and key functioning areas of a company\",\n    \"low_support\": false\n  },\n  \"feeder_path\": {\n    \"label\": \"sellside_research\",\n    \"confidence\": 0.95,\n    \"rationale\": \"Started career as equity research analyst at Transparent Value in 2013, progressed through sell-side research roles\",\n    \"quote\": \"Transparent Value - Equity Research Analyst - Oct'13 to Oct'15\",\n    \"low_support\": false\n  },\n  \"geography_primary\": {\n    \"value\": \"India\",\n    \"quote\": \"listed Indian healthcare universe\"\n  },\n  \"skills\": [\n    {\n      \"name\": \"Financial Modeling\",\n      \"depth\": \"core\",\n      \"quote\": \"Build up financial models by getting details from interaction with company management\"\n    },\n    {\n      \"name\": \"Equity Research\",\n      \"depth\": \"core\",\n      \"quote\": \"consistently published high-quality research including initiation reports, sector outlook pieces, quarterly earnings analysis\"\n    },\n    {\n      \"name\": \"Company Management Interaction\",\n      \"depth\": \"core\",\n      \"quote\": \"Periodical meetings with industry participants (listed & unlisted) to get a perspective of industry\"\n    },\n    {\n      \"name\": \"IPO Analysis\",\n      \"depth\": \"applied\",\n      \"quote\": \"Actively managed primary fund raise for Jupiter Hospital, Innova Captab, Entero Healthcare and AKUMS\"\n    },\n    {\n      \"name\": \"Regulatory Analysis\",\n      \"depth\": \"applied\",\n      \"quote\": \"critical industry issues including regulatory compliance with USFDA, EMA and domestic authorities\"\n    },\n    {\n      \"name\": \"Competitive Analysis\",\n      \"depth\": \"applied\",\n      \"quote\": \"competitive positioning analysis, and patent cliff assessments\"\n    },\n    {\n      \"name\": \"Valuation\",\n      \"depth\": \"applied\",\n      \"quote\": \"various parameters of value investing and sensibly highlight them in the report\"\n    }\n  ],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 2348,
+ "tokens_out": 764,
+ "latency_ms": 10519,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "profile"
+}

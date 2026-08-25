@@ -1,0 +1,163 @@
+{
+ "data": {
+  "full_name": {
+   "value": "Dr. Zara Al-Rashid",
+   "quote": "Dr. Zara Al-Rashid"
+  },
+  "email": {
+   "value": null,
+   "quote": ""
+  },
+  "phone": {
+   "value": null,
+   "quote": ""
+  },
+  "home_address": {
+   "value": null,
+   "quote": ""
+  },
+  "location_current": {
+   "value": null,
+   "quote": ""
+  },
+  "headline": {
+   "value": "Lead Analyst - Pharmaceuticals and Healthcare",
+   "quote": "Lead Analyst - Pharmaceuticals and Healthcare"
+  },
+  "summary": {
+   "value": null,
+   "quote": ""
+  },
+  "marital_status": {
+   "value": null,
+   "quote": ""
+  },
+  "work_authorization": {
+   "value": null,
+   "quote": ""
+  },
+  "education": [
+   {
+    "institution": {
+     "value": "Indian School of Business Management (ISBM), Pune",
+     "quote": "Indian School of Business Management (ISBM), Pune"
+    },
+    "degree_raw": {
+     "value": "PGDM (Finance)",
+     "quote": "PGDM (Finance)"
+    },
+    "field_of_study": {
+     "value": "Finance",
+     "quote": "Finance"
+    },
+    "graduation_year": {
+     "value": 2012,
+     "quote": "2012"
+    },
+    "gpa_raw": {
+     "value": "7.2/10",
+     "quote": "7.2/10 (Finance)"
+    },
+    "location": {
+     "value": "Pune",
+     "quote": "Pune"
+    },
+    "honors": []
+   },
+   {
+    "institution": {
+     "value": "K.J. Somaiya Medical College, Mumbai",
+     "quote": "K.J. Somaiya Medical College, Mumbai"
+    },
+    "degree_raw": {
+     "value": "M.B.B.S",
+     "quote": "M.B.B.S"
+    },
+    "field_of_study": {
+     "value": null,
+     "quote": ""
+    },
+    "graduation_year": {
+     "value": 2010,
+     "quote": "2010"
+    },
+    "gpa_raw": {
+     "value": "63.87%",
+     "quote": "63.87%"
+    },
+    "location": {
+     "value": "Mumbai",
+     "quote": "Mumbai"
+    },
+    "honors": []
+   },
+   {
+    "institution": {
+     "value": "Mithibai College, Mumbai",
+     "quote": "Mithibai College, Mumbai"
+    },
+    "degree_raw": {
+     "value": "XII Std.(PCMB)",
+     "quote": "XII Std.(PCMB)"
+    },
+    "field_of_study": {
+     "value": "PCMB",
+     "quote": "PCMB"
+    },
+    "graduation_year": {
+     "value": 2004,
+     "quote": "2004"
+    },
+    "gpa_raw": {
+     "value": "89.00%",
+     "quote": "89.00% (Top 0.2% Maharashtra state board)"
+    },
+    "location": {
+     "value": "Mumbai",
+     "quote": "Mumbai"
+    },
+    "honors": [
+     "Top 0.2% Maharashtra state board"
+    ]
+   },
+   {
+    "institution": {
+     "value": "St. Xavier's High School, Mumbai",
+     "quote": "St. Xavier's High School, Mumbai"
+    },
+    "degree_raw": {
+     "value": "X Std.",
+     "quote": "X Std."
+    },
+    "field_of_study": {
+     "value": null,
+     "quote": ""
+    },
+    "graduation_year": {
+     "value": 2002,
+     "quote": "2002"
+    },
+    "gpa_raw": {
+     "value": "90.43%",
+     "quote": "90.43% (Top 5% Maharashtra state board)"
+    },
+    "location": {
+     "value": "Mumbai",
+     "quote": "Mumbai"
+    },
+    "honors": [
+     "Top 5% Maharashtra state board"
+    ]
+   }
+  ],
+  "certifications": [],
+  "languages": [],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"full_name\": {\n    \"value\": \"Dr. Zara Al-Rashid\",\n    \"quote\": \"Dr. Zara Al-Rashid\"\n  },\n  \"email\": {\n    \"value\": null,\n    \"quote\": \"\"\n  },\n  \"phone\": {\n    \"value\": null,\n    \"quote\": \"\"\n  },\n  \"home_address\": {\n    \"value\": null,\n    \"quote\": \"\"\n  },\n  \"location_current\": {\n    \"value\": null,\n    \"quote\": \"\"\n  },\n  \"headline\": {\n    \"value\": \"Lead Analyst - Pharmaceuticals and Healthcare\",\n    \"quote\": \"Lead Analyst - Pharmaceuticals and Healthcare\"\n  },\n  \"summary\": {\n    \"value\": null,\n    \"quote\": \"\"\n  },\n  \"marital_status\": {\n    \"value\": null,\n    \"quote\": \"\"\n  },\n  \"work_authorization\": {\n    \"value\": null,\n    \"quote\": \"\"\n  },\n  \"education\": [\n    {\n      \"institution\": {\n        \"value\": \"Indian School of Business Management (ISBM), Pune\",\n        \"quote\": \"Indian School of Business Management (ISBM), Pune\"\n      },\n      \"degree_raw\": {\n        \"value\": \"PGDM (Finance)\",\n        \"quote\": \"PGDM (Finance)\"\n      },\n      \"field_of_study\": {\n        \"value\": \"Finance\",\n        \"quote\": \"Finance\"\n      },\n      \"graduation_year\": {\n        \"value\": 2012,\n        \"quote\": \"2012\"\n      },\n      \"gpa_raw\": {\n        \"value\": \"7.2/10\",\n        \"quote\": \"7.2/10 (Finance)\"\n      },\n      \"location\": {\n        \"value\": \"Pune\",\n        \"quote\": \"Pune\"\n      },\n      \"honors\": []\n    },\n    {\n      \"institution\": {\n        \"value\": \"K.J. Somaiya Medical College, Mumbai\",\n        \"quote\": \"K.J. Somaiya Medical College, Mumbai\"\n      },\n      \"degree_raw\": {\n        \"value\": \"M.B.B.S\",\n        \"quote\": \"M.B.B.S\"\n      },\n      \"field_of_study\": {\n        \"value\": null,\n        \"quote\": \"\"\n      },\n      \"graduation_year\": {\n        \"value\": 2010,\n        \"quote\": \"2010\"\n      },\n      \"gpa_raw\": {\n        \"value\": \"63.87%\",\n        \"quote\": \"63.87%\"\n      },\n      \"location\": {\n        \"value\": \"Mumbai\",\n        \"quote\": \"Mumbai\"\n      },\n      \"honors\": []\n    },\n    {\n      \"institution\": {\n        \"value\": \"Mithibai College, Mumbai\",\n        \"quote\": \"Mithibai College, Mumbai\"\n      },\n      \"degree_raw\": {\n        \"value\": \"XII Std.(PCMB)\",\n        \"quote\": \"XII Std.(PCMB)\"\n      },\n      \"field_of_study\": {\n        \"value\": \"PCMB\",\n        \"quote\": \"PCMB\"\n      },\n      \"graduation_year\": {\n        \"value\": 2004,\n        \"quote\": \"2004\"\n      },\n      \"gpa_raw\": {\n        \"value\": \"89.00%\",\n        \"quote\": \"89.00% (Top 0.2% Maharashtra state board)\"\n      },\n      \"location\": {\n        \"value\": \"Mumbai\",\n        \"quote\": \"Mumbai\"\n      },\n      \"honors\": [\n        \"Top 0.2% Maharashtra state board\"\n      ]\n    },\n    {\n      \"institution\": {\n        \"value\": \"St. Xavier's High School, Mumbai\",\n        \"quote\": \"St. Xavier's High School, Mumbai\"\n      },\n      \"degree_raw\": {\n        \"value\": \"X Std.\",\n        \"quote\": \"X Std.\"\n      },\n      \"field_of_study\": {\n        \"value\": null,\n        \"quote\": \"\"\n      },\n      \"graduation_year\": {\n        \"value\": 2002,\n        \"quote\": \"2002\"\n      },\n      \"gpa_raw\": {\n        \"value\": \"90.43%\",\n        \"quote\": \"90.43% (Top 5% Maharashtra state board)\"\n      },\n      \"location\": {\n        \"value\": \"Mumbai\",\n        \"quote\": \"Mumbai\"\n      },\n      \"honors\": [\n        \"Top 5% Maharashtra state board\"\n      ]\n    }\n  ],\n  \"certifications\": [],\n  \"languages\": [],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 2115,
+ "tokens_out": 1175,
+ "latency_ms": 11057,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "identity"
+}

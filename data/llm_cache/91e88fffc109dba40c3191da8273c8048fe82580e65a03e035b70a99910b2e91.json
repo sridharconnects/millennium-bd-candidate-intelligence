@@ -1,0 +1,106 @@
+{
+ "data": {
+  "strategies": [
+   {
+    "label": "derivatives_pricing",
+    "confidence": 0.95,
+    "rationale": "Core work in derivatives pricing library development and exotic payoff implementation",
+    "quote": "quantitative development in the pricing library (C++)",
+    "low_support": false
+   },
+   {
+    "label": "fixed_income_rv",
+    "confidence": 0.85,
+    "rationale": "Works in Fixed Income team on pricing and yield curve construction",
+    "quote": "R&D Front Office Fixed Income team",
+    "low_support": false
+   },
+   {
+    "label": "systematic_macro",
+    "confidence": 0.7,
+    "rationale": "Developed and backtested momentum-based trading strategies during internship",
+    "quote": "Development and back testing of momentum-based trading strategies",
+    "low_support": true
+   }
+  ],
+  "sectors": [
+   {
+    "label": "financials",
+    "confidence": 0.9,
+    "rationale": "Works at major investment banks in derivatives pricing and trading",
+    "quote": "BNP Paribas CIB",
+    "low_support": false
+   }
+  ],
+  "quant_fundamental": {
+   "label": "quantitative",
+   "confidence": 0.95,
+   "rationale": "Quantitative developer role with focus on pricing models, Monte Carlo methods, and systematic strategies",
+   "quote": "Quantitative Developer"
+  },
+  "feeder_path": {
+   "label": "quant_technical",
+   "confidence": 0.9,
+   "rationale": "Entered finance through quantitative finance education and quant strategist internship",
+   "quote": "Quantitative Strategist - Intern"
+  },
+  "geography_primary": {
+   "value": "France",
+   "quote": "Paris, France"
+  },
+  "skills": [
+   {
+    "name": "C++",
+    "depth": "core",
+    "quote": "quantitative development in the pricing library (C++)"
+   },
+   {
+    "name": "C#",
+    "depth": "applied",
+    "quote": "Built automated testing framework in C#"
+   },
+   {
+    "name": "Monte Carlo methods",
+    "depth": "applied",
+    "quote": "Monte Carlo pricer for european and american options (C++)"
+   },
+   {
+    "name": "Python",
+    "depth": "mentioned",
+    "quote": "Python"
+   },
+   {
+    "name": "Stochastic calculus",
+    "depth": "core",
+    "quote": "Stochastic calculs"
+   },
+   {
+    "name": "derivatives pricing",
+    "depth": "core",
+    "quote": "derivatives pricing validation"
+   },
+   {
+    "name": "backtesting",
+    "depth": "applied",
+    "quote": "Backtester application for a systematic strategie"
+   },
+   {
+    "name": "SQL",
+    "depth": "mentioned",
+    "quote": "SQL"
+   },
+   {
+    "name": "machine learning",
+    "depth": "applied",
+    "quote": "Neural Network : implementation based on gradient descent"
+   }
+  ],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"strategies\": [\n    {\n      \"label\": \"derivatives_pricing\",\n      \"confidence\": 0.95,\n      \"rationale\": \"Core work in derivatives pricing library development and exotic payoff implementation\",\n      \"quote\": \"quantitative development in the pricing library (C++)\",\n      \"low_support\": false\n    },\n    {\n      \"label\": \"fixed_income_rv\",\n      \"confidence\": 0.85,\n      \"rationale\": \"Works in Fixed Income team on pricing and yield curve construction\",\n      \"quote\": \"R&D Front Office Fixed Income team\",\n      \"low_support\": false\n    },\n    {\n      \"label\": \"systematic_macro\",\n      \"confidence\": 0.70,\n      \"rationale\": \"Developed and backtested momentum-based trading strategies during internship\",\n      \"quote\": \"Development and back testing of momentum-based trading strategies\",\n      \"low_support\": true\n    }\n  ],\n  \"sectors\": [\n    {\n      \"label\": \"financials\",\n      \"confidence\": 0.90,\n      \"rationale\": \"Works at major investment banks in derivatives pricing and trading\",\n      \"quote\": \"BNP Paribas CIB\",\n      \"low_support\": false\n    }\n  ],\n  \"quant_fundamental\": {\n    \"label\": \"quantitative\",\n    \"confidence\": 0.95,\n    \"rationale\": \"Quantitative developer role with focus on pricing models, Monte Carlo methods, and systematic strategies\",\n    \"quote\": \"Quantitative Developer\"\n  },\n  \"feeder_path\": {\n    \"label\": \"quant_technical\",\n    \"confidence\": 0.90,\n    \"rationale\": \"Entered finance through quantitative finance education and quant strategist internship\",\n    \"quote\": \"Quantitative Strategist - Intern\"\n  },\n  \"geography_primary\": {\n    \"value\": \"France\",\n    \"quote\": \"Paris, France\"\n  },\n  \"skills\": [\n    {\n      \"name\": \"C++\",\n      \"depth\": \"core\",\n      \"quote\": \"quantitative development in the pricing library (C++)\"\n    },\n    {\n      \"name\": \"C#\",\n      \"depth\": \"applied\",\n      \"quote\": \"Built automated testing framework in C#\"\n    },\n    {\n      \"name\": \"Monte Carlo methods\",\n      \"depth\": \"applied\",\n      \"quote\": \"Monte Carlo pricer for european and american options (C++)\"\n    },\n    {\n      \"name\": \"Python\",\n      \"depth\": \"mentioned\",\n      \"quote\": \"Python\"\n    },\n    {\n      \"name\": \"Stochastic calculus\",\n      \"depth\": \"core\",\n      \"quote\": \"Stochastic calculs\"\n    },\n    {\n      \"name\": \"derivatives pricing\",\n      \"depth\": \"core\",\n      \"quote\": \"derivatives pricing validation\"\n    },\n    {\n      \"name\": \"backtesting\",\n      \"depth\": \"applied\",\n      \"quote\": \"Backtester application for a systematic strategie\"\n    },\n    {\n      \"name\": \"SQL\",\n      \"depth\": \"mentioned\",\n      \"quote\": \"SQL\"\n    },\n    {\n      \"name\": \"machine learning\",\n      \"depth\": \"applied\",\n      \"quote\": \"Neural Network : implementation based on gradient descent\"\n    }\n  ],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 1671,
+ "tokens_out": 823,
+ "latency_ms": 10885,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "profile"
+}

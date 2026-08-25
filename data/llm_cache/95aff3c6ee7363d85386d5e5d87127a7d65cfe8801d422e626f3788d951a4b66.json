@@ -1,0 +1,103 @@
+{
+ "data": {
+  "full_name": {
+   "value": "Vikram Shah",
+   "quote": "Vikram Shah, CFA"
+  },
+  "email": {
+   "value": "Vshah@gmail.com",
+   "quote": "Vshah@gmail.com"
+  },
+  "phone": {
+   "value": "267-328-0909",
+   "quote": "267-328-0909"
+  },
+  "home_address": {
+   "value": null,
+   "quote": null
+  },
+  "location_current": {
+   "value": "New York, NY",
+   "quote": "Cinctive Capital Management, New York, NY Sep 2021 - Present"
+  },
+  "headline": {
+   "value": "Investment Analyst",
+   "quote": "Investment Analyst"
+  },
+  "summary": {
+   "value": null,
+   "quote": null
+  },
+  "marital_status": {
+   "value": null,
+   "quote": null
+  },
+  "work_authorization": {
+   "value": null,
+   "quote": null
+  },
+  "education": [
+   {
+    "institution": {
+     "value": "Northwestern University - Kellogg School of Management",
+     "quote": "Northwestern University - Kellogg School of Management, Evanston, IL"
+    },
+    "degree_raw": {
+     "value": "Bachelor of Science in Business Administration",
+     "quote": "Bachelor of Science in Business Administration"
+    },
+    "field_of_study": {
+     "value": null,
+     "quote": null
+    },
+    "graduation_year": {
+     "value": 2014,
+     "quote": "Graduated May 2014"
+    },
+    "gpa_raw": {
+     "value": "3.44/4.00",
+     "quote": "Cumulative GPA: 3.44/4.00"
+    },
+    "location": {
+     "value": "Evanston, IL",
+     "quote": "Evanston, IL"
+    },
+    "honors": [
+     "Dean's Honor List (Fall 2012 - Spring 2014)",
+     "Greek Award of Distinction (2011, 2012)"
+    ]
+   }
+  ],
+  "certifications": [
+   {
+    "name": {
+     "value": "CFA Charterholder",
+     "quote": "CFA® Charterholder, CFA Institute"
+    },
+    "year": {
+     "value": 2019,
+     "quote": "Issued March 2019"
+    }
+   }
+  ],
+  "languages": [
+   {
+    "language": "Mandarin",
+    "proficiency": "fluent",
+    "quote": "Mandarin (fluent)"
+   },
+   {
+    "language": "Cantonese",
+    "proficiency": "conversational",
+    "quote": "Cantonese (conversational)"
+   }
+  ],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"full_name\": {\n    \"value\": \"Vikram Shah\",\n    \"quote\": \"Vikram Shah, CFA\"\n  },\n  \"email\": {\n    \"value\": \"Vshah@gmail.com\",\n    \"quote\": \"Vshah@gmail.com\"\n  },\n  \"phone\": {\n    \"value\": \"267-328-0909\",\n    \"quote\": \"267-328-0909\"\n  },\n  \"home_address\": {\n    \"value\": null,\n    \"quote\": null\n  },\n  \"location_current\": {\n    \"value\": \"New York, NY\",\n    \"quote\": \"Cinctive Capital Management, New York, NY Sep 2021 - Present\"\n  },\n  \"headline\": {\n    \"value\": \"Investment Analyst\",\n    \"quote\": \"Investment Analyst\"\n  },\n  \"summary\": {\n    \"value\": null,\n    \"quote\": null\n  },\n  \"marital_status\": {\n    \"value\": null,\n    \"quote\": null\n  },\n  \"work_authorization\": {\n    \"value\": null,\n    \"quote\": null\n  },\n  \"education\": [\n    {\n      \"institution\": {\n        \"value\": \"Northwestern University - Kellogg School of Management\",\n        \"quote\": \"Northwestern University - Kellogg School of Management, Evanston, IL\"\n      },\n      \"degree_raw\": {\n        \"value\": \"Bachelor of Science in Business Administration\",\n        \"quote\": \"Bachelor of Science in Business Administration\"\n      },\n      \"field_of_study\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"graduation_year\": {\n        \"value\": 2014,\n        \"quote\": \"Graduated May 2014\"\n      },\n      \"gpa_raw\": {\n        \"value\": \"3.44/4.00\",\n        \"quote\": \"Cumulative GPA: 3.44/4.00\"\n      },\n      \"location\": {\n        \"value\": \"Evanston, IL\",\n        \"quote\": \"Evanston, IL\"\n      },\n      \"honors\": [\n        \"Dean's Honor List (Fall 2012 - Spring 2014)\",\n        \"Greek Award of Distinction (2011, 2012)\"\n      ]\n    }\n  ],\n  \"certifications\": [\n    {\n      \"name\": {\n        \"value\": \"CFA Charterholder\",\n        \"quote\": \"CFA® Charterholder, CFA Institute\"\n      },\n      \"year\": {\n        \"value\": 2019,\n        \"quote\": \"Issued March 2019\"\n      }\n    }\n  ],\n  \"languages\": [\n    {\n      \"language\": \"Mandarin\",\n      \"proficiency\": \"fluent\",\n      \"quote\": \"Mandarin (fluent)\"\n    },\n    {\n      \"language\": \"Cantonese\",\n      \"proficiency\": \"conversational\",\n      \"quote\": \"Cantonese (conversational)\"\n    }\n  ],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 2056,
+ "tokens_out": 755,
+ "latency_ms": 7737,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "identity"
+}

@@ -1,0 +1,273 @@
+{
+ "data": {
+  "employment": [
+   {
+    "employer_raw": {
+     "value": "Meridian Capital Partners",
+     "quote": "Meridian Capital Partners"
+    },
+    "title_raw": {
+     "value": "Investment Professional, Generalist - Soft Catalyst & Fundamental Long/Short",
+     "quote": "Investment Professional, Generalist - Soft Catalyst & Fundamental Long/Short"
+    },
+    "location": {
+     "value": "Greenwich, CT",
+     "quote": "Greenwich, CT"
+    },
+    "start": {
+     "value": "2023-03",
+     "quote": "Mar 2023"
+    },
+    "end": {
+     "value": "present",
+     "quote": "Present"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "is_volunteer": false,
+    "highlights": [
+     {
+      "value": "Primary investor responsible for managing the only long short fundamental equity portfolio at Meridian Capital Partners",
+      "quote": "Primary investor responsible for managing the only long short fundamental equity portfolio at Meridian Capital Partners"
+     },
+     {
+      "value": "Lead investment decisions for the portfolio including sizing of positions based on conviction level/idiosyncratic volatility, hedging of positions using public peers and/or appropriate sector ETFs/market indices, and timing of position initiation and monetization",
+      "quote": "Lead investment decisions for the portfolio including sizing of positions based on conviction level/idiosyncratic volatility, hedging of positions using public peers and/or appropriate sector ETFs/market indices"
+     },
+     {
+      "value": "Generate new investment ideas based on detailed and disciplined diligence processes, including meetings with C-Suite Executives/IR, calls with third-party experts, attending industry conferences, and analyses of alternative datasets provided by third parties",
+      "quote": "Generate new investment ideas based on detailed and disciplined diligence processes, including meetings with C-Suite Executives/IR, calls with third-party experts, attending industry conferences"
+     },
+     {
+      "value": "Provide portfolio updates on a bi-weekly basis to Meridian's Founder/CIO and CRO including formal quarterly updates/presentations on position level performances, hit rates, and key risk metrics such as target volatility and factor attribution",
+      "quote": "Provide portfolio updates on a bi-weekly basis to Meridian's Founder/CIO and CRO including formal quarterly updates/presentations on position level performances, hit rates, and key risk metrics"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Millennium Management",
+     "quote": "Millennium Management"
+    },
+    "title_raw": {
+     "value": "Investment Analyst, Consumer & TMT - North53 Capital",
+     "quote": "Investment Analyst, Consumer & TMT - North53 Capital"
+    },
+    "location": {
+     "value": "New York, NY",
+     "quote": "New York, NY"
+    },
+    "start": {
+     "value": "2021-09",
+     "quote": "Sep 2021"
+    },
+    "end": {
+     "value": "2022-08",
+     "quote": "Aug 2022"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "is_volunteer": false,
+    "highlights": [
+     {
+      "value": "Principal analyst responsible for managing the Consumer and Technology portfolio within the $4.2bn gross portfolio for Vertex Capital",
+      "quote": "Principal analyst responsible for managing the Consumer and Technology portfolio within the $4.2bn gross portfolio for Vertex Capital"
+     },
+     {
+      "value": "Co-managed the risk exposures of the Consumer and Technology portfolio with the Senior Portfolio Manager including discretion over position sizing (idiosyncratic volatility/conviction), alpha/factor exposures (hedges), and timing of position entry/exit",
+      "quote": "Co-managed the risk exposures of the Consumer and Technology portfolio with the Senior Portfolio Manager including discretion over position sizing (idiosyncratic volatility/conviction), alpha/factor exposures (hedges)"
+     },
+     {
+      "value": "Presented new investment ideas based on fundamental analyses, primary research, industry events/conferences, sector expert consultations, and company management meetings; actively present findings/ideas through written memos and deep dive analyses",
+      "quote": "Presented new investment ideas based on fundamental analyses, primary research, industry events/conferences, sector expert consultations, and company management meetings"
+     },
+     {
+      "value": "Constructed and maintained financial models for core positions, with analyses evaluating growth drivers, competitive positioning, and structural/strategic transformation; includes operating model, DCF, comparable companies, LBO, and precedent transactions",
+      "quote": "Constructed and maintained financial models for core positions, with analyses evaluating growth drivers, competitive positioning, and structural/strategic transformation"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Apollo Global Management",
+     "quote": "Apollo Global Management"
+    },
+    "title_raw": {
+     "value": "Associate - Private Equity",
+     "quote": "Associate - Private Equity"
+    },
+    "location": {
+     "value": "New York, NY",
+     "quote": "New York, NY"
+    },
+    "start": {
+     "value": "2019-08",
+     "quote": "Aug 2019"
+    },
+    "end": {
+     "value": "2021-08",
+     "quote": "Aug 2021"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "is_volunteer": false,
+    "highlights": [
+     {
+      "value": "Evaluated and executed private equity investments across the Business & Technology Services, Consumer, and Healthcare industries",
+      "quote": "Evaluated and executed private equity investments across the Business & Technology Services, Consumer, and Healthcare industries"
+     },
+     {
+      "value": "Performed due diligence on businesses to determine competitive advantages, key growth drivers, addressable markets, and risks",
+      "quote": "Performed due diligence on businesses to determine competitive advantages, key growth drivers, addressable markets, and risks"
+     },
+     {
+      "value": "Worked directly with management at portfolio companies to manage any operational and liquidity risk, particularly during COVID",
+      "quote": "Worked directly with management at portfolio companies to manage any operational and liquidity risk, particularly during COVID"
+     },
+     {
+      "value": "Board observer: Strategic Safety Solutions (global industrial consulting firm), MedTech Manufacturing (medical device contract manufacturer)",
+      "quote": "Board observer: Strategic Safety Solutions (global industrial consulting firm), MedTech Manufacturing (medical device contract manufacturer)"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "J.P.Mogan",
+     "quote": "J.P.Mogan"
+    },
+    "title_raw": {
+     "value": "Analyst - Healthcare Investment Banking",
+     "quote": "Analyst - Healthcare Investment Banking"
+    },
+    "location": {
+     "value": "New York, NY",
+     "quote": "New York, NY"
+    },
+    "start": {
+     "value": "2016",
+     "quote": "Summer 2016"
+    },
+    "end": {
+     "value": "2019-07",
+     "quote": "Jul 2019"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "is_volunteer": false,
+    "highlights": [
+     {
+      "value": "Ranked top tier of analyst class in two years at J.P. Morgan; winner of Firmwide Summer Analyst Financial Modeling Competition",
+      "quote": "Ranked top tier of analyst class in two years at J.P. Morgan; winner of Firmwide Summer Analyst Financial Modeling Competition"
+     },
+     {
+      "value": "Participated in all aspects of M&A, equity, and debt transactions including idea generation, due diligence, and valuation",
+      "quote": "Participated in all aspects of M&A, equity, and debt transactions including idea generation, due diligence, and valuation"
+     },
+     {
+      "value": "Exclusive financial advisor - BioPharm Corp's $8.5bn acquisition of Oncology Therapeutics Inc",
+      "quote": "Exclusive financial advisor - BioPharm Corp's $8.5bn acquisition of Oncology Therapeutics Inc"
+     },
+     {
+      "value": "Exclusive financial advisor and lead-left arranger of financing - Blackstone Life Sciences' acquisition of Clinical Research Partners",
+      "quote": "Exclusive financial advisor and lead-left arranger of financing - Blackstone Life Sciences' acquisition of Clinical Research Partners"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Global Education Alliance",
+     "quote": "Global Education Alliance"
+    },
+    "title_raw": {
+     "value": "Co-Founder",
+     "quote": "Co-Founder"
+    },
+    "location": {
+     "value": "Mumbai, IN",
+     "quote": "Mumbai, IN"
+    },
+    "start": {
+     "value": "2017-01",
+     "quote": "Jan 2017"
+    },
+    "end": {
+     "value": "present",
+     "quote": "Present"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "is_volunteer": true,
+    "highlights": [
+     {
+      "value": "Created a non-profit organization dedicated to providing educational resources, technology access, and vocational training to underserved communities",
+      "quote": "Created a non-profit organization dedicated to providing educational resources, technology access, and vocational training to underserved communities"
+     },
+     {
+      "value": "65+ students have completed certification programs and secured employment in technology and manufacturing sectors throughout the Maharashtra region",
+      "quote": "65+ students have completed certification programs and secured employment in technology and manufacturing sectors throughout the Maharashtra region"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Beta Alpha Psi, Gamma Chapter - Professional Business Fraternity",
+     "quote": "Beta Alpha Psi, Gamma Chapter - Professional Business Fraternity"
+    },
+    "title_raw": {
+     "value": "President, Alumni Relations Chair, Finance Committee",
+     "quote": "President, Alumni Relations Chair, Finance Committee"
+    },
+    "location": {
+     "value": "New York, NY",
+     "quote": "New York, NY"
+    },
+    "start": {
+     "value": "2014-02",
+     "quote": "Feb 2014"
+    },
+    "end": {
+     "value": "2017-05",
+     "quote": "May 2017"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "is_volunteer": true,
+    "highlights": [
+     {
+      "value": "Led 140+ members and organized signature events across Columbia Business School, earning Outstanding Organization Award among 30+ student groups",
+      "quote": "Led 140+ members and organized signature events across Columbia Business School, earning Outstanding Organization Award among 30+ student groups"
+     },
+     {
+      "value": "Managed relationships with 400+ active alumni and coordinated 3 professional networking events per semester, increasing alumni engagement by 65%",
+      "quote": "Managed relationships with 400+ active alumni and coordinated 3 professional networking events per semester, increasing alumni engagement by 65%"
+     }
+    ]
+   }
+  ],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"employment\": [\n    {\n      \"employer_raw\": {\n        \"value\": \"Meridian Capital Partners\",\n        \"quote\": \"Meridian Capital Partners\"\n      },\n      \"title_raw\": {\n        \"value\": \"Investment Professional, Generalist - Soft Catalyst & Fundamental Long/Short\",\n        \"quote\": \"Investment Professional, Generalist - Soft Catalyst & Fundamental Long/Short\"\n      },\n      \"location\": {\n        \"value\": \"Greenwich, CT\",\n        \"quote\": \"Greenwich, CT\"\n      },\n      \"start\": {\n        \"value\": \"2023-03\",\n        \"quote\": \"Mar 2023\"\n      },\n      \"end\": {\n        \"value\": \"present\",\n        \"quote\": \"Present\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"is_volunteer\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Primary investor responsible for managing the only long short fundamental equity portfolio at Meridian Capital Partners\",\n          \"quote\": \"Primary investor responsible for managing the only long short fundamental equity portfolio at Meridian Capital Partners\"\n        },\n        {\n          \"value\": \"Lead investment decisions for the portfolio including sizing of positions based on conviction level/idiosyncratic volatility, hedging of positions using public peers and/or appropriate sector ETFs/market indices, and timing of position initiation and monetization\",\n          \"quote\": \"Lead investment decisions for the portfolio including sizing of positions based on conviction level/idiosyncratic volatility, hedging of positions using public peers and/or appropriate sector ETFs/market indices\"\n        },\n        {\n          \"value\": \"Generate new investment ideas based on detailed and disciplined diligence processes, including meetings with C-Suite Executives/IR, calls with third-party experts, attending industry conferences, and analyses of alternative datasets provided by third parties\",\n          \"quote\": \"Generate new investment ideas based on detailed and disciplined diligence processes, including meetings with C-Suite Executives/IR, calls with third-party experts, attending industry conferences\"\n        },\n        {\n          \"value\": \"Provide portfolio updates on a bi-weekly basis to Meridian's Founder/CIO and CRO including formal quarterly updates/presentations on position level performances, hit rates, and key risk metrics such as target volatility and factor attribution\",\n          \"quote\": \"Provide portfolio updates on a bi-weekly basis to Meridian's Founder/CIO and CRO including formal quarterly updates/presentations on position level performances, hit rates, and key risk metrics\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Millennium Management\",\n        \"quote\": \"Millennium Management\"\n      },\n      \"title_raw\": {\n        \"value\": \"Investment Analyst, Consumer & TMT - North53 Capital\",\n        \"quote\": \"Investment Analyst, Consumer & TMT - North53 Capital\"\n      },\n      \"location\": {\n        \"value\": \"New York, NY\",\n        \"quote\": \"New York, NY\"\n      },\n      \"start\": {\n        \"value\": \"2021-09\",\n        \"quote\": \"Sep 2021\"\n      },\n      \"end\": {\n        \"value\": \"2022-08\",\n        \"quote\": \"Aug 2022\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"is_volunteer\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Principal analyst responsible for managing the Consumer and Technology portfolio within the $4.2bn gross portfolio for Vertex Capital\",\n          \"quote\": \"Principal analyst responsible for managing the Consumer and Technology portfolio within the $4.2bn gross portfolio for Vertex Capital\"\n        },\n        {\n          \"value\": \"Co-managed the risk exposures of the Consumer and Technology portfolio with the Senior Portfolio Manager including discretion over position sizing (idiosyncratic volatility/conviction), alpha/factor exposures (hedges), and timing of position entry/exit\",\n          \"quote\": \"Co-managed the risk exposures of the Consumer and Technology portfolio with the Senior Portfolio Manager including discretion over position sizing (idiosyncratic volatility/conviction), alpha/factor exposures (hedges)\"\n        },\n        {\n          \"value\": \"Presented new investment ideas based on fundamental analyses, primary research, industry events/conferences, sector expert consultations, and company management meetings; actively present findings/ideas through written memos and deep dive analyses\",\n          \"quote\": \"Presented new investment ideas based on fundamental analyses, primary research, industry events/conferences, sector expert consultations, and company management meetings\"\n        },\n        {\n          \"value\": \"Constructed and maintained financial models for core positions, with analyses evaluating growth drivers, competitive positioning, and structural/strategic transformation; includes operating model, DCF, comparable companies, LBO, and precedent transactions\",\n          \"quote\": \"Constructed and maintained financial models for core positions, with analyses evaluating growth drivers, competitive positioning, and structural/strategic transformation\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Apollo Global Management\",\n        \"quote\": \"Apollo Global Management\"\n      },\n      \"title_raw\": {\n        \"value\": \"Associate - Private Equity\",\n        \"quote\": \"Associate - Private Equity\"\n      },\n      \"location\": {\n        \"value\": \"New York, NY\",\n        \"quote\": \"New York, NY\"\n      },\n      \"start\": {\n        \"value\": \"2019-08\",\n        \"quote\": \"Aug 2019\"\n      },\n      \"end\": {\n        \"value\": \"2021-08\",\n        \"quote\": \"Aug 2021\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"is_volunteer\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Evaluated and executed private equity investments across the Business & Technology Services, Consumer, and Healthcare industries\",\n          \"quote\": \"Evaluated and executed private equity investments across the Business & Technology Services, Consumer, and Healthcare industries\"\n        },\n        {\n          \"value\": \"Performed due diligence on businesses to determine competitive advantages, key growth drivers, addressable markets, and risks\",\n          \"quote\": \"Performed due diligence on businesses to determine competitive advantages, key growth drivers, addressable markets, and risks\"\n        },\n        {\n          \"value\": \"Worked directly with management at portfolio companies to manage any operational and liquidity risk, particularly during COVID\",\n          \"quote\": \"Worked directly with management at portfolio companies to manage any operational and liquidity risk, particularly during COVID\"\n        },\n        {\n          \"value\": \"Board observer: Strategic Safety Solutions (global industrial consulting firm), MedTech Manufacturing (medical device contract manufacturer)\",\n          \"quote\": \"Board observer: Strategic Safety Solutions (global industrial consulting firm), MedTech Manufacturing (medical device contract manufacturer)\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"J.P.Mogan\",\n        \"quote\": \"J.P.Mogan\"\n      },\n      \"title_raw\": {\n        \"value\": \"Analyst - Healthcare Investment Banking\",\n        \"quote\": \"Analyst - Healthcare Investment Banking\"\n      },\n      \"location\": {\n        \"value\": \"New York, NY\",\n        \"quote\": \"New York, NY\"\n      },\n      \"start\": {\n        \"value\": \"2016\",\n        \"quote\": \"Summer 2016\"\n      },\n      \"end\": {\n        \"value\": \"2019-07\",\n        \"quote\": \"Jul 2019\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"is_volunteer\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Ranked top tier of analyst class in two years at J.P. Morgan; winner of Firmwide Summer Analyst Financial Modeling Competition\",\n          \"quote\": \"Ranked top tier of analyst class in two years at J.P. Morgan; winner of Firmwide Summer Analyst Financial Modeling Competition\"\n        },\n        {\n          \"value\": \"Participated in all aspects of M&A, equity, and debt transactions including idea generation, due diligence, and valuation\",\n          \"quote\": \"Participated in all aspects of M&A, equity, and debt transactions including idea generation, due diligence, and valuation\"\n        },\n        {\n          \"value\": \"Exclusive financial advisor - BioPharm Corp's $8.5bn acquisition of Oncology Therapeutics Inc\",\n          \"quote\": \"Exclusive financial advisor - BioPharm Corp's $8.5bn acquisition of Oncology Therapeutics Inc\"\n        },\n        {\n          \"value\": \"Exclusive financial advisor and lead-left arranger of financing - Blackstone Life Sciences' acquisition of Clinical Research Partners\",\n          \"quote\": \"Exclusive financial advisor and lead-left arranger of financing - Blackstone Life Sciences' acquisition of Clinical Research Partners\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Global Education Alliance\",\n        \"quote\": \"Global Education Alliance\"\n      },\n      \"title_raw\": {\n        \"value\": \"Co-Founder\",\n        \"quote\": \"Co-Founder\"\n      },\n      \"location\": {\n        \"value\": \"Mumbai, IN\",\n        \"quote\": \"Mumbai, IN\"\n      },\n      \"start\": {\n        \"value\": \"2017-01\",\n        \"quote\": \"Jan 2017\"\n      },\n      \"end\": {\n        \"value\": \"present\",\n        \"quote\": \"Present\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"is_volunteer\": true,\n      \"highlights\": [\n        {\n          \"value\": \"Created a non-profit organization dedicated to providing educational resources, technology access, and vocational training to underserved communities\",\n          \"quote\": \"Created a non-profit organization dedicated to providing educational resources, technology access, and vocational training to underserved communities\"\n        },\n        {\n          \"value\": \"65+ students have completed certification programs and secured employment in technology and manufacturing sectors throughout the Maharashtra region\",\n          \"quote\": \"65+ students have completed certification programs and secured employment in technology and manufacturing sectors throughout the Maharashtra region\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Beta Alpha Psi, Gamma Chapter - Professional Business Fraternity\",\n        \"quote\": \"Beta Alpha Psi, Gamma Chapter - Professional Business Fraternity\"\n      },\n      \"title_raw\": {\n        \"value\": \"President, Alumni Relations Chair, Finance Committee\",\n        \"quote\": \"President, Alumni Relations Chair, Finance Committee\"\n      },\n      \"location\": {\n        \"value\": \"New York, NY\",\n        \"quote\": \"New York, NY\"\n      },\n      \"start\": {\n        \"value\": \"2014-02\",\n        \"quote\": \"Feb 2014\"\n      },\n      \"end\": {\n        \"value\": \"2017-05\",\n        \"quote\": \"May 2017\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"is_volunteer\": true,\n      \"highlights\": [\n        {\n          \"value\": \"Led 140+ members and organized signature events across Columbia Business School, earning Outstanding Organization Award among 30+ student groups\",\n          \"quote\": \"Led 140+ members and organized signature events across Columbia Business School, earning Outstanding Organization Award among 30+ student groups\"\n        },\n        {\n          \"value\": \"Managed relationships with 400+ active alumni and coordinated 3 professional networking events per semester, increasing alumni engagement by 65%\",\n          \"quote\": \"Managed relationships with 400+ active alumni and coordinated 3 professional networking events per semester, increasing alumni engagement by 65%\"\n        }\n      ]\n    }\n  ],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 2269,
+ "tokens_out": 2928,
+ "latency_ms": 26442,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "employment"
+}

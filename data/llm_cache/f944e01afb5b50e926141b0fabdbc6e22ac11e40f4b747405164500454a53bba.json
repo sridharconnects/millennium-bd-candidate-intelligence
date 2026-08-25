@@ -1,0 +1,137 @@
+{
+ "data": {
+  "full_name": {
+   "value": "MARINA SILVA COSTA",
+   "quote": "MARINA SILVA COSTA"
+  },
+  "email": {
+   "value": "marina.costa.finance@gmail.com",
+   "quote": "marina.costa.finance@gmail.com"
+  },
+  "phone": {
+   "value": "+44 (785) 429-1673",
+   "quote": "+44 (785) 429-1673"
+  },
+  "home_address": {
+   "value": null,
+   "quote": ""
+  },
+  "location_current": {
+   "value": "London, United Kingdom",
+   "quote": "Boston, USA / London, United Kingdom"
+  },
+  "headline": {
+   "value": "Equity Research Analyst",
+   "quote": "Equity Research Analyst"
+  },
+  "summary": {
+   "value": null,
+   "quote": ""
+  },
+  "marital_status": {
+   "value": null,
+   "quote": ""
+  },
+  "work_authorization": {
+   "value": null,
+   "quote": ""
+  },
+  "education": [
+   {
+    "institution": {
+     "value": "MIT SLOAN SCHOOL OF MANAGEMENT",
+     "quote": "MIT SLOAN SCHOOL OF MANAGEMENT"
+    },
+    "degree_raw": {
+     "value": "Master of business administration (MBA)",
+     "quote": "Master of business administration (MBA)"
+    },
+    "field_of_study": {
+     "value": null,
+     "quote": ""
+    },
+    "graduation_year": {
+     "value": 2021,
+     "quote": "August/2019 - May/2021"
+    },
+    "gpa_raw": {
+     "value": null,
+     "quote": ""
+    },
+    "location": {
+     "value": "Cambridge, MA, United States",
+     "quote": "Cambridge, MA, United States"
+    },
+    "honors": [
+     "Investment Management Club Co-President",
+     "Latin America Conference 2020 organizer"
+    ]
+   },
+   {
+    "institution": {
+     "value": "FUNDACAO GETULIO VARGAS",
+     "quote": "FUNDACAO GETULIO VARGAS"
+    },
+    "degree_raw": {
+     "value": "BS in Economics",
+     "quote": "BS in Economics"
+    },
+    "field_of_study": {
+     "value": "Economics",
+     "quote": "BS in Economics"
+    },
+    "graduation_year": {
+     "value": 2016,
+     "quote": "2013 - 2016"
+    },
+    "gpa_raw": {
+     "value": null,
+     "quote": ""
+    },
+    "location": {
+     "value": "Sao Paulo, Brazil",
+     "quote": "Sao Paulo, Brazil"
+    },
+    "honors": [
+     "Manager of CJE-FF - a student-run equity fund - and the Investment Committee"
+    ]
+   }
+  ],
+  "certifications": [
+   {
+    "name": {
+     "value": "GMAT, score 740",
+     "quote": "GMAT, score 740"
+    },
+    "year": {
+     "value": 2019,
+     "quote": "taken in 2019"
+    }
+   }
+  ],
+  "languages": [
+   {
+    "language": "Portuguese",
+    "proficiency": "fluent",
+    "quote": "fluent in Portuguese and English"
+   },
+   {
+    "language": "English",
+    "proficiency": "fluent",
+    "quote": "fluent in Portuguese and English"
+   },
+   {
+    "language": "Spanish",
+    "proficiency": "conversational",
+    "quote": "conversational Spanish"
+   }
+  ],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"full_name\": {\n    \"value\": \"MARINA SILVA COSTA\",\n    \"quote\": \"MARINA SILVA COSTA\"\n  },\n  \"email\": {\n    \"value\": \"marina.costa.finance@gmail.com\",\n    \"quote\": \"marina.costa.finance@gmail.com\"\n  },\n  \"phone\": {\n    \"value\": \"+44 (785) 429-1673\",\n    \"quote\": \"+44 (785) 429-1673\"\n  },\n  \"home_address\": {\n    \"value\": null,\n    \"quote\": \"\"\n  },\n  \"location_current\": {\n    \"value\": \"London, United Kingdom\",\n    \"quote\": \"Boston, USA / London, United Kingdom\"\n  },\n  \"headline\": {\n    \"value\": \"Equity Research Analyst\",\n    \"quote\": \"Equity Research Analyst\"\n  },\n  \"summary\": {\n    \"value\": null,\n    \"quote\": \"\"\n  },\n  \"marital_status\": {\n    \"value\": null,\n    \"quote\": \"\"\n  },\n  \"work_authorization\": {\n    \"value\": null,\n    \"quote\": \"\"\n  },\n  \"education\": [\n    {\n      \"institution\": {\n        \"value\": \"MIT SLOAN SCHOOL OF MANAGEMENT\",\n        \"quote\": \"MIT SLOAN SCHOOL OF MANAGEMENT\"\n      },\n      \"degree_raw\": {\n        \"value\": \"Master of business administration (MBA)\",\n        \"quote\": \"Master of business administration (MBA)\"\n      },\n      \"field_of_study\": {\n        \"value\": null,\n        \"quote\": \"\"\n      },\n      \"graduation_year\": {\n        \"value\": 2021,\n        \"quote\": \"August/2019 - May/2021\"\n      },\n      \"gpa_raw\": {\n        \"value\": null,\n        \"quote\": \"\"\n      },\n      \"location\": {\n        \"value\": \"Cambridge, MA, United States\",\n        \"quote\": \"Cambridge, MA, United States\"\n      },\n      \"honors\": [\n        \"Investment Management Club Co-President\",\n        \"Latin America Conference 2020 organizer\"\n      ]\n    },\n    {\n      \"institution\": {\n        \"value\": \"FUNDACAO GETULIO VARGAS\",\n        \"quote\": \"FUNDACAO GETULIO VARGAS\"\n      },\n      \"degree_raw\": {\n        \"value\": \"BS in Economics\",\n        \"quote\": \"BS in Economics\"\n      },\n      \"field_of_study\": {\n        \"value\": \"Economics\",\n        \"quote\": \"BS in Economics\"\n      },\n      \"graduation_year\": {\n        \"value\": 2016,\n        \"quote\": \"2013 - 2016\"\n      },\n      \"gpa_raw\": {\n        \"value\": null,\n        \"quote\": \"\"\n      },\n      \"location\": {\n        \"value\": \"Sao Paulo, Brazil\",\n        \"quote\": \"Sao Paulo, Brazil\"\n      },\n      \"honors\": [\n        \"Manager of CJE-FF - a student-run equity fund - and the Investment Committee\"\n      ]\n    }\n  ],\n  \"certifications\": [\n    {\n      \"name\": {\n        \"value\": \"GMAT, score 740\",\n        \"quote\": \"GMAT, score 740\"\n      },\n      \"year\": {\n        \"value\": 2019,\n        \"quote\": \"taken in 2019\"\n      }\n    }\n  ],\n  \"languages\": [\n    {\n      \"language\": \"Portuguese\",\n      \"proficiency\": \"fluent\",\n      \"quote\": \"fluent in Portuguese and English\"\n    },\n    {\n      \"language\": \"English\",\n      \"proficiency\": \"fluent\",\n      \"quote\": \"fluent in Portuguese and English\"\n    },\n    {\n      \"language\": \"Spanish\",\n      \"proficiency\": \"conversational\",\n      \"quote\": \"conversational Spanish\"\n    }\n  ],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 1968,
+ "tokens_out": 984,
+ "latency_ms": 10037,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "identity"
+}

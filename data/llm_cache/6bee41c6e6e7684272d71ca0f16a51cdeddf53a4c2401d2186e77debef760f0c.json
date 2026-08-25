@@ -1,0 +1,124 @@
+{
+ "data": {
+  "employment": [
+   {
+    "employer_raw": {
+     "value": "BNP Paribas CIB",
+     "quote": "Quantitative Developer - BNP Paribas CIB"
+    },
+    "title_raw": {
+     "value": "Quantitative Developer",
+     "quote": "Quantitative Developer - BNP Paribas CIB"
+    },
+    "location": {
+     "value": "Paris, France",
+     "quote": "Paris, France"
+    },
+    "start": {
+     "value": "2022-05",
+     "quote": "Since May 2022"
+    },
+    "end": {
+     "value": "present",
+     "quote": "Since May 2022"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "highlights": [
+     {
+      "value": "Introduction of a new model (one factor Gaussian copula model)",
+      "quote": "Introduction of a new model (one factor Gaussian copula model)"
+     },
+     {
+      "value": "Implement a new exotic payoff (local spread option)",
+      "quote": "Implement a new exotic payoff (local spread option)"
+     },
+     {
+      "value": "Implementation of new features for trading desks (Scenario analysis, Greeks computation, ...)",
+      "quote": "Implementation of new features for trading desks (Scenario analysis,\nGreeks computation, ...)"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "BNP Paribas CIB",
+     "quote": "Quantitative Developer - BNP Paribas CIB"
+    },
+    "title_raw": {
+     "value": "Internship",
+     "quote": "Internship - April 2022 to August 2022"
+    },
+    "location": {
+     "value": "Paris, France",
+     "quote": "Paris, France"
+    },
+    "start": {
+     "value": "2022-04",
+     "quote": "April 2022"
+    },
+    "end": {
+     "value": "2022-08",
+     "quote": "August 2022"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": true,
+    "highlights": [
+     {
+      "value": "Built automated testing framework in C# for derivatives pricing validation",
+      "quote": "Built automated testing framework in C# for derivatives pricing validation"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Société Générale - SGATS (SGCIB)",
+     "quote": "Quantitative Strategist - Intern - Société Générale - SGATS (SGCIB)"
+    },
+    "title_raw": {
+     "value": "Quantitative Strategist - Intern",
+     "quote": "Quantitative Strategist - Intern"
+    },
+    "location": {
+     "value": "Rabat, Morocco",
+     "quote": "Rabat, Morocco"
+    },
+    "start": {
+     "value": "2021-06",
+     "quote": "June 2021"
+    },
+    "end": {
+     "value": "2021-08",
+     "quote": "August 2021"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": true,
+    "highlights": [
+     {
+      "value": "Development and back testing of momentum-based trading strategies",
+      "quote": "Development and back testing of momentum-based trading strategies"
+     },
+     {
+      "value": "Performance optimization of yield curve construction algorithms",
+      "quote": "Performance optimization of yield curve construction algorithms"
+     }
+    ]
+   }
+  ],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"employment\": [\n    {\n      \"employer_raw\": {\n        \"value\": \"BNP Paribas CIB\",\n        \"quote\": \"Quantitative Developer - BNP Paribas CIB\"\n      },\n      \"title_raw\": {\n        \"value\": \"Quantitative Developer\",\n        \"quote\": \"Quantitative Developer - BNP Paribas CIB\"\n      },\n      \"location\": {\n        \"value\": \"Paris, France\",\n        \"quote\": \"Paris, France\"\n      },\n      \"start\": {\n        \"value\": \"2022-05\",\n        \"quote\": \"Since May 2022\"\n      },\n      \"end\": {\n        \"value\": \"present\",\n        \"quote\": \"Since May 2022\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Introduction of a new model (one factor Gaussian copula model)\",\n          \"quote\": \"Introduction of a new model (one factor Gaussian copula model)\"\n        },\n        {\n          \"value\": \"Implement a new exotic payoff (local spread option)\",\n          \"quote\": \"Implement a new exotic payoff (local spread option)\"\n        },\n        {\n          \"value\": \"Implementation of new features for trading desks (Scenario analysis, Greeks computation, ...)\",\n          \"quote\": \"Implementation of new features for trading desks (Scenario analysis,\\nGreeks computation, ...)\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"BNP Paribas CIB\",\n        \"quote\": \"Quantitative Developer - BNP Paribas CIB\"\n      },\n      \"title_raw\": {\n        \"value\": \"Internship\",\n        \"quote\": \"Internship - April 2022 to August 2022\"\n      },\n      \"location\": {\n        \"value\": \"Paris, France\",\n        \"quote\": \"Paris, France\"\n      },\n      \"start\": {\n        \"value\": \"2022-04\",\n        \"quote\": \"April 2022\"\n      },\n      \"end\": {\n        \"value\": \"2022-08\",\n        \"quote\": \"August 2022\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": true,\n      \"highlights\": [\n        {\n          \"value\": \"Built automated testing framework in C# for derivatives pricing validation\",\n          \"quote\": \"Built automated testing framework in C# for derivatives pricing validation\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Société Générale - SGATS (SGCIB)\",\n        \"quote\": \"Quantitative Strategist - Intern - Société Générale - SGATS (SGCIB)\"\n      },\n      \"title_raw\": {\n        \"value\": \"Quantitative Strategist - Intern\",\n        \"quote\": \"Quantitative Strategist - Intern\"\n      },\n      \"location\": {\n        \"value\": \"Rabat, Morocco\",\n        \"quote\": \"Rabat, Morocco\"\n      },\n      \"start\": {\n        \"value\": \"2021-06\",\n        \"quote\": \"June 2021\"\n      },\n      \"end\": {\n        \"value\": \"2021-08\",\n        \"quote\": \"August 2021\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": true,\n      \"highlights\": [\n        {\n          \"value\": \"Development and back testing of momentum-based trading strategies\",\n          \"quote\": \"Development and back testing of momentum-based trading strategies\"\n        },\n        {\n          \"value\": \"Performance optimization of yield curve construction algorithms\",\n          \"quote\": \"Performance optimization of yield curve construction algorithms\"\n        }\n      ]\n    }\n  ],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 1460,
+ "tokens_out": 998,
+ "latency_ms": 9054,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "employment"
+}

@@ -1,0 +1,94 @@
+{
+ "data": {
+  "strategies": [
+   {
+    "label": "equity_long_short",
+    "confidence": 0.95,
+    "rationale": "Current role deploying long/short equity strategy across technology/media stocks",
+    "quote": "deploy long/short equity strategy across ~75 Technology/Media stocks",
+    "low_support": false
+   }
+  ],
+  "sectors": [
+   {
+    "label": "technology",
+    "confidence": 0.95,
+    "rationale": "Primary coverage of technology stocks including cloud computing, enterprise software, e-commerce",
+    "quote": "~75 Technology/Media stocks under coverage (with primary focus on cloud computing",
+    "low_support": false
+   },
+   {
+    "label": "communications",
+    "confidence": 0.85,
+    "rationale": "Coverage includes digital advertising, social media, and streaming services",
+    "quote": "digital advertising, streaming services, enterprise software, mobility platforms, online marketplaces, social media",
+    "low_support": false
+   }
+  ],
+  "quant_fundamental": {
+   "label": "fundamental",
+   "confidence": 0.95,
+   "rationale": "Work emphasizes fundamental research, financial modeling, management meetings, and DCF valuation",
+   "quote": "Built comprehensive financial models and conducted fundamental analysis"
+  },
+  "feeder_path": {
+   "label": "sellside_research",
+   "confidence": 0.9,
+   "rationale": "Entered buyside from Goldman Sachs equity research covering technology and media sectors",
+   "quote": "Cinctive Capital Management, New York, NY Sep 2021 - Present"
+  },
+  "geography_primary": {
+   "value": "United States",
+   "quote": "New York, NY Sep 2021 - Present"
+  },
+  "skills": [
+   {
+    "name": "Financial Modeling",
+    "depth": "core",
+    "quote": "Built comprehensive financial models and conducted fundamental analysis"
+   },
+   {
+    "name": "Bloomberg",
+    "depth": "mentioned",
+    "quote": "Bloomberg, FactSet, Microsoft Office, Financial Modeling"
+   },
+   {
+    "name": "FactSet",
+    "depth": "mentioned",
+    "quote": "Bloomberg, FactSet, Microsoft Office"
+   },
+   {
+    "name": "DCF Valuation",
+    "depth": "applied",
+    "quote": "DCF, comparable company, and sum-of-the-parts valuation methodologies"
+   },
+   {
+    "name": "Equity Research",
+    "depth": "core",
+    "quote": "Equity Research, U.S. Internet & Interactive Entertainment - Associate"
+   },
+   {
+    "name": "Alternative Data Analysis",
+    "depth": "applied",
+    "quote": "alternative data tracking, and macroeconomic trend analysis"
+   },
+   {
+    "name": "Mandarin",
+    "depth": "mentioned",
+    "quote": "Mandarin (fluent)"
+   },
+   {
+    "name": "Cantonese",
+    "depth": "mentioned",
+    "quote": "Cantonese (conversational)"
+   }
+  ],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"strategies\": [\n    {\n      \"label\": \"equity_long_short\",\n      \"confidence\": 0.95,\n      \"rationale\": \"Current role deploying long/short equity strategy across technology/media stocks\",\n      \"quote\": \"deploy long/short equity strategy across ~75 Technology/Media stocks\",\n      \"low_support\": false\n    }\n  ],\n  \"sectors\": [\n    {\n      \"label\": \"technology\",\n      \"confidence\": 0.95,\n      \"rationale\": \"Primary coverage of technology stocks including cloud computing, enterprise software, e-commerce\",\n      \"quote\": \"~75 Technology/Media stocks under coverage (with primary focus on cloud computing\",\n      \"low_support\": false\n    },\n    {\n      \"label\": \"communications\",\n      \"confidence\": 0.85,\n      \"rationale\": \"Coverage includes digital advertising, social media, and streaming services\",\n      \"quote\": \"digital advertising, streaming services, enterprise software, mobility platforms, online marketplaces, social media\",\n      \"low_support\": false\n    }\n  ],\n  \"quant_fundamental\": {\n    \"label\": \"fundamental\",\n    \"confidence\": 0.95,\n    \"rationale\": \"Work emphasizes fundamental research, financial modeling, management meetings, and DCF valuation\",\n    \"quote\": \"fundamental research, financial KPI analysis, alternative data tracking\",\n    \"quote\": \"Built comprehensive financial models and conducted fundamental analysis\"\n  },\n  \"feeder_path\": {\n    \"label\": \"sellside_research\",\n    \"confidence\": 0.9,\n    \"rationale\": \"Entered buyside from Goldman Sachs equity research covering technology and media sectors\",\n    \"quote\": \"Goldman Sachs, New York, NY Feb 2019 - Sep 2021\\nEquity Research, U.S. Internet & Interactive Entertainment - Associate\",\n    \"quote\": \"Cinctive Capital Management, New York, NY Sep 2021 - Present\"\n  },\n  \"geography_primary\": {\n    \"value\": \"United States\",\n    \"quote\": \"New York, NY Sep 2021 - Present\"\n  },\n  \"skills\": [\n    {\n      \"name\": \"Financial Modeling\",\n      \"depth\": \"core\",\n      \"quote\": \"Built comprehensive financial models and conducted fundamental analysis\"\n    },\n    {\n      \"name\": \"Bloomberg\",\n      \"depth\": \"mentioned\",\n      \"quote\": \"Bloomberg, FactSet, Microsoft Office, Financial Modeling\"\n    },\n    {\n      \"name\": \"FactSet\",\n      \"depth\": \"mentioned\",\n      \"quote\": \"Bloomberg, FactSet, Microsoft Office\"\n    },\n    {\n      \"name\": \"DCF Valuation\",\n      \"depth\": \"applied\",\n      \"quote\": \"DCF, comparable company, and sum-of-the-parts valuation methodologies\"\n    },\n    {\n      \"name\": \"Equity Research\",\n      \"depth\": \"core\",\n      \"quote\": \"Equity Research, U.S. Internet & Interactive Entertainment - Associate\"\n    },\n    {\n      \"name\": \"Alternative Data Analysis\",\n      \"depth\": \"applied\",\n      \"quote\": \"alternative data tracking, and macroeconomic trend analysis\"\n    },\n    {\n      \"name\": \"Mandarin\",\n      \"depth\": \"mentioned\",\n      \"quote\": \"Mandarin (fluent)\"\n    },\n    {\n      \"name\": \"Cantonese\",\n      \"depth\": \"mentioned\",\n      \"quote\": \"Cantonese (conversational)\"\n    }\n  ],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 2046,
+ "tokens_out": 857,
+ "latency_ms": 10872,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "profile"
+}

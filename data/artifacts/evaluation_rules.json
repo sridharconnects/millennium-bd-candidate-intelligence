@@ -1,0 +1,404 @@
+{
+  "generated_at": "2026-08-23T02:36:46",
+  "extraction_path": "rule-baseline",
+  "note": "'rule-baseline' is NOT the case study's required LLM-via-API path. It is published as the rule-vs-LLM baseline.",
+  "extraction": {
+    "n_documents": 10,
+    "schema_validity": 1.0,
+    "macro_f1": 0.8563,
+    "hallucination_rate": 0.0,
+    "hallucinations": [],
+    "abstention_rate": 0.0,
+    "evidence_coverage": 0.8651,
+    "years_experience_mae": 0.69,
+    "years_experience_n": 9,
+    "per_field": [
+      {
+        "field": "certifications",
+        "n": 10,
+        "precision": 1.0,
+        "recall": 0.95,
+        "f1": 0.967,
+        "exact_match": "\u2014"
+      },
+      {
+        "field": "country",
+        "n": 10,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "exact_match": "10/10 (0 abstained)"
+      },
+      {
+        "field": "current_employer",
+        "n": 10,
+        "precision": 0.9,
+        "recall": 0.9,
+        "f1": 0.9,
+        "exact_match": "9/10 (0 abstained)"
+      },
+      {
+        "field": "current_title",
+        "n": 10,
+        "precision": 0.6,
+        "recall": 0.6,
+        "f1": 0.6,
+        "exact_match": "6/10 (0 abstained)"
+      },
+      {
+        "field": "degree_levels",
+        "n": 10,
+        "precision": 1.0,
+        "recall": 0.925,
+        "f1": 0.952,
+        "exact_match": "\u2014"
+      },
+      {
+        "field": "email",
+        "n": 10,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "exact_match": "10/10 (0 abstained)"
+      },
+      {
+        "field": "employers",
+        "n": 10,
+        "precision": 0.562,
+        "recall": 0.558,
+        "f1": 0.546,
+        "exact_match": "\u2014"
+      },
+      {
+        "field": "full_name",
+        "n": 10,
+        "precision": 0.9,
+        "recall": 0.9,
+        "f1": 0.9,
+        "exact_match": "9/10 (0 abstained)"
+      },
+      {
+        "field": "languages",
+        "n": 10,
+        "precision": 0.9,
+        "recall": 1.0,
+        "f1": 0.9,
+        "exact_match": "\u2014"
+      },
+      {
+        "field": "phone",
+        "n": 10,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "exact_match": "10/10 (0 abstained)"
+      },
+      {
+        "field": "region",
+        "n": 10,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "exact_match": "10/10 (0 abstained)"
+      },
+      {
+        "field": "sectors_expected",
+        "n": 10,
+        "precision": 0.419,
+        "recall": 0.817,
+        "f1": 0.551,
+        "exact_match": "\u2014"
+      },
+      {
+        "field": "skills_expected",
+        "n": 10,
+        "precision": 0.752,
+        "recall": 0.9,
+        "f1": 0.816,
+        "exact_match": "\u2014"
+      }
+    ],
+    "rule_vs_llm": [
+      {
+        "source": "llm",
+        "fields": 666,
+        "with_evidence": 399,
+        "mean_confidence": 0.524,
+        "evidence_coverage": 0.599
+      },
+      {
+        "source": "rule",
+        "fields": 5,
+        "with_evidence": 5,
+        "mean_confidence": 0.93,
+        "evidence_coverage": 1.0
+      }
+    ]
+  },
+  "ablation": [
+    {
+      "mode": "lexical (BM25/FTS5)",
+      "ndcg@10": 0.7834,
+      "recall@5": 0.7865,
+      "recall@10": 0.9062,
+      "precision@5": 0.3875,
+      "mrr": 0.811,
+      "latency_ms": 0.1428
+    },
+    {
+      "mode": "dense (bge-small)",
+      "ndcg@10": 0.7672,
+      "recall@5": 0.8125,
+      "recall@10": 0.9896,
+      "precision@5": 0.4,
+      "mrr": 0.7882,
+      "latency_ms": 13.0404
+    },
+    {
+      "mode": "hybrid RRF",
+      "ndcg@10": 0.8178,
+      "recall@5": 0.8073,
+      "recall@10": 0.9896,
+      "precision@5": 0.3875,
+      "mrr": 0.8507,
+      "latency_ms": 14.9804
+    },
+    {
+      "mode": "hybrid RRF \u00b7 hashing embedder",
+      "ndcg@10": 0.7467,
+      "recall@5": 0.7135,
+      "recall@10": 1.0,
+      "precision@5": 0.3625,
+      "mrr": 0.7089,
+      "latency_ms": 0.1898
+    }
+  ],
+  "per_query": [
+    {
+      "id": "q01",
+      "kind": "strategy+sector",
+      "query": "healthcare equity long/short analyst",
+      "ndcg@10": 0.884,
+      "recall@5": 0.667,
+      "mrr": 1.0,
+      "n_relevant": 3
+    },
+    {
+      "id": "q02",
+      "kind": "skill-specific",
+      "query": "quantitative developer C++ derivatives pricing library",
+      "ndcg@10": 1.0,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "n_relevant": 1
+    },
+    {
+      "id": "q03",
+      "kind": "credential (exact term)",
+      "query": "CFA charterholder",
+      "ndcg@10": 0.92,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "n_relevant": 3
+    },
+    {
+      "id": "q04",
+      "kind": "sector+feeder",
+      "query": "sell-side equity research analyst covering TMT and technology",
+      "ndcg@10": 0.971,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "n_relevant": 2
+    },
+    {
+      "id": "q05",
+      "kind": "sector+geography",
+      "query": "healthcare analyst based in India",
+      "ndcg@10": 0.898,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "n_relevant": 3
+    },
+    {
+      "id": "q06",
+      "kind": "strategy+skill",
+      "query": "systematic quantitative research with python backtesting and factor models",
+      "ndcg@10": 0.821,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "n_relevant": 2
+    },
+    {
+      "id": "q07",
+      "kind": "strategy",
+      "query": "private equity growth investing and due diligence",
+      "ndcg@10": 1.0,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "n_relevant": 2
+    },
+    {
+      "id": "q08",
+      "kind": "strategy",
+      "query": "credit research high yield and investment grade corporate bonds",
+      "ndcg@10": 0.964,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "n_relevant": 1
+    },
+    {
+      "id": "q09",
+      "kind": "feeder+education",
+      "query": "management consulting background with an MBA",
+      "ndcg@10": 0.631,
+      "recall@5": 1.0,
+      "mrr": 0.5,
+      "n_relevant": 1
+    },
+    {
+      "id": "q10",
+      "kind": "sector",
+      "query": "consumer sector coverage",
+      "ndcg@10": 0.878,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "n_relevant": 2
+    },
+    {
+      "id": "q11",
+      "kind": "education (rare)",
+      "query": "candidate with a medical or life sciences degree",
+      "ndcg@10": 0.585,
+      "recall@5": 0.5,
+      "mrr": 0.5,
+      "n_relevant": 2
+    },
+    {
+      "id": "q12",
+      "kind": "geography",
+      "query": "analyst based in Asia Pacific",
+      "ndcg@10": 0.761,
+      "recall@5": 0.25,
+      "mrr": 1.0,
+      "n_relevant": 4
+    },
+    {
+      "id": "q13",
+      "kind": "negation",
+      "query": "equity analyst with no investment banking background",
+      "ndcg@10": 0.807,
+      "recall@5": 0.5,
+      "mrr": 1.0,
+      "n_relevant": 6
+    },
+    {
+      "id": "q14",
+      "kind": "rare skill (exact term)",
+      "query": "Bloomberg terminal and FactSet power user",
+      "ndcg@10": 0.926,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "n_relevant": 4
+    },
+    {
+      "id": "q15",
+      "kind": "seniority",
+      "query": "junior analyst two to four years experience ready for a pod seat",
+      "ndcg@10": 0.362,
+      "recall@5": 0.0,
+      "mrr": 0.111,
+      "n_relevant": 2
+    },
+    {
+      "id": "q16",
+      "kind": "employer tier",
+      "query": "multi-manager platform hedge fund experience",
+      "ndcg@10": 0.675,
+      "recall@5": 1.0,
+      "mrr": 0.5,
+      "n_relevant": 3
+    }
+  ],
+  "calibration": {
+    "n_samples": 106,
+    "n_bins": 2,
+    "ece": 0.1229,
+    "brier": 0.1824,
+    "verdict": "over-confident",
+    "reliability_curve": [
+      {
+        "bucket": "0.45\u20130.54",
+        "n": 1,
+        "mean_confidence": 0.45,
+        "observed_accuracy": 1,
+        "gap": 0.55
+      },
+      {
+        "bucket": "0.83\u20130.92",
+        "n": 105,
+        "mean_confidence": 0.9093,
+        "observed_accuracy": 0.7905,
+        "gap": -0.1189
+      }
+    ],
+    "per_field": [
+      {
+        "field": "current_employer",
+        "n": 9,
+        "correct": 8,
+        "accuracy": 0.889,
+        "mean_confidence": 0.92
+      },
+      {
+        "field": "current_title",
+        "n": 7,
+        "correct": 5,
+        "accuracy": 0.714,
+        "mean_confidence": 0.9
+      },
+      {
+        "field": "email",
+        "n": 7,
+        "correct": 7,
+        "accuracy": 1.0,
+        "mean_confidence": 0.836
+      },
+      {
+        "field": "employer",
+        "n": 40,
+        "correct": 27,
+        "accuracy": 0.675,
+        "mean_confidence": 0.92
+      },
+      {
+        "field": "full_name",
+        "n": 9,
+        "correct": 9,
+        "accuracy": 1.0,
+        "mean_confidence": 0.9
+      },
+      {
+        "field": "institution",
+        "n": 27,
+        "correct": 21,
+        "accuracy": 0.778,
+        "mean_confidence": 0.9
+      },
+      {
+        "field": "phone",
+        "n": 7,
+        "correct": 7,
+        "accuracy": 1.0,
+        "mean_confidence": 0.9
+      }
+    ],
+    "interpretation": "Across 106 grounded field predictions, mean |confidence \u2212 accuracy| is 0.123 (ECE). A value below 0.10 means the confidence number can be read as a probability rather than a vibe."
+  },
+  "fairness": {
+    "names_tested": 6,
+    "mean_abs_rank_change": 0,
+    "max_abs_rank_change": 0,
+    "protected_fields_reachable_by_scorer": [],
+    "mechanism": "structural, not statistical: the scoring function accepts only ScorableProfile, which has no field capable of carrying a protected attribute. The name never reaches the scorer."
+  }
+}

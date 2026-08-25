@@ -1,0 +1,278 @@
+{
+ "data": {
+  "employment": [
+   {
+    "employer_raw": {
+     "value": "Fidelity Asset Management",
+     "quote": "Fidelity Asset Management - Boston, MA"
+    },
+    "title_raw": {
+     "value": "Analyst, Consumer Internet & Software",
+     "quote": "Analyst, Consumer Internet & Software"
+    },
+    "location": {
+     "value": "Boston, MA",
+     "quote": "Boston, MA"
+    },
+    "start": {
+     "value": "2022-05",
+     "quote": "May 2022"
+    },
+    "end": {
+     "value": "present",
+     "quote": "Present"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "is_volunteer": false,
+    "highlights": [
+     {
+      "value": "Initiated on 20+ names across TMT sector through diligence on public filings, industry experts and valuation analysis",
+      "quote": "Initiated on 20+ names across TMT sector through diligence on public filings, industry experts and valuation analysis"
+     },
+     {
+      "value": "Contributed to weekly portfolio review committee and investment process meetings to determine equity allocation across $1-2 billion AUM mutual fund",
+      "quote": "Contributed to weekly portfolio review committee and investment process meetings to determine equity allocation across $1-2 billion AUM mutual fund"
+     },
+     {
+      "value": "Met directly with management teams as a part of investment process to assess corporate strategy & initiatives",
+      "quote": "Met directly with management teams as a part of investment process to assess corporate strategy & initiatives"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "William Blair, Equity Research",
+     "quote": "William Blair, Equity Research - Chicago, IL"
+    },
+    "title_raw": {
+     "value": "Associate, TMT",
+     "quote": "Associate, TMT"
+    },
+    "location": {
+     "value": "Chicago, IL",
+     "quote": "Chicago, IL"
+    },
+    "start": {
+     "value": "2019-04",
+     "quote": "April 2019"
+    },
+    "end": {
+     "value": "2022-01",
+     "quote": "January 2022"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "is_volunteer": false,
+    "highlights": [
+     {
+      "value": "Covered 20+ names across TMT sector providing quarterly earnings estimates and research reports",
+      "quote": "Covered 20+ names across TMT sector providing quarterly earnings estimates and research reports"
+     },
+     {
+      "value": "Wrote coverage initiation reports and built IPO syndicate models from scratch on 10+ consumer internet companies",
+      "quote": "Wrote coverage initiation reports and built IPO syndicate models from scratch on 10+ consumer internet companies"
+     },
+     {
+      "value": "Built and updated models with earnings releases to prepare notes with adjusted forecasts and valuation metrics",
+      "quote": "Built and updated models with earnings releases to prepare notes with adjusted forecasts and valuation metrics"
+     },
+     {
+      "value": "Published a differentiated 70+ page report on 3D printing industry highlighting 29 competitors with extensive discussion of technology, products, pricing and financial performance; researched forward looking manufacturing trends",
+      "quote": "Published a differentiated 70+ page report on 3D printing industry highlighting 29 competitors with extensive discussion of technology, products, pricing and financial performance"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "William Blair, Fixed Income Sales & Trading",
+     "quote": "William Blair, Fixed Income Sales & Trading -- Chicago, IL"
+    },
+    "title_raw": {
+     "value": "Jr. Desk Analyst",
+     "quote": "Jr. Desk Analyst"
+    },
+    "location": {
+     "value": "Chicago, IL",
+     "quote": "Chicago, IL"
+    },
+    "start": {
+     "value": "2018-04",
+     "quote": "April 2018"
+    },
+    "end": {
+     "value": "2019-04",
+     "quote": "April 2019"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "is_volunteer": false,
+    "highlights": [
+     {
+      "value": "Contributed fundamental research for clients on various HY, XO and IG credits as a junior desk analyst by building three-statement valuation models to pitch relative value ideas and drive desk revenue across coverage of 10+ names",
+      "quote": "Contributed fundamental research for clients on various HY, XO and IG credits as a junior desk analyst by building three-statement valuation models to pitch relative value ideas"
+     },
+     {
+      "value": "Priced 100+ corporate bonds daily for inventory RUNZ on Bloomberg and ALLQ quoted markets",
+      "quote": "Priced 100+ corporate bonds daily for inventory RUNZ on Bloomberg and ALLQ quoted markets"
+     },
+     {
+      "value": "Responsible for odd lot market making in High yield, Investment Grade and Hybrid securities up to $500m",
+      "quote": "Responsible for odd lot market making in High yield, Investment Grade and Hybrid securities up to $500m"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Guaranteed Rate, Mortgage Trading",
+     "quote": "Guaranteed Rate, Mortgage Trading - Chicago, IL"
+    },
+    "title_raw": {
+     "value": "Capital Markets Analyst",
+     "quote": "Capital Markets Analyst"
+    },
+    "location": {
+     "value": "Chicago, IL",
+     "quote": "Chicago, IL"
+    },
+    "start": {
+     "value": "2017-07",
+     "quote": "July 2017"
+    },
+    "end": {
+     "value": "2018-03",
+     "quote": "March 2018"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "is_volunteer": false,
+    "highlights": [
+     {
+      "value": "Managed mortgage origination pipeline for strategic lending partnership utilizing Excel, SQL and proprietary risk management systems to hedge interest rate exposure through MBS forward contracts",
+      "quote": "Managed mortgage origination pipeline for strategic lending partnership utilizing Excel, SQL and proprietary risk management systems to hedge interest rate exposure"
+     },
+     {
+      "value": "Structured, pooled and delivered residential mortgage loans weekly exceeding $30M into agency and non-agency securitization products",
+      "quote": "Structured, pooled and delivered residential mortgage loans weekly exceeding $30M into agency and non-agency securitization products"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Magnetar Capital Management",
+     "quote": "Magnetar Capital Management, Summer Intern- Evanston, IL"
+    },
+    "title_raw": {
+     "value": "Summer Intern",
+     "quote": "Summer Intern"
+    },
+    "location": {
+     "value": "Evanston, IL",
+     "quote": "Evanston, IL"
+    },
+    "start": {
+     "value": "2016-05",
+     "quote": "May 2016"
+    },
+    "end": {
+     "value": "2016-08",
+     "quote": "August 2016"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": true,
+    "is_volunteer": false,
+    "highlights": []
+   },
+   {
+    "employer_raw": {
+     "value": "Ross Investment Banking Club",
+     "quote": "Ross Investment Banking Club"
+    },
+    "title_raw": {
+     "value": null,
+     "quote": null
+    },
+    "location": {
+     "value": null,
+     "quote": null
+    },
+    "start": {
+     "value": "2015-03",
+     "quote": "March 2015"
+    },
+    "end": {
+     "value": "2017-05",
+     "quote": "May 2017"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "is_volunteer": true,
+    "highlights": [
+     {
+      "value": "Viewed banking firm presentations, networked with professionals and participated in financial modeling exercises",
+      "quote": "Viewed banking firm presentations, networked with professionals and participated in financial modeling exercises"
+     }
+    ]
+   },
+   {
+    "employer_raw": {
+     "value": "Campus Tutoring Service",
+     "quote": "Campus Tutoring Service - Ann Arbor, MI"
+    },
+    "title_raw": {
+     "value": null,
+     "quote": null
+    },
+    "location": {
+     "value": "Ann Arbor, MI",
+     "quote": "Ann Arbor, MI"
+    },
+    "start": {
+     "value": "2015-01",
+     "quote": "January 2015"
+    },
+    "end": {
+     "value": "2015-05",
+     "quote": "May 2015"
+    },
+    "duration_text": {
+     "value": null,
+     "quote": null
+    },
+    "is_internship": false,
+    "is_volunteer": true,
+    "highlights": [
+     {
+      "value": "Tutored individuals in one-on-one sessions on the subjects: Macroeconomics, Excel, Finite Math and Accounting",
+      "quote": "Tutored individuals in one-on-one sessions on the subjects: Macroeconomics, Excel, Finite Math and Accounting"
+     }
+    ]
+   }
+  ],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"employment\": [\n    {\n      \"employer_raw\": {\n        \"value\": \"Fidelity Asset Management\",\n        \"quote\": \"Fidelity Asset Management - Boston, MA\"\n      },\n      \"title_raw\": {\n        \"value\": \"Analyst, Consumer Internet & Software\",\n        \"quote\": \"Analyst, Consumer Internet & Software\"\n      },\n      \"location\": {\n        \"value\": \"Boston, MA\",\n        \"quote\": \"Boston, MA\"\n      },\n      \"start\": {\n        \"value\": \"2022-05\",\n        \"quote\": \"May 2022\"\n      },\n      \"end\": {\n        \"value\": \"present\",\n        \"quote\": \"Present\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"is_volunteer\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Initiated on 20+ names across TMT sector through diligence on public filings, industry experts and valuation analysis\",\n          \"quote\": \"Initiated on 20+ names across TMT sector through diligence on public filings, industry experts and valuation analysis\"\n        },\n        {\n          \"value\": \"Contributed to weekly portfolio review committee and investment process meetings to determine equity allocation across $1-2 billion AUM mutual fund\",\n          \"quote\": \"Contributed to weekly portfolio review committee and investment process meetings to determine equity allocation across $1-2 billion AUM mutual fund\"\n        },\n        {\n          \"value\": \"Met directly with management teams as a part of investment process to assess corporate strategy & initiatives\",\n          \"quote\": \"Met directly with management teams as a part of investment process to assess corporate strategy & initiatives\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"William Blair, Equity Research\",\n        \"quote\": \"William Blair, Equity Research - Chicago, IL\"\n      },\n      \"title_raw\": {\n        \"value\": \"Associate, TMT\",\n        \"quote\": \"Associate, TMT\"\n      },\n      \"location\": {\n        \"value\": \"Chicago, IL\",\n        \"quote\": \"Chicago, IL\"\n      },\n      \"start\": {\n        \"value\": \"2019-04\",\n        \"quote\": \"April 2019\"\n      },\n      \"end\": {\n        \"value\": \"2022-01\",\n        \"quote\": \"January 2022\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"is_volunteer\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Covered 20+ names across TMT sector providing quarterly earnings estimates and research reports\",\n          \"quote\": \"Covered 20+ names across TMT sector providing quarterly earnings estimates and research reports\"\n        },\n        {\n          \"value\": \"Wrote coverage initiation reports and built IPO syndicate models from scratch on 10+ consumer internet companies\",\n          \"quote\": \"Wrote coverage initiation reports and built IPO syndicate models from scratch on 10+ consumer internet companies\"\n        },\n        {\n          \"value\": \"Built and updated models with earnings releases to prepare notes with adjusted forecasts and valuation metrics\",\n          \"quote\": \"Built and updated models with earnings releases to prepare notes with adjusted forecasts and valuation metrics\"\n        },\n        {\n          \"value\": \"Published a differentiated 70+ page report on 3D printing industry highlighting 29 competitors with extensive discussion of technology, products, pricing and financial performance; researched forward looking manufacturing trends\",\n          \"quote\": \"Published a differentiated 70+ page report on 3D printing industry highlighting 29 competitors with extensive discussion of technology, products, pricing and financial performance\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"William Blair, Fixed Income Sales & Trading\",\n        \"quote\": \"William Blair, Fixed Income Sales & Trading -- Chicago, IL\"\n      },\n      \"title_raw\": {\n        \"value\": \"Jr. Desk Analyst\",\n        \"quote\": \"Jr. Desk Analyst\"\n      },\n      \"location\": {\n        \"value\": \"Chicago, IL\",\n        \"quote\": \"Chicago, IL\"\n      },\n      \"start\": {\n        \"value\": \"2018-04\",\n        \"quote\": \"April 2018\"\n      },\n      \"end\": {\n        \"value\": \"2019-04\",\n        \"quote\": \"April 2019\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"is_volunteer\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Contributed fundamental research for clients on various HY, XO and IG credits as a junior desk analyst by building three-statement valuation models to pitch relative value ideas and drive desk revenue across coverage of 10+ names\",\n          \"quote\": \"Contributed fundamental research for clients on various HY, XO and IG credits as a junior desk analyst by building three-statement valuation models to pitch relative value ideas\"\n        },\n        {\n          \"value\": \"Priced 100+ corporate bonds daily for inventory RUNZ on Bloomberg and ALLQ quoted markets\",\n          \"quote\": \"Priced 100+ corporate bonds daily for inventory RUNZ on Bloomberg and ALLQ quoted markets\"\n        },\n        {\n          \"value\": \"Responsible for odd lot market making in High yield, Investment Grade and Hybrid securities up to $500m\",\n          \"quote\": \"Responsible for odd lot market making in High yield, Investment Grade and Hybrid securities up to $500m\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Guaranteed Rate, Mortgage Trading\",\n        \"quote\": \"Guaranteed Rate, Mortgage Trading - Chicago, IL\"\n      },\n      \"title_raw\": {\n        \"value\": \"Capital Markets Analyst\",\n        \"quote\": \"Capital Markets Analyst\"\n      },\n      \"location\": {\n        \"value\": \"Chicago, IL\",\n        \"quote\": \"Chicago, IL\"\n      },\n      \"start\": {\n        \"value\": \"2017-07\",\n        \"quote\": \"July 2017\"\n      },\n      \"end\": {\n        \"value\": \"2018-03\",\n        \"quote\": \"March 2018\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"is_volunteer\": false,\n      \"highlights\": [\n        {\n          \"value\": \"Managed mortgage origination pipeline for strategic lending partnership utilizing Excel, SQL and proprietary risk management systems to hedge interest rate exposure through MBS forward contracts\",\n          \"quote\": \"Managed mortgage origination pipeline for strategic lending partnership utilizing Excel, SQL and proprietary risk management systems to hedge interest rate exposure\"\n        },\n        {\n          \"value\": \"Structured, pooled and delivered residential mortgage loans weekly exceeding $30M into agency and non-agency securitization products\",\n          \"quote\": \"Structured, pooled and delivered residential mortgage loans weekly exceeding $30M into agency and non-agency securitization products\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Magnetar Capital Management\",\n        \"quote\": \"Magnetar Capital Management, Summer Intern- Evanston, IL\"\n      },\n      \"title_raw\": {\n        \"value\": \"Summer Intern\",\n        \"quote\": \"Summer Intern\"\n      },\n      \"location\": {\n        \"value\": \"Evanston, IL\",\n        \"quote\": \"Evanston, IL\"\n      },\n      \"start\": {\n        \"value\": \"2016-05\",\n        \"quote\": \"May 2016\"\n      },\n      \"end\": {\n        \"value\": \"2016-08\",\n        \"quote\": \"August 2016\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": true,\n      \"is_volunteer\": false,\n      \"highlights\": []\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Ross Investment Banking Club\",\n        \"quote\": \"Ross Investment Banking Club\"\n      },\n      \"title_raw\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"location\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"start\": {\n        \"value\": \"2015-03\",\n        \"quote\": \"March 2015\"\n      },\n      \"end\": {\n        \"value\": \"2017-05\",\n        \"quote\": \"May 2017\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"is_volunteer\": true,\n      \"highlights\": [\n        {\n          \"value\": \"Viewed banking firm presentations, networked with professionals and participated in financial modeling exercises\",\n          \"quote\": \"Viewed banking firm presentations, networked with professionals and participated in financial modeling exercises\"\n        }\n      ]\n    },\n    {\n      \"employer_raw\": {\n        \"value\": \"Campus Tutoring Service\",\n        \"quote\": \"Campus Tutoring Service - Ann Arbor, MI\"\n      },\n      \"title_raw\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"location\": {\n        \"value\": \"Ann Arbor, MI\",\n        \"quote\": \"Ann Arbor, MI\"\n      },\n      \"start\": {\n        \"value\": \"2015-01\",\n        \"quote\": \"January 2015\"\n      },\n      \"end\": {\n        \"value\": \"2015-05\",\n        \"quote\": \"May 2015\"\n      },\n      \"duration_text\": {\n        \"value\": null,\n        \"quote\": null\n      },\n      \"is_internship\": false,\n      \"is_volunteer\": true,\n      \"highlights\": [\n        {\n          \"value\": \"Tutored individuals in one-on-one sessions on the subjects: Macroeconomics, Excel, Finite Math and Accounting\",\n          \"quote\": \"Tutored individuals in one-on-one sessions on the subjects: Macroeconomics, Excel, Finite Math and Accounting\"\n        }\n      ]\n    }\n  ],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 1978,
+ "tokens_out": 2542,
+ "latency_ms": 21968,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "employment"
+}

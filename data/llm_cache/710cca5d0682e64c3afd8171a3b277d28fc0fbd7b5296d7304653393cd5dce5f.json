@@ -1,0 +1,123 @@
+{
+ "data": {
+  "strategies": [
+   {
+    "label": "equity_long_short",
+    "confidence": 0.95,
+    "rationale": "Primary investor managing fundamental long/short equity portfolio at Meridian; also managed Consumer and TMT long/short at Millennium",
+    "quote": "managing the only long short fundamental equity portfolio at Meridian Capital Partners",
+    "low_support": false
+   },
+   {
+    "label": "private_markets",
+    "confidence": 0.9,
+    "rationale": "Worked as Associate in Private Equity at Apollo Global Management evaluating and executing PE investments",
+    "quote": "Associate - Private Equity",
+    "low_support": false
+   }
+  ],
+  "sectors": [
+   {
+    "label": "consumer",
+    "confidence": 0.95,
+    "rationale": "Principal analyst managing Consumer portfolio at Millennium and evaluated PE investments in Consumer at Apollo",
+    "quote": "Principal analyst responsible for managing the Consumer and Technology portfolio",
+    "low_support": false
+   },
+   {
+    "label": "technology",
+    "confidence": 0.95,
+    "rationale": "Principal analyst managing TMT/Technology portfolio at Millennium and evaluated PE investments in Business & Technology Services at Apollo",
+    "quote": "Principal analyst responsible for managing the Consumer and Technology portfolio",
+    "low_support": false
+   },
+   {
+    "label": "healthcare",
+    "confidence": 0.85,
+    "rationale": "Healthcare Investment Banking analyst at J.P. Morgan and evaluated PE investments in Healthcare at Apollo",
+    "quote": "Analyst - Healthcare Investment Banking",
+    "low_support": false
+   }
+  ],
+  "quant_fundamental": {
+   "label": "fundamental",
+   "confidence": 0.95,
+   "rationale": "Explicitly described as fundamental long/short investor with focus on company meetings, expert calls, and fundamental analyses",
+   "quote": "Presented new investment ideas based on fundamental analyses"
+  },
+  "feeder_path": {
+   "label": "ibd_analyst_program",
+   "confidence": 0.95,
+   "rationale": "Started career as Investment Banking Analyst at J.P. Morgan in Healthcare group, ranked top tier of analyst class",
+   "quote": "Ranked top tier of analyst class in two years at J.P. Morgan"
+  },
+  "geography_primary": {
+   "value": "United States",
+   "quote": "Greenwich, CT"
+  },
+  "skills": [
+   {
+    "name": "Financial Modeling",
+    "depth": "core",
+    "quote": "Constructed and maintained financial models for core positions"
+   },
+   {
+    "name": "DCF Valuation",
+    "depth": "core",
+    "quote": "includes operating model, DCF, comparable companies, LBO, and precedent transactions"
+   },
+   {
+    "name": "LBO Analysis",
+    "depth": "core",
+    "quote": "includes operating model, DCF, comparable companies, LBO, and precedent transactions"
+   },
+   {
+    "name": "Comparable Company Analysis",
+    "depth": "core",
+    "quote": "includes operating model, DCF, comparable companies, LBO, and precedent transactions"
+   },
+   {
+    "name": "M&A Advisory",
+    "depth": "core",
+    "quote": "Participated in all aspects of M&A, equity, and debt transactions"
+   },
+   {
+    "name": "Portfolio Management",
+    "depth": "core",
+    "quote": "Lead investment decisions for the portfolio including sizing of positions"
+   },
+   {
+    "name": "Risk Management",
+    "depth": "core",
+    "quote": "hedging of positions using public peers and/or appropriate sector ETFs/market indices"
+   },
+   {
+    "name": "Alternative Data Analysis",
+    "depth": "applied",
+    "quote": "analyses of alternative datasets provided by third parties"
+   },
+   {
+    "name": "Expert Networks",
+    "depth": "applied",
+    "quote": "calls with third-party experts"
+   },
+   {
+    "name": "Due Diligence",
+    "depth": "core",
+    "quote": "Performed due diligence on businesses to determine competitive advantages"
+   },
+   {
+    "name": "Statistics",
+    "depth": "mentioned",
+    "quote": "Minor in Statistics"
+   }
+  ],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"strategies\": [\n    {\n      \"label\": \"equity_long_short\",\n      \"confidence\": 0.95,\n      \"rationale\": \"Primary investor managing fundamental long/short equity portfolio at Meridian; also managed Consumer and TMT long/short at Millennium\",\n      \"quote\": \"managing the only long short fundamental equity portfolio at Meridian Capital Partners\",\n      \"low_support\": false\n    },\n    {\n      \"label\": \"private_markets\",\n      \"confidence\": 0.9,\n      \"rationale\": \"Worked as Associate in Private Equity at Apollo Global Management evaluating and executing PE investments\",\n      \"quote\": \"Associate - Private Equity\",\n      \"low_support\": false\n    }\n  ],\n  \"sectors\": [\n    {\n      \"label\": \"consumer\",\n      \"confidence\": 0.95,\n      \"rationale\": \"Principal analyst managing Consumer portfolio at Millennium and evaluated PE investments in Consumer at Apollo\",\n      \"quote\": \"Principal analyst responsible for managing the Consumer and Technology portfolio\",\n      \"low_support\": false\n    },\n    {\n      \"label\": \"technology\",\n      \"confidence\": 0.95,\n      \"rationale\": \"Principal analyst managing TMT/Technology portfolio at Millennium and evaluated PE investments in Business & Technology Services at Apollo\",\n      \"quote\": \"Principal analyst responsible for managing the Consumer and Technology portfolio\",\n      \"low_support\": false\n    },\n    {\n      \"label\": \"healthcare\",\n      \"confidence\": 0.85,\n      \"rationale\": \"Healthcare Investment Banking analyst at J.P. Morgan and evaluated PE investments in Healthcare at Apollo\",\n      \"quote\": \"Analyst - Healthcare Investment Banking\",\n      \"low_support\": false\n    }\n  ],\n  \"quant_fundamental\": {\n    \"label\": \"fundamental\",\n    \"confidence\": 0.95,\n    \"rationale\": \"Explicitly described as fundamental long/short investor with focus on company meetings, expert calls, and fundamental analyses\",\n    \"quote\": \"long short fundamental equity portfolio\",\n    \"quote\": \"Presented new investment ideas based on fundamental analyses\"\n  },\n  \"feeder_path\": {\n    \"label\": \"ibd_analyst_program\",\n    \"confidence\": 0.95,\n    \"rationale\": \"Started career as Investment Banking Analyst at J.P. Morgan in Healthcare group, ranked top tier of analyst class\",\n    \"quote\": \"Analyst - Healthcare Investment Banking\",\n    \"quote\": \"Ranked top tier of analyst class in two years at J.P. Morgan\"\n  },\n  \"geography_primary\": {\n    \"value\": \"United States\",\n    \"quote\": \"Greenwich, CT\"\n  },\n  \"skills\": [\n    {\n      \"name\": \"Financial Modeling\",\n      \"depth\": \"core\",\n      \"quote\": \"Constructed and maintained financial models for core positions\"\n    },\n    {\n      \"name\": \"DCF Valuation\",\n      \"depth\": \"core\",\n      \"quote\": \"includes operating model, DCF, comparable companies, LBO, and precedent transactions\"\n    },\n    {\n      \"name\": \"LBO Analysis\",\n      \"depth\": \"core\",\n      \"quote\": \"includes operating model, DCF, comparable companies, LBO, and precedent transactions\"\n    },\n    {\n      \"name\": \"Comparable Company Analysis\",\n      \"depth\": \"core\",\n      \"quote\": \"includes operating model, DCF, comparable companies, LBO, and precedent transactions\"\n    },\n    {\n      \"name\": \"M&A Advisory\",\n      \"depth\": \"core\",\n      \"quote\": \"Participated in all aspects of M&A, equity, and debt transactions\"\n    },\n    {\n      \"name\": \"Portfolio Management\",\n      \"depth\": \"core\",\n      \"quote\": \"Lead investment decisions for the portfolio including sizing of positions\"\n    },\n    {\n      \"name\": \"Risk Management\",\n      \"depth\": \"core\",\n      \"quote\": \"hedging of positions using public peers and/or appropriate sector ETFs/market indices\"\n    },\n    {\n      \"name\": \"Alternative Data Analysis\",\n      \"depth\": \"applied\",\n      \"quote\": \"analyses of alternative datasets provided by third parties\"\n    },\n    {\n      \"name\": \"Expert Networks\",\n      \"depth\": \"applied\",\n      \"quote\": \"calls with third-party experts\"\n    },\n    {\n      \"name\": \"Due Diligence\",\n      \"depth\": \"core\",\n      \"quote\": \"Performed due diligence on businesses to determine competitive advantages\"\n    },\n    {\n      \"name\": \"Statistics\",\n      \"depth\": \"mentioned\",\n      \"quote\": \"Minor in Statistics\"\n    }\n  ],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 2330,
+ "tokens_out": 1118,
+ "latency_ms": 15819,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "profile"
+}

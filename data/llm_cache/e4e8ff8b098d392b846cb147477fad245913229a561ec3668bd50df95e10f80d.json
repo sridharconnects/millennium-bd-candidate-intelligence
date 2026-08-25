@@ -1,0 +1,106 @@
+{
+ "data": {
+  "strategies": [
+   {
+    "label": "equity_long_short",
+    "confidence": 0.9,
+    "rationale": "Candidate worked as equity research analyst covering stocks with buy/sell recommendations across multiple sectors for 8+ years",
+    "quote": "Maintained active coverage of 42 stocks across multiple sectors",
+    "low_support": false
+   }
+  ],
+  "sectors": [
+   {
+    "label": "healthcare",
+    "confidence": 0.95,
+    "rationale": "Covered pharmaceuticals and healthcare extensively across multiple roles including dedicated healthcare fund",
+    "quote": "Covering Pharmaceuticals and Specialty Chemicals",
+    "low_support": false
+   },
+   {
+    "label": "energy",
+    "confidence": 0.85,
+    "rationale": "Covered Oil&Gas sector and published renewable energy sector report",
+    "quote": "Covered Healthcare, Oil&Gas, Logistics and Alcobev",
+    "low_support": false
+   },
+   {
+    "label": "industrials",
+    "confidence": 0.75,
+    "rationale": "Covered logistics sector and published infrastructure sector analysis",
+    "quote": "published detailed analysis on Indian infrastructure sector",
+    "low_support": false
+   },
+   {
+    "label": "consumer",
+    "confidence": 0.7,
+    "rationale": "Covered alcoholic beverages sector",
+    "quote": "Alcobev",
+    "low_support": true
+   },
+   {
+    "label": "technology",
+    "confidence": 0.65,
+    "rationale": "Completed equity analysis project on Indian Technology Sector and initiated coverage on digital health platforms",
+    "quote": "Comprehensive equity analysis of Indian Technology Sector",
+    "low_support": true
+   }
+  ],
+  "quant_fundamental": {
+   "label": "fundamental",
+   "confidence": 0.95,
+   "rationale": "Candidate's work focused on company fundamentals, sector reports, and traditional equity research analyst activities",
+   "quote": "Applied sector-agnostic investment approach focusing on company fundamentals"
+  },
+  "feeder_path": {
+   "label": "sellside_research",
+   "confidence": 0.9,
+   "rationale": "Candidate spent 8+ years at ICICI Securities as research analyst, a major sellside firm, after brief buyside stint",
+   "quote": "ICICI Securities Limited | Duration | 8 years 10 months",
+   "low_support": false
+  },
+  "geography_primary": {
+   "value": "India",
+   "quote": "Mumbai Institute of Management"
+  },
+  "skills": [
+   {
+    "name": "Equity Research",
+    "depth": "core",
+    "quote": "Maintained active coverage of 42 stocks across multiple sectors"
+   },
+   {
+    "name": "Sector Analysis",
+    "depth": "core",
+    "quote": "Completed comprehensive sector report on renewable energy (~120 pages)"
+   },
+   {
+    "name": "Financial Modeling",
+    "depth": "applied",
+    "quote": "Comprehensive equity analysis of Indian Technology Sector"
+   },
+   {
+    "name": "CFA",
+    "depth": "mentioned",
+    "quote": "Successfully completed Chartered Financial Analyst Level 3 (CFA, USA)"
+   },
+   {
+    "name": "Stakeholder Management",
+    "depth": "applied",
+    "quote": "conducted meetings with various stakeholders (management teams, buy-side analysts)"
+   },
+   {
+    "name": "Machine Learning",
+    "depth": "applied",
+    "quote": "Machine Learning Applications in Biomarker Discovery"
+   }
+  ],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"strategies\": [\n    {\n      \"label\": \"equity_long_short\",\n      \"confidence\": 0.9,\n      \"rationale\": \"Candidate worked as equity research analyst covering stocks with buy/sell recommendations across multiple sectors for 8+ years\",\n      \"quote\": \"Maintained active coverage of 42 stocks across multiple sectors\",\n      \"low_support\": false\n    }\n  ],\n  \"sectors\": [\n    {\n      \"label\": \"healthcare\",\n      \"confidence\": 0.95,\n      \"rationale\": \"Covered pharmaceuticals and healthcare extensively across multiple roles including dedicated healthcare fund\",\n      \"quote\": \"Covering Pharmaceuticals and Specialty Chemicals\",\n      \"low_support\": false\n    },\n    {\n      \"label\": \"energy\",\n      \"confidence\": 0.85,\n      \"rationale\": \"Covered Oil&Gas sector and published renewable energy sector report\",\n      \"quote\": \"Covered Healthcare, Oil&Gas, Logistics and Alcobev\",\n      \"low_support\": false\n    },\n    {\n      \"label\": \"industrials\",\n      \"confidence\": 0.75,\n      \"rationale\": \"Covered logistics sector and published infrastructure sector analysis\",\n      \"quote\": \"published detailed analysis on Indian infrastructure sector\",\n      \"low_support\": false\n    },\n    {\n      \"label\": \"consumer\",\n      \"confidence\": 0.7,\n      \"rationale\": \"Covered alcoholic beverages sector\",\n      \"quote\": \"Alcobev\",\n      \"low_support\": true\n    },\n    {\n      \"label\": \"technology\",\n      \"confidence\": 0.65,\n      \"rationale\": \"Completed equity analysis project on Indian Technology Sector and initiated coverage on digital health platforms\",\n      \"quote\": \"Comprehensive equity analysis of Indian Technology Sector\",\n      \"low_support\": true\n    }\n  ],\n  \"quant_fundamental\": {\n    \"label\": \"fundamental\",\n    \"confidence\": 0.95,\n    \"rationale\": \"Candidate's work focused on company fundamentals, sector reports, and traditional equity research analyst activities\",\n    \"quote\": \"Applied sector-agnostic investment approach focusing on company fundamentals\"\n  },\n  \"feeder_path\": {\n    \"label\": \"sellside_research\",\n    \"confidence\": 0.9,\n    \"rationale\": \"Candidate spent 8+ years at ICICI Securities as research analyst, a major sellside firm, after brief buyside stint\",\n    \"quote\": \"ICICI Securities Limited | Duration | 8 years 10 months\",\n    \"low_support\": false\n  },\n  \"geography_primary\": {\n    \"value\": \"India\",\n    \"quote\": \"Mumbai Institute of Management\"\n  },\n  \"skills\": [\n    {\n      \"name\": \"Equity Research\",\n      \"depth\": \"core\",\n      \"quote\": \"Maintained active coverage of 42 stocks across multiple sectors\"\n    },\n    {\n      \"name\": \"Sector Analysis\",\n      \"depth\": \"core\",\n      \"quote\": \"Completed comprehensive sector report on renewable energy (~120 pages)\"\n    },\n    {\n      \"name\": \"Financial Modeling\",\n      \"depth\": \"applied\",\n      \"quote\": \"Comprehensive equity analysis of Indian Technology Sector\"\n    },\n    {\n      \"name\": \"CFA\",\n      \"depth\": \"mentioned\",\n      \"quote\": \"Successfully completed Chartered Financial Analyst Level 3 (CFA, USA)\"\n    },\n    {\n      \"name\": \"Stakeholder Management\",\n      \"depth\": \"applied\",\n      \"quote\": \"conducted meetings with various stakeholders (management teams, buy-side analysts)\"\n    },\n    {\n      \"name\": \"Machine Learning\",\n      \"depth\": \"applied\",\n      \"quote\": \"Machine Learning Applications in Biomarker Discovery\"\n    }\n  ],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 1968,
+ "tokens_out": 928,
+ "latency_ms": 13098,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "profile"
+}

@@ -1,0 +1,63 @@
+candidate_id,skill,category,depth,surface_forms,n_evidence
+39fb62eab66a5034,backtesting,analytics,core,backtesting; performance attribution,2
+39fb62eab66a5034,gis,analytics,core,GIS; satellite imagery,2
+39fb62eab66a5034,machine_learning,analytics,core,Machine Learning; machine learning,2
+39fb62eab66a5034,portfolio_construction,finance,core,risk exposures; risk-adjusted,2
+39fb62eab66a5034,python,programming,core,Python,3
+39fb62eab66a5034,r_lang,programming,applied,R,2
+39fb62eab66a5034,statistics,analytics,applied,Econometrics; Statistics; statistical analysis,3
+39fb62eab66a5034,bloomberg,tools,mentioned,Bloomberg Terminal,1
+39fb62eab66a5034,excel,tools,mentioned,Excel; Microsoft Office,2
+39fb62eab66a5034,financial_modelling,finance,mentioned,DCF,1
+39fb62eab66a5034,sql,programming,mentioned,SQL,1
+39fb62eab66a5034,vba,programming,mentioned,Excel with VBA,1
+39fb62eab66a5034,wind_db,tools,mentioned,WIND Database,1
+31b604248140fd1b,financial_modelling,finance,core,financial modeling,2
+31b604248140fd1b,equity_research,finance,mentioned,Equity Research,2
+31b604248140fd1b,excel,tools,mentioned,Excel,1
+31b604248140fd1b,python,programming,mentioned,Python,1
+31b604248140fd1b,r_lang,programming,mentioned,R,1
+31b604248140fd1b,vba,programming,mentioned,Advanced Excel/VBA,1
+6af5686564dbbb2a,due_diligence,finance,core,diligence; due diligence,2
+6af5686564dbbb2a,financial_modelling,finance,mentioned,Financial modeling; financial modeling,2
+3e9b46a397616de2,bloomberg,tools,core,ALLQ; Bloomberg; Bloomberg Terminal; RUNZ,3
+3e9b46a397616de2,equity_research,finance,core,Equity Research; coverage initiation; earnings estimates; equity research,3
+3e9b46a397616de2,excel,tools,core,Excel,3
+3e9b46a397616de2,financial_modelling,finance,core,Financial Modeling; financial modeling; three-statement,3
+3e9b46a397616de2,due_diligence,finance,applied,diligence,1
+3e9b46a397616de2,sql,programming,applied,SQL,1
+3e9b46a397616de2,capital_iq,tools,mentioned,S&P Capital IQ,1
+3e9b46a397616de2,factset,tools,mentioned,FactSet,1
+3e9b46a397616de2,statistics,analytics,mentioned,Hypothesis Testing; Statistical Analysis,2
+7ee7c4909d5aa2dc,csharp,programming,core,C#; C# / .NET,3
+7ee7c4909d5aa2dc,machine_learning,analytics,core,Machine Learning; Neural Network; gradient descent,3
+7ee7c4909d5aa2dc,time_series,analytics,core,Monte Carlo; Probability theory; Stochastic calculus,3
+7ee7c4909d5aa2dc,cpp,programming,applied,C++,3
+7ee7c4909d5aa2dc,statistics,analytics,applied,Statistics,2
+7ee7c4909d5aa2dc,backtesting,analytics,mentioned,Backtester,1
+7ee7c4909d5aa2dc,excel,tools,mentioned,Excel,1
+7ee7c4909d5aa2dc,java,programming,mentioned,Java,1
+7ee7c4909d5aa2dc,mongodb,tools,mentioned,MongoDB,1
+7ee7c4909d5aa2dc,python,programming,mentioned,Python,1
+7ee7c4909d5aa2dc,r_lang,programming,mentioned,R,1
+7ee7c4909d5aa2dc,sql,programming,mentioned,SQL,1
+2fe654610aa00d06,equity_research,finance,applied,Equity Research,2
+2fe654610aa00d06,financial_modelling,finance,applied,financial modeling,1
+c0a2c9e2c03785e7,due_diligence,finance,core,diligence; due diligence; primary research,3
+c0a2c9e2c03785e7,financial_modelling,finance,core,DCF; Financial Modeling; LBO; operating model,3
+c0a2c9e2c03785e7,portfolio_construction,finance,core,factor attribution; hedging; position sizing; risk exposures,3
+c0a2c9e2c03785e7,statistics,analytics,applied,Statistics,1
+c0a2c9e2c03785e7,alternative_data,analytics,mentioned,alternative datasets,1
+8d634b54d8648e8e,financial_modelling,finance,core,DCF; Financial Modeling; comparable company; sum-of-the-parts,3
+8d634b54d8648e8e,equity_research,finance,applied,Equity Research; coverage initiation,2
+8d634b54d8648e8e,alternative_data,analytics,mentioned,alternative data,1
+8d634b54d8648e8e,bloomberg,tools,mentioned,Bloomberg,1
+8d634b54d8648e8e,due_diligence,finance,mentioned,due diligence,1
+8d634b54d8648e8e,excel,tools,mentioned,Microsoft Office,1
+8d634b54d8648e8e,factset,tools,mentioned,FactSet,1
+3fab70b8478323b4,machine_learning,analytics,applied,Machine Learning,1
+c3b30be3fbf03368,equity_research,finance,core,Equity Research; equity research; sector thematic,3
+c3b30be3fbf03368,bloomberg,tools,applied,Bloomberg,1
+c3b30be3fbf03368,excel,tools,applied,MS Office,1
+c3b30be3fbf03368,factset,tools,applied,Factset,1
+c3b30be3fbf03368,refinitiv,tools,applied,Reuters,1

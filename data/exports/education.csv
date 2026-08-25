@@ -1,0 +1,26 @@
+candidate_id,institution,degree,degree_level,field,graduation_year,gpa,location,honors,institution_status
+39fb62eab66a5034,University of Hong Kong,Master of Science in Financial Technology,masters,Financial Technology,2023,,Hong Kong,,verified
+39fb62eab66a5034,University of Hong Kong,Bachelor of Business Administration (Finance),bachelors,Finance,2021,,Hong Kong,,verified
+31b604248140fd1b,MIT SLOAN SCHOOL OF MANAGEMENT,Master of business administration (MBA),mba,,2021,,"Cambridge, MA, United States",Investment Management Club Co-President; Latin America Conference 2020 organizer,verified
+31b604248140fd1b,FUNDACAO GETULIO VARGAS,BS in Economics,bachelors,Economics,2016,,"Sao Paulo, Brazil",Manager of CJE-FF - a student-run equity fund - and the Investment Committee,verified
+6af5686564dbbb2a,Harvard University,Bachelor of Arts in Economics,bachelors,"Economics, Secondary in Molecular Biology",2013,,"Cambridge, MA",Magna Cum Laude,verified
+6af5686564dbbb2a,Stanford University,"Summer Program: Healthcare Innovation, Biotechnology Commercialization",,"Healthcare Innovation, Biotechnology Commercialization",,,,,verified
+3e9b46a397616de2,"University of Michigan, Ross School of Business",Bachelor of Science in Business,bachelors,Finance,2017,3.5/4.0,"Ann Arbor, MI","Business Leadership Program: Selected as one of 120 Ross students out of a class of 1,200 admitted into competitive program based on leadership potential and academic performance to complete advanced integrative coursework; Merit Scholar Program: Awarded partial scholarship by selective Ross program recognizing academic excellence and leadership through active participation in community service programs and peer mentoring",verified
+7ee7c4909d5aa2dc,INSA Lyon,Diplôme d'Ingénieur,masters,Financial Engineering,2022,,France,,verified
+7ee7c4909d5aa2dc,Universite Lyon,Master's degree,masters,Quantitative Finance,2022,,France,,verified
+7ee7c4909d5aa2dc,École Royale Navale,Preparatory Classes,,Mathematics and Physics,2019,,"Casablanca, Morocco",,verified
+2fe654610aa00d06,Mumbai Institute of Management Studies (MIMS),MBA- Finance,mba,Finance,2013,,,,verified
+2fe654610aa00d06,University of Pune,MCOM,masters,,2013,,,,verified
+2fe654610aa00d06,Thakur College of Commerce,B.M.S,masters,,2007,,,,verified
+2fe654610aa00d06,Jai Hind College,HSC,secondary,,2004,,,,verified
+2fe654610aa00d06,Modern High School and Junior College,SSC,secondary,,2002,,,,verified
+c0a2c9e2c03785e7,"Columbia Business School, Columbia University",Bachelor of Science in Business,bachelors,"Concentration in Finance and International Business, Minor in Statistics",2017,3.61/4.00,"New York, NY",Dean's Merit Scholarship (awarded for all four years); Student Leadership Excellence Award (awarded to top 3 graduating seniors); Academic Achievement Recognition; Finalist in Goldman Sachs Investment Banking Case Competition; Winner of Morgan Stanley Financial Markets Challenge,verified
+8d634b54d8648e8e,Northwestern University - Kellogg School of Management,Bachelor of Science in Business Administration,bachelors,,2014,3.44/4.00,"Evanston, IL","Dean's Honor List (Fall 2012 - Spring 2014); Greek Award of Distinction (2011, 2012)",verified
+3fab70b8478323b4,Mumbai Institute of Management Studies and Research,PGDM,mba,,2015,2.5/4,,,verified
+3fab70b8478323b4,"Padmashree Dr.D.Y.Patil Institute of Biotechnology and Bioinformatics, Navi Mumbai",M.Tech(Integrated),masters,,2010,68%,,,verified
+3fab70b8478323b4,"Bharti Vidyapeeth junior college, Navi Mumbai",HSC,secondary,,2006,72%,,,verified
+3fab70b8478323b4,"Don Bosco High School, Navi Mumbai",SSC,secondary,,2004,73%,,,verified
+c3b30be3fbf03368,"Indian School of Business Management (ISBM), Pune",PGDM (Finance),mba,Finance,2012,7.2/10,Pune,,verified
+c3b30be3fbf03368,"K.J. Somaiya Medical College, Mumbai",M.B.B.S,professional,,2010,63.87%,Mumbai,,verified
+c3b30be3fbf03368,"Mithibai College, Mumbai",XII Std.(PCMB),secondary,PCMB,2004,89.00%,Mumbai,Top 0.2% Maharashtra state board,verified
+c3b30be3fbf03368,"St. Xavier's High School, Mumbai",X Std.,secondary,,2002,90.43%,Mumbai,Top 5% Maharashtra state board,verified

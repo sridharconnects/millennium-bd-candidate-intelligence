@@ -1,0 +1,111 @@
+{
+ "data": {
+  "strategies": [
+   {
+    "label": "equity_long_short",
+    "confidence": 0.85,
+    "rationale": "Analyst role at Fidelity managing equity allocation for mutual fund with direct management meetings",
+    "quote": "investment process meetings to determine equity allocation across $1-2 billion AUM mutual fund",
+    "low_support": false
+   }
+  ],
+  "sectors": [
+   {
+    "label": "technology",
+    "confidence": 0.9,
+    "rationale": "Covered TMT sector at both Fidelity and William Blair, initiated on 20+ names",
+    "quote": "Analyst, Consumer Internet & Software",
+    "low_support": false
+   },
+   {
+    "label": "communications",
+    "confidence": 0.85,
+    "rationale": "TMT coverage includes communications sector companies",
+    "quote": "Covered 20+ names across TMT sector",
+    "low_support": false
+   },
+   {
+    "label": "consumer",
+    "confidence": 0.8,
+    "rationale": "Specific focus on consumer internet companies including IPO coverage",
+    "quote": "coverage initiation reports and built IPO syndicate models from scratch on 10+ consumer internet companies",
+    "low_support": false
+   }
+  ],
+  "quant_fundamental": {
+   "label": "fundamental",
+   "confidence": 0.9,
+   "rationale": "Equity research and buy-side analyst conducting company diligence, management meetings, and fundamental valuation analysis",
+   "quote": "diligence on public filings, industry experts and valuation analysis"
+  },
+  "feeder_path": {
+   "label": "sellside_research",
+   "confidence": 0.95,
+   "rationale": "Started substantive finance career as equity research associate at William Blair covering TMT sector",
+   "quote": "str"
+  },
+  "geography_primary": {
+   "value": "United States",
+   "quote": "Boston, MA 01125"
+  },
+  "skills": [
+   {
+    "name": "Financial Modeling",
+    "depth": "core",
+    "quote": "Built and updated models with earnings releases to prepare notes with adjusted forecasts and valuation metrics"
+   },
+   {
+    "name": "Bloomberg Terminal",
+    "depth": "applied",
+    "quote": "Priced 100+ corporate bonds daily for inventory RUNZ on Bloomberg"
+   },
+   {
+    "name": "Excel",
+    "depth": "core",
+    "quote": "Managed mortgage origination pipeline for strategic lending partnership utilizing Excel, SQL"
+   },
+   {
+    "name": "SQL",
+    "depth": "applied",
+    "quote": "utilizing Excel, SQL and proprietary risk management systems"
+   },
+   {
+    "name": "FactSet",
+    "depth": "mentioned",
+    "quote": "FactSet"
+   },
+   {
+    "name": "S&P Capital IQ",
+    "depth": "mentioned",
+    "quote": "S&P Capital IQ"
+   },
+   {
+    "name": "Equity Research",
+    "depth": "core",
+    "quote": "Covered 20+ names across TMT sector providing quarterly earnings estimates and research reports"
+   },
+   {
+    "name": "Valuation Analysis",
+    "depth": "core",
+    "quote": "built three-statement valuation models to pitch relative value ideas"
+   },
+   {
+    "name": "Statistical Analysis",
+    "depth": "mentioned",
+    "quote": "Statistical Analysis"
+   },
+   {
+    "name": "Fixed Income Trading",
+    "depth": "applied",
+    "quote": "Responsible for odd lot market making in High yield, Investment Grade and Hybrid securities up to $500m"
+   }
+  ],
+  "suspicious_content": []
+ },
+ "raw_text": "{\n  \"strategies\": [\n    {\n      \"label\": \"equity_long_short\",\n      \"confidence\": 0.85,\n      \"rationale\": \"Analyst role at Fidelity managing equity allocation for mutual fund with direct management meetings\",\n      \"quote\": \"investment process meetings to determine equity allocation across $1-2 billion AUM mutual fund\",\n      \"low_support\": false\n    }\n  ],\n  \"sectors\": [\n    {\n      \"label\": \"technology\",\n      \"confidence\": 0.9,\n      \"rationale\": \"Covered TMT sector at both Fidelity and William Blair, initiated on 20+ names\",\n      \"quote\": \"Analyst, Consumer Internet & Software\",\n      \"low_support\": false\n    },\n    {\n      \"label\": \"communications\",\n      \"confidence\": 0.85,\n      \"rationale\": \"TMT coverage includes communications sector companies\",\n      \"quote\": \"Covered 20+ names across TMT sector\",\n      \"low_support\": false\n    },\n    {\n      \"label\": \"consumer\",\n      \"confidence\": 0.8,\n      \"rationale\": \"Specific focus on consumer internet companies including IPO coverage\",\n      \"quote\": \"coverage initiation reports and built IPO syndicate models from scratch on 10+ consumer internet companies\",\n      \"low_support\": false\n    }\n  ],\n  \"quant_fundamental\": {\n    \"label\": \"fundamental\",\n    \"confidence\": 0.9,\n    \"rationale\": \"Equity research and buy-side analyst conducting company diligence, management meetings, and fundamental valuation analysis\",\n    \"quote\": \"diligence on public filings, industry experts and valuation analysis\"\n  },\n  \"feeder_path\": {\n    \"label\": \"sellside_research\",\n    \"confidence\": 0.95,\n    \"rationale\": \"Started substantive finance career as equity research associate at William Blair covering TMT sector\",\n    \"quote\": \"Associate, TMT\",\n    \"quote\": \"str\"\n  },\n  \"geography_primary\": {\n    \"value\": \"United States\",\n    \"quote\": \"Boston, MA 01125\"\n  },\n  \"skills\": [\n    {\n      \"name\": \"Financial Modeling\",\n      \"depth\": \"core\",\n      \"quote\": \"Built and updated models with earnings releases to prepare notes with adjusted forecasts and valuation metrics\"\n    },\n    {\n      \"name\": \"Bloomberg Terminal\",\n      \"depth\": \"applied\",\n      \"quote\": \"Priced 100+ corporate bonds daily for inventory RUNZ on Bloomberg\"\n    },\n    {\n      \"name\": \"Excel\",\n      \"depth\": \"core\",\n      \"quote\": \"Managed mortgage origination pipeline for strategic lending partnership utilizing Excel, SQL\"\n    },\n    {\n      \"name\": \"SQL\",\n      \"depth\": \"applied\",\n      \"quote\": \"utilizing Excel, SQL and proprietary risk management systems\"\n    },\n    {\n      \"name\": \"FactSet\",\n      \"depth\": \"mentioned\",\n      \"quote\": \"FactSet\"\n    },\n    {\n      \"name\": \"S&P Capital IQ\",\n      \"depth\": \"mentioned\",\n      \"quote\": \"S&P Capital IQ\"\n    },\n    {\n      \"name\": \"Equity Research\",\n      \"depth\": \"core\",\n      \"quote\": \"Covered 20+ names across TMT sector providing quarterly earnings estimates and research reports\"\n    },\n    {\n      \"name\": \"Valuation Analysis\",\n      \"depth\": \"core\",\n      \"quote\": \"built three-statement valuation models to pitch relative value ideas\"\n    },\n    {\n      \"name\": \"Statistical Analysis\",\n      \"depth\": \"mentioned\",\n      \"quote\": \"Statistical Analysis\"\n    },\n    {\n      \"name\": \"Fixed Income Trading\",\n      \"depth\": \"applied\",\n      \"quote\": \"Responsible for odd lot market making in High yield, Investment Grade and Hybrid securities up to $500m\"\n    }\n  ],\n  \"suspicious_content\": []\n}",
+ "tokens_in": 2039,
+ "tokens_out": 962,
+ "latency_ms": 12268,
+ "model": "claude-sonnet-4-5-20250929",
+ "stage": "profile"
+}

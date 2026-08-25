@@ -1,0 +1,149 @@
+{
+  "generated_at": "2026-08-22T10:55:51",
+  "embedder": "fastembed:BAAI/bge-small-en-v1.5",
+  "vector_store": "faiss:IndexFlatIP",
+  "reps_per_query": 5,
+  "n_queries": 10,
+  "corpus_note": "SYNTHETIC corpus (scripts/make_synthetic.py, seeded) padded with the real parsed candidates. Used only to characterise retrieval behaviour vs corpus size \u2014 never for accuracy.",
+  "points": [
+    {
+      "n_candidates": 10,
+      "n_chunks": 69,
+      "index_build_ms": 1591.4,
+      "peak_mem_mb": 3.9,
+      "hybrid_p50_ms": 14.09,
+      "hybrid_p95_ms": 16.38,
+      "hybrid_p99_ms": 18.02,
+      "hybrid_qps": 71.8,
+      "dense_p50_ms": 13.96,
+      "dense_p95_ms": 15.59,
+      "dense_p99_ms": 15.74,
+      "dense_qps": 74.6,
+      "lexical_p50_ms": 0.08,
+      "lexical_p95_ms": 0.14,
+      "lexical_p99_ms": 0.27,
+      "lexical_qps": 11951.1,
+      "p50_ms": 14.09,
+      "p95_ms": 16.38
+    },
+    {
+      "n_candidates": 50,
+      "n_chunks": 325,
+      "index_build_ms": 6858.4,
+      "peak_mem_mb": 1.2,
+      "hybrid_p50_ms": 12.24,
+      "hybrid_p95_ms": 15.78,
+      "hybrid_p99_ms": 19.34,
+      "hybrid_qps": 82.1,
+      "dense_p50_ms": 11.96,
+      "dense_p95_ms": 13.44,
+      "dense_p99_ms": 13.57,
+      "dense_qps": 86.8,
+      "lexical_p50_ms": 0.19,
+      "lexical_p95_ms": 0.27,
+      "lexical_p99_ms": 0.35,
+      "lexical_qps": 5405.5,
+      "p50_ms": 12.24,
+      "p95_ms": 15.78
+    },
+    {
+      "n_candidates": 100,
+      "n_chunks": 656,
+      "index_build_ms": 13472.6,
+      "peak_mem_mb": 2.4,
+      "hybrid_p50_ms": 13.88,
+      "hybrid_p95_ms": 15.8,
+      "hybrid_p99_ms": 16.34,
+      "hybrid_qps": 73.7,
+      "dense_p50_ms": 13.75,
+      "dense_p95_ms": 15.86,
+      "dense_p99_ms": 15.94,
+      "dense_qps": 74.7,
+      "lexical_p50_ms": 0.27,
+      "lexical_p95_ms": 0.41,
+      "lexical_p99_ms": 0.46,
+      "lexical_qps": 3679.1,
+      "p50_ms": 13.88,
+      "p95_ms": 15.8
+    },
+    {
+      "n_candidates": 250,
+      "n_chunks": 1650,
+      "index_build_ms": 34451.5,
+      "peak_mem_mb": 6.1,
+      "hybrid_p50_ms": 14.38,
+      "hybrid_p95_ms": 18.82,
+      "hybrid_p99_ms": 21.55,
+      "hybrid_qps": 68.1,
+      "dense_p50_ms": 13.25,
+      "dense_p95_ms": 16.46,
+      "dense_p99_ms": 16.59,
+      "dense_qps": 77.6,
+      "lexical_p50_ms": 0.41,
+      "lexical_p95_ms": 0.71,
+      "lexical_p99_ms": 0.81,
+      "lexical_qps": 2314.7,
+      "p50_ms": 14.38,
+      "p95_ms": 18.82
+    },
+    {
+      "n_candidates": 500,
+      "n_chunks": 3291,
+      "index_build_ms": 68494.7,
+      "peak_mem_mb": 12.1,
+      "hybrid_p50_ms": 11.2,
+      "hybrid_p95_ms": 13.82,
+      "hybrid_p99_ms": 16.59,
+      "hybrid_qps": 89.6,
+      "dense_p50_ms": 12.42,
+      "dense_p95_ms": 18.11,
+      "dense_p99_ms": 22.05,
+      "dense_qps": 78.4,
+      "lexical_p50_ms": 0.69,
+      "lexical_p95_ms": 1.2,
+      "lexical_p99_ms": 1.29,
+      "lexical_qps": 1439.0,
+      "p50_ms": 11.2,
+      "p95_ms": 13.82
+    }
+  ],
+  "parsing": {},
+  "migration_triggers": [
+    {
+      "trigger": "> ~100k vectors",
+      "symptom": "flat-index scan latency exceeds ~50 ms",
+      "action": "move to an ANN index (FAISS IVF-PQ or HNSW), accepting ~1-2% recall loss",
+      "why_not_now": "at 500 candidates the exhaustive scan is sub-millisecond; an approximate index would trade accuracy for latency we do not need"
+    },
+    {
+      "trigger": "concurrent writers",
+      "symptom": "index rebuild blocks ingestion",
+      "action": "move to Qdrant or pgvector for transactional upserts and metadata filters",
+      "why_not_now": "single-process batch ingestion has no write contention"
+    },
+    {
+      "trigger": "> ~1M documents",
+      "symptom": "index no longer fits in a single dyno's RAM",
+      "action": "shard by region or tenant; move to a managed store (Pinecone / OpenSearch)",
+      "why_not_now": "500 candidates x ~6 chunks x 384 dims x 4 bytes is under 5 MB"
+    },
+    {
+      "trigger": "multi-tenant / RBAC",
+      "symptom": "per-desk data isolation required",
+      "action": "Postgres + pgvector with row-level security; per-tenant index namespaces",
+      "why_not_now": "single BD team, single trust boundary"
+    },
+    {
+      "trigger": "> ~1k resumes/day ingest",
+      "symptom": "synchronous parsing blocks the UI",
+      "action": "async task queue (Celery/SQS), object storage for documents, idempotent jobs keyed on file SHA-256, incremental index updates",
+      "why_not_now": "the pipeline already memoises on inputs_hash and threads across documents; at 10-500 documents a batch run is seconds"
+    },
+    {
+      "trigger": "SLA on freshness",
+      "symptom": "nightly rebuild is too slow",
+      "action": "incremental add/remove on the live index plus a background compaction",
+      "why_not_now": "full rebuild at 500 candidates takes under two seconds"
+    }
+  ]
+}
