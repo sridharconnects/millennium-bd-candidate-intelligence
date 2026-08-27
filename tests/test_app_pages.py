@@ -76,6 +76,9 @@ def test_page_renders_without_error(monkeypatch, sample_profiles, page):
     at = _app(monkeypatch, sample_profiles, page)
     errs = _errors(at)
     assert not errs, f"{page} page produced {len(errs)} error(s):\n" + "\n".join(errs[:4])
+    if page == "Intake":
+        body = " ".join(m.value for m in at.markdown)
+        assert "Uses LLM" in body and "Resume parsing" in body
 
 
 def test_search_hero_exposes_match_import_and_shortlist_actions(monkeypatch, sample_profiles):
@@ -92,6 +95,7 @@ def test_search_hero_exposes_match_import_and_shortlist_actions(monkeypatch, sam
     # The results header reads "All N candidates" when browsing, or
     # "Showing X of N candidates" once a search/filter narrows the pool.
     assert "candidates ·" in body
+    assert "Uses LLM" in body and "Search intent understanding" in body
 
 
 def test_search_with_a_natural_language_query(monkeypatch, sample_profiles):
@@ -117,6 +121,8 @@ def test_requisition_page_parses_and_ranks(monkeypatch, sample_profiles):
     # Weight sliders must all be present and editable.
     labels = {s.label for s in at.slider}
     assert {"skills", "strategy", "sector", "semantic"} <= labels, labels
+    body = " ".join(m.value for m in at.markdown)
+    assert "Uses LLM" in body and "Requisition parser" in body
     at.button(key="FormSubmitter" if False else at.button[0].key).click().run() \
         if at.button else None
     assert not _errors(at)
@@ -146,6 +152,56 @@ def test_analytics_renders_charts(monkeypatch, sample_profiles):
     at = _app(monkeypatch, sample_profiles, "Analytics")
     assert not _errors(at)
     assert len(at.tabs) >= 4, "analytics tabs missing"
+
+
+def test_llm_advisory_buttons_are_available(monkeypatch, sample_profiles):
+    """LLM use is labelled where it adds judgment: profile, review, analytics, slate."""
+    from streamlit.testing.v1 import AppTest
+
+    from millennium import app_data
+    monkeypatch.setattr(app_data, "load_profiles_from_artifact",
+                        lambda path=None: (sample_profiles, {}))
+    monkeypatch.setattr(app_data, "load_raw_texts", lambda ps: None)
+    monkeypatch.setattr(app_data, "load_synthetic", lambda: [])
+
+    at = AppTest.from_file(str(ROOT / "app.py"), default_timeout=90)
+    at.session_state["page"] = "Candidate"
+    at.session_state["selected"] = sample_profiles[0].candidate_id
+    at.run()
+    assert not _errors(at)
+    assert f"cand_ai_brief_btn_{sample_profiles[0].candidate_id}" in {b.key for b in at.button}
+    body = " ".join(m.value for m in at.markdown)
+    assert "Uses LLM" in body and "Candidate brief" in body
+
+    at = AppTest.from_file(str(ROOT / "app.py"), default_timeout=90)
+    at.session_state["page"] = "Review"
+    at.session_state["review_selected"] = sample_profiles[0].candidate_id
+    at.run()
+    assert not _errors(at)
+    assert f"review_ai_plan_btn_{sample_profiles[0].candidate_id}" in {b.key for b in at.button}
+    body = " ".join(m.value for m in at.markdown)
+    assert "Uses LLM" in body and "Review plan" in body
+
+    at = AppTest.from_file(str(ROOT / "app.py"), default_timeout=90)
+    at.session_state["page"] = "Analytics"
+    at.run()
+    assert not _errors(at)
+    assert "analytics_ai_memo_btn" in {b.key for b in at.button}
+    body = " ".join(m.value for m in at.markdown)
+    assert "Uses LLM" in body and "Pool memo" in body
+
+    at = AppTest.from_file(str(ROOT / "app.py"), default_timeout=90)
+    cid = sample_profiles[0].candidate_id
+    at.session_state["page"] = "Shortlist"
+    at.session_state["shortlist"] = {
+        cid: {"note": "strong profile", "tags": "priority", "source": "human", "basis": "test"}
+    }
+    at.session_state["shortlist_selected"] = cid
+    at.run()
+    assert not _errors(at)
+    assert "sl_ai_memo_btn" in {b.key for b in at.button}
+    body = " ".join(m.value for m in at.markdown)
+    assert "Uses LLM" in body and "Slate memo" in body
 
 
 def test_system_page_renders_every_tab(monkeypatch, sample_profiles):

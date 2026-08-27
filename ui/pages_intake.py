@@ -295,6 +295,11 @@ def render_intake(profiles, synth, pool, index, index_manifest, manifest, store,
     st.caption("Type is verified by magic bytes, not by extension; filenames are "
               "randomised before anything is written; and the injection scanner "
               "runs before any text reaches the model.")
+    C.llm_callout(
+        "Resume parsing",
+        "Uses the LLM to extract structured candidate fields from uploaded resumes "
+        "after file safety checks and prompt-injection scanning.",
+        stage="ingest")
 
     if SETTINGS.flags.demo_mode:
         st.markdown(

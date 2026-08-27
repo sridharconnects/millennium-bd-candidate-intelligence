@@ -55,6 +55,17 @@ def metric_card(value, label: str, hint: str = "", colour: str | None = None,
         + "</div>", unsafe_allow_html=True)
 
 
+def llm_callout(title: str, body: str, *, stage: str = "") -> None:
+    """Compact disclosure for any action that sends context to the LLM."""
+    stage_html = f'<b>{html.escape(stage)}</b>' if stage else ""
+    st.markdown(
+        '<div class="mm-llm-callout">'
+        '<span class="mm-llm-chip">Uses LLM</span>'
+        f'<div><strong>{html.escape(title)}</strong>'
+        f'<p>{html.escape(body)}</p></div>{stage_html}</div>',
+        unsafe_allow_html=True)
+
+
 def section_header(title: str, subtitle: str = "", meta: str = "") -> None:
     """Toolbar-style section head used above results, analytics blocks, etc."""
     sub = (f'<div class="mm-toolbar-meta">{html.escape(subtitle)}</div>'

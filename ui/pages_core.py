@@ -11,7 +11,7 @@ import pandas as pd
 import streamlit as st
 
 from millennium import taxonomy as tx
-from millennium.config import ScoreWeights
+from millennium.config import SETTINGS, ScoreWeights
 from millennium.index import build_chunks
 from millennium.llm import LLMUnavailable
 from millennium.prompts import requisition_prompt
@@ -19,6 +19,7 @@ from millennium.retrieval import (ParsedQuery, apply_filters, retrieve, similar_
                                   understand_query)
 from millennium.scoring import gap_analysis, minimal_edit, rank, weight_sensitivity
 from . import components as C
+from . import llm_panels
 from . import theme
 
 # Example searches, shown as suggestion pills under the search bar. Keys are short,
@@ -446,6 +447,13 @@ def render_search(profiles, synth, pool, index, index_manifest, manifest, store,
             meta=f"{len(pool)} in pool",
             key="cc_command",
         )
+        query_llm_state = "enabled" if SETTINGS.flags.enable_llm_query_parse else "disabled"
+        C.llm_callout(
+            "Search intent understanding",
+            f"Plain-English queries can use the LLM to extract must-haves, "
+            f"preferences, and exclusions. Retrieval, filtering, and ranking stay "
+            f"local; LLM query parsing is currently {query_llm_state}.",
+            stage="query")
         query = st.session_state["query"] if "query" in st.session_state else ""
         mode = st.session_state["retrieval_mode"] if "retrieval_mode" in st.session_state else "hybrid"
         mode = mode or "hybrid"
@@ -943,6 +951,47 @@ def _profile_downloads_compact(p) -> None:
             width="stretch")
 
 
+def _render_ai_json_panel(data: dict, title: str) -> None:
+    if data.get("_notice"):
+        st.info(data["_notice"])
+    source = "Uses LLM: generated" if data.get("_llm_generated") else "LLM feature: fallback"
+    st.markdown(
+        f'<div class="mm-ai-panel-head"><span>{html.escape(title)}</span>'
+        f'<b>{html.escape(source)}</b></div>',
+        unsafe_allow_html=True)
+    for key, value in data.items():
+        if key.startswith("_"):
+            continue
+        label = key.replace("_", " ").title()
+        if isinstance(value, list):
+            st.markdown(f"**{label}**")
+            if value and isinstance(value[0], dict):
+                for item in value[:8]:
+                    bits = [f"**{html.escape(str(k).replace('_', ' ').title())}:** "
+                            f"{html.escape(str(v))}" for k, v in item.items() if v not in ("", [], None)]
+                    st.markdown("- " + " · ".join(bits) if bits else "-")
+            else:
+                for item in value[:8]:
+                    st.markdown(f"- {html.escape(str(item))}")
+        elif value not in ("", None, []):
+            st.markdown(f"**{label}**  \n{html.escape(str(value))}")
+
+
+def _render_candidate_ai_brief(client, p, pool) -> None:
+    key = f"candidate_ai_brief_{p.candidate_id}"
+    C.llm_callout(
+        "Candidate brief",
+        "Creates recruiter-facing strengths, watchouts, and next actions from the "
+        "verified profile. It runs only after you click.",
+        stage="candidate_brief")
+    if st.button("Generate LLM brief", icon=":material/auto_awesome:",
+                 key=f"cand_ai_brief_btn_{p.candidate_id}", width="stretch"):
+        st.session_state[key] = llm_panels.candidate_brief(
+            client, p, pool, blind=st.session_state.blind)
+    if st.session_state.get(key):
+        _render_ai_json_panel(st.session_state[key], "LLM recruiter brief")
+
+
 def _profile_insights(p, pool) -> None:
     """Compact charts on the Profile tab so opening a record shows *work done*,
     not only fields: skill depth, quality coverage, and how this person sits in
@@ -1028,7 +1077,7 @@ def _profile_insights(p, pool) -> None:
 
 
 def _render_candidate_command_center(p, ids: list[str], byid: dict, i: int,
-                                     pool) -> None:
+                                     pool, client) -> None:
     name = p.display_name(st.session_state.blind)
     initials = "".join(part[0] for part in name.replace("(", " ").split()
                        if part[:1].isalpha())[:2].upper() or "·"
@@ -1127,6 +1176,7 @@ def _render_candidate_command_center(p, ids: list[str], byid: dict, i: int,
                 st.session_state.page = "Search"
                 st.rerun()
             _profile_downloads_compact(p)
+            _render_candidate_ai_brief(client, p, pool)
 
 
 def _render_profile_tab(p, pool) -> None:
@@ -1311,7 +1361,7 @@ def render_candidate(profiles, synth, pool, index, index_manifest, manifest, sto
                     f'same person submitted through a different source.</div>',
                     unsafe_allow_html=True)
 
-    _render_candidate_command_center(p, ids, byid, i, pool)
+    _render_candidate_command_center(p, ids, byid, i, pool, client)
 
     tabs = st.tabs(["Profile", "Evidence Board", "Career Map", "Lookalikes",
                     "Lineage", "Source Text"])
@@ -1615,6 +1665,12 @@ def _render_req_brief_builder(client, store) -> None:
 
     jd = st.text_area("Job description", height=270, key="req_jd_text",
                       placeholder="Paste the role, mandate, or search brief...")
+    C.llm_callout(
+        "Requisition parser",
+        "The primary parser sends the role brief to the LLM to structure "
+        "must-haves, preferences, exclusions, and requirement rows. The rules-only "
+        "button below does not use the LLM.",
+        stage="requisition")
     p1, p2 = st.columns(2)
     if p1.button("Parse with LLM", type="primary", icon=":material/auto_awesome:",
                  width="stretch", key="req_parse_llm"):
@@ -2292,7 +2348,7 @@ def _results_actions(selected_ids: list[str]) -> None:
 
 
 _SOURCE_BADGE = {
-    "ai": ("🤖", "AI-ranked", "#2DD4BF"),
+    "ai": ("LLM", "LLM-ranked", "#2DD4BF"),
     "human": ("☆", "Human-selected", "#8B9CB3"),
     "assistant": ("💬", "Added via chat", "#A78BFA"),
 }
@@ -2364,14 +2420,20 @@ def _ics_invite(candidate_name: str, dt: datetime, duration_min: int,
 def _render_outreach(p, store, client) -> None:
     st.markdown(
         '<div class="mm-warn">✉ No email or calendar service is connected to this '
-        'app. Messages below are drafted and logged, never sent over any network; '
-        'the interview invite is a real, downloadable .ics file you send '
-        'yourself.</div>', unsafe_allow_html=True)
+        'app. Messages below are drafted and logged, never sent over any network. '
+        'Only the draft action uses the LLM; logging and invite generation stay '
+        'local.</div>', unsafe_allow_html=True)
     email = p.sensitive.email.display("unknown")
     st.caption(f"Recipient on file: {email}")
 
     dkey = f"draft_{p.candidate_id}"
-    if st.button("🤖 Draft with AI", key=f"aidraft_{p.candidate_id}"):
+    C.llm_callout(
+        "Outreach draft",
+        "Uses the LLM to draft a first-contact email from verified candidate "
+        "background only. It does not send email.",
+        stage="outreach_draft")
+    if st.button("Draft with LLM", icon=":material/auto_awesome:",
+                 key=f"aidraft_{p.candidate_id}"):
         subject, body, ai = _draft_outreach_email(client, p)
         st.session_state[dkey] = {"subject": subject, "body": body}
         if not ai:
@@ -2708,7 +2770,7 @@ def _render_shortlist_profile(cid: str, p, sl: dict, store, client) -> None:
         _render_outreach(p, store, client)
 
 
-def _render_shortlist_side(sl: dict, byid: dict, store) -> None:
+def _render_shortlist_side(sl: dict, byid: dict, store, client) -> None:
     st.markdown('<div class="mm-panel-heading"><span>Slate controls</span>'
                 '<b>compare & export</b></div>', unsafe_allow_html=True)
     df = _shortlist_table(sl, byid)
@@ -2736,6 +2798,17 @@ def _render_shortlist_side(sl: dict, byid: dict, store) -> None:
         for cid in sl if cid in byid]}
     d2.download_button("JSON", json.dumps(payload, indent=1), "shortlist.json",
                        "application/json", width="stretch")
+    memo_key = "shortlist_ai_memo"
+    C.llm_callout(
+        "Slate memo",
+        "Uses the LLM to summarize shortlist coverage, risks, and interview focus "
+        "from the current slate. It does not approve candidates.",
+        stage="shortlist_memo")
+    if st.button("Generate LLM slate memo", icon=":material/auto_awesome:",
+                 key="sl_ai_memo_btn", width="stretch", disabled=df.empty):
+        st.session_state[memo_key] = llm_panels.shortlist_memo(client, sl, byid, store)
+    if st.session_state.get(memo_key):
+        _render_ai_json_panel(st.session_state[memo_key], "LLM slate memo")
     with st.expander("Inbox", expanded=True):
         _render_inbox(sl, byid, store)
 
@@ -2770,4 +2843,4 @@ def render_shortlist(profiles, synth, pool, index, index_manifest, manifest, sto
             _render_shortlist_profile(selected, byid[selected], sl, store, client)
     with right:
         with st.container(border=True, key="sl_side_panel"):
-            _render_shortlist_side(sl, byid, store)
+            _render_shortlist_side(sl, byid, store, client)

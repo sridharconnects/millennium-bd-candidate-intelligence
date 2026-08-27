@@ -16,6 +16,7 @@ from millennium.agents.insight import (coverage_gaps, data_quality, distribution
                                        skill_cooccurrence)
 from millennium.config import SETTINGS
 from . import components as C
+from . import llm_panels
 from . import theme
 
 
@@ -63,6 +64,32 @@ def _review_lane(p) -> str:
     if p.quality.evidence_coverage < 0.85:
         return "Check source spans"
     return "Approve quality"
+
+
+def _render_ai_json_panel(data: dict, title: str) -> None:
+    if data.get("_notice"):
+        st.info(data["_notice"])
+    source = "Uses LLM: generated" if data.get("_llm_generated") else "LLM feature: fallback"
+    st.markdown(
+        f'<div class="mm-ai-panel-head"><span>{html.escape(title)}</span>'
+        f'<b>{html.escape(source)}</b></div>',
+        unsafe_allow_html=True)
+    for key, value in data.items():
+        if key.startswith("_"):
+            continue
+        label = key.replace("_", " ").title()
+        if isinstance(value, list):
+            st.markdown(f"**{label}**")
+            if value and isinstance(value[0], dict):
+                for item in value[:8]:
+                    bits = [f"**{html.escape(str(k).replace('_', ' ').title())}:** "
+                            f"{html.escape(str(v))}" for k, v in item.items() if v not in ("", [], None)]
+                    st.markdown("- " + " · ".join(bits) if bits else "-")
+            else:
+                for item in value[:8]:
+                    st.markdown(f"- {html.escape(str(item))}")
+        elif value not in ("", None, []):
+            st.markdown(f"**{label}**  \n{html.escape(str(value))}")
 
 
 def _render_review_summary(queue, profiles, store):
@@ -147,7 +174,7 @@ def _render_review_queue(queue):
             st.rerun()
 
 
-def _render_review_case(p, fields, store):
+def _render_review_case(p, fields, store, client):
     name = p.display_name(st.session_state.blind)
     initials = _review_initials(name)
     sev, tone = _review_severity(p)
@@ -196,6 +223,18 @@ def _render_review_case(p, fields, store):
     with st.container(border=True, key="review_editor_card"):
         st.markdown('<div class="mm-panel-heading"><span>Correct or approve a field</span>'
                     '<b>source evidence stays visible</b></div>', unsafe_allow_html=True)
+        plan_key = f"review_ai_plan_{p.candidate_id}"
+        C.llm_callout(
+            "Review plan",
+            "Uses the LLM to suggest what is wrong, what evidence to inspect, and "
+            "which fields need correction. Reviewers still make the decision.",
+            stage="review_plan")
+        if st.button("Generate LLM review plan", icon=":material/auto_awesome:",
+                     key=f"review_ai_plan_btn_{p.candidate_id}", width="stretch"):
+            st.session_state[plan_key] = llm_panels.review_plan(
+                client, p, fields, blind=st.session_state.blind)
+        if st.session_state.get(plan_key):
+            _render_ai_json_panel(st.session_state[plan_key], "LLM review plan")
         pick = st.selectbox("Field to review", list(fields),
                             key=f"review_field_{p.candidate_id}")
         path, t = fields[pick]
@@ -327,7 +366,7 @@ def render_review(profiles, synth, pool, index, index_manifest, manifest, store,
             _render_review_queue(queue)
     with center:
         with st.container(border=True, key="review_case_panel"):
-            _render_review_case(p, fields, store)
+            _render_review_case(p, fields, store, client)
     with right:
         with st.container(border=True, key="review_context_panel"):
             _render_review_context(p, fields, store, index)
@@ -353,9 +392,31 @@ def render_analytics(profiles, synth, pool, index, index_manifest, manifest, sto
     C.kpi(k[4], dq.get("needs_review", 0), "Need review",
           colour=theme.WARNING if dq.get("needs_review", 0) else theme.INK)
 
-    tabs = st.tabs(["Distributions", "Coverage gaps", "Skills", "Data quality", "Export"])
+    tabs = st.tabs(["LLM memo", "Distributions", "Coverage gaps", "Skills",
+                    "Data quality", "Export"])
 
     with tabs[0]:
+        st.markdown("##### LLM pool memo")
+        C.llm_callout(
+            "Pool memo",
+            "Uses the LLM to write an advisory narrative from aggregate pool data. "
+            "It does not see candidate contact details or make hiring decisions.",
+            stage="analytics_memo")
+        memo_key = "analytics_ai_memo"
+        if st.button("Generate LLM pool memo", icon=":material/auto_awesome:",
+                     key="analytics_ai_memo_btn"):
+            st.session_state[memo_key] = llm_panels.analytics_memo(
+                client, pool, dq, dist, gaps)
+        if st.session_state.get(memo_key):
+            _render_ai_json_panel(st.session_state[memo_key], "LLM pool memo")
+        else:
+            st.markdown(
+                '<div class="mm-ai-empty">Generate a concise readout of the current '
+                'pool, coverage risks, recommended searches, and data quality actions.'
+                '</div>',
+                unsafe_allow_html=True)
+
+    with tabs[1]:
         pairs = [("region", "Geographic market"), ("strategy", "Investment strategy"),
                  ("sector", "Sector coverage"), ("seniority", "Seniority level"),
                  ("experience_band", "Experience"), ("approach", "Investment approach"),
@@ -397,7 +458,7 @@ def render_analytics(profiles, synth, pool, index, index_manifest, manifest, sto
                               font=dict(size=11), xaxis_title=None, yaxis_title=None)
             st.plotly_chart(theme.polish_fig(fig), width="stretch", config={"displayModeBar": False})
 
-    with tabs[1]:
+    with tabs[2]:
         st.markdown("##### Where you cannot currently hire")
         st.caption("The inverse of a distribution chart. A recruiter already knows most "
                    "of the pool is equity research; what they need is the list of "
@@ -424,7 +485,7 @@ def render_analytics(profiles, synth, pool, index, index_manifest, manifest, sto
         if strong:
             st.dataframe(pd.DataFrame(strong), width="stretch", hide_index=True)
 
-    with tabs[2]:
+    with tabs[3]:
         a, b = st.columns([0.45, 0.55])
         with a:
             data = dist.get("skill", {})
@@ -453,7 +514,7 @@ def render_analytics(profiles, synth, pool, index, index_manifest, manifest, sto
                 st.dataframe(pd.DataFrame(co).head(20), width="stretch",
                              hide_index=True)
 
-    with tabs[3]:
+    with tabs[4]:
         a, b = st.columns(2)
         with a:
             rows = [{"candidate": p.display_name(st.session_state.blind),
@@ -483,7 +544,7 @@ def render_analytics(profiles, synth, pool, index, index_manifest, manifest, sto
                        "number. In a hiring product a fabricated employer is worse than "
                        "a blank, so a refusal is a success state, not a failure.")
 
-    with tabs[4]:
+    with tabs[5]:
         _render_export_tab()
 
 

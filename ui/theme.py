@@ -2488,6 +2488,103 @@ CSS = f"""
       margin:0 0 2px;
       padding-bottom:6px;
   }}
+  .mm-ai-panel-head {{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin:10px 0 8px;
+      padding:8px 10px;
+      border:1px solid #C7D2FE;
+      border-radius:8px;
+      background:linear-gradient(135deg, #EEF2FF 0%, #FFFFFF 72%);
+      box-shadow:0 1px 2px rgba(79,70,229,.06);
+  }}
+  .mm-ai-panel-head span {{
+      font-size:0.76rem;
+      font-weight:760;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:{ACCENT_TEXT};
+  }}
+  .mm-ai-panel-head b {{
+      font-size:0.66rem;
+      font-weight:700;
+      color:{MUTED};
+      background:#FFFFFF;
+      border:1px solid #E0E7FF;
+      border-radius:999px;
+      padding:3px 8px;
+      white-space:nowrap;
+  }}
+  .mm-ai-empty {{
+      padding:14px 16px;
+      border:1px dashed #C7D2FE;
+      border-radius:8px;
+      background:rgba(238,242,255,.56);
+      color:{MUTED};
+      font-size:0.82rem;
+      line-height:1.5;
+  }}
+  .mm-llm-callout {{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin:8px 0 12px;
+      padding:10px 12px;
+      border:1px solid #C7D2FE;
+      border-left:3px solid {ACCENT};
+      border-radius:8px;
+      background:linear-gradient(135deg, rgba(238,242,255,.78), rgba(255,255,255,.94));
+      box-shadow:0 1px 2px rgba(15,23,42,.04);
+      color:{INK};
+  }}
+  .mm-llm-callout div {{
+      min-width:0;
+      flex:1 1 auto;
+  }}
+  .mm-llm-callout strong {{
+      display:block;
+      font-size:0.82rem;
+      line-height:1.2;
+      font-weight:760;
+      color:{INK};
+  }}
+  .mm-llm-callout p {{
+      margin:3px 0 0;
+      color:{MUTED};
+      font-size:0.74rem;
+      line-height:1.35;
+  }}
+  .mm-llm-callout > b {{
+      flex:0 0 auto;
+      padding:3px 8px;
+      border:1px solid #E0E7FF;
+      border-radius:999px;
+      background:#FFFFFF;
+      color:{MUTED};
+      font-size:0.62rem;
+      font-weight:760;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      white-space:nowrap;
+  }}
+  .mm-llm-chip {{
+      flex:0 0 auto;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:24px;
+      padding:4px 9px;
+      border-radius:999px;
+      background:{ACCENT};
+      color:#FFFFFF;
+      font-size:0.64rem;
+      font-weight:800;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      white-space:nowrap;
+  }}
   div[data-testid="stVerticalBlockBorderWrapper"] {{
       margin-bottom:10px;
   }}
