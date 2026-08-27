@@ -207,3 +207,139 @@ def export_all(profiles: list[CandidateProfile], out_dir: Path | None = None,
                for p in profiles for ev in p.all_evidence()]
     written["evidence.csv"] = _write_csv(out / "evidence.csv", ev_rows)
     return written
+
+
+def _slug(p: CandidateProfile, blind: bool = False) -> str:
+    raw = p.display_name(blind).lower()
+    keep = "".join(c if c.isalnum() else "-" for c in raw).strip("-")
+    return (keep or p.candidate_id[:8])[:48]
+
+
+def profile_filename(p: CandidateProfile, ext: str, blind: bool = False) -> str:
+    return f"{_slug(p, blind)}.{ext.lstrip('.')}" if ext else _slug(p, blind)
+
+
+def profile_json_bytes(p: CandidateProfile, include_pii: bool = True) -> bytes:
+    payload = json.loads(p.model_dump_json(exclude={"raw_text"}))
+    if not include_pii:
+        payload.pop("sensitive", None)
+    return json.dumps(payload, indent=2, ensure_ascii=False).encode("utf8")
+
+
+def profile_csv_bytes(p: CandidateProfile, include_pii: bool = True) -> bytes:
+    row = flat_row(p, include_pii=include_pii)
+    from io import StringIO
+    buf = StringIO()
+    wr = csv.DictWriter(buf, fieldnames=list(row.keys()))
+    wr.writeheader()
+    wr.writerow(row)
+    return buf.getvalue().encode("utf8")
+
+
+def _profile_lines(p: CandidateProfile, include_pii: bool) -> list[tuple[str, str]]:
+    """Plain-text sections for PDF / Word. (heading, body)."""
+    name = p.display_name(not include_pii)
+    cur = p.current_role()
+    lines: list[tuple[str, str]] = [
+        ("Name", name),
+        ("Headline", p.headline.display("—")),
+        ("Location", p.location_current.display("—")),
+        ("Years experience", p.years_experience.display("—")),
+        ("Seniority", (f"{p.seniority.label} · {tx.display('seniority', p.seniority.label)}"
+                       if p.seniority else "—")),
+        ("Current role", (f"{cur.title_raw.display('—')} · "
+                          f"{cur.employer_canonical or cur.employer_raw.display('—')}"
+                          if cur else "—")),
+        ("Strategies", ", ".join(tx.display("strategy", c.label) for c in p.strategies) or "—"),
+        ("Sectors", ", ".join(tx.display("sector", c.label) for c in p.sectors) or "—"),
+        ("Skills", ", ".join(s.canonical for s in p.skills) or "—"),
+        ("Languages", ", ".join(
+            f"{l.language}" + (f" ({l.proficiency})" if l.proficiency else "")
+            for l in p.languages) or "—"),
+        ("Certifications", ", ".join(
+            tx.display("certification", c.canonical) for c in p.certifications if c.canonical) or "—"),
+    ]
+    if include_pii:
+        lines.insert(2, ("Email", p.sensitive.email.display("—")))
+        lines.insert(3, ("Phone", p.sensitive.phone.display("—")))
+    emp = []
+    for e in p.employment:
+        dates = f"{e.dates.start.normalized_value or '?'} → {e.dates.end.normalized_value or '?'}"
+        emp.append(f"{e.title_raw.display('—')} · "
+                   f"{e.employer_canonical or e.employer_raw.display('—')} ({dates})")
+        for h in e.highlights[:4]:
+            emp.append(f"  – {h.value}")
+    lines.append(("Employment", "\n".join(emp) if emp else "—"))
+    edu = []
+    for e in p.education:
+        edu.append(" · ".join(x for x in [
+            e.institution.display(""), e.degree_raw.display(""),
+            e.field_of_study.display(""), str(e.graduation_year.display("")),
+        ] if x and x != "—"))
+    lines.append(("Education", "\n".join(edu) if edu else "—"))
+    return lines
+
+
+def profile_docx_bytes(p: CandidateProfile, include_pii: bool = True) -> bytes:
+    from io import BytesIO
+    from docx import Document
+    from docx.shared import Pt, RGBColor
+
+    doc = Document()
+    title = doc.add_heading(p.display_name(not include_pii), level=1)
+    title.runs[0].font.color.rgb = RGBColor(0x0F, 0x17, 0x2A)
+    sub = doc.add_paragraph(p.headline.display(""))
+    for run in sub.runs:
+        run.font.size = Pt(11)
+        run.font.color.rgb = RGBColor(0x64, 0x74, 0x8B)
+    for heading, body in _profile_lines(p, include_pii):
+        h = doc.add_heading(heading, level=2)
+        h.runs[0].font.color.rgb = RGBColor(0x0F, 0x76, 0x6E)
+        para = doc.add_paragraph(str(body))
+        para.paragraph_format.space_after = Pt(8)
+    buf = BytesIO()
+    doc.save(buf)
+    return buf.getvalue()
+
+
+def profile_pdf_bytes(p: CandidateProfile, include_pii: bool = True) -> bytes:
+    import pymupdf as fitz
+
+    def wrap(text: str, width: int = 92) -> list[str]:
+        out: list[str] = []
+        for para in str(text).split("\n"):
+            line = ""
+            for word in para.split() or [""]:
+                trial = (line + " " + word).strip()
+                if len(trial) > width and line:
+                    out.append(line)
+                    line = word
+                else:
+                    line = trial
+            out.append(line)
+        return out or [""]
+
+    doc = fitz.open()
+    page = doc.new_page(width=595, height=842)
+    y, margin = 56.0, 48.0
+
+    def write(text: str, size: float, color=(0.06, 0.09, 0.16), bold: bool = False) -> None:
+        nonlocal y, page
+        font = "hebo" if bold else "helv"
+        for line in wrap(text):
+            if y > 800:
+                page = doc.new_page(width=595, height=842)
+                y = 56.0
+            page.insert_text((margin, y), line, fontsize=size, fontname=font, color=color)
+            y += size + 5
+
+    write(p.display_name(not include_pii), 18, bold=True)
+    write(p.headline.display(""), 11, color=(0.39, 0.45, 0.55))
+    y += 8
+    for heading, body in _profile_lines(p, include_pii):
+        write(heading.upper(), 9, color=(0.06, 0.46, 0.43), bold=True)
+        write(str(body), 10)
+        y += 8
+    data = doc.tobytes()
+    doc.close()
+    return data

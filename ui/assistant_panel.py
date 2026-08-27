@@ -52,17 +52,20 @@ def init_state() -> None:
 
 
 def render_toggle_button() -> None:
-    """The header icon that opens/closes the dock -- 'press chat in top' the way VS
-    Code's own chat toggle works, rather than a switch buried in the sidebar."""
-    is_open = st.session_state.chat_open
-    label = "✕  Chat" if is_open else "💬  Chat"
-    if st.button(label, key="chat_toggle_btn", type="primary" if is_open else "secondary",
-                width="stretch",
+    """The chat launcher: a floating pill pinned to the TOP-RIGHT corner of the
+    viewport (theme.py fixes `.st-key-chat_toggle_btn` in place), so it is reachable
+    from any page at any scroll position -- the way an IDE's chat icon lives in the
+    title bar rather than somewhere in the document. It only exists while the panel
+    is closed; the open panel carries its own ✕, and rendering both would stack two
+    controls in the same corner."""
+    if st.session_state.chat_open:
+        return
+    if st.button("💬  Assistant", key="chat_toggle_btn",
                 help="A real Claude tool-calling loop over this exact workspace -- it "
                      "can search, filter, open a candidate, manage the shortlist, and "
                      "answer questions using live pool data. It cannot delete a record "
                      "or approve a review; those stay behind your own click."):
-        st.session_state.chat_open = not is_open
+        st.session_state.chat_open = True
         st.rerun()
 
 
@@ -85,8 +88,12 @@ def _send(user_text: str, pool: list, store) -> None:
 
 
 def render_chat_dock(pool: list, store) -> None:
-    """The full right-hand panel. Call only when `st.session_state.chat_open` is True,
-    inside the column reserved for it -- see app.py's routing section."""
+    """The docked panel: fixed to the right edge of the viewport at full height
+    (Cursor / VS Code chat shape -- see theme.py's .st-key-chat_dock rules). Layout
+    inside is a flex column: title bar, then a message-history container that grows
+    to fill the panel and scrolls internally, then the input pinned at the bottom.
+    Call only when `st.session_state.chat_open` is True -- see app.py's routing
+    section, which also injects the CSS that reflows the main page beside it."""
     with st.container(key="chat_dock"):
         head, clear, close = st.columns([0.72, 0.14, 0.14])
         with head:
@@ -95,7 +102,7 @@ def render_chat_dock(pool: list, store) -> None:
                 '<span class="mm-chat-live"><span class="dot"></span>live</span></div>',
                 unsafe_allow_html=True)
         with clear:
-            if st.button("↺", key="chat_clear_btn", help="Start a new conversation",
+            if st.button("＋", key="chat_clear_btn", help="New conversation",
                         width="stretch"):
                 st.session_state.chat_api_messages = []
                 st.session_state.chat_last_actions = []
@@ -105,27 +112,29 @@ def render_chat_dock(pool: list, store) -> None:
                         width="stretch"):
                 st.session_state.chat_open = False
                 st.rerun()
-        st.markdown(
-            '<div class="mm-sub" style="margin:-4px 0 10px 0">Real tool-calling over '
-            'this workspace — search, filter, open a candidate, manage the shortlist. '
-            'It never deletes a record or approves a review.</div>',
-            unsafe_allow_html=True)
 
         turns = _display_turns(st.session_state.chat_api_messages)
-        if not turns:
-            st.markdown(
-                '<div style="text-align:center;padding:28px 10px 18px 10px">'
-                '<div style="font-size:2rem;line-height:1">💬</div>'
-                '<div style="font-weight:700;font-size:1.0rem;margin-top:8px">'
-                'How can I help?</div>'
-                '<div class="mm-sub" style="margin-top:2px">Ask about candidates, run a '
-                'search, or manage the shortlist.</div></div>', unsafe_allow_html=True)
-            picked = st.pills("Suggestions", list(SUGGESTIONS.keys()),
-                              label_visibility="collapsed", key="chat_suggestion_pill")
-            if picked:
-                _send(SUGGESTIONS[picked], pool, store)
-        else:
-            with st.container(height=560):
+        # Always the same container, whether empty or mid-conversation: it is the
+        # flex-growing region of the panel (the height=560 is a fallback that the
+        # theme CSS overrides to "fill the panel"), so the input below it sits at
+        # the bottom of the viewport in both states, exactly like an IDE chat.
+        with st.container(height=560, key="chat_messages"):
+            if not turns:
+                st.markdown(
+                    '<div style="text-align:center;padding:80px 10px 18px 10px">'
+                    '<div style="font-size:2rem;line-height:1">💬</div>'
+                    '<div style="font-weight:700;font-size:1.0rem;margin-top:8px">'
+                    'How can I help?</div>'
+                    '<div class="mm-sub" style="margin-top:2px">Ask about candidates, '
+                    'run a search, or manage the shortlist. Real tool-calling over '
+                    'this workspace — it never deletes a record or approves a review.'
+                    '</div></div>', unsafe_allow_html=True)
+                picked = st.pills("Suggestions", list(SUGGESTIONS.keys()),
+                                  label_visibility="collapsed",
+                                  key="chat_suggestion_pill")
+                if picked:
+                    _send(SUGGESTIONS[picked], pool, store)
+            else:
                 for role, text in turns:
                     with st.chat_message("user" if role == "user" else "assistant"):
                         st.markdown(text)

@@ -41,6 +41,9 @@ CSS = f"""
   :root {{
     --ink:{INK}; --muted:{MUTED}; --line:{LINE};
     --surface:{SURFACE}; --canvas:{CANVAS}; --accent:{ACCENT};
+    /* Width of the docked chat panel; the main content's right padding is derived
+       from the same variable so the two can never drift apart. */
+    --mm-chat-w:clamp(360px, 30vw, 500px);
   }}
   .stApp {{ background:{CANVAS}; }}
 
@@ -52,7 +55,11 @@ CSS = f"""
      toolbar is hidden outright and the container reclaims that space instead. */
   header[data-testid="stHeader"] {{ display:none; }}
   div[data-testid="stToolbar"] {{ display:none; }}
-  .block-container {{ padding-top:1.6rem; padding-bottom:3rem; max-width:1480px; }}
+  .block-container {{ padding-top:1.6rem; padding-bottom:3rem; max-width:1480px;
+                      overflow:visible; }}
+  /* Sticky chrome needs a scrollport whose overflow is not `hidden`. Streamlit's
+     main section is that scrollport on this version. */
+  section[data-testid="stMain"] {{ overflow:auto; }}
   html, body, [class*="css"] {{
       font-family:"Inter",-apple-system,"Segoe UI",system-ui,sans-serif;
       color:{INK}; font-size:14px; }}
@@ -62,6 +69,23 @@ CSS = f"""
   /* dense sidebar */
   section[data-testid="stSidebar"] {{ background:{SURFACE}; border-right:1px solid {LINE}; }}
   section[data-testid="stSidebar"] .block-container {{ padding-top:1rem; }}
+
+  /* The workspace sidebar is a permanent fixture: Streamlit's native drag-to-resize
+     on its right edge stays available (min/max keep it usable at both extremes),
+     but the collapse control is removed entirely -- the primary navigation of a
+     tool that is open all day should never be one misclick away from vanishing. */
+  section[data-testid="stSidebar"] {{ min-width:220px; max-width:460px; }}
+  [data-testid="stSidebarCollapseButton"] {{ display:none !important; }}
+  /* A session that collapsed the sidebar BEFORE the control was removed (or an
+     auto-collapse on a narrow window) is otherwise stuck: Streamlit collapses by
+     sliding the section off-screen with translateX(-width) while min-width above
+     keeps its layout slot reserved -- the result is a dead empty strip where the
+     nav should be, with the expand chevron unreachable inside the hidden header.
+     Neutralising the transform makes the collapsed state a no-op: the sidebar is
+     simply always there. */
+  section[data-testid="stSidebar"][aria-expanded="false"] {{
+      transform:none !important; visibility:visible !important;
+  }}
 
   /* Workspace nav: the most important navigation surface in the app, previously a
      bare radio list with no visual weight and no indication of what each page does.
@@ -96,6 +120,119 @@ CSS = f"""
   .mm-card {{ background:{SURFACE}; border:1px solid {LINE}; border-radius:9px;
              padding:14px 16px; margin-bottom:10px; }}
   .mm-card:hover {{ border-color:#CBD5E1; }}
+
+  /* Employment as a connected flow (rail + nodes), not a stack of boxed cards. */
+  .mm-flow {{ position:relative; padding:4px 0 2px 22px; margin:4px 0 8px 0; }}
+  .mm-flow::before {{ content:""; position:absolute; left:6px; top:10px; bottom:10px;
+                      width:2px; background:{ACCENT_SOFT}; }}
+  .mm-flow-item {{ position:relative; padding:0 0 22px 12px; }}
+  .mm-flow-item:last-child {{ padding-bottom:2px; }}
+  .mm-flow-item::before {{ content:""; position:absolute; left:-19px; top:7px;
+                           width:10px; height:10px; border-radius:50%;
+                           background:{ACCENT}; border:2px solid {SURFACE};
+                           outline:2px solid {ACCENT_SOFT}; }}
+  .mm-flow-item.is-intern::before {{ background:{MUTED}; outline-color:{LINE}; }}
+  .mm-flow-meta {{ color:{MUTED}; font-size:0.83rem; margin-top:2px; line-height:1.45; }}
+  .mm-flow details {{ margin-top:6px; }}
+  .mm-flow details summary {{ cursor:pointer; color:{ACCENT}; font-size:0.8rem;
+                              font-weight:600; list-style:none; }}
+  .mm-flow details summary::-webkit-details-marker {{ display:none; }}
+  .mm-flow details summary::before {{ content:"▾ "; }}
+  .mm-flow details:not([open]) summary::before {{ content:"▸ "; }}
+  .mm-flow details ul {{ margin:6px 0 0 0; padding-left:18px; color:{INK};
+                         font-size:0.84rem; line-height:1.5; }}
+  .mm-flow details li {{ margin-bottom:4px; }}
+
+  .mm-insight-h {{ font-size:0.78rem; font-weight:750; letter-spacing:.04em;
+                   text-transform:uppercase; color:{INK}; }}
+  .mm-insight-stats {{ display:flex; gap:14px; margin-top:10px; }}
+  .mm-insight-stats div {{ display:flex; flex-direction:column; }}
+  .mm-insight-stats b {{ font-size:1.35rem; letter-spacing:-0.02em; color:{INK};
+                         line-height:1.1; }}
+  .mm-insight-stats span {{ font-size:0.72rem; color:{MUTED}; margin-top:2px; }}
+
+  .mm-switch-head {{ font-weight:650; font-size:0.95rem; margin-bottom:2px; }}
+  .st-key-cand_switcher {{ background:{SURFACE}; }}
+  .st-key-cand_switcher [data-testid="stSelectbox"] label p {{
+      font-size:0.78rem; font-weight:600; color:{MUTED};
+      text-transform:uppercase; letter-spacing:.04em;
+  }}
+  /* Prev = ink (step back); Next = teal (step forward). Disabled stays quiet
+     so the header does not reflow when you hit either end of the pool. */
+  .st-key-cand_prev button {{
+      background:{INK}; color:#fff; border:1px solid {INK};
+      font-weight:650; border-radius:10px;
+  }}
+  .st-key-cand_prev button:hover:enabled {{
+      background:{ACCENT}; border-color:{ACCENT}; color:#fff;
+  }}
+  .st-key-cand_prev button:disabled {{
+      background:{CANVAS}; color:#CBD5E1; border-color:{LINE};
+  }}
+  .st-key-cand_next button {{
+      background:{ACCENT}; color:#fff; border:1px solid {ACCENT};
+      font-weight:650; border-radius:10px;
+  }}
+  .st-key-cand_next button:hover:enabled {{
+      background:#0D9488; border-color:#0D9488; color:#fff;
+  }}
+  .st-key-cand_next button:disabled {{
+      background:{CANVAS}; color:#CBD5E1; border-color:{LINE};
+  }}
+  .st-key-cand_remove button {{
+      background:#FEF2F2; color:#991B1B; border:1px solid #FECACA;
+      font-weight:650; border-radius:10px;
+  }}
+  .st-key-cand_remove button:hover {{
+      background:#B91C1C; color:#fff; border-color:#B91C1C;
+  }}
+  /* Profile-page shortlist: filled teal when adding; amber once they are on
+     the list so the state is obvious without reading the label. */
+  .st-key-cand_shortlist button {{
+      font-weight:650; border-radius:10px;
+  }}
+  .st-key-cand_shortlist button[kind="secondary"] {{
+      background:#FFFBEB; color:#92400E; border:1px solid #FCD34D;
+  }}
+  .st-key-cand_shortlist button[kind="secondary"]:hover {{
+      background:#F59E0B; color:#fff; border-color:#F59E0B;
+  }}
+  .st-key-cand_go_sl button {{
+      font-weight:650; border-radius:10px;
+      background:#EEF2FF; color:#4338CA; border:1px solid #C7D2FE;
+  }}
+  .st-key-cand_go_sl button:hover {{
+      background:#4F46E5; color:#fff; border-color:#4F46E5;
+  }}
+  /* Download-this-profile: each format gets its own colour so the four
+     identical white buttons read as four different artefacts. */
+  .st-key-profile_exports [data-testid="stDownloadButton"] button {{
+      font-weight:650; border-radius:8px;
+  }}
+  .st-key-dl_json button {{
+      background:#EEF2FF; color:#3730A3; border-color:#C7D2FE;
+  }}
+  .st-key-dl_json button:hover {{
+      background:#4F46E5; color:#fff; border-color:#4F46E5;
+  }}
+  .st-key-dl_csv button {{
+      background:{ACCENT_SOFT}; color:#115E59; border-color:#99F6E4;
+  }}
+  .st-key-dl_csv button:hover {{
+      background:{ACCENT}; color:#fff; border-color:{ACCENT};
+  }}
+  .st-key-dl_pdf button {{
+      background:#FEF2F2; color:#991B1B; border-color:#FECACA;
+  }}
+  .st-key-dl_pdf button:hover {{
+      background:#B91C1C; color:#fff; border-color:#B91C1C;
+  }}
+  .st-key-dl_docx button {{
+      background:#EFF6FF; color:#1E3A8A; border-color:#BFDBFE;
+  }}
+  .st-key-dl_docx button:hover {{
+      background:#1D4ED8; color:#fff; border-color:#1D4ED8;
+  }}
   .mm-row {{ display:flex; gap:10px; align-items:baseline; flex-wrap:wrap; }}
   .mm-name {{ font-weight:650; font-size:1.02rem; color:{INK}; }}
   .mm-sub {{ color:{MUTED}; font-size:0.83rem; }}
@@ -208,19 +345,59 @@ CSS = f"""
       .st-key-cta_top div[data-testid="stButton"] button {{ animation:none; }}
   }}
 
-  /* Chat dock -- the full right-hand panel (app.py splits the page into
-     main_col/chat_col via st.columns when `chat_open` is true; this styles the
-     `st.container(key="chat_dock")` that wraps everything inside chat_col). Scoped
-     via the same `.st-key-*` convention proven on the Overview CTA button.
-     `position:sticky` (not `fixed`) pins it to the top of the viewport as the main
-     column scrolls -- the same visual result as VS Code's always-present side panel --
-     without `fixed`'s coordinate math or its risk of overlapping the header, since
-     sticky still respects the column's own box and simply refuses to scroll past it. */
+  /* Chat dock -- a fixed, full-viewport-height panel on the RIGHT EDGE of the
+     window, the same shape as Cursor's / VS Code's chat pane: it does not scroll
+     with the page, the message history scrolls inside it, and the input is pinned
+     to the bottom. `position:fixed` is safe here because Streamlit's own header
+     is hidden (see the stHeader rule above) and no ancestor of the block container
+     carries a transform that would re-anchor fixed positioning. While the dock is
+     open, app.py injects CHAT_OPEN_CSS below so the main content reflows beside
+     the panel instead of hiding underneath it. The `!important`s on radius/margin
+     override the generic stVerticalBlockBorderWrapper card styling further down,
+     which would otherwise round the panel's corners and float it off the edge. */
   .st-key-chat_dock {{
-      background:{SURFACE}; border:1px solid {LINE}; border-radius:16px;
-      padding:16px 18px 14px 18px; box-shadow:0 1px 3px rgba(15,23,42,.06),
-      0 8px 24px rgba(15,23,42,.05); position:sticky; top:12px;
-      max-height:calc(100vh - 24px); overflow-y:auto;
+      position:fixed; top:0; right:0; bottom:0;
+      width:min(var(--mm-chat-w), 100vw);
+      z-index:400;
+      background:{SURFACE};
+      border:none; border-left:1px solid {LINE};
+      border-radius:0 !important; margin-bottom:0 !important;
+      box-shadow:-10px 0 30px rgba(15,23,42,.08);
+      padding:12px 14px;
+      display:flex; flex-direction:column;
+  }}
+  /* Flex chain: every wrapper between the fixed panel and the message list must
+     pass height down, so the list can flex-grow and scroll while the input stays
+     pinned at the bottom. */
+  .st-key-chat_dock > div {{
+      display:flex; flex-direction:column; flex:1 1 auto; min-height:0;
+  }}
+  .st-key-chat_dock > div > div[data-testid="stVerticalBlock"] {{
+      flex:1 1 auto; min-height:0; gap:0.55rem;
+  }}
+  /* The message history (st.container(height=..., key="chat_messages")): the fixed
+     height Streamlit sets is overridden to "fill whatever the panel has left", and
+     scrolling moves to the inner div so it works whichever element Streamlit put
+     its own height/overflow on in this version. */
+  .st-key-chat_dock .st-key-chat_messages {{
+      flex:1 1 0 !important; min-height:0 !important; height:auto !important;
+      max-height:none !important; overflow:hidden !important;
+      border:none !important; border-radius:0 !important;
+      margin-bottom:0 !important; background:transparent;
+  }}
+  .st-key-chat_dock .st-key-chat_messages > div {{
+      height:100% !important; max-height:none !important;
+      overflow-y:auto !important; padding-right:4px;
+  }}
+  .st-key-chat_messages div[data-testid="stVerticalBlock"] {{ gap:0.4rem; }}
+  /* Compact ghost icon buttons in the panel header (new chat / close), matching
+     an IDE title bar rather than full-size form buttons. */
+  .st-key-chat_clear_btn button, .st-key-chat_close_btn button {{
+      border:none; background:transparent; color:{MUTED};
+      padding:0.15rem 0.4rem; min-height:1.8rem; font-size:0.95rem;
+  }}
+  .st-key-chat_clear_btn button:hover, .st-key-chat_close_btn button:hover {{
+      background:{CANVAS}; color:{INK}; border:none;
   }}
   .mm-chat-title {{ font-size:1.05rem; font-weight:750; letter-spacing:-0.01em;
                     padding-top:2px; }}
@@ -234,7 +411,34 @@ CSS = f"""
       0%, 100% {{ box-shadow:0 0 0 0 {ACCENT}55; }}
       50% {{ box-shadow:0 0 0 4px {ACCENT}00; }}
   }}
-  .st-key-chat_toggle_btn button {{ font-weight:600; }}
+  /* Chat launcher -- a floating pill pinned to the viewport's top-right corner,
+     visible from any page at any scroll position. Indigo, deliberately OUTSIDE the
+     app's four status colours: this is the one control that is an AI surface rather
+     than a data surface, and it should read as such at a glance (the same purple
+     convention Copilot-style assistants use). Only rendered while the panel is
+     closed, so it can never collide with the open panel's own ✕. */
+  .st-key-chat_toggle_btn {{
+      position:fixed; top:14px; right:18px; z-index:390; width:auto;
+  }}
+  .st-key-chat_toggle_btn button {{
+      background:#4F46E5; color:#fff; border:none; border-radius:22px;
+      padding:0.5rem 1.15rem; font-weight:650; font-size:0.88rem;
+      box-shadow:0 4px 16px rgba(79,70,229,.35);
+      transition:transform .12s ease, box-shadow .12s ease, background-color .12s ease;
+      animation:mm-chat-launch-pulse 2.6s ease-in-out infinite;
+  }}
+  .st-key-chat_toggle_btn button:hover {{
+      background:#4338CA; color:#fff; transform:translateY(-1px);
+      box-shadow:0 6px 20px rgba(79,70,229,.45); animation:none;
+  }}
+  .st-key-chat_toggle_btn button:active {{ transform:translateY(0); }}
+  @keyframes mm-chat-launch-pulse {{
+      0%, 100% {{ box-shadow:0 4px 16px rgba(79,70,229,.35), 0 0 0 0 rgba(79,70,229,.30); }}
+      50%      {{ box-shadow:0 4px 16px rgba(79,70,229,.35), 0 0 0 7px rgba(79,70,229,0); }}
+  }}
+  @media (prefers-reduced-motion: reduce) {{
+      .st-key-chat_toggle_btn button {{ animation:none; }}
+  }}
 
   /* Modern chat bubbles -- reskins Streamlit's own st.chat_message (verified live
      against this Streamlit version's DOM: stable `data-testid`s, not the fragile
@@ -294,6 +498,157 @@ CSS = f"""
   }}
   .st-key-chat_dock div[data-testid="stButtonGroup"] label:hover {{
       transform:translateY(-1px); box-shadow:0 2px 6px rgba(15,23,42,.08);
+  }}
+
+  /* Search hero -- the single unified search block on the Search page: input row +
+     example chips, tightened so it reads as ONE control rather than stacked strips. */
+  .st-key-search_hero > div > div[data-testid="stVerticalBlock"] {{ gap:0.45rem; }}
+  .st-key-search_hero div[data-testid="stButtonGroup"] label {{
+      border-radius:15px !important; font-size:0.78rem !important;
+      background:{CANVAS}; border-color:{LINE};
+      transition:border-color .1s ease, background-color .1s ease;
+  }}
+  .st-key-search_hero div[data-testid="stButtonGroup"] label:hover {{
+      border-color:{ACCENT}; background:{ACCENT_SOFT};
+  }}
+  /* The ⓘ mode-explainer trigger sits in the input row and should read as a quiet
+     icon button, not a second dropdown. */
+  .st-key-search_hero [data-testid="stPopoverButton"] {{
+      width:100%; justify-content:center; font-size:1.05rem; color:{MUTED};
+      border-color:{LINE};
+  }}
+  .st-key-search_hero [data-testid="stPopoverButton"]:hover {{
+      color:{ACCENT}; border-color:{ACCENT};
+  }}
+  .st-key-search_tools {{ gap:8px; }}
+  .st-key-open_match_studio button {{
+      background:#EEF2FF; color:#4338CA; border:1px solid #C7D2FE; font-weight:650;
+  }}
+  .st-key-open_match_studio button:hover {{
+      background:#4F46E5; color:#fff; border-color:#4F46E5;
+  }}
+  .st-key-open_import_studio button {{
+      background:{CANVAS}; color:{INK}; border:1px solid {LINE}; font-weight:650;
+  }}
+  .st-key-open_import_studio button:hover {{
+      border-color:{ACCENT}; color:{ACCENT};
+  }}
+  .st-key-resume_match {{
+      background:linear-gradient(180deg, #EEF2FF 0%, {SURFACE} 52px);
+      border:1px solid #C7D2FE !important; border-radius:12px;
+  }}
+  .st-key-pool_import {{
+      border:1px dashed #94A3B8 !important; border-radius:12px;
+  }}
+  .st-key-match_commit_btn button {{
+      font-weight:700;
+  }}
+  .st-key-cand_remove button,
+  .st-key-act_delete button {{
+      background:#FEF2F2; color:#991B1B; border:1px solid #FECACA; font-weight:650;
+  }}
+  .st-key-cand_remove button:hover,
+  .st-key-act_delete button:hover {{
+      background:#B91C1C; color:#fff; border-color:#B91C1C;
+  }}
+
+  /* Pool at a glance -- user-resizable via the native CSS resize handle (drag the
+     bottom-right corner), which needs overflow to not be `visible`. */
+  .st-key-pool_glance {{
+      resize:vertical; overflow:auto; min-height:170px;
+  }}
+  .mm-glance-sec {{ font-size:0.68rem; font-weight:750; letter-spacing:.07em;
+                    text-transform:uppercase; color:{MUTED}; margin:14px 0 4px 0; }}
+  .mm-glance-sec:first-child {{ margin-top:2px; }}
+  .mm-glance-row {{ display:flex; align-items:center; gap:9px; margin:5px 0; }}
+  .mm-glance-row .lbl {{ flex:0 0 118px; text-align:right; font-size:0.79rem;
+                         color:{INK}; white-space:nowrap; overflow:hidden;
+                         text-overflow:ellipsis; }}
+  .mm-glance-row .track {{ flex:1 1 auto; height:9px; border-radius:5px;
+                           background:#EEF2F7; overflow:hidden; }}
+  .mm-glance-row .fill {{ display:block; height:100%; border-radius:5px;
+                          background:{ACCENT}; }}
+  .mm-glance-row .n {{ flex:0 0 22px; font-size:0.76rem; color:{MUTED};
+                       font-variant-numeric:tabular-nums; }}
+
+  /* Header KPI band -- each KPI is an st.popover trigger styled as the same card the
+     old static markdown produced, so clicking it opens the detail behind the number.
+     The strong element is the value line; the rest of the label is the caption. */
+  /* DOM (verified live): stPopover > div > button[data-testid="stPopoverButton"],
+     label markdown rendered as one <p> with <strong>value</strong><br>label<br><em>sub</em>. */
+  .st-key-kpi_band [data-testid="stPopover"],
+  .st-key-kpi_band [data-testid="stPopover"] > div {{ width:100%; }}
+  .st-key-kpi_band [data-testid="stPopoverButton"] {{
+      width:100%; min-height:86px; background:{SURFACE};
+      border:1px solid {LINE}; border-radius:9px; padding:11px 13px;
+      justify-content:flex-start; text-align:left;
+      transition:border-color .12s ease, box-shadow .12s ease;
+  }}
+  .st-key-kpi_band [data-testid="stPopoverButton"]:hover {{
+      border-color:{ACCENT}; box-shadow:0 2px 8px rgba(15,23,42,.07);
+  }}
+  .st-key-kpi_band [data-testid="stPopoverButton"] p {{
+      font-size:0.72rem; color:{MUTED}; text-transform:uppercase;
+      letter-spacing:0.06em; line-height:1.5; text-align:left;
+  }}
+  .st-key-kpi_band [data-testid="stPopoverButton"] p strong {{
+      display:block; font-size:1.32rem; font-weight:680; letter-spacing:-0.02em;
+      color:{INK}; line-height:1.15; text-transform:none;
+  }}
+  .st-key-kpi_band [data-testid="stPopoverButton"] p em {{
+      display:block; font-style:normal; text-transform:none; font-size:0.72rem;
+      color:{MUTED}; letter-spacing:0; margin-top:3px;
+  }}
+  /* A value wrapped in a markdown colour directive (e.g. :orange[**8**] when records
+     need review) keeps that colour instead of the default ink. */
+  .st-key-kpi_band [data-testid="stPopoverButton"] p span strong {{ color:inherit; }}
+
+  /* Home button -- the ⌂ icon at the very top-left of the header. */
+  .st-key-home_btn button {{
+      width:44px; height:44px; border-radius:10px; font-size:1.05rem;
+      border:1px solid {LINE}; background:{SURFACE};
+  }}
+  .st-key-home_btn button:hover {{ border-color:{ACCENT}; color:{ACCENT}; }}
+
+  /* Back button -- ink-filled so it reads as a distinct control from the white
+     home button beside it and the indigo assistant launcher opposite. Disabled
+     state stays visible but quiet, so the header never reflows. */
+  .st-key-back_btn button {{
+      width:44px; height:44px; border-radius:10px; font-size:1.2rem;
+      background:{INK}; color:#fff; border:1px solid {INK};
+  }}
+  .st-key-back_btn button:hover:enabled {{
+      background:{ACCENT}; border-color:{ACCENT}; color:#fff;
+  }}
+  .st-key-back_btn button:disabled {{
+      background:{CANVAS}; color:#CBD5E1; border-color:{LINE};
+  }}
+
+  /* App chrome (title + KPI band): pinned to the top of every page. `sticky`
+     keeps it in the main column (so it never covers the workspace sidebar) and
+     still scrolls the page *under* it. */
+  .st-key-app_chrome {{
+      position:sticky; top:0; z-index:50;
+      background:{CANVAS}; padding:2px 0 10px 0; margin:0 0 8px 0;
+      border-bottom:1px solid {LINE};
+  }}
+  .st-key-app_chrome .st-key-kpi_band [data-testid="stPopoverButton"] {{
+      min-height:72px;
+  }}
+
+  /* Floating back control at the bottom of a candidate profile. `fixed` so it
+     stays in the same corner while you scroll the original document. */
+  .st-key-profile_back_fab {{
+      position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
+      z-index:360; width:auto;
+  }}
+  .st-key-profile_back_fab button {{
+      background:{INK}; color:#fff; border:1px solid {INK};
+      border-radius:22px; padding:0.55rem 1.35rem; font-weight:650;
+      font-size:0.92rem;
+  }}
+  .st-key-profile_back_fab button:hover {{
+      background:{ACCENT}; border-color:{ACCENT}; color:#fff;
   }}
 
   /* Labelled, coloured section dividers (components.section_break) -- used on pages
@@ -358,6 +713,31 @@ CSS = f"""
 
 def inject() -> None:
     st.markdown(CSS, unsafe_allow_html=True)
+
+
+# Injected by app.py ONLY while the chat dock is open: the dock itself is
+# position:fixed (out of document flow), so the main content must make room for it
+# explicitly. Padding is derived from the same --mm-chat-w variable that sizes the
+# panel, and max-width is released so the page uses the remaining space the way an
+# editor does beside the Cursor/VS Code chat pane, rather than staying centred in
+# a now-asymmetric viewport.
+CHAT_OPEN_CSS = """
+<style>
+  section[data-testid="stMain"] .block-container {
+      padding-right:calc(min(var(--mm-chat-w), 100vw) + 28px) !important;
+      max-width:100% !important;
+  }
+  .st-key-profile_back_fab {
+      left:auto;
+      right:calc(min(var(--mm-chat-w), 100vw) + 24px);
+      transform:none;
+  }
+</style>
+"""
+
+
+def inject_chat_open() -> None:
+    st.markdown(CHAT_OPEN_CSS, unsafe_allow_html=True)
 
 
 # ---------------------------------------------------------------- flag classification
