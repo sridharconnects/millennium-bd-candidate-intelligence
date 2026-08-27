@@ -60,9 +60,11 @@ def _load_index(candidate_ids: tuple[str, ...], include_synthetic: bool,
     # session_state (read here, not hashed) because CandidateProfile isn't a cheap
     # cache key itself.
     profiles, synth, _ = _load_pool(include_synthetic)
-    manual = [p for p in st.session_state.get("manual_profiles", [])
-             if p.candidate_id in manual_ids]
-    pool = profiles + (synth if include_synthetic else []) + manual
+    manual_ss = st.session_state["manual_profiles"] if "manual_profiles" in st.session_state else []
+    manual = [p for p in manual_ss if p.candidate_id in manual_ids]
+    wanted = set(candidate_ids)
+    pool = [p for p in (profiles + (synth if include_synthetic else []) + manual)
+            if p.candidate_id in wanted]
     return app_data.make_index(pool)
 
 
@@ -93,7 +95,8 @@ def _init_state() -> None:
         "weights": ScoreWeights().model_dump(), "blind": SETTINGS.flags.blind_review,
         "include_synthetic": False, "requisition": None, "filters": {},
         "retrieval_mode": "hybrid", "last_latency_ms": 0.0, "corrections": {},
-        "manual_profiles": [],
+        "manual_profiles": [], "nav_history": [], "_last_page": None,
+        "hidden_ids": [],
     }
     for k, v in d.items():
         st.session_state.setdefault(k, v)
@@ -119,6 +122,29 @@ if "_url_seeded" not in st.session_state:
                                        "Analytics", "System"):
         st.session_state.page = qp["page"]
 
+# Navigation history for the header's back button. Every route change -- sidebar
+# click, a card's "Open", a table row, the assistant switching pages -- funnels
+# through st.session_state.page, so detecting a change here catches all of them
+# without every call site having to remember to record itself. The back callback
+# sets `_last_page` itself, so returning somewhere never re-pushes it.
+if st.session_state._last_page is None:
+    st.session_state._last_page = st.session_state.page
+elif st.session_state._last_page != st.session_state.page:
+    st.session_state.nav_history = (
+        st.session_state.nav_history + [st.session_state._last_page])[-12:]
+    st.session_state._last_page = st.session_state.page
+
+
+def _nav_back() -> None:
+    hist = st.session_state.nav_history
+    if hist:
+        target = hist.pop()
+        st.session_state.page = target
+        st.session_state._last_page = target
+    else:
+        st.session_state.page = "Search"
+        st.session_state._last_page = "Search"
+
 # A single placeholder carries the whole boot sequence -- pool load, then index
 # build -- as one coherent branded moment rather than two separate default spinners.
 # Both calls below are no-ops after the first run of a given process (cache hit), so
@@ -141,7 +167,9 @@ if not profiles:
     st.stop()
 
 manual = st.session_state.manual_profiles
-pool = profiles + (synth if st.session_state.include_synthetic else []) + manual
+hidden = set(st.session_state.hidden_ids) if "hidden_ids" in st.session_state else set()
+pool = [p for p in (profiles + (synth if st.session_state.include_synthetic else []) + manual)
+        if p.candidate_id not in hidden]
 _boot.markdown(C.loading_screen("Building the hybrid search index…"),
               unsafe_allow_html=True)
 index, index_manifest = _load_index(tuple(p.candidate_id for p in pool),
@@ -157,28 +185,96 @@ _boot.empty()
 # separate bug (Streamlit's own toolbar overlapping and clipping this whole region)
 # was hiding it. Fixing the clipping surfaced the squeeze; this fixes the squeeze.
 pages_assistant.init_state()
-title_col, chat_btn_col = st.columns([0.85, 0.15])
-with title_col:
-    st.markdown(
-        '<div class="mm-row" style="gap:14px;align-items:center">'
-        '<span style="font-size:1.35rem;font-weight:700;letter-spacing:-0.02em">'
-        '◧ Millennium BD · Candidate Intelligence</span></div>'
-        '<div class="mm-sub">Recruiter decision support — every claim traces to a span '
-        'in a source document, and anything unprovable is refused rather than guessed. '
-        'A human approves every shortlist.</div>', unsafe_allow_html=True)
-with chat_btn_col:
-    st.markdown('<div style="height:4px"></div>', unsafe_allow_html=True)
+# Title + KPI band stay on screen while the page scrolls -- the recruiter's
+# orientation (where am I, how big is the pool, what's waiting) never leaves the
+# viewport. `.st-key-app_chrome` is position:sticky in theme.py.
+with st.container(key="app_chrome"):
+    back_col, home_col, title_col = st.columns([0.05, 0.05, 0.90])
+    with back_col:
+        # Back: browser-style history over st.session_state.page. Disabled (but still
+        # visible, so the layout never jumps) until there is somewhere to go back to.
+        _hist = st.session_state.nav_history
+        st.button("←", key="back_btn", on_click=_nav_back, disabled=not _hist,
+                  help=f"Back to {_hist[-1]}" if _hist else "Nothing to go back to yet")
+    with home_col:
+        # Home: one click back to the core workspace (Search) from anywhere in the app.
+        if st.button("⌂", key="home_btn", help="Home — back to Search, the main "
+                     "workspace where you find and filter candidates"):
+            st.session_state.page = "Search"
+            st.rerun()
+    with title_col:
+        st.markdown(
+            '<div class="mm-row" style="gap:14px;align-items:center">'
+            '<span style="font-size:1.35rem;font-weight:700;letter-spacing:-0.02em">'
+            '◧ Millennium BD · Candidate Intelligence</span></div>'
+            '<div class="mm-sub">Recruiter decision support — every claim traces to a span '
+            'in a source document, and anything unprovable is refused rather than guessed. '
+            'A human approves every shortlist.</div>', unsafe_allow_html=True)
+    # The chat launcher floats fixed at the viewport's top-right corner (it is not part
+    # of the header's flow), so it needs no column of its own.
     pages_assistant.render_toggle_button()
 
-k = st.columns(4)
-C.kpi(k[0], len(profiles) + len(manual), "candidates",
-      f"real corpus + {len(manual)} uploaded" if manual else "real corpus")
-review_n = sum(1 for p in profiles if p.quality.needs_human_review)
-C.kpi(k[1], review_n, "need review", "routed, not blocked",
-      "#B45309" if review_n else theme.ACCENT)
-abst = sum(p.quality.abstention_count for p in profiles)
-C.kpi(k[2], abst, "abstentions", "unprovable → refused", theme.ACCENT)
-C.kpi(k[3], f"${manifest.get('cost_usd', 0):.3f}", "parse cost", "one-off, cached")
+    def _kpi_nav(label: str, target: str, key: str) -> None:
+        """A jump link at the bottom of a KPI popover to the page with the full story."""
+        if st.button(label, key=key, width="stretch"):
+            st.session_state.page = target
+            st.rerun()
+
+    # Each KPI is a clickable card (an st.popover styled by theme.py): the number stays
+    # scannable at a glance, and clicking it opens WHAT is behind the number -- which
+    # records, which reasons -- plus a jump to the page that owns the detail.
+    review_profiles = [p for p in profiles if p.quality.needs_human_review]
+    review_n = len(review_profiles)
+    abst = sum(p.quality.abstention_count for p in profiles)
+    abst_profiles = [p for p in profiles if p.quality.abstention_count]
+    _blind = st.session_state.blind
+
+    with st.container(key="kpi_band"):
+        k = st.columns(4)
+        with k[0], st.popover(f"**{len(profiles) + len(manual)}**  \nCandidates  \n"
+                              f"_{f'real corpus + {len(manual)} uploaded' if manual else 'real corpus'}_",
+                              width="stretch"):
+            st.markdown(f"**{len(profiles)}** candidates parsed from the supplied resumes"
+                        + (f" plus **{len(manual)}** uploaded this session." if manual else "."))
+            for p in profiles + manual:
+                region = p.geo_region.label if p.geo_region else "region unknown"
+                st.markdown(f"- **{p.display_name(_blind)}** — "
+                            f"{p.seniority.label if p.seniority else '—'} · {region}")
+            _kpi_nav("Open Analytics for pool-wide insights", "Analytics", "kpi_go_analytics")
+        _rev_val = f":orange[**{review_n}**]" if review_n else f"**{review_n}**"
+        with k[1], st.popover(f"{_rev_val}  \nNeed review  \n_routed, not blocked_",
+                              width="stretch"):
+            if review_profiles:
+                st.markdown("Records the pipeline was **not confident enough to publish "
+                            "silently** — each is waiting for a human eye, not rejected:")
+                for p in review_profiles:
+                    why = p.quality.review_reasons[0] if p.quality.review_reasons else "flagged"
+                    st.markdown(f"- **{p.display_name(_blind)}** — {why}")
+            else:
+                st.markdown("Nothing is waiting for review right now.")
+            _kpi_nav("Open the Review queue", "Review", "kpi_go_review")
+        with k[2], st.popover(f"**{abst}**  \nAbstentions  \n_unprovable → refused_",
+                              width="stretch"):
+            st.markdown("An abstention is a value the LLM proposed **whose supporting "
+                        "quote could not be found in the document** — so it was discarded "
+                        "rather than guessed. A refusal here is a success state, not an "
+                        "error.")
+            if abst_profiles:
+                for p in abst_profiles:
+                    st.markdown(f"- **{p.display_name(_blind)}** — "
+                                f"{p.quality.abstention_count} field(s) abstained")
+                st.caption("Open a candidate's Evidence tab to see exactly which fields "
+                           "abstained and why.")
+            _kpi_nav("Open the Review queue", "Review", "kpi_go_review2")
+        with k[3], st.popover(f"**${manifest.get('cost_usd', 0):.3f}**  \nParse cost  \n"
+                              f"_one-off, cached_", width="stretch"):
+            n_parsed = max(len(profiles), 1)
+            st.markdown(f"Total LLM cost to parse the corpus: "
+                        f"**${manifest.get('cost_usd', 0):.3f}** "
+                        f"(≈ ${manifest.get('cost_usd', 0) / n_parsed:.3f} per resume).")
+            st.markdown("Every response is cached on disk, so re-runs and this demo "
+                        "replay for **$0.00** — the cost was paid exactly once.")
+            _kpi_nav("Open System for the full cost breakdown", "System", "kpi_go_system")
 
 PAGE_PURPOSE = {
     "Overview": "How the platform works, in one view — the candidate ontology "
@@ -256,7 +352,8 @@ with st.sidebar:
     st.divider()
     if st.button("↺ Reset demo", width="stretch"):
         for key in ("query", "selected", "shortlist", "requisition", "filters",
-                   "corrections", "manual_profiles"):
+                   "corrections", "manual_profiles", "hidden_ids",
+                   "match_studio_open", "import_studio_open"):
             st.session_state.pop(key, None)
         st.cache_resource.clear()
         st.cache_data.clear()
@@ -277,15 +374,16 @@ ctx = dict(profiles=profiles, synth=synth, pool=pool, index=index,
            index_manifest=index_manifest, manifest=manifest, store=_store(),
            client=_client(), bench=_bench(), evals=_evals())
 
-# The chat dock takes the full right side of the page, VS Code Copilot-panel style,
-# rather than living in the sidebar -- so it needs its own column claimed at the
-# routing level, not just inside the sidebar block above. `main_col` is a plain
-# `st.container` (not a column) when the dock is closed so the page keeps its full
-# width instead of always reserving space for a hidden panel.
+# The chat dock is a fixed, full-viewport-height panel on the RIGHT EDGE of the
+# window -- the same shape as Cursor's / VS Code's chat pane -- not an in-flow
+# column. CSS pins it to the viewport (theme.py, .st-key-chat_dock), and while it
+# is open theme.inject_chat_open() pads the main block-container by the panel's
+# width so page content reflows beside it instead of hiding underneath. The main
+# content therefore always renders in a plain full-width container; no layout
+# switch happens when the dock opens beyond that padding rule.
 if st.session_state.chat_open:
-    main_col, chat_col = st.columns([0.54, 0.46], gap="medium")
-else:
-    main_col, chat_col = st.container(), None
+    theme.inject_chat_open()
+main_col = st.container()
 
 with main_col:
     if page == "Overview":
@@ -296,6 +394,15 @@ with main_col:
         pages_core.render_search(**ctx)
     elif page == "Candidate":
         pages_core.render_candidate(**ctx)
+        # Always-visible back control at the bottom of a profile -- the header
+        # back button is easy to miss once you have scrolled into the document.
+        _hist = st.session_state.nav_history
+        dest = _hist[-1] if _hist else "Search"
+        with st.container(key="profile_back_fab"):
+            st.button(f"←  Back to {dest}", key="profile_fab_back",
+                      on_click=_nav_back,
+                      help="Return to the previous page. Always on screen while "
+                           "you read a profile.")
     elif page == "Requisition":
         pages_core.render_requisition(**ctx)
     elif page == "Shortlist":
@@ -309,9 +416,8 @@ with main_col:
     elif page == "System":
         pages_ops.render_system(**ctx)
 
-if chat_col is not None:
-    with chat_col:
-        pages_assistant.render_chat_dock(pool, _store())
+if st.session_state.chat_open:
+    pages_assistant.render_chat_dock(pool, _store())
 
 render_ms = (time.perf_counter() - t0) * 1000
 C.footer({

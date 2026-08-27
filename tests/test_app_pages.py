@@ -78,12 +78,20 @@ def test_page_renders_without_error(monkeypatch, sample_profiles, page):
     assert not errs, f"{page} page produced {len(errs)} error(s):\n" + "\n".join(errs[:4])
 
 
-def test_search_returns_results_and_renders_filters(monkeypatch, sample_profiles):
+def test_search_hero_exposes_match_import_and_shortlist_actions(monkeypatch, sample_profiles):
+    at = _app(monkeypatch, sample_profiles, "Search")
+    assert not _errors(at)
+    keys = {b.key for b in at.button}
+    assert "open_match_studio" in keys, "Match to JD launcher missing from Search"
+    assert "open_import_studio" in keys, "Import launcher missing from Search"
+    assert "jump_shortlist_from_search" in keys
     at = _app(monkeypatch, sample_profiles, "Search")
     assert not _errors(at)
     assert len(at.sidebar.multiselect) >= 5, "filter rail is missing facets"
     body = " ".join(m.value for m in at.markdown)
-    assert "candidate(s)" in body
+    # The results header reads "All N candidates" when browsing, or
+    # "Showing X of N candidates" once a search/filter narrows the pool.
+    assert "candidates ·" in body
 
 
 def test_search_with_a_natural_language_query(monkeypatch, sample_profiles):
@@ -336,6 +344,46 @@ def test_clicking_the_radio_itself_still_navigates(monkeypatch, sample_profiles)
     radios[0].set_value("Analytics").run()
     assert not _errors(at)
     assert at.session_state["page"] == "Analytics"
+
+
+def test_step_candidate_moves_selected(monkeypatch):
+    """Prev/Next must update `selected` and drop the selectbox widget key so the
+    next render reconstructs it. AppTest cannot click these buttons: the
+    selectbox uses format_func and the harness looks up the raw id in the
+    formatted option list (Streamlit's own element_tree.Selectbox.index)."""
+    from ui import pages_core
+
+    class SS(dict):
+        def __getattr__(self, name):
+            try:
+                return self[name]
+            except KeyError as e:
+                raise AttributeError(name) from e
+
+        def __setattr__(self, name, value):
+            self[name] = value
+
+    ss = SS({"_cand_ids": ["a", "b", "c"], "selected": "a", "cand_switch_box": "a"})
+    monkeypatch.setattr(pages_core.st, "session_state", ss)
+    pages_core._step_candidate(1)
+    assert ss["selected"] == "b"
+    assert "cand_switch_box" not in ss
+    pages_core._step_candidate(1)
+    assert ss["selected"] == "c"
+    pages_core._step_candidate(1)
+    assert ss["selected"] == "c", "Next at the end of the pool must be a no-op"
+    pages_core._step_candidate(-1)
+    assert ss["selected"] == "b"
+
+
+def test_candidate_switcher_renders_prev_next(monkeypatch, sample_profiles):
+    at = _app(monkeypatch, sample_profiles, "Candidate")
+    assert not _errors(at)
+    keys = {b.key for b in at.button}
+    assert "cand_next" in keys and "cand_prev" in keys
+    assert "cand_shortlist" in keys, "profile page is missing the manual shortlist button"
+    assert any(b.key == "cand_prev" and b.disabled for b in at.button), \
+        "Prev should be disabled on the first profile"
 
 
 def test_candidate_profile_shows_provenance_and_split_view(monkeypatch, sample_profiles):

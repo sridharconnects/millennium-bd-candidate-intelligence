@@ -116,7 +116,7 @@ def render_review(profiles, synth, pool, index, index_manifest, manifest, store,
 
     if p.quality.validation_flags:
         with st.expander(f"⚑ {len(p.quality.validation_flags)} validation flag(s) — "
-                         f"full detail, most severe first"):
+                         f"full detail, most severe first", expanded=True):
             st.markdown(theme.flag_list(p.quality.validation_flags), unsafe_allow_html=True)
 
     st.divider()
