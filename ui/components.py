@@ -19,18 +19,55 @@ def loading_screen(subtitle: str) -> str:
     later rerun (a cache hit) it never appears at all."""
     return (
         '<div class="mm-loading">'
-        '<div class="mm-loading-ring"><span class="mm-loading-mark">◧</span></div>'
+        '<div class="mm-loading-ring"><span class="mm-loading-mark">M</span></div>'
         '<div class="mm-loading-title">Millennium BD</div>'
         f'<div class="mm-loading-sub">{html.escape(subtitle)}</div>'
         '</div>')
 
 
-def kpi(col, value, label: str, hint: str = "", colour: str | None = None) -> None:
+def kpi(col, value, label: str, hint: str = "", colour: str | None = None,
+        delta: str | None = None, delta_tone: str = "flat") -> None:
+    """Metric card. Optional delta_tone: up | down | flat."""
+    delta_html = ""
+    if delta:
+        tone = {"up": "delta-up", "down": "delta-down"}.get(delta_tone, "delta-flat")
+        delta_html = f'<div class="delta {tone}">{html.escape(delta)}</div>'
     col.markdown(
         f'<div class="mm-kpi"><div class="v" style="color:{colour or theme.INK}">{value}</div>'
         f'<div class="l">{html.escape(label)}</div>'
         + (f'<div class="h">{html.escape(hint)}</div>' if hint else "")
+        + delta_html
         + "</div>", unsafe_allow_html=True)
+
+
+def metric_card(value, label: str, hint: str = "", colour: str | None = None,
+                delta: str | None = None, delta_tone: str = "flat") -> None:
+    """Full-width metric card (not column-bound)."""
+    delta_html = ""
+    if delta:
+        tone = {"up": "delta-up", "down": "delta-down"}.get(delta_tone, "delta-flat")
+        delta_html = f'<div class="delta {tone}">{html.escape(delta)}</div>'
+    st.markdown(
+        f'<div class="mm-kpi"><div class="v" style="color:{colour or theme.INK}">{value}</div>'
+        f'<div class="l">{html.escape(label)}</div>'
+        + (f'<div class="h">{html.escape(hint)}</div>' if hint else "")
+        + delta_html
+        + "</div>", unsafe_allow_html=True)
+
+
+def section_header(title: str, subtitle: str = "", meta: str = "") -> None:
+    """Toolbar-style section head used above results, analytics blocks, etc."""
+    sub = (f'<div class="mm-toolbar-meta">{html.escape(subtitle)}</div>'
+           if subtitle else "")
+    right = (f'<div class="mm-toolbar-meta">{html.escape(meta)}</div>' if meta else "")
+    st.markdown(
+        f'<div class="mm-toolbar"><div><div class="mm-toolbar-title">'
+        f'{html.escape(title)}</div>{sub}</div>{right}</div>',
+        unsafe_allow_html=True)
+
+
+def status_badge(text: str, tone: str = "plain") -> str:
+    return theme.chip(text, tone)
 
 
 def section_break(label: str, index: int = 0) -> None:
@@ -155,20 +192,43 @@ def candidate_card(p: CandidateProfile, blind: bool = False, score: float | None
         flags.append(theme.chip("near-duplicate", "conflicted"))
     if p.provenance and p.provenance.is_synthetic:
         flags.append(theme.chip("SYNTHETIC", "human_corrected"))
-    sc = (f'<span class="mm-mono" style="font-weight:700;color:{theme.ACCENT}">'
-          f'{score:.3f}</span>' if score is not None else "")
+    sc = (f'<span class="mm-cand-score">{score:.3f}</span>' if score is not None else "")
+    name = p.display_name(blind)
+    initials = "".join(part[0] for part in name.replace("(", " ").split() if part[:1].isalpha())[:2].upper() or "·"
     return (
-        f'<div class="mm-card"><div class="mm-row" style="justify-content:space-between">'
-        f'<span class="mm-name">{html.escape(p.display_name(blind))}</span>{sc}</div>'
+        f'<div class="mm-card mm-cand">'
+        f'<div class="mm-cand-avatar">{html.escape(initials)}</div>'
+        f'<div class="mm-cand-body">'
+        f'<div class="mm-row" style="justify-content:space-between;align-items:center">'
+        f'<span class="mm-name">{html.escape(name)}</span>{sc}</div>'
         f'<div class="mm-sub">{html.escape(role)}</div>'
         f'<div class="mm-sub">{html.escape(yrs)}'
         + (f' · {html.escape(explain)}' if explain else "") + "</div>"
-        f'<div style="margin-top:6px">{labels_row(p)}{"".join(flags)}</div></div>')
+        f'<div style="margin-top:6px">{labels_row(p)}{"".join(flags)}</div>'
+        f'</div></div>')
 
 
 def footer(metrics: dict) -> None:
     bits = " · ".join(f"{k} {v}" for k, v in metrics.items())
     st.markdown(f'<div class="mm-foot">{html.escape(bits)}</div>', unsafe_allow_html=True)
+
+
+def empty_state(title: str, body: str, icon: str = "⌕") -> None:
+    st.markdown(
+        f'<div class="mm-empty">'
+        f'<div class="mm-empty-icon">{html.escape(icon)}</div>'
+        f'<h4>{html.escape(title)}</h4>'
+        f'<div>{html.escape(body)}</div></div>',
+        unsafe_allow_html=True)
+
+
+def page_kicker(title: str, subtitle: str = "") -> None:
+    """In-page section title when the top bar already named the route."""
+    sub = f'<div class="mm-page-sub" style="margin-bottom:8px">{html.escape(subtitle)}</div>' if subtitle else ""
+    st.markdown(
+        f'<div class="mm-page-head" style="margin-bottom:4px">'
+        f'<div class="mm-page-title">{html.escape(title)}</div>{sub}</div>',
+        unsafe_allow_html=True)
 
 
 def synthetic_banner(n: int) -> None:

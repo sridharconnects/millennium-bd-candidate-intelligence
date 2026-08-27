@@ -23,68 +23,7 @@ def _byid(pool):
     return {p.candidate_id: p for p in pool}
 
 
-# ============================================================================ REVIEW
-def render_review(profiles, synth, pool, index, index_manifest, manifest, store,
-                  client, bench, evals):
-    st.markdown("##### Human review queue")
-    st.caption("Records the pipeline is not confident enough to publish silently. "
-               "Routing is deliberately generous: a record that reaches a recruiter "
-               "with a silent error costs far more than one that asks for thirty "
-               "seconds of attention.")
-
-    queue = [p for p in profiles if p.quality.needs_human_review]
-    m = st.columns(4)
-    C.kpi(m[0], len(queue), "in queue", f"of {len(profiles)} records")
-    C.kpi(m[1], sum(p.quality.abstention_count for p in profiles), "abstained fields",
-          "value proposed, then discarded")
-    C.kpi(m[2], sum(len(p.quality.validation_flags) for p in profiles), "validation flags")
-    C.kpi(m[3], len(store.audit_trail()), "audit entries")
-
-    if not queue:
-        st.success("Nothing in the review queue.")
-        return
-
-    ids = [p.candidate_id for p in queue]
-    byid = _byid(pool)
-
-    # A bare selectbox gives no visual sign it's clickable until a new user happens to
-    # click it -- this is the queue's most-used control, so it gets a real card grid
-    # instead: each record's name, reason count, and severity are all visible without
-    # opening anything, and the selected one is unmistakable (accent border + fill),
-    # not a small chevron next to plain text.
-    st.session_state.setdefault("review_selected", ids[0])
-    if st.session_state["review_selected"] not in ids:
-        st.session_state["review_selected"] = ids[0]
-
-    st.markdown('<div class="mm-sub" style="margin-bottom:4px">Select a record — '
-               f'{len(queue)} waiting</div>', unsafe_allow_html=True)
-    cols_per_row = 3
-    for row_start in range(0, len(queue), cols_per_row):
-        row = queue[row_start:row_start + cols_per_row]
-        cols = st.columns(cols_per_row)
-        for col, rec in zip(cols, row):
-            is_sel = rec.candidate_id == st.session_state["review_selected"]
-            n = len(rec.quality.review_reasons)
-            with col:
-                st.markdown(
-                    f'<div class="mm-review-pick{" is-selected" if is_sel else ""}">'
-                    f'<div class="mm-name" style="font-size:0.88rem">'
-                    f'{html.escape(rec.display_name(st.session_state.blind))}</div>'
-                    f'<div class="mm-sub" style="font-size:0.74rem">{n} reason{"s" if n != 1 else ""}'
-                    + (f' · <span style="color:#B45309;font-weight:600">needs review</span>'
-                       if n else '') + '</div></div>',
-                    unsafe_allow_html=True)
-                if st.button("Open" if not is_sel else "Selected ✓",
-                            key=f"rev_pick_{rec.candidate_id}",
-                            type="primary" if is_sel else "secondary",
-                            disabled=is_sel, width="stretch"):
-                    st.session_state["review_selected"] = rec.candidate_id
-                    st.rerun()
-
-    p = byid[st.session_state["review_selected"]]
-    st.divider()
-    C.provenance_banner(p)
-
+def _review_fields(p):
     fields = {"Name": ("sensitive.full_name", p.sensitive.full_name),
               "Email": ("sensitive.email", p.sensitive.email),
               "Phone": ("sensitive.phone", p.sensitive.phone),
@@ -93,103 +32,305 @@ def render_review(profiles, synth, pool, index, index_manifest, manifest, store,
     for i, e in enumerate(p.employment[:5]):
         fields[f"Employer #{i+1}"] = (f"employment[{i}].employer_raw", e.employer_raw)
         fields[f"Title #{i+1}"] = (f"employment[{i}].title_raw", e.title_raw)
+    return fields
 
-    rc1, rc2 = st.columns(2)
-    with rc1:
-        st.markdown("**Why this was routed here** — colour = severity, not just category")
+
+def _review_initials(name: str) -> str:
+    return "".join(part[0] for part in name.replace("(", " ").split()
+                   if part[:1].isalpha())[:2].upper() or "?"
+
+
+def _review_severity(p):
+    score = (len(p.quality.validation_flags) * 2 +
+             p.quality.abstention_count +
+             len(p.quality.review_reasons))
+    if p.quality.completeness < 0.6 or score >= 6:
+        return "High", "danger"
+    if p.quality.evidence_coverage < 0.85 or score >= 3:
+        return "Medium", "warn"
+    return "Low", "ok"
+
+
+def _clamp01(value: float) -> float:
+    return max(0.0, min(1.0, float(value or 0.0)))
+
+
+def _review_lane(p) -> str:
+    if p.quality.validation_flags:
+        return "Correct contradiction"
+    if p.quality.abstention_count:
+        return "Fill missing proof"
+    if p.quality.evidence_coverage < 0.85:
+        return "Check source spans"
+    return "Approve quality"
+
+
+def _render_review_summary(queue, profiles, store):
+    total_abstained = sum(p.quality.abstention_count for p in profiles)
+    total_flags = sum(len(p.quality.validation_flags) for p in profiles)
+    mean_complete = (sum(p.quality.completeness for p in profiles) /
+                     max(1, len(profiles)))
+    mean_evidence = (sum(p.quality.evidence_coverage for p in profiles) /
+                     max(1, len(profiles)))
+    st.markdown(
+        '<div class="mm-review-hero">'
+        '<div><div class="mm-page-title">Review workbench</div>'
+        '<div class="mm-page-sub">A focused triage desk for deciding what is wrong, '
+        'what needs correction, and what can safely move forward.</div></div>'
+        '<div class="mm-review-flow">'
+        '<span>Route</span><b></b><span>Correct</span><b></b><span>Approve</span>'
+        '</div></div>',
+        unsafe_allow_html=True)
+    st.markdown(
+        '<div class="mm-review-metrics">'
+        f'<div><b>{len(queue)}</b><span>in queue</span><small>of {len(profiles)} records</small></div>'
+        f'<div><b>{total_flags}</b><span>validation flags</span><small>possible contradictions</small></div>'
+        f'<div><b>{total_abstained}</b><span>abstained fields</span><small>not guessed by the agent</small></div>'
+        f'<div><b>{len(store.audit_trail())}</b><span>audit entries</span><small>review history</small></div>'
+        f'<div><b>{mean_complete:.0%}</b><span>mean complete</span><small>whole pool</small></div>'
+        f'<div><b>{mean_evidence:.0%}</b><span>mean evidenced</span><small>source-backed fields</small></div>'
+        '</div>',
+        unsafe_allow_html=True)
+
+
+def _render_review_queue(queue):
+    ids = [p.candidate_id for p in queue]
+    st.session_state.setdefault("review_selected", ids[0])
+    if st.session_state["review_selected"] not in ids:
+        st.session_state["review_selected"] = ids[0]
+
+    st.markdown(
+        f'<div class="mm-panel-heading"><span>Review queue</span>'
+        f'<b>{len(queue)} waiting</b></div>',
+        unsafe_allow_html=True)
+    q = st.text_input("Find in queue", "", placeholder="Search name, role or reason",
+                      key="review_queue_search", label_visibility="collapsed")
+    needle = q.strip().lower()
+    visible = []
+    for rec in queue:
+        haystack = " ".join([rec.display_name(st.session_state.blind),
+                             str(rec.headline.display() or ""),
+                             " ".join(rec.quality.review_reasons),
+                             " ".join(rec.quality.validation_flags)]).lower()
+        if not needle or needle in haystack:
+            visible.append(rec)
+    if not visible:
+        st.markdown('<div class="mm-review-empty">No queued record matches that search.</div>',
+                    unsafe_allow_html=True)
+        return
+    if st.session_state["review_selected"] not in {rec.candidate_id for rec in visible}:
+        st.session_state["review_selected"] = visible[0].candidate_id
+        st.rerun()
+
+    for rec in visible:
+        is_sel = rec.candidate_id == st.session_state["review_selected"]
+        sev, tone = _review_severity(rec)
+        name = rec.display_name(st.session_state.blind)
+        initials = _review_initials(name)
+        reason = rec.quality.review_reasons[0] if rec.quality.review_reasons else _review_lane(rec)
+        st.markdown(
+            f'<div class="mm-review-pick {tone}{" is-selected" if is_sel else ""}">'
+            f'<div class="mm-review-avatar">{html.escape(initials)}</div>'
+            f'<div class="mm-review-pick-body">'
+            f'<div class="mm-review-pick-top"><span>{html.escape(name)}</span>'
+            f'<b>{html.escape(sev)}</b></div>'
+            f'<div class="mm-review-pick-reason">{html.escape(reason)}</div>'
+            f'<div class="mm-review-pick-meta">'
+            f'{len(rec.quality.review_reasons)} reasons · '
+            f'{len(rec.quality.validation_flags)} flags · '
+            f'{rec.quality.abstention_count} abstained</div></div></div>',
+            unsafe_allow_html=True)
+        if st.button("Selected" if is_sel else "Review", key=f"rev_pick_{rec.candidate_id}",
+                     type="primary" if is_sel else "secondary", disabled=is_sel,
+                     width="stretch"):
+            st.session_state["review_selected"] = rec.candidate_id
+            st.rerun()
+
+
+def _render_review_case(p, fields, store):
+    name = p.display_name(st.session_state.blind)
+    initials = _review_initials(name)
+    sev, tone = _review_severity(p)
+    headline = p.headline.display() or "No headline extracted"
+    source = p.provenance.source_file or p.doc_id
+    problem = (p.quality.review_reasons[0] if p.quality.review_reasons
+               else "Record is waiting for a reviewer decision.")
+    st.markdown(
+        f'<div class="mm-review-case-head {tone}">'
+        f'<div class="mm-review-avatar xl">{html.escape(initials)}</div>'
+        f'<div class="mm-review-case-title"><div class="mm-review-case-kicker">'
+        f'{html.escape(_review_lane(p))}</div>'
+        f'<h2>{html.escape(name)}</h2>'
+        f'<p>{html.escape(str(headline))}</p>'
+        f'<div class="mm-review-source">{html.escape(source)}</div></div>'
+        f'<div class="mm-review-severity"><span>{html.escape(sev)}</span>'
+        f'<small>severity</small></div></div>'
+        f'<div class="mm-review-problem"><b>What needs attention</b>'
+        f'<span>{html.escape(problem)}</span></div>',
+        unsafe_allow_html=True)
+
+    C.provenance_banner(p)
+
+    st.markdown('<div class="mm-panel-heading"><span>Decision checklist</span>'
+                '<b>colour = severity</b></div>', unsafe_allow_html=True)
+    c1, c2 = st.columns([0.54, 0.46])
+    with c1:
+        st.markdown('<div class="mm-review-subtitle">Why this was routed here</div>',
+                    unsafe_allow_html=True)
         if p.quality.review_reasons:
             st.markdown(theme.flag_list(p.quality.review_reasons), unsafe_allow_html=True)
         else:
-            st.caption("No specific reasons recorded.")
-    with rc2:
-        abstained_here = [(lbl, t) for lbl, (_path, t) in fields.items()
-                          if t.validation_status == "abstained"]
-        st.markdown(f"**Abstained fields** — {len(abstained_here)} of {len(fields)} "
-                    f"checked here ({p.quality.abstention_count} total on this record)")
-        if abstained_here:
-            for lbl, t in abstained_here:
-                reason = t.notes[0] if t.notes else "no reason recorded"
-                st.markdown(theme.flag_card(f"{lbl}: {reason}"), unsafe_allow_html=True)
+            st.caption("No specific routing reasons recorded.")
+    with c2:
+        st.markdown('<div class="mm-review-subtitle">Immediate correction targets</div>',
+                    unsafe_allow_html=True)
+        flagged_fields = [(lbl, t) for lbl, (_path, t) in fields.items()
+                          if t.validation_status in {"abstained", "conflicted", "unverified"}]
+        if flagged_fields:
+            for lbl, t in flagged_fields[:4]:
+                note = t.notes[0] if t.notes else t.validation_status
+                st.markdown(theme.flag_card(f"{lbl}: {note}"), unsafe_allow_html=True)
         else:
-            st.caption("None of the correctable fields below abstained — remaining "
-                       "abstentions (if any) are in skills, education or other fields.")
+            st.caption("No correctable field here is abstained, conflicted or unverified.")
+
+    with st.container(border=True, key="review_editor_card"):
+        st.markdown('<div class="mm-panel-heading"><span>Correct or approve a field</span>'
+                    '<b>source evidence stays visible</b></div>', unsafe_allow_html=True)
+        pick = st.selectbox("Field to review", list(fields),
+                            key=f"review_field_{p.candidate_id}")
+        path, t = fields[pick]
+        safe = (path.replace("[", "_").replace("]", "").replace(".", "_"))
+        left, right = st.columns([0.42, 0.58])
+        with left:
+            st.markdown(C.tracked_value(t, pick), unsafe_allow_html=True)
+            for note in t.notes:
+                st.caption(f"· {note}")
+            new = st.text_input("Corrected value", str(t.value or ""), key=f"corr_{path}")
+            reviewer = st.text_input("Reviewer", "bd.analyst", key="reviewer")
+            a, b = st.columns(2)
+            if a.button("Save correction", type="primary", width="stretch",
+                        key=f"save_corr_{p.candidate_id}_{safe}"):
+                old = t.value
+                t.value, t.normalized_value = new, new
+                t.confidence = 1.0
+                t.extraction_method = "human"
+                t.validation_status = "human_corrected"
+                t.notes.append(f"corrected by {reviewer}")
+                store.log_review(p.candidate_id, path, old, new, reviewer, "correct")
+                st.session_state.corrections[f"{p.candidate_id}:{path}"] = new
+                st.success("Correction saved to the audit log. This is also a training signal.")
+            if b.button("Approve as-is", width="stretch",
+                        key=f"approve_corr_{p.candidate_id}_{safe}"):
+                store.log_review(p.candidate_id, path, t.value, t.value, reviewer, "approve")
+                st.success("Approved.")
+        with right:
+            st.markdown('<div class="mm-review-subtitle">Source evidence</div>',
+                        unsafe_allow_html=True)
+            C.evidence_for(t, p)
+
+
+def _render_review_context(p, fields, store, index):
+    st.markdown('<div class="mm-panel-heading"><span>Record context</span>'
+                '<b>trust & history</b></div>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="mm-review-trust-grid">'
+        f'<div><b>{p.quality.completeness:.0%}</b><span>complete</span></div>'
+        f'<div><b>{p.quality.evidence_coverage:.0%}</b><span>evidenced</span></div>'
+        f'<div><b>{p.quality.abstention_count}</b><span>abstained</span></div>'
+        f'<div><b>{len(p.quality.validation_flags)}</b><span>flags</span></div>'
+        '</div>',
+        unsafe_allow_html=True)
+    st.progress(_clamp01(p.quality.completeness), text="Profile completeness")
+    st.progress(_clamp01(p.quality.evidence_coverage), text="Evidence coverage")
+
+    abstained_here = [(lbl, t) for lbl, (_path, t) in fields.items()
+                      if t.validation_status == "abstained"]
+    st.markdown(
+        f'<div class="mm-review-subtitle">Abstained fields — {len(abstained_here)} of '
+        f'{len(fields)} checked here ({p.quality.abstention_count} total on this record)</div>',
+        unsafe_allow_html=True)
+    if abstained_here:
+        for lbl, t in abstained_here:
+            reason = t.notes[0] if t.notes else "no reason recorded"
+            st.markdown(theme.flag_card(f"{lbl}: {reason}"), unsafe_allow_html=True)
+    else:
+        st.caption("No profile/contact/title field abstained in this correction set.")
 
     if p.quality.validation_flags:
-        with st.expander(f"⚑ {len(p.quality.validation_flags)} validation flag(s) — "
-                         f"full detail, most severe first", expanded=True):
+        with st.expander(f"{len(p.quality.validation_flags)} validation flag(s)", expanded=True):
             st.markdown(theme.flag_list(p.quality.validation_flags), unsafe_allow_html=True)
 
-    st.divider()
-    st.markdown("**Correct a field** — side by side with its source")
-    pick = st.selectbox("Field", list(fields))
-    path, t = fields[pick]
-    a, b = st.columns([0.42, 0.58])
-    with a:
-        st.markdown(C.tracked_value(t, pick), unsafe_allow_html=True)
-        for n in t.notes:
-            st.caption(f"· {n}")
-        new = st.text_input("Corrected value", str(t.value or ""), key=f"corr_{path}")
-        reviewer = st.text_input("Reviewer", "bd.analyst", key="reviewer")
-        c1, c2 = st.columns(2)
-        if c1.button("Save correction", type="primary", width="stretch"):
-            old = t.value
-            t.value, t.normalized_value = new, new
-            t.confidence = 1.0
-            t.extraction_method = "human"
-            t.validation_status = "human_corrected"
-            t.notes.append(f"corrected by {reviewer}")
-            store.log_review(p.candidate_id, path, old, new, reviewer, "correct")
-            st.session_state.corrections[f"{p.candidate_id}:{path}"] = new
-            st.success("Correction saved to the audit log. In production this row is "
-                       "also the training signal for the next extraction model.")
-        if c2.button("Approve as-is", width="stretch"):
-            store.log_review(p.candidate_id, path, t.value, t.value, reviewer, "approve")
-            st.success("Approved.")
-    with b:
-        st.markdown("**Source evidence**")
-        C.evidence_for(t, p)
-
-    st.divider()
     trail = store.audit_trail(p.candidate_id)
-    st.markdown(f"**Audit trail for this record** — {len(trail)} entr{'y' if len(trail)==1 else 'ies'}")
-    ACTION_STYLE = {
-        "correct": ("#6D28D9", "#EDE9FE", "✎", "corrected"),
-        "approve": ("#0F766E", "#CCFBF1", "✓", "approved as-is"),
-        "gdpr_delete": ("#B91C1C", "#FEE2E2", "🗑", "erased (GDPR)"),
+    st.markdown(
+        f'<div class="mm-panel-heading compact"><span>Audit trail for this record</span>'
+        f'<b>{len(trail)} entr{"y" if len(trail) == 1 else "ies"}</b></div>',
+        unsafe_allow_html=True)
+    action_style = {
+        "correct": ("#6D28D9", "#F5F3FF", "corrected"),
+        "approve": ("#15803D", "#F0FDF4", "approved as-is"),
+        "gdpr_delete": ("#B91C1C", "#FEF2F2", "erased"),
     }
     if trail:
-        for row in trail[:12]:
-            fg, bg, icon, word = ACTION_STYLE.get(row["action"],
-                                                   ("#64748B", "#F1F5F9", "•", row["action"]))
+        for row in trail[:8]:
+            fg, bg, word = action_style.get(row["action"],
+                                            ("#71717A", "#F4F4F5", str(row["action"])))
             new_val = "" if row["action"] == "gdpr_delete" else \
-                html.escape(str(row["new_value"] or "")[:80])
+                html.escape(str(row["new_value"] or "")[:58])
             st.markdown(
-                f'<div style="background:{bg};border:1px solid {fg}33;border-left:3px '
-                f'solid {fg};color:{fg};border-radius:0 7px 7px 0;padding:6px 11px;'
-                f'font-size:0.8rem;margin-bottom:5px;display:flex;gap:8px;'
-                f'align-items:baseline"><span>{icon}</span>'
-                f'<b>{html.escape(row["field"])}</b> {word}'
-                + (f' → <span class="mm-mono">{new_val}</span>' if new_val else "")
-                + f'<span style="margin-left:auto;color:{fg}99;font-size:0.72rem">'
-                f'{html.escape(str(row["reviewer"]))} · {html.escape(str(row["created_at"]))}'
-                f'</span></div>', unsafe_allow_html=True)
-        with st.expander("Full audit table (all fields, exportable)"):
+                f'<div class="mm-review-audit-row" style="--fg:{fg};--bg:{bg};--bd:{fg}33">'
+                f'<div><b>{html.escape(row["field"])}</b> {html.escape(word)}'
+                + (f' <span>{new_val}</span>' if new_val else "")
+                + f'</div><small>{html.escape(str(row["reviewer"]))} · '
+                f'{html.escape(str(row["created_at"]))}</small></div>',
+                unsafe_allow_html=True)
+        with st.expander("Full audit table"):
             st.dataframe(pd.DataFrame(store.audit_trail())[
                 ["created_at", "candidate_id", "field", "action", "reviewer", "new_value"]],
                 width="stretch", hide_index=True)
     else:
         st.caption("No corrections recorded for this candidate yet.")
 
-    st.divider()
-    with st.expander("⚠ Right to erasure (GDPR Art. 17 / CCPA)"):
-        st.caption("Deletion runs end to end — SQLite rows, the FTS index, the FAISS "
-                   "vectors, and the on-disk profile. A delete that leaves the person "
-                   "in the search index is not a delete. Covered by tests/test_deletion.py.")
-        if st.button("Delete this candidate permanently", type="secondary"):
+    with st.expander("Right to erasure (GDPR Art. 17 / CCPA)"):
+        st.caption("Deletion removes database rows, the search index entry, vector index "
+                   "state, and the on-disk profile.")
+        if st.button("Delete this candidate permanently", type="secondary",
+                     key=f"delete_review_{p.candidate_id}"):
             res = store.delete_candidate(p.candidate_id, index)
             st.json(res)
             st.cache_resource.clear()
             st.warning("Erased. Reload to refresh the pool.")
+
+
+# ============================================================================ REVIEW
+def render_review(profiles, synth, pool, index, index_manifest, manifest, store,
+                  client, bench, evals):
+    queue = [p for p in profiles if p.quality.needs_human_review]
+    _render_review_summary(queue, profiles, store)
+
+    if not queue:
+        C.empty_state("Nothing needs review",
+                      "Every profile in the current pool is complete enough to publish.")
+        return
+
+    ids = [p.candidate_id for p in queue]
+    byid = _byid(pool)
+    st.session_state.setdefault("review_selected", ids[0])
+    if st.session_state["review_selected"] not in ids:
+        st.session_state["review_selected"] = ids[0]
+
+    p = byid[st.session_state["review_selected"]]
+    fields = _review_fields(p)
+
+    left, center, right = st.columns([0.22, 0.52, 0.26], gap="medium")
+    with left:
+        with st.container(border=True, key="review_queue_panel"):
+            _render_review_queue(queue)
+    with center:
+        with st.container(border=True, key="review_case_panel"):
+            _render_review_case(p, fields, store)
+    with right:
+        with st.container(border=True, key="review_context_panel"):
+            _render_review_context(p, fields, store, index)
 
 
 # ========================================================================= ANALYTICS
@@ -200,12 +341,17 @@ def render_analytics(profiles, synth, pool, index, index_manifest, manifest, sto
     dq = data_quality(pool).output or {}
     gaps = coverage_gaps(pool).output or {}
 
-    m = st.columns(5)
-    C.kpi(m[0], dq.get("candidates", 0), "candidates")
-    C.kpi(m[1], f"{dq.get('mean_completeness', 0):.0%}", "mean completeness")
-    C.kpi(m[2], f"{dq.get('mean_evidence_coverage', 0):.0%}", "evidence coverage")
-    C.kpi(m[3], dq.get("total_abstentions", 0), "abstentions", "refused, not guessed")
-    C.kpi(m[4], dq.get("needs_review", 0), "need review")
+    C.section_header("Pool intelligence",
+                     subtitle="Coverage, gaps, and extraction quality across the working set")
+    k = st.columns(5)
+    C.kpi(k[0], dq.get("candidates", 0), "Candidates", "in working pool")
+    C.kpi(k[1], f"{dq.get('mean_completeness', 0):.0%}", "Mean complete",
+          delta=None)
+    C.kpi(k[2], f"{dq.get('mean_evidence_coverage', 0):.0%}", "Evidenced")
+    C.kpi(k[3], dq.get("total_abstentions", 0), "Abstained", "refused, not guessed",
+          colour=theme.WARNING if dq.get("total_abstentions", 0) else theme.SUCCESS)
+    C.kpi(k[4], dq.get("needs_review", 0), "Need review",
+          colour=theme.WARNING if dq.get("needs_review", 0) else theme.INK)
 
     tabs = st.tabs(["Distributions", "Coverage gaps", "Skills", "Data quality", "Export"])
 
@@ -231,7 +377,7 @@ def render_analytics(profiles, synth, pool, index, index_manifest, manifest, sto
                                   plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
                                   font=dict(size=11))
                 fig.update_traces(textposition="outside", cliponaxis=False)
-                cols[j].plotly_chart(fig, width="stretch",
+                cols[j].plotly_chart(theme.polish_fig(fig), width="stretch",
                                      config={"displayModeBar": False})
 
         st.markdown("**Strategy × sector coverage**")
@@ -245,11 +391,11 @@ def render_analytics(profiles, synth, pool, index, index_manifest, manifest, sto
             piv = (pd.DataFrame(cells).value_counts().reset_index(name="n")
                    .pivot(index="strategy", columns="sector", values="n").fillna(0))
             fig = px.imshow(piv, text_auto=True, aspect="auto",
-                            color_continuous_scale=["#F8FAFC", theme.ACCENT],
+                            color_continuous_scale=["#EEF2FF", theme.ACCENT],
                             height=90 + 34 * len(piv))
             fig.update_layout(margin=dict(l=0, r=0, t=10, b=0), coloraxis_showscale=False,
                               font=dict(size=11), xaxis_title=None, yaxis_title=None)
-            st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
+            st.plotly_chart(theme.polish_fig(fig), width="stretch", config={"displayModeBar": False})
 
     with tabs[1]:
         st.markdown("##### Where you cannot currently hire")
@@ -297,7 +443,7 @@ def render_analytics(profiles, synth, pool, index, index_manifest, manifest, sto
                                   legend=dict(orientation="h", y=1.06),
                                   plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
                                   font=dict(size=11))
-                st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
+                st.plotly_chart(theme.polish_fig(fig), width="stretch", config={"displayModeBar": False})
         with b:
             co = skill_cooccurrence(pool).output or []
             if co:
@@ -329,7 +475,7 @@ def render_analytics(profiles, synth, pool, index, index_manifest, manifest, sto
                               legend=dict(orientation="h", y=1.05),
                               plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
                               font=dict(size=11))
-            st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
+            st.plotly_chart(theme.polish_fig(fig), width="stretch", config={"displayModeBar": False})
         with b:
             st.markdown("**Pool-level honesty metrics**")
             st.json(dq)
@@ -460,7 +606,7 @@ def render_system(profiles, synth, pool, index, index_manifest, manifest, store,
             fig.update_layout(margin=dict(l=0, r=0, t=20, b=0), yaxis_title=metric,
                               xaxis_title=None, plot_bgcolor="rgba(0,0,0,0)",
                               paper_bgcolor="rgba(0,0,0,0)", font=dict(size=11))
-            st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
+            st.plotly_chart(theme.polish_fig(fig), width="stretch", config={"displayModeBar": False})
 
     with tabs[2]:
         st.markdown("##### Extraction accuracy vs hand-labelled gold")
@@ -526,7 +672,7 @@ def render_system(profiles, synth, pool, index, index_manifest, manifest, store,
                               paper_bgcolor="rgba(0,0,0,0)", font=dict(size=11),
                               legend=dict(orientation="h", y=1.12))
             a, b = st.columns([0.55, 0.45])
-            a.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
+            a.plotly_chart(theme.polish_fig(fig), width="stretch", config={"displayModeBar": False})
             with b:
                 st.markdown("**Per bucket**")
                 st.dataframe(curve, width="stretch", hide_index=True)
@@ -559,7 +705,7 @@ def render_system(profiles, synth, pool, index, index_manifest, manifest, store,
                                   plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
                                   font=dict(size=11),
                                   colorway=[theme.ACCENT, "#B45309"])
-                a.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
+                a.plotly_chart(theme.polish_fig(fig), width="stretch", config={"displayModeBar": False})
                 fig2 = px.line(df, x="n_candidates", y="index_build_ms", markers=True,
                                height=320, color_discrete_sequence=[theme.SERIES[1]])
                 fig2.update_layout(title="Index build time", title_font_size=13,
@@ -567,7 +713,7 @@ def render_system(profiles, synth, pool, index, index_manifest, manifest, store,
                                    margin=dict(l=0, r=0, t=34, b=0),
                                    plot_bgcolor="rgba(0,0,0,0)",
                                    paper_bgcolor="rgba(0,0,0,0)", font=dict(size=11))
-                b.plotly_chart(fig2, width="stretch", config={"displayModeBar": False})
+                b.plotly_chart(theme.polish_fig(fig2), width="stretch", config={"displayModeBar": False})
                 st.dataframe(df, width="stretch", hide_index=True)
             st.markdown("**Migration triggers** — thresholds, not adjectives")
             st.dataframe(pd.DataFrame(bench.get("migration_triggers", [])),

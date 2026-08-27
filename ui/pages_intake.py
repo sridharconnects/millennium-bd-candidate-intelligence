@@ -288,10 +288,8 @@ def _render_bulk_import() -> None:
 
 def render_intake(profiles, synth, pool, index, index_manifest, manifest, store,
                   client, bench, evals):
-    st.markdown("##### Intake")
-    st.caption("Two ways to add candidates to the working pool: parse a resume file "
-               "through the real pipeline below, or bring in data you already have "
-               "as structured CSV/JSON.")
+    C.page_kicker("Intake",
+                  "Parse a resume through the live pipeline, or import structured CSV/JSON.")
 
     C.section_break("Resume upload — PDF / Word", 0)
     st.caption("Type is verified by magic bytes, not by extension; filenames are "

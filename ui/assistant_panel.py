@@ -60,7 +60,7 @@ def render_toggle_button() -> None:
     controls in the same corner."""
     if st.session_state.chat_open:
         return
-    if st.button("💬  Assistant", key="chat_toggle_btn",
+    if st.button("Assistant", icon=":material/auto_awesome:", key="chat_toggle_btn",
                 help="A real Claude tool-calling loop over this exact workspace -- it "
                      "can search, filter, open a candidate, manage the shortlist, and "
                      "answer questions using live pool data. It cannot delete a record "
@@ -98,7 +98,7 @@ def render_chat_dock(pool: list, store) -> None:
         head, clear, close = st.columns([0.72, 0.14, 0.14])
         with head:
             st.markdown(
-                '<div class="mm-chat-title">💬 Assistant'
+                '<div class="mm-chat-title">Assistant'
                 '<span class="mm-chat-live"><span class="dot"></span>live</span></div>',
                 unsafe_allow_html=True)
         with clear:
@@ -121,14 +121,11 @@ def render_chat_dock(pool: list, store) -> None:
         with st.container(height=560, key="chat_messages"):
             if not turns:
                 st.markdown(
-                    '<div style="text-align:center;padding:80px 10px 18px 10px">'
-                    '<div style="font-size:2rem;line-height:1">💬</div>'
-                    '<div style="font-weight:700;font-size:1.0rem;margin-top:8px">'
-                    'How can I help?</div>'
-                    '<div class="mm-sub" style="margin-top:2px">Ask about candidates, '
-                    'run a search, or manage the shortlist. Real tool-calling over '
-                    'this workspace — it never deletes a record or approves a review.'
-                    '</div></div>', unsafe_allow_html=True)
+                    '<div class="mm-empty" style="border:none;background:transparent;padding:56px 12px">'
+                    '<h4>How can I help?</h4>'
+                    '<div>Ask about candidates, run a search, or manage the shortlist. '
+                    'Real tool-calling over this workspace — it never deletes a record '
+                    'or approves a review.</div></div>', unsafe_allow_html=True)
                 picked = st.pills("Suggestions", list(SUGGESTIONS.keys()),
                                   label_visibility="collapsed",
                                   key="chat_suggestion_pill")

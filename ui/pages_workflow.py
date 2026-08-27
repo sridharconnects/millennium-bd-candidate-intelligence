@@ -42,10 +42,10 @@ def _mechanism(name: str) -> str:
 # ============================================================== 1. document parsing
 _PARSE_MERMAID = r"""
 flowchart TD
-    classDef llm fill:#0F766E,color:#ffffff,stroke:#0B5C56,stroke-width:1.5px;
-    classDef decision fill:#FEF3C7,color:#92400E,stroke:#F59E0B,stroke-width:1px;
-    classDef io fill:#0F172A,color:#ffffff,stroke:#0F172A;
-    classDef stage fill:#E2E8F0,color:#0F172A,stroke:#94A3B8,stroke-width:1px;
+    classDef llm fill:#EEF2FF,color:#3730A3,stroke:#4F46E5,stroke-width:1.5px;
+    classDef decision fill:#FFFBEB,color:#92400E,stroke:#D97706,stroke-width:1px;
+    classDef io fill:#18181B,color:#ffffff,stroke:#09090B;
+    classDef stage fill:#F4F4F5,color:#09090B,stroke:#D4D4D8,stroke-width:1px;
 
     DOC["Resume — PDF or DOCX"]:::io --> ST1
 
@@ -139,11 +139,11 @@ def _render_parse_pipeline() -> None:
 # ============================================================== 2. search / retrieval
 _SEARCH_MERMAID = r"""
 flowchart TD
-    classDef llm fill:#0F766E,color:#ffffff,stroke:#0B5C56,stroke-width:1.5px;
-    classDef localmodel fill:#1D4ED8,color:#ffffff,stroke:#1E40AF,stroke-width:1.5px;
-    classDef rule fill:#F1F5F9,color:#0F172A,stroke:#CBD5E1,stroke-width:1px;
-    classDef decision fill:#FEF3C7,color:#92400E,stroke:#F59E0B,stroke-width:1px;
-    classDef io fill:#0F172A,color:#ffffff,stroke:#0F172A;
+    classDef llm fill:#EEF2FF,color:#3730A3,stroke:#4F46E5,stroke-width:1.5px;
+    classDef localmodel fill:#EFF6FF,color:#1D4ED8,stroke:#3B82F6,stroke-width:1.5px;
+    classDef rule fill:#FAFAFA,color:#52525B,stroke:#E4E4E7,stroke-width:1px;
+    classDef decision fill:#FFFBEB,color:#92400E,stroke:#D97706,stroke-width:1px;
+    classDef io fill:#18181B,color:#ffffff,stroke:#09090B;
 
     Q["User query — free text"]:::io --> UQ{"ENABLE_LLM_QUERY flag on?"}:::decision
     UQ -- "yes" --> PL["parse_query_llm\nClaude Sonnet 4.5 · API call"]:::llm
@@ -177,8 +177,8 @@ def _render_search_pipeline(index) -> None:
 # ============================================================ 3. requisition matching
 _MATCH_MERMAID = r"""
 flowchart LR
-    classDef rule fill:#F1F5F9,color:#0F172A,stroke:#CBD5E1,stroke-width:1px;
-    classDef io fill:#0F172A,color:#ffffff,stroke:#0F172A;
+    classDef rule fill:#FAFAFA,color:#52525B,stroke:#E4E4E7,stroke-width:1px;
+    classDef io fill:#18181B,color:#ffffff,stroke:#09090B;
 
     JD["Job description text\n+ must-have toggles + weights"]:::io --> SC["score_candidate\nweighted rubric — deterministic math\nover ScorableProfile only"]:::rule
     SC --> RK["rank\nsort + top-N"]:::rule
@@ -206,8 +206,8 @@ def _render_match_pipeline() -> None:
 # ================================================================ 4. analytics/insight
 _INSIGHT_MERMAID = r"""
 flowchart LR
-    classDef rule fill:#F1F5F9,color:#0F172A,stroke:#CBD5E1,stroke-width:1px;
-    classDef io fill:#0F172A,color:#ffffff,stroke:#0F172A;
+    classDef rule fill:#FAFAFA,color:#52525B,stroke:#E4E4E7,stroke-width:1px;
+    classDef io fill:#18181B,color:#ffffff,stroke:#09090B;
 
     POOL["Candidate pool\nevery parsed profile"]:::io --> D1["distributions\naggregation"]:::rule
     POOL --> D2["skill_cooccurrence\naggregation"]:::rule
@@ -229,10 +229,10 @@ def _render_insight_pipeline() -> None:
 # =================================================================== 5. chat assistant
 _CHAT_MERMAID = r"""
 flowchart TD
-    classDef llm fill:#0F766E,color:#ffffff,stroke:#0B5C56,stroke-width:1.5px;
-    classDef rule fill:#F1F5F9,color:#0F172A,stroke:#CBD5E1,stroke-width:1px;
-    classDef decision fill:#FEF3C7,color:#92400E,stroke:#F59E0B,stroke-width:1px;
-    classDef io fill:#0F172A,color:#ffffff,stroke:#0F172A;
+    classDef llm fill:#EEF2FF,color:#3730A3,stroke:#4F46E5,stroke-width:1.5px;
+    classDef rule fill:#FAFAFA,color:#52525B,stroke:#E4E4E7,stroke-width:1px;
+    classDef decision fill:#FFFBEB,color:#92400E,stroke:#D97706,stroke-width:1px;
+    classDef io fill:#18181B,color:#ffffff,stroke:#09090B;
 
     U["User message"]:::io --> C1["Claude Sonnet 4.5\nlive API call — NOT the disk-cached\nLLMClient the parsing pipeline uses"]:::llm
     C1 --> D1{"response contains\na tool_use block?"}:::decision
@@ -270,7 +270,7 @@ def _render_registry_section() -> None:
     k = st.columns(4)
     C.kpi(k[0], len(rows), "subagents registered", f"{df['agent'].nunique()} agent modules")
     C.kpi(k[1], n_llm, "call the LLM API", "Claude Sonnet 4.5", theme.ACCENT)
-    C.kpi(k[2], n_local, "call a local model", "embeddings + BM25, no network", "#1D4ED8")
+    C.kpi(k[2], n_local, "call a local model", "embeddings + BM25, no network", "#60A5FA")
     C.kpi(k[3], n_rule, "pure rule-based Python", "regex, taxonomy, date math, span checks")
     st.caption("Every subagent here does real work and is independently testable — "
               "the same registry the System page's own Agents tab reads from, so the "
@@ -281,23 +281,21 @@ def _render_registry_section() -> None:
 
 def render_workflow(profiles, synth, pool, index, index_manifest, manifest, store,
                     client, bench, evals) -> None:
-    st.markdown("##### Workflow")
     st.caption(
-        "Five real pipelines run this platform. Each diagram below is read directly "
-        "off the code that runs it — not a mock-up — with every node labelled by "
-        "exactly what produces it: an LLM API call (named model), a local model "
-        "(embeddings, no network), or deterministic Python.")
+        "Five real pipelines run this platform. Each diagram is read off the code "
+        "that runs it — every node labelled by what produces it: an LLM API call, "
+        "a local model, or deterministic Python.")
     legend = st.columns(4)
-    legend[0].markdown('<span class="mm-chip" style="background:#0F766E22;'
-                       'color:#0F766E;border-color:#0F766E44">🤖 LLM API call</span>',
+    legend[0].markdown('<span class="mm-chip" style="background:#EEF2FF;'
+                       'color:#3730A3;border-color:#C7D2FE">LLM API call</span>',
                        unsafe_allow_html=True)
-    legend[1].markdown('<span class="mm-chip" style="background:#1D4ED822;'
-                       'color:#1D4ED8;border-color:#1D4ED844">⚙ local model, no API</span>',
+    legend[1].markdown('<span class="mm-chip" style="background:#EFF6FF;'
+                       'color:#1D4ED8;border-color:#BFDBFE">local model, no API</span>',
                        unsafe_allow_html=True)
-    legend[2].markdown('<span class="mm-chip mm-chip-plain">𝑓 rule-based / deterministic</span>',
+    legend[2].markdown('<span class="mm-chip mm-chip-plain">rule-based / deterministic</span>',
                        unsafe_allow_html=True)
-    legend[3].markdown('<span class="mm-chip" style="background:#FEF3C722;'
-                       'color:#92400E;border-color:#F59E0B44">◇ decision / branch</span>',
+    legend[3].markdown('<span class="mm-chip" style="background:#FFFBEB;'
+                       'color:#92400E;border-color:#FDE68A">decision / branch</span>',
                        unsafe_allow_html=True)
 
     C.section_break("① Document parsing", 0)

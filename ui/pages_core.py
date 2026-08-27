@@ -279,47 +279,181 @@ def _manual_filter(pool, F: dict):
     return out
 
 
+def _render_filter_bar(facets: dict, store, *, n_shown: int | None = None,
+                       n_pool: int | None = None, latency_ms: float | None = None) -> dict:
+    """Results toolbar: filters sit above the table, with active chips + view meta."""
+    F: dict = {}
+    active_bits: list[str] = []
+
+    meta = ""
+    if n_shown is not None and n_pool is not None and latency_ms is not None:
+        meta = f"{n_shown} of {n_pool} candidates · {latency_ms:.0f} ms"
+
+    st.markdown(
+        f'<div class="mm-results-bar">'
+        f'<div class="mm-results-bar-label">Results'
+        + (f'<span class="mm-results-bar-meta">{html.escape(meta)}</span>' if meta else "")
+        + '</div></div>',
+        unsafe_allow_html=True)
+
+    with st.container(horizontal=True, gap="small", key="filter_studio"):
+        with st.popover("Filters", icon=":material/tune:"):
+            st.caption("Narrow the working pool. Filters compose with the query.")
+            c1, c2 = st.columns(2)
+            with c1:
+                F["region"] = st.multiselect("Region", facets["region"], key="f_region")
+                F["strategy"] = st.multiselect("Strategy", facets["strategy"], key="f_strategy")
+                F["sector"] = st.multiselect("Sector", facets["sector"], key="f_sector")
+            with c2:
+                F["skill"] = st.multiselect("Skills", facets["skill"], key="f_skill")
+                F["seniority"] = st.multiselect(
+                    "Seniority", facets["seniority"], key="f_seniority",
+                    format_func=lambda s: f"{s} · {tx.display('seniority', s)}")
+                F["years"] = st.slider(
+                    "Years of experience", 0.0, 30.0, (0.0, 30.0), 0.5, key="f_years")
+            F["include_unknown_years"] = st.checkbox(
+                "Include candidates whose experience is unknown", value=True,
+                help="Unknown ≠ zero. Some CVs state tenure as a duration with no dates.")
+            with st.expander("More filters"):
+                F["approach"] = st.multiselect("Approach", facets["approach"], key="f_approach")
+                F["feeder"] = st.multiselect("Feeder path", facets["feeder"], key="f_feeder")
+                F["employer"] = st.multiselect("Employer", facets["employer"], key="f_employer")
+                F["tier"] = st.multiselect("Employer tier", facets["tier"], key="f_tier")
+                F["cert"] = st.multiselect("Certification", facets["cert"], key="f_cert")
+                F["degree"] = st.multiselect("Degree level", facets["degree"], key="f_degree")
+                F["language"] = st.multiselect("Language", facets["language"], key="f_language")
+                F["min_completeness"] = st.slider(
+                    "Minimum profile completeness", 0.0, 1.0, 0.0, 0.05)
+                F["review_only"] = st.checkbox("Only records flagged for review")
+            F.setdefault("min_completeness", 0.0)
+            F.setdefault("review_only", False)
+            F.setdefault("feeder", [])
+
+        with st.popover("Saved", icon=":material/bookmark:"):
+            saved = store.list_searches()
+            if saved:
+                pick = st.selectbox("Load", ["—"] + [s["name"] for s in saved],
+                                    label_visibility="collapsed", key="load_saved_pick")
+                if pick != "—":
+                    rec = next(s for s in saved if s["name"] == pick)
+                    lc, dc = st.columns(2)
+                    if lc.button("Load", width="stretch", key="load_search"):
+                        st.session_state.query = rec["query"]
+                        st.session_state.retrieval_mode = rec.get("mode", "hybrid")
+                        st.session_state.pending_filters = rec["filters"]
+                        st.rerun()
+                    if dc.button("Delete", width="stretch", key="del_search"):
+                        store.delete_search(pick)
+                        st.rerun()
+            else:
+                st.caption("No saved searches yet.")
+            nm = st.text_input("Name", placeholder="e.g. APAC healthcare L/S",
+                               label_visibility="collapsed", key="save_search_name")
+            if st.button("Save current search", width="stretch",
+                         disabled=not nm.strip(), key="save_search_btn"):
+                snap = {
+                    "region": st.session_state["f_region"] if "f_region" in st.session_state else [],
+                    "strategy": st.session_state["f_strategy"] if "f_strategy" in st.session_state else [],
+                    "sector": st.session_state["f_sector"] if "f_sector" in st.session_state else [],
+                    "skill": st.session_state["f_skill"] if "f_skill" in st.session_state else [],
+                    "seniority": st.session_state["f_seniority"] if "f_seniority" in st.session_state else [],
+                    "years": st.session_state["f_years"] if "f_years" in st.session_state else (0.0, 30.0),
+                    "approach": st.session_state["f_approach"] if "f_approach" in st.session_state else [],
+                    "feeder": st.session_state["f_feeder"] if "f_feeder" in st.session_state else [],
+                    "employer": st.session_state["f_employer"] if "f_employer" in st.session_state else [],
+                    "tier": st.session_state["f_tier"] if "f_tier" in st.session_state else [],
+                    "cert": st.session_state["f_cert"] if "f_cert" in st.session_state else [],
+                    "degree": st.session_state["f_degree"] if "f_degree" in st.session_state else [],
+                    "language": st.session_state["f_language"] if "f_language" in st.session_state else [],
+                }
+                store.save_search(nm.strip(), st.session_state.query, snap,
+                                  st.session_state.retrieval_mode)
+                st.success(f"Saved '{nm.strip()}'")
+
+    for key, label in (("f_region", "Region"), ("f_strategy", "Strategy"),
+                       ("f_sector", "Sector"), ("f_skill", "Skill"),
+                       ("f_seniority", "Level")):
+        vals = st.session_state[key] if key in st.session_state else []
+        for v in vals or []:
+            active_bits.append(f"{label}: {v}")
+    years = st.session_state["f_years"] if "f_years" in st.session_state else (0.0, 30.0)
+    if years != (0.0, 30.0):
+        active_bits.append(f"Years: {years[0]:.0f}–{years[1]:.0f}")
+    if active_bits:
+        chips = "".join(
+            f'<span class="mm-filter-chip">{html.escape(b)}</span>' for b in active_bits[:8])
+        extra = (f'<span class="mm-sub">+{len(active_bits) - 8} more</span>'
+                 if len(active_bits) > 8 else "")
+        st.markdown(
+            f'<div class="mm-filter-chip-row">{chips}{extra}</div>',
+            unsafe_allow_html=True)
+
+    F.setdefault("region", st.session_state["f_region"] if "f_region" in st.session_state else [])
+    F.setdefault("strategy", st.session_state["f_strategy"] if "f_strategy" in st.session_state else [])
+    F.setdefault("sector", st.session_state["f_sector"] if "f_sector" in st.session_state else [])
+    F.setdefault("skill", st.session_state["f_skill"] if "f_skill" in st.session_state else [])
+    F.setdefault("seniority", st.session_state["f_seniority"] if "f_seniority" in st.session_state else [])
+    F.setdefault("years", years)
+    F.setdefault("include_unknown_years", True)
+    F.setdefault("approach", st.session_state["f_approach"] if "f_approach" in st.session_state else [])
+    F.setdefault("feeder", st.session_state["f_feeder"] if "f_feeder" in st.session_state else [])
+    F.setdefault("employer", st.session_state["f_employer"] if "f_employer" in st.session_state else [])
+    F.setdefault("tier", st.session_state["f_tier"] if "f_tier" in st.session_state else [])
+    F.setdefault("cert", st.session_state["f_cert"] if "f_cert" in st.session_state else [])
+    F.setdefault("degree", st.session_state["f_degree"] if "f_degree" in st.session_state else [])
+    F.setdefault("language", st.session_state["f_language"] if "f_language" in st.session_state else [])
+    F.setdefault("min_completeness", 0.0)
+    F.setdefault("review_only", False)
+    return F
+
+
 # ============================================================================ SEARCH
 def render_search(profiles, synth, pool, index, index_manifest, manifest, store,
                   client, bench, evals):
     C.synthetic_banner(len(synth) if st.session_state.include_synthetic else 0)
 
-    # ONE search-and-results unit: the input row, the example chips, and the result
-    # list all live in the same bordered container (`hero` is re-entered further down
-    # once the results are computed), so the search visibly IS the thing filtering
-    # the list rather than a separate widget floating above it. Pool at a glance
-    # moved out to its own full-width section below.
-    hero = st.container(border=True, key="search_hero")
+    # Command card (query + tools) and a separate results panel so Filters sit
+    # directly above the table — Linear/Notion density, not sidebar clutter.
+    facets = _facets(pool)
+
+    # A saved search restores filters, not just the query text. Widget state must be
+    # written before the widgets are constructed, and only values still present in
+    # the current facets are restored.
+    pending = st.session_state.pop("pending_filters", None)
+    if pending:
+        facet_key = {"region": "region", "strategy": "strategy", "sector": "sector",
+                     "skill": "skill", "seniority": "seniority", "approach": "approach",
+                     "feeder": "feeder", "employer": "employer", "tier": "tier",
+                     "cert": "cert", "degree": "degree", "language": "language"}
+        for fk, ffk in facet_key.items():
+            vals = [v for v in (pending.get(fk) or []) if v in facets.get(ffk, [])]
+            st.session_state[f"f_{fk}"] = vals
+        if isinstance(pending.get("years"), (list, tuple)) and len(pending["years"]) == 2:
+            st.session_state["f_years"] = tuple(float(x) for x in pending["years"])
+
+    hero = st.container(border=False, key="search_hero")
     with hero:
-        qcol, mcol, icol, scol, bcol = st.columns([0.47, 0.15, 0.05, 0.14, 0.19])
-        with qcol:
-            query = st.text_input(
-                "Search", key="query", label_visibility="collapsed",
-                placeholder="Describe the candidate you need — plain English works "
-                            "(\"healthcare L/S in APAC, no banking background\")")
-        with mcol:
-            mode = st.selectbox("Retrieval", ["hybrid", "dense", "lexical"],
-                                key="retrieval_mode", label_visibility="collapsed",
-                                help="How matches are found and ranked. Click ⓘ for "
-                                     "exactly what the selected mode does with your "
-                                     "query, with measured accuracy for all three.")
-        with icol:
-            _mode_popover(st.session_state.retrieval_mode, evals)
-        with scol:
-            show_n = st.selectbox(
-                "Show", [25, 50, 100, 250, "All"], index=1, key="f_show_n",
-                label_visibility="collapsed",
-                help="How many matches to display. With a large pool (e.g. the "
-                     "500-record synthetic corpus), the default only shows the top "
-                     "50 — raise this to see more.")
-        with bcol:
-            st.button("Search", type="primary", width="stretch")
-        st.pills("Try an example search", list(EXAMPLES), key="search_examples",
-                 on_change=_apply_example,
-                 help="Each chip runs a ready-made plain-English query, so you can "
-                      "see what the search understands without typing anything.")
+        from . import cc_surfaces
+
+        show_n = st.session_state["f_show_n"] if "f_show_n" in st.session_state else 50
+        mode0 = st.session_state["retrieval_mode"] if "retrieval_mode" in st.session_state else "hybrid"
+        q0 = st.session_state["query"] if "query" in st.session_state else ""
+        cc_surfaces.command_bar(
+            query=q0,
+            mode=mode0 or "hybrid",
+            show=show_n,
+            examples=[{"label": k, "query": v} for k, v in EXAMPLES.items()],
+            meta=f"{len(pool)} in pool",
+            key="cc_command",
+        )
+        query = st.session_state["query"] if "query" in st.session_state else ""
+        mode = st.session_state["retrieval_mode"] if "retrieval_mode" in st.session_state else "hybrid"
+        mode = mode or "hybrid"
+        show_n = st.session_state["f_show_n"] if "f_show_n" in st.session_state else 50
         n_sl = len(st.session_state.shortlist)
-        with st.container(horizontal=True, key="search_tools"):
+        with st.container(horizontal=True, key="search_tools", gap="small",
+                          vertical_alignment="center"):
+            _mode_popover(mode, evals)
             st.button("Match to JD", icon=":material/person_search:",
                       key="open_match_studio",
                       type="primary" if _flag_on("match_studio_open") else "secondary",
@@ -339,127 +473,53 @@ def render_search(profiles, synth, pool, index, index_manifest, manifest, store,
                 st.session_state.page = "Shortlist"
                 st.rerun()
 
-    facets = _facets(pool)
+        # Filter widgets live in the results panel; read session keys here so Match
+        # studio and retrieval see the same active filters.
+        F = {
+            "region": st.session_state["f_region"] if "f_region" in st.session_state else [],
+            "strategy": st.session_state["f_strategy"] if "f_strategy" in st.session_state else [],
+            "sector": st.session_state["f_sector"] if "f_sector" in st.session_state else [],
+            "skill": st.session_state["f_skill"] if "f_skill" in st.session_state else [],
+            "seniority": st.session_state["f_seniority"] if "f_seniority" in st.session_state else [],
+            "years": st.session_state["f_years"] if "f_years" in st.session_state else (0.0, 30.0),
+            "include_unknown_years": True,
+            "approach": st.session_state["f_approach"] if "f_approach" in st.session_state else [],
+            "feeder": st.session_state["f_feeder"] if "f_feeder" in st.session_state else [],
+            "employer": st.session_state["f_employer"] if "f_employer" in st.session_state else [],
+            "tier": st.session_state["f_tier"] if "f_tier" in st.session_state else [],
+            "cert": st.session_state["f_cert"] if "f_cert" in st.session_state else [],
+            "degree": st.session_state["f_degree"] if "f_degree" in st.session_state else [],
+            "language": st.session_state["f_language"] if "f_language" in st.session_state else [],
+            "min_completeness": 0.0,
+            "review_only": False,
+        }
+        show_cap = len(pool) if show_n == "All" else int(show_n)
+        t0 = time.perf_counter()
+        filtered = _manual_filter(pool, F)
+        parsed = None
+        hits = []
+        if query.strip():
+            parsed, _presult = understand_query(query, client)
+            r = retrieve(index, parsed.semantic_text or query, mode, top_k=show_cap)
+            hits = r.output or []
+            allowed = {p.candidate_id for p in filtered}
+            gated, excluded, caveats = apply_filters(filtered, parsed)
+            gset = {p.candidate_id for p in gated}
+            ordered = [h for h in hits if h.candidate_id in allowed and h.candidate_id in gset]
+            byid = _byid(pool)
+            results = [(byid[h.candidate_id], h.score, h.explain, h.matched_chunks)
+                       for h in ordered if h.candidate_id in byid]
+            seen = {p.candidate_id for p, *_ in results}
+            results += [(p, 0.0, "matched filters only", []) for p in gated
+                        if p.candidate_id not in seen]
+        else:
+            excluded, caveats = [], {}
+            results = [(p, 0.0, "", []) for p in sorted(
+                filtered, key=lambda p: -p.quality.completeness)]
+        latency = (time.perf_counter() - t0) * 1000
+        st.session_state.last_latency_ms = latency
+        st.query_params["q"] = query
 
-    # A saved search restores the filter rail, not just the query text. Widget state
-    # must be written before the widgets are constructed, and only values still present
-    # in the current facets are restored -- a saved employer that has since been deleted
-    # must not resurrect itself as a phantom filter.
-    pending = st.session_state.pop("pending_filters", None)
-    if pending:
-        facet_key = {"region": "region", "strategy": "strategy", "sector": "sector",
-                     "skill": "skill", "seniority": "seniority", "approach": "approach",
-                     "feeder": "feeder", "employer": "employer", "tier": "tier",
-                     "cert": "cert", "degree": "degree", "language": "language"}
-        for fk, ffk in facet_key.items():
-            vals = [v for v in (pending.get(fk) or []) if v in facets.get(ffk, [])]
-            st.session_state[f"f_{fk}"] = vals
-        if isinstance(pending.get("years"), (list, tuple)) and len(pending["years"]) == 2:
-            st.session_state["f_years"] = tuple(float(x) for x in pending["years"])
-
-    with st.sidebar:
-        st.divider()
-        st.markdown("#### Filters")
-        F = {}
-        F["region"] = st.multiselect("Region", facets["region"], key="f_region")
-        F["strategy"] = st.multiselect("Strategy", facets["strategy"], key="f_strategy")
-        F["sector"] = st.multiselect("Sector", facets["sector"], key="f_sector")
-        F["skill"] = st.multiselect("Skills", facets["skill"], key="f_skill")
-        F["seniority"] = st.multiselect(
-            "Seniority", facets["seniority"], key="f_seniority",
-            format_func=lambda s: f"{s} · {tx.display("seniority", s)}")
-        F["years"] = st.slider("Years of experience", 0.0, 30.0, (0.0, 30.0), 0.5, key="f_years")
-        F["include_unknown_years"] = st.checkbox(
-            "Include candidates whose experience is unknown", value=True,
-            help="Unknown ≠ zero. Three CVs in this corpus state tenure as a duration "
-                 "with no dates, so no total can be derived without inventing one.")
-        with st.expander("More filters"):
-            F["approach"] = st.multiselect("Approach", facets["approach"], key="f_approach")
-            F["feeder"] = st.multiselect("Feeder path", facets["feeder"], key="f_feeder")
-            F["employer"] = st.multiselect("Employer", facets["employer"], key="f_employer")
-            F["tier"] = st.multiselect("Employer tier", facets["tier"], key="f_tier")
-            F["cert"] = st.multiselect("Certification", facets["cert"], key="f_cert")
-            F["degree"] = st.multiselect("Degree level", facets["degree"], key="f_degree")
-            F["language"] = st.multiselect("Language", facets["language"], key="f_language")
-            F["min_completeness"] = st.slider("Minimum profile completeness", 0.0, 1.0, 0.0, 0.05)
-            F["review_only"] = st.checkbox("Only records flagged for review")
-        F.setdefault("min_completeness", 0.0)
-        F.setdefault("review_only", False)
-        F.setdefault("feeder", [])
-
-        # Saved searches. A recruiter re-runs the same handful of searches every week;
-        # making them rebuild the filter rail each time is pure friction.
-        st.divider()
-        st.markdown("#### Saved searches")
-        saved = store.list_searches()
-        if saved:
-            pick = st.selectbox("Load", ["—"] + [s["name"] for s in saved],
-                                label_visibility="collapsed")
-            if pick != "—":
-                rec = next(s for s in saved if s["name"] == pick)
-                lc, dc = st.columns(2)
-                if lc.button("Load", width="stretch", key="load_search"):
-                    st.session_state.query = rec["query"]
-                    st.session_state.retrieval_mode = rec.get("mode", "hybrid")
-                    st.session_state.pending_filters = rec["filters"]
-                    st.rerun()
-                if dc.button("Delete", width="stretch", key="del_search"):
-                    store.delete_search(pick)
-                    st.rerun()
-        nm = st.text_input("Name", placeholder="e.g. APAC healthcare L/S",
-                           label_visibility="collapsed", key="save_search_name")
-        if st.button("Save current search", width="stretch",
-                     disabled=not nm.strip()):
-            store.save_search(nm.strip(), st.session_state.query, F,
-                              st.session_state.retrieval_mode)
-            st.success(f"Saved '{nm.strip()}'")
-
-    show_cap = len(pool) if show_n == "All" else int(show_n)
-    t0 = time.perf_counter()
-    filtered = _manual_filter(pool, F)
-    parsed = None
-    hits = []
-    if query.strip():
-        parsed, presult = understand_query(query, client)
-        # `top_k` only controls how many of the FUSED candidates are kept -- the two
-        # sub-retrievers each still cap at SETTINGS.retrieval.top_k_{dense,lexical}
-        # (50) internally, so a text query naturally tops out around there regardless
-        # of `show_cap`. That is a relevance cutoff, not a bug: "500 matches" is not a
-        # meaningful answer to a specific plain-English query the way it is when
-        # browsing with no query at all (the `else` branch below).
-        r = retrieve(index, parsed.semantic_text or query, mode, top_k=show_cap)
-        hits = r.output or []
-        allowed = {p.candidate_id for p in filtered}
-        # Soft preferences must never eliminate, so query-derived filters are applied
-        # only where the parser marked them as genuinely hard.
-        gated, excluded, caveats = apply_filters(filtered, parsed)
-        gset = {p.candidate_id for p in gated}
-        ordered = [h for h in hits if h.candidate_id in allowed and h.candidate_id in gset]
-        byid = _byid(pool)
-        results = [(byid[h.candidate_id], h.score, h.explain, h.matched_chunks)
-                   for h in ordered if h.candidate_id in byid]
-        # Filter-only matches still belong in the list, below the ranked ones.
-        seen = {p.candidate_id for p, *_ in results}
-        results += [(p, 0.0, "matched filters only", []) for p in gated
-                    if p.candidate_id not in seen]
-    else:
-        excluded, caveats = [], {}
-        results = [(p, 0.0, "", []) for p in sorted(
-            filtered, key=lambda p: -p.quality.completeness)]
-    latency = (time.perf_counter() - t0) * 1000
-    st.session_state.last_latency_ms = latency
-    st.query_params["q"] = query
-    # NB: do not also write "page" here. It used to be hardcoded to "Search", which
-    # meant every Search render pinned the URL to that value; on the *next* rerun
-    # (e.g. clicking a different sidebar item) the URL-restore block in app.py read
-    # that stale param back and silently reverted the navigation. app.py now owns the
-    # "page" query param centrally, written once from whatever the current page
-    # actually is, so it can never fight with in-session navigation.
-
-    # Results render INSIDE the same hero container as the search bar (re-entered
-    # here now that they exist), separated by a divider: one surface, where typing
-    # a query visibly narrows the list below it.
-    with hero:
         if "import_flash" in st.session_state:
             st.success(st.session_state.import_flash)
             del st.session_state["import_flash"]
@@ -470,44 +530,49 @@ def render_search(profiles, synth, pool, index, index_manifest, manifest, store,
                 f'<div class="mm-banner"><b>Interpreted as</b> — {html.escape(parsed.interpretation)}'
                 f' <span class="mm-mono">[{parsed.method} parser]</span></div>',
                 unsafe_allow_html=True)
-        st.divider()
-        shown = min(show_cap, len(results))
-        hd_l, hd_m, hd_r = st.columns([0.50, 0.22, 0.28])
-        with hd_l:
-            # "Showing X of Y" (not a bare count): the header itself says these are
-            # the survivors of the search + filters, which is the whole mental model.
-            if query.strip() or len(results) < len(pool):
-                st.markdown(f"##### Showing {shown} of {len(pool)} candidates "
-                            f"· {latency:.1f} ms")
-            else:
-                st.markdown(f"##### All {len(pool)} candidates · {latency:.1f} ms")
+
+    shown = min(show_cap, len(results))
+    results_col, insight_col = st.columns([0.74, 0.26], gap="medium",
+                                          vertical_alignment="top")
+    with results_col:
+        _render_results_panel(facets, store, shown, results, pool, latency, query,
+                              caveats, excluded)
+    with insight_col:
+        _render_pool_glance(results, shown, latency, pool)
+
+
+def _render_results_panel(facets, store, shown: int, results, pool, latency: float,
+                          query: str, caveats: dict, excluded: list) -> None:
+    results_panel = st.container(border=True, key="results_panel")
+    with results_panel:
+        _render_filter_bar(facets, store, n_shown=shown, n_pool=len(pool),
+                           latency_ms=latency)
+        hd_m, hd_r = st.columns([0.35, 0.65], vertical_alignment="center")
         with hd_m:
             if query.strip():
-                st.button("✕ Clear search", key="clear_query", width="stretch",
-                          on_click=_clear_query,
+                st.button("Clear search", key="clear_query", width="stretch",
+                          icon=":material/close:", on_click=_clear_query,
                           help="Remove the query and show the whole pool again "
-                               "(sidebar filters stay applied)")
+                               "(filters stay applied)")
         with hd_r:
             view = st.segmented_control(
-                # `default` is only consulted the first time this key is seen; once
-                # the widget's own state exists, Streamlit uses that and ignores
-                # `default`. So this does not need (and must not use) a `.get()` read
-                # of session_state, which is also unsupported under the AppTest
-                # harness this file is tested with.
-                "View", ["Table", "Cards"], default="Table",
+                "View", ["List", "Table", "Cards"], default="List",
                 key="view", label_visibility="collapsed",
-                help="Table for dense scanning and sorting; cards when you want the "
-                     "labels and flags at a glance.")
+                help="List for a dense product scan; table for sorting; cards for flags.")
         if len(results) > shown:
-            st.caption(f"showing {shown} of {len(results)} — raise \"Show\" above the "
-                      f"search bar to see more")
+            st.caption(f"showing {shown} of {len(results)} — raise \"Show\" in the "
+                       f"command bar to see more")
         if not results:
-            st.markdown('<div class="mm-warn">No candidates match. Try removing a '
-                        'filter, or search in plain English instead — must-have terms '
-                        'gate, preferences only score.</div>', unsafe_allow_html=True)
-        if view == "Table":
+            C.empty_state(
+                "No candidates match",
+                "Try removing a filter, or search in plain English instead — "
+                "must-have terms gate, preferences only score.",
+                icon="⌀")
+        if view == "Table" and results:
             picked = _results_table(results[:shown])
             _results_actions(picked)
+        if view == "List" and results:
+            _render_result_list(results[:shown], shown, latency)
         for p, score, explain, chunks in (results[:shown] if view == "Cards" else []):
             st.markdown(C.candidate_card(p, st.session_state.blind,
                                          score if score else None, explain),
@@ -520,8 +585,7 @@ def render_search(profiles, synth, pool, index, index_manifest, manifest, store,
                 st.rerun()
             listed = p.candidate_id in st.session_state.shortlist
             if b[1].button("Listed" if listed else "Shortlist",
-                           key=f"s_{p.candidate_id}",
-                           icon=":material/star:"):
+                           key=f"s_{p.candidate_id}", icon=":material/star:"):
                 if listed:
                     st.session_state.shortlist.pop(p.candidate_id)
                 else:
@@ -545,9 +609,6 @@ def render_search(profiles, synth, pool, index, index_manifest, manifest, store,
                             f'<span class="mm-sub mm-mono">{rk}</span></div>',
                             unsafe_allow_html=True)
 
-    # The gating explanations belong to the RESULTS (they say why someone is or is
-    # not in the list above), so they render at the bottom of the hero.
-    with hero:
         if caveats:
             with st.expander(f"⚠ {len(caveats)} kept with an unverified must-have"):
                 st.caption("Their CV does not state the requirement either way. Kept, "
@@ -568,16 +629,123 @@ def render_search(profiles, synth, pool, index, index_manifest, manifest, store,
                     st.markdown(f"**{html.escape(nm)}** — " +
                                 "; ".join(html.escape(r) for r in e["reasons"]))
 
-    # Pool at a glance: its own full-width section OUTSIDE the search unit — it
-    # describes the candidates currently in view, it is not a search control.
-    # `key="pool_glance"` lets theme.py make it user-resizable (CSS `resize:vertical`
-    # + a native drag handle at its bottom-right corner).
+
+def _render_result_list(results, shown: int, latency: float) -> None:
+    from . import cc_surfaces
+
+    def _list_action(payload: dict) -> None:
+        cid = payload.get("id") if isinstance(payload, dict) else None
+        kind = payload.get("type") if isinstance(payload, dict) else None
+        if not cid:
+            return
+        if kind == "open":
+            st.session_state.selected = cid
+            st.session_state.page = "Candidate"
+        elif kind == "shortlist":
+            if cid in st.session_state.shortlist:
+                st.session_state.shortlist.pop(cid)
+            else:
+                st.session_state.shortlist[cid] = {
+                    "note": "", "tags": "", "source": "human", "basis": ""}
+
+    rows = []
+    for p, score, explain, _chunks in results:
+        cur = p.current_role()
+        tags = []
+        if p.geo_region:
+            tags.append({"label": tx.display("region", p.geo_region.label,
+                                             p.geo_region.label), "tone": "muted"})
+        if p.seniority:
+            tags.append({"label": p.seniority.label, "tone": ""})
+        if p.strategies:
+            tags.append({"label": tx.display("strategy", p.strategies[0].label,
+                                             p.strategies[0].label), "tone": ""})
+        if p.quality.needs_human_review:
+            tags.append({"label": "review", "tone": "warn"})
+        name = p.display_name(st.session_state.blind)
+        initials = "".join(w[0] for w in name.split()[:2] if w) or "?"
+        subtitle = " · ".join(filter(None, [
+            (cur.title_raw.display("") if cur else ""),
+            (cur.employer_canonical or cur.employer_raw.display("")) if cur else "",
+        ]))
+        rows.append({
+            "id": p.candidate_id,
+            "name": name,
+            "initials": initials.upper(),
+            "subtitle": subtitle or explain or "Profile in pool",
+            "tags": tags[:4],
+            "score": f"{score:.3f}" if score else "",
+            "listed": p.candidate_id in st.session_state.shortlist,
+        })
+    cc_surfaces.candidate_list(
+        rows, title=f"{shown} candidates", meta=f"{latency:.0f} ms",
+        key="cc_candidate_list", on_action=_list_action)
+
+
+def _render_pool_glance(results, shown: int, latency: float, pool) -> None:
     with st.container(border=True, key="pool_glance"):
-        st.markdown("##### Pool at a glance")
-        st.caption("How the candidates currently shown above are distributed — "
-                   "updates live with every search and filter. Drag the "
-                   "bottom-right corner to resize.")
+        C.section_header(
+            "Pool at a glance",
+            subtitle="Distribution of candidates currently in view.")
+        m1, m2 = st.columns(2)
+        C.metric_card(shown, "visible", f"of {len(results)} matched")
+        with m1:
+            C.metric_card(len(st.session_state.shortlist), "shortlisted")
+        with m2:
+            C.metric_card(review_n := sum(1 for p, *_ in results if p.quality.needs_human_review),
+                          "review", colour=theme.WARNING if review_n else theme.SUCCESS)
+        l1, l2 = st.columns(2)
+        with l1:
+            C.metric_card(f"{latency:.0f}", "ms")
+        with l2:
+            C.metric_card(len(pool), "pool")
         _mini_charts(results)
+        _right_rail_focus(results[:shown])
+
+
+def _right_rail_focus(results) -> None:
+    if not results:
+        return
+
+    st.markdown('<div class="mm-rail-sec">Focus queue</div>', unsafe_allow_html=True)
+    for p, score, explain, _chunks in results[:4]:
+        cur = p.current_role()
+        role = " · ".join(filter(None, [
+            cur.title_raw.display("") if cur else "",
+            (cur.employer_canonical or cur.employer_raw.display("")) if cur else "",
+        ]))
+        badges = []
+        if score:
+            badges.append(f"{score:.3f}")
+        if p.quality.needs_human_review:
+            badges.append("review")
+        if p.candidate_id in st.session_state.shortlist:
+            badges.append("listed")
+        badge_html = "".join(
+            f'<span class="mm-rail-pill">{html.escape(b)}</span>' for b in badges[:3])
+        st.markdown(
+            f'<div class="mm-rail-person">'
+            f'<div class="mm-row" style="justify-content:space-between">'
+            f'<span class="mm-name">{html.escape(p.display_name(st.session_state.blind))}</span>'
+            f'<span>{badge_html}</span></div>'
+            f'<div class="mm-sub">{html.escape(role or explain or "Profile in pool")}</div>'
+            f'</div>',
+            unsafe_allow_html=True)
+        if st.button("Open profile", key=f"rail_open_{p.candidate_id}",
+                     icon=":material/open_in_new:", width="stretch"):
+            st.session_state.selected = p.candidate_id
+            st.session_state.page = "Candidate"
+            st.rerun()
+
+    a, b = st.columns(2)
+    if a.button("Analytics", icon=":material/monitoring:", key="rail_go_analytics",
+                width="stretch"):
+        st.session_state.page = "Analytics"
+        st.rerun()
+    if b.button("Review", icon=":material/flag:", key="rail_go_review",
+                width="stretch"):
+        st.session_state.page = "Review"
+        st.rerun()
 
 
 def _results_table(results) -> list[str]:
@@ -736,6 +904,45 @@ def _profile_exports(p) -> None:
                 help="Editable .docx of the extracted profile")
 
 
+def _profile_downloads_compact(p) -> None:
+    from millennium.export import (
+        profile_csv_bytes, profile_docx_bytes, profile_json_bytes,
+        profile_pdf_bytes, profile_filename,
+    )
+
+    include_pii = not st.session_state.blind
+    cid = p.candidate_id[:8]
+    st.markdown('<div class="mm-console-title">Exports</div>', unsafe_allow_html=True)
+    c1, c2 = st.columns(2)
+    with c1, st.container(key="dlc_json"):
+        st.download_button(
+            "JSON", profile_json_bytes(p, include_pii=include_pii),
+            file_name=profile_filename(p, "json", st.session_state.blind),
+            mime="application/json", icon=":material/data_object:",
+            key=f"dlc_json_{cid}", width="stretch")
+    with c2, st.container(key="dlc_csv"):
+        st.download_button(
+            "CSV", profile_csv_bytes(p, include_pii=include_pii),
+            file_name=profile_filename(p, "csv", st.session_state.blind),
+            mime="text/csv", icon=":material/table:",
+            key=f"dlc_csv_{cid}", width="stretch")
+    c3, c4 = st.columns(2)
+    with c3, st.container(key="dlc_pdf"):
+        st.download_button(
+            "PDF", profile_pdf_bytes(p, include_pii=include_pii),
+            file_name=profile_filename(p, "pdf", st.session_state.blind),
+            mime="application/pdf", icon=":material/picture_as_pdf:",
+            key=f"dlc_pdf_{cid}", width="stretch")
+    with c4, st.container(key="dlc_docx"):
+        st.download_button(
+            "Word", profile_docx_bytes(p, include_pii=include_pii),
+            file_name=profile_filename(p, "docx", st.session_state.blind),
+            mime="application/vnd.openxmlformats-officedocument."
+                 "wordprocessingml.document",
+            icon=":material/description:", key=f"dlc_docx_{cid}",
+            width="stretch")
+
+
 def _profile_insights(p, pool) -> None:
     """Compact charts on the Profile tab so opening a record shows *work done*,
     not only fields: skill depth, quality coverage, and how this person sits in
@@ -768,7 +975,7 @@ def _profile_insights(p, pool) -> None:
                           plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
                           xaxis=dict(visible=False), yaxis=dict(title=None),
                           font=dict(size=11), showlegend=False)
-        st.plotly_chart(fig, width="stretch", config={"displayModeBar": False},
+        st.plotly_chart(theme.polish_fig(fig), width="stretch", config={"displayModeBar": False},
                         key="insight_skills")
     with c2:
         st.markdown('<div class="mm-insight-h">Extraction quality</div>'
@@ -786,7 +993,7 @@ def _profile_insights(p, pool) -> None:
                           plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
                           xaxis=dict(range=[0, 1.15], visible=False),
                           yaxis=dict(title=None), font=dict(size=11), showlegend=False)
-        st.plotly_chart(fig, width="stretch", config={"displayModeBar": False},
+        st.plotly_chart(theme.polish_fig(fig), width="stretch", config={"displayModeBar": False},
                         key="insight_quality")
     with c3:
         st.markdown('<div class="mm-insight-h">In this pool</div>'
@@ -820,6 +1027,252 @@ def _profile_insights(p, pool) -> None:
                 unsafe_allow_html=True)
 
 
+def _render_candidate_command_center(p, ids: list[str], byid: dict, i: int,
+                                     pool) -> None:
+    name = p.display_name(st.session_state.blind)
+    initials = "".join(part[0] for part in name.replace("(", " ").split()
+                       if part[:1].isalpha())[:2].upper() or "·"
+    cur = p.current_role()
+    current = ""
+    if cur:
+        current = " · ".join(filter(None, [
+            cur.title_raw.display(""),
+            cur.employer_canonical or cur.employer_raw.display(""),
+        ]))
+    review = p.quality.needs_human_review
+    status = "Human review" if review else "Ready for recruiter review"
+    status_tone = "warn" if review else "ok"
+    source = p.provenance.source_file if p.provenance else "source document"
+    y = f"{p.years_experience.value:.1f}" if p.years_experience.is_known else "—"
+    listed = p.candidate_id in st.session_state.shortlist
+
+    with st.container(border=True, key="candidate_command"):
+        profile_col, console_col = st.columns([0.58, 0.42], gap="large",
+                                              vertical_alignment="top")
+        with profile_col:
+            st.markdown(
+                f'<div class="mm-profile-command-head">'
+                f'<div class="mm-cand-avatar mm-hud-avatar">{html.escape(initials)}</div>'
+                f'<div class="mm-profile-command-body">'
+                f'<div class="mm-profile-status {status_tone}">{html.escape(status)}</div>'
+                f'<div class="mm-hud-name">{html.escape(name)}</div>'
+                f'<div class="mm-profile-role">{html.escape(current or p.headline.display(""))}</div>'
+                f'<div class="mm-profile-source">Source · {html.escape(source)}</div>'
+                f'<div class="mm-profile-labels">{C.labels_row(p, 10)}</div>'
+                f'</div></div>',
+                unsafe_allow_html=True)
+            metric_html = (
+                '<div class="mm-profile-metrics">'
+                f'<div><b>{html.escape(y)}</b><span>years exp</span></div>'
+                f'<div><b>{p.quality.completeness:.0%}</b><span>complete</span></div>'
+                f'<div><b>{p.quality.evidence_coverage:.0%}</b><span>evidenced</span></div>'
+                f'<div><b>{p.quality.abstention_count}</b><span>abstained</span></div>'
+                '</div>')
+            st.markdown(metric_html, unsafe_allow_html=True)
+        with console_col:
+            st.markdown('<div class="mm-console-title">Profile controls</div>',
+                        unsafe_allow_html=True)
+            n1, n2, n3 = st.columns([0.2, 0.6, 0.2], vertical_alignment="bottom")
+            with n1:
+                st.button("Prev", icon=":material/chevron_left:", key="cand_prev",
+                          width="stretch", disabled=i == 0,
+                          on_click=_step_candidate, args=(-1,),
+                          help="Open the previous candidate")
+            with n2:
+                st.selectbox(
+                    "Switch candidate", ids, index=i, key="cand_switch_box",
+                    on_change=_sync_candidate_from_switch,
+                    label_visibility="collapsed",
+                    format_func=lambda cid: byid[cid].display_name(st.session_state.blind),
+                    help="Jump to another parsed profile")
+            with n3:
+                st.button("Next", icon=":material/chevron_right:", key="cand_next",
+                          width="stretch", disabled=i >= len(ids) - 1,
+                          on_click=_step_candidate, args=(1,),
+                          help="Open the next candidate")
+            st.markdown(
+                f'<div class="mm-console-note">{i + 1} of {len(ids)} in the working pool</div>',
+                unsafe_allow_html=True)
+            a1, a2 = st.columns(2)
+            with a1:
+                if listed:
+                    if st.button("Remove", icon=":material/star:", key="cand_shortlist",
+                                 width="stretch",
+                                 help="Remove this person from the shortlist"):
+                        st.session_state.shortlist.pop(p.candidate_id)
+                        st.rerun()
+                else:
+                    if st.button("Shortlist", icon=":material/star:", type="primary",
+                                 key="cand_shortlist", width="stretch",
+                                 help="Add this person to the shortlist"):
+                        st.session_state.shortlist[p.candidate_id] = {
+                            "note": "", "tags": "", "source": "human",
+                            "basis": "Manually shortlisted from the candidate profile"}
+                        st.rerun()
+            with a2:
+                if listed and st.button("Open list", icon=":material/open_in_new:",
+                                        key="cand_go_sl", width="stretch"):
+                    st.session_state.page = "Shortlist"
+                    st.rerun()
+                elif not listed and st.button("Delete", icon=":material/delete:",
+                                              key="cand_remove", width="stretch",
+                                              help="Remove this profile from this session"):
+                    _remove_from_pool([st.session_state.selected])
+                    st.session_state.page = "Search"
+                    st.rerun()
+            if listed and st.button("Delete", icon=":material/delete:",
+                                    key="cand_remove", width="stretch",
+                                    help="Remove this profile from this session"):
+                _remove_from_pool([st.session_state.selected])
+                st.session_state.page = "Search"
+                st.rerun()
+            _profile_downloads_compact(p)
+
+
+def _render_profile_tab(p, pool) -> None:
+    detail_col, source_col = st.columns([0.58, 0.42], gap="large",
+                                        vertical_alignment="top")
+    with detail_col:
+        with st.container(border=True, key="profile_detail_panel"):
+            st.markdown(
+                '<div class="mm-profile-panel-title">Agent-extracted profile</div>'
+                '<div class="mm-profile-panel-sub">Verified fields, work history, '
+                'skills, and education in the order a reviewer needs them.</div>',
+                unsafe_allow_html=True)
+            if p.summary.is_known:
+                st.markdown(
+                    f'<div class="mm-candidate-summary">'
+                    f'{html.escape(str(p.summary.display("")))}</div>',
+                    unsafe_allow_html=True)
+
+            a, b = st.columns([0.52, 0.48], gap="medium")
+            with a:
+                st.markdown("**Identity & contact**")
+                for t, lbl in ((p.sensitive.full_name, "Name"),
+                               (p.sensitive.email, "Email"),
+                               (p.sensitive.phone, "Phone"),
+                               (p.location_current, "Location"),
+                               (p.work_authorization, "Work authorisation")):
+                    if st.session_state.blind and lbl in ("Name", "Email", "Phone"):
+                        st.markdown(
+                            f'<div class="mm-row"><span class="mm-sub">{lbl}</span>'
+                            f'<span style="color:{theme.MUTED}">masked '
+                            f'(blind review)</span></div>',
+                            unsafe_allow_html=True)
+                    else:
+                        st.markdown(C.tracked_value(t, lbl), unsafe_allow_html=True)
+                st.markdown(C.tracked_value(p.years_experience, "Total experience"),
+                            unsafe_allow_html=True)
+                st.markdown(C.tracked_value(p.years_relevant_experience,
+                                            "Investment-relevant"),
+                            unsafe_allow_html=True)
+                if p.certifications:
+                    st.markdown("**Certifications**")
+                    st.markdown("".join(
+                        theme.chip(tx.display("certification", c.canonical)
+                                   + (f" · {c.status}" if c.status else ""), "verified")
+                        for c in p.certifications if c.canonical), unsafe_allow_html=True)
+                if p.languages:
+                    st.markdown("**Languages**")
+                    st.markdown("".join(
+                        theme.chip(f"{l.language}"
+                                   + (f" · {l.proficiency}" if l.proficiency else ""))
+                        for l in p.languages), unsafe_allow_html=True)
+            with b:
+                st.markdown("**Skills**")
+                st.caption("Grouped by how strongly the document supports each skill.")
+                for depth, tone in (("core", "verified"), ("applied", "derived"),
+                                    ("mentioned", "missing")):
+                    group = [s for s in p.skills if s.depth == depth]
+                    if group:
+                        st.markdown(f'<span class="mm-sub">{depth}</span><br>'
+                                    + "".join(theme.chip(s.canonical, tone)
+                                              for s in group),
+                                    unsafe_allow_html=True)
+
+            st.divider()
+            st.markdown("**Employment**")
+            _render_employment_flow(p)
+            st.markdown("**Education**")
+            edu_rows = [{"Institution": e.institution.display("—"),
+                         "Degree": e.degree_raw.display("—"),
+                         "Level": e.degree_level or "—",
+                         "Field": e.field_of_study.display("—"),
+                         "Year": e.graduation_year.display("—"),
+                         "Result": e.gpa_raw.display("—")}
+                        for e in p.education]
+            if edu_rows:
+                st.dataframe(pd.DataFrame(edu_rows), width="stretch", hide_index=True)
+            else:
+                st.caption("No education entries were extracted.")
+
+    with source_col:
+        with st.container(border=True, key="profile_source_panel"):
+            st.markdown(
+                '<div class="mm-profile-panel-title">Original document</div>'
+                '<div class="mm-profile-panel-sub">The uploaded file sits beside '
+                'the extracted record for direct inspection.</div>',
+                unsafe_allow_html=True)
+            C.original_document_view(p, height=520)
+
+        with st.container(border=True, key="profile_trust_panel"):
+            st.markdown(
+                '<div class="mm-profile-panel-title">Trust & review</div>'
+                '<div class="mm-profile-panel-sub">How the profile was produced and '
+                'what needs attention.</div>',
+                unsafe_allow_html=True)
+            C.provenance_banner(p)
+            if p.quality.validation_flags:
+                st.markdown(theme.flag_list(p.quality.validation_flags[:3]),
+                            unsafe_allow_html=True)
+                if len(p.quality.validation_flags) > 3:
+                    with st.expander(f"{len(p.quality.validation_flags) - 3} more flag(s)"):
+                        st.markdown(theme.flag_list(p.quality.validation_flags[3:]),
+                                    unsafe_allow_html=True)
+            else:
+                st.success("No validation flags on this record.")
+
+    C.section_break("Profile intelligence", 1)
+    _profile_insights(p, pool)
+
+
+def _render_employment_flow(p) -> None:
+    flow_parts: list[str] = ['<div class="mm-flow">']
+    for e in p.employment:
+        dates = f"{e.dates.start.normalized_value or '?'} → {e.dates.end.normalized_value or '?'}"
+        if not e.dates.start.is_known and e.dates.duration_months.is_known:
+            dates = (f"{e.dates.duration_months.value} months stated · "
+                     f"absolute dates unknown")
+        tier = tx.display("tier", e.employer_tier, "")
+        intern_cls = " is-intern" if e.is_internship else ""
+        meta = " · ".join(x for x in [
+            e.employer_canonical or e.employer_raw.display("—"),
+            tier if tier and tier != "Unknown" else "",
+            e.location.display("") if e.location.is_known else "",
+            f"L{e.seniority_level}" if e.seniority_level else "",
+            "internship" if e.is_internship else "",
+        ] if x)
+        highlights = ""
+        if e.highlights:
+            items = "".join(f"<li>{html.escape(str(h.value))}</li>"
+                            for h in e.highlights)
+            highlights = (
+                f'<details open><summary>{len(e.highlights)} grounded '
+                f'highlight(s)</summary><ul>{items}</ul></details>')
+        flow_parts.append(
+            f'<div class="mm-flow-item{intern_cls}">'
+            f'<div class="mm-row" style="justify-content:space-between">'
+            f'<span class="mm-name">{html.escape(e.title_raw.display("—"))}</span>'
+            f'<span class="mm-sub mm-mono">{html.escape(dates)}</span></div>'
+            f'<div class="mm-flow-meta">{html.escape(meta)}</div>'
+            f'{highlights}</div>')
+    flow_parts.append("</div>")
+    if p.employment:
+        st.markdown("".join(flow_parts), unsafe_allow_html=True)
+    else:
+        st.caption("No employment entries were extracted.")
+
+
 # ========================================================================= CANDIDATE
 def render_candidate(profiles, synth, pool, index, index_manifest, manifest, store,
                      client, bench, evals):
@@ -838,42 +1291,8 @@ def render_candidate(profiles, synth, pool, index, index_manifest, manifest, sto
     if ("cand_switch_box" not in st.session_state
             or st.session_state["cand_switch_box"] != st.session_state.selected):
         st.session_state.cand_switch_box = st.session_state.selected
-    with st.container(border=True, key="cand_switcher"):
-        i = ids.index(st.session_state.selected)
-        st.markdown(
-            f'<div class="mm-switch-head">Browse the pool'
-            f'<span class="mm-sub"> · {i + 1} of {len(ids)} — pick a name or step '
-            f'through</span></div>', unsafe_allow_html=True)
-        prev_c, mid_c, next_c, del_c = st.columns(
-            [0.14, 0.54, 0.14, 0.18], vertical_alignment="bottom")
-        with prev_c:
-            st.button("Prev", icon=":material/chevron_left:", key="cand_prev",
-                      width="stretch", disabled=i == 0,
-                      on_click=_step_candidate, args=(-1,),
-                      help="Open the previous candidate in the pool")
-        with mid_c:
-            st.selectbox(
-                "Switch candidate", ids, index=i, key="cand_switch_box",
-                on_change=_sync_candidate_from_switch,
-                format_func=lambda cid: byid[cid].display_name(st.session_state.blind),
-                help="Every parsed profile in the current pool. Click to open a "
-                     "different person without going back to Search.")
-        with next_c:
-            st.button("Next", icon=":material/chevron_right:", key="cand_next",
-                      width="stretch", disabled=i >= len(ids) - 1,
-                      icon_position="right",
-                      on_click=_step_candidate, args=(1,),
-                      help="Open the next candidate in the pool")
-        with del_c:
-            if st.button("Delete", icon=":material/delete:", key="cand_remove",
-                         width="stretch",
-                         help="Remove this profile from the working pool this session. "
-                              "Imported records are dropped; corpus records come back "
-                              "with Reset demo. GDPR erasure is on Review."):
-                _remove_from_pool([st.session_state.selected])
-                st.session_state.page = "Search"
-                st.rerun()
     p = byid[st.session_state.selected]
+    i = ids.index(st.session_state.selected)
 
     if p.provenance and p.provenance.is_synthetic:
         st.markdown('<div class="mm-synth">SYNTHETIC RECORD — generated for benchmarking, '
@@ -892,153 +1311,13 @@ def render_candidate(profiles, synth, pool, index, index_manifest, manifest, sto
                     f'same person submitted through a different source.</div>',
                     unsafe_allow_html=True)
 
-    head = st.columns([0.55, 0.45])
-    with head[0]:
-        st.markdown(f"### {html.escape(p.display_name(st.session_state.blind))}")
-        st.markdown(f'<div class="mm-sub">{html.escape(p.headline.display(""))}</div>'
-                    f'<div style="margin-top:8px">{C.labels_row(p, 8)}</div>',
-                    unsafe_allow_html=True)
-        listed = p.candidate_id in st.session_state.shortlist
-        act_l, act_r = st.columns([0.58, 0.42])
-        with act_l:
-            if listed:
-                if st.button("On shortlist — remove", icon=":material/star:",
-                             key="cand_shortlist", width="stretch",
-                             help="Remove this person from the Shortlist tab."):
-                    st.session_state.shortlist.pop(p.candidate_id)
-                    st.rerun()
-            else:
-                if st.button("Add to shortlist", icon=":material/star:",
-                             type="primary", key="cand_shortlist", width="stretch",
-                             help="Add this person to the Shortlist tab. A human still "
-                                  "approves; this only proposes."):
-                    st.session_state.shortlist[p.candidate_id] = {
-                        "note": "", "tags": "", "source": "human",
-                        "basis": "Manually shortlisted from the candidate profile"}
-                    st.rerun()
-        with act_r:
-            if listed and st.button("Open Shortlist", icon=":material/open_in_new:",
-                                    key="cand_go_sl", width="stretch"):
-                st.session_state.page = "Shortlist"
-                st.rerun()
-    with head[1]:
-        k = st.columns(4)
-        C.kpi(k[0], f"{p.years_experience.value:.1f}" if p.years_experience.is_known else "—",
-              "years exp", "derived" if p.years_experience.is_known else "unknown")
-        C.kpi(k[1], f"{p.quality.completeness:.0%}", "complete")
-        C.kpi(k[2], f"{p.quality.evidence_coverage:.0%}", "evidenced")
-        C.kpi(k[3], p.quality.abstention_count, "abstained",
-              colour="#B45309" if p.quality.abstention_count else theme.ACCENT)
+    _render_candidate_command_center(p, ids, byid, i, pool)
 
-    _profile_exports(p)
-
-    tabs = st.tabs(["Profile", "Evidence", "Timeline", "Similar", "Lineage", "Source"])
+    tabs = st.tabs(["Profile", "Evidence Board", "Career Map", "Lookalikes",
+                    "Lineage", "Source Text"])
 
     with tabs[0]:
-        C.provenance_banner(p)
-        if p.quality.validation_flags:
-            with st.expander(f"⚑ {len(p.quality.validation_flags)} validation flag(s) "
-                             f"on this record", expanded=True):
-                st.markdown(theme.flag_list(p.quality.validation_flags),
-                           unsafe_allow_html=True)
-        _profile_insights(p, pool)
-        st.divider()
-
-        # Left: everything the agent pipeline produced. Right: the real, unmodified
-        # source file, so the two can be checked against each other directly rather
-        # than trusting a re-rendered/extracted stand-in for the original.
-        work_col, doc_col = st.columns([0.56, 0.44])
-
-    with work_col:
-        st.markdown('<span class="mm-sub" style="text-transform:uppercase;'
-                    'letter-spacing:.04em;font-weight:600">Agent-extracted profile</span>',
-                    unsafe_allow_html=True)
-        a, b = st.columns([0.52, 0.48])
-        with a:
-            st.markdown("**Identity & contact**")
-            for t, lbl in ((p.sensitive.full_name, "Name"), (p.sensitive.email, "Email"),
-                           (p.sensitive.phone, "Phone"), (p.location_current, "Location"),
-                           (p.work_authorization, "Work authorisation")):
-                if st.session_state.blind and lbl in ("Name", "Email", "Phone"):
-                    st.markdown(f'<div class="mm-row"><span class="mm-sub">{lbl}</span>'
-                                f'<span style="color:{theme.MUTED}">masked (blind review)</span>'
-                                f'</div>', unsafe_allow_html=True)
-                else:
-                    st.markdown(C.tracked_value(t, lbl), unsafe_allow_html=True)
-            st.markdown(C.tracked_value(p.years_experience, "Total experience"),
-                        unsafe_allow_html=True)
-            st.markdown(C.tracked_value(p.years_relevant_experience, "Investment-relevant"),
-                        unsafe_allow_html=True)
-            if p.certifications:
-                st.markdown("**Certifications**")
-                st.markdown("".join(
-                    theme.chip(tx.display("certification", c.canonical)
-                               + (f" · {c.status}" if c.status else ""), "verified")
-                    for c in p.certifications if c.canonical), unsafe_allow_html=True)
-            if p.languages:
-                st.markdown("**Languages**")
-                st.markdown("".join(
-                    theme.chip(f"{l.language}" + (f" · {l.proficiency}" if l.proficiency else ""))
-                    for l in p.languages), unsafe_allow_html=True)
-        with b:
-            st.markdown("**Skills** — depth is inferred from how the skill is used, "
-                        "not from where it is listed")
-            for depth, tone in (("core", "verified"), ("applied", "derived"),
-                                ("mentioned", "missing")):
-                group = [s for s in p.skills if s.depth == depth]
-                if group:
-                    st.markdown(f'<span class="mm-sub">{depth}</span><br>'
-                                + "".join(theme.chip(s.canonical, tone) for s in group),
-                                unsafe_allow_html=True)
-        st.divider()
-        st.markdown("**Employment**")
-        flow_parts: list[str] = ['<div class="mm-flow">']
-        for e in p.employment:
-            dates = f"{e.dates.start.normalized_value or '?'} → {e.dates.end.normalized_value or '?'}"
-            if not e.dates.start.is_known and e.dates.duration_months.is_known:
-                dates = (f"{e.dates.duration_months.value} months stated · "
-                         f"absolute dates unknown")
-            tier = tx.display("tier", e.employer_tier, "")
-            intern_cls = " is-intern" if e.is_internship else ""
-            meta = " · ".join(x for x in [
-                e.employer_canonical or e.employer_raw.display("—"),
-                tier if tier and tier != "Unknown" else "",
-                e.location.display("") if e.location.is_known else "",
-                f"L{e.seniority_level}" if e.seniority_level else "",
-                "internship" if e.is_internship else "",
-            ] if x)
-            highlights = ""
-            if e.highlights:
-                items = "".join(
-                    f"<li>{html.escape(str(h.value))}</li>" for h in e.highlights)
-                highlights = (
-                    f'<details open><summary>{len(e.highlights)} grounded '
-                    f'highlight(s)</summary><ul>{items}</ul></details>')
-            flow_parts.append(
-                f'<div class="mm-flow-item{intern_cls}">'
-                f'<div class="mm-row" style="justify-content:space-between">'
-                f'<span class="mm-name">{html.escape(e.title_raw.display("—"))}</span>'
-                f'<span class="mm-sub mm-mono">{html.escape(dates)}</span></div>'
-                f'<div class="mm-flow-meta">{html.escape(meta)}</div>'
-                f'{highlights}</div>')
-        flow_parts.append("</div>")
-        st.markdown("".join(flow_parts), unsafe_allow_html=True)
-        st.markdown("**Education**")
-        edu_rows = [{"Institution": e.institution.display("—"),
-                     "Degree": e.degree_raw.display("—"), "Level": e.degree_level or "—",
-                     "Field": e.field_of_study.display("—"),
-                     "Year": e.graduation_year.display("—"), "Result": e.gpa_raw.display("—")}
-                    for e in p.education]
-        if edu_rows:
-            st.dataframe(pd.DataFrame(edu_rows), width="stretch", hide_index=True)
-
-    with doc_col:
-        st.markdown('<span class="mm-sub" style="text-transform:uppercase;'
-                    'letter-spacing:.04em;font-weight:600">Original document</span>',
-                    unsafe_allow_html=True)
-        st.caption("Exactly the file that was uploaded — not extracted text, not a "
-                  "re-render. Compare it directly against the agent's work on the left.")
-        C.original_document_view(p)
+        _render_profile_tab(p, pool)
 
     with tabs[1]:
         st.caption("Click any field to see the exact text it came from. This is the "
@@ -1137,7 +1416,7 @@ def _timeline(p) -> None:
     fig.update_layout(margin=dict(l=0, r=0, t=10, b=0), plot_bgcolor="rgba(0,0,0,0)",
                       paper_bgcolor="rgba(0,0,0,0)", font=dict(size=11),
                       legend=dict(orientation="h", y=1.12))
-    st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
+    st.plotly_chart(theme.polish_fig(fig), width="stretch", config={"displayModeBar": False})
     if p.employment_gaps:
         st.markdown("**Employment gaps**")
         for g in p.employment_gaps:
@@ -1181,197 +1460,474 @@ JD_TEMPLATES = {
 }
 
 
-def render_requisition(profiles, synth, pool, index, index_manifest, manifest, store,
-                       client, bench, evals):
-    st.markdown("##### Requisition matching")
-    st.caption("Paste a job description. Requirements are parsed, you decide which are "
-               "genuinely mandatory, and every score decomposes into its parts.")
+REQ_WEIGHT_PRESETS = {
+    "Balanced": ScoreWeights().model_dump(),
+    "Skill first": {"skills": 0.42, "strategy": 0.16, "sector": 0.14,
+                    "semantic": 0.12, "geography": 0.06, "experience": 0.06,
+                    "data_quality": 0.04},
+    "Mandate fit": {"skills": 0.24, "strategy": 0.22, "sector": 0.18,
+                    "semantic": 0.12, "geography": 0.12, "experience": 0.08,
+                    "data_quality": 0.04},
+    "Research mode": {"skills": 0.22, "strategy": 0.15, "sector": 0.13,
+                      "semantic": 0.25, "geography": 0.07, "experience": 0.08,
+                      "data_quality": 0.10},
+}
 
-    a, b = st.columns([0.48, 0.52])
-    with a:
-        jd = st.text_area("Job description", SAMPLE_JD, height=280)
-        c1, c2 = st.columns(2)
-        parse_clicked = c1.button("Parse requisition", type="primary",
-                                  width="stretch")
-        if c2.button("Use rules only", width="stretch",
-                     help="Skip the LLM parse and use the deterministic parser."):
-            from millennium.retrieval import parse_query_rules
-            st.session_state.requisition = {
-                "parsed": parse_query_rules(jd).output, "raw": jd, "method": "rule",
-                "requirements": []}
-        if parse_clicked:
-            st.session_state.requisition = _parse_req(client, jd)
 
-    with b:
-        st.markdown("**Weights** — editable, and shown next to every score")
-        w = st.session_state.weights
-        cols = st.columns(2)
-        keys = list(ScoreWeights().model_dump())
-        for i, k in enumerate(keys):
-            w[k] = cols[i % 2].slider(k.replace("_", " "), 0.0, 0.6, float(w[k]), 0.01,
-                                      key=f"w_{k}")
-        st.session_state.weights = w
-        total = sum(w.values())
-        st.caption(f"Raw total {total:.2f} — normalised to 1.00 at scoring time, so you "
-                   f"can move one slider without rebalancing the rest.")
+_REQ_DISPLAY_KIND = {
+    "strategies": "strategy", "sectors": "sector", "skills": "skill",
+    "certifications": "certification", "degree_levels": "degree",
+    "geo_regions": "region", "countries": "region", "employer_tiers": "tier",
+    "feeder_paths": "feeder", "languages": "language",
+}
 
-    # Role templates freeze a desk's weights and must-have set so the second
-    # healthcare L/S req is not re-tuned from scratch — and therefore not scored
-    # differently from the first.
-    with st.expander("Role templates"):
-        templates = store.list_templates()
-        tc = st.columns([0.35, 0.2, 0.2, 0.25])
+
+def _seed_requisition() -> None:
+    from millennium.retrieval import parse_query_rules
+    if "req_jd_text" not in st.session_state:
+        active = st.session_state.requisition if "requisition" in st.session_state else None
+        raw = active["raw"] if active else SAMPLE_JD
+        st.session_state.req_jd_text = raw or SAMPLE_JD
+    if "requisition" not in st.session_state or not st.session_state.requisition:
+        jd = st.session_state.req_jd_text
+        st.session_state.requisition = {
+            "parsed": parse_query_rules(jd).output, "raw": jd, "method": "rule",
+            "requirements": []}
+
+
+def _req_count(block: dict) -> int:
+    n = 0
+    for value in (block or {}).values():
+        if isinstance(value, list):
+            n += len([x for x in value if x])
+        elif value not in (None, "", []):
+            n += 1
+    return n
+
+
+def _req_format_value(key: str, value) -> str:
+    if key == "min_years":
+        return f"{float(value):g}+ years"
+    if key == "max_years":
+        return f"up to {float(value):g} years"
+    if key == "min_seniority":
+        return f"L{value}+ seniority"
+    kind = _REQ_DISPLAY_KIND.get(key, key)
+    return tx.display(kind, value, str(value))
+
+
+def _req_chip_block(title: str, block: dict, tone: str = "plain") -> str:
+    chips = []
+    for key, value in (block or {}).items():
+        values = value if isinstance(value, list) else [value]
+        for v in values:
+            if v in (None, "", []):
+                continue
+            chips.append(theme.chip(_req_format_value(key, v), tone))
+    if not chips:
+        chips.append(theme.chip("none", "missing"))
+    return (f'<div class="mm-req-chip-block"><b>{html.escape(title)}</b>'
+            f'<div>{"".join(chips)}</div></div>')
+
+
+def _req_top_components(result, limit: int = 3) -> str:
+    parts = []
+    for c in sorted(result.components, key=lambda x: -x.contribution)[:limit]:
+        parts.append(
+            f'<div><span>{html.escape(c.name.replace("_", " "))}</span>'
+            f'<b>{c.contribution:.3f}</b></div>')
+    return "".join(parts)
+
+
+def _render_req_hero(req, ranked, excluded, latency_ms: float) -> None:
+    pq = req["parsed"]
+    top_score = ranked[0].total if ranked else 0.0
+    st.markdown(
+        '<div class="mm-req-hero">'
+        '<div><div class="mm-page-title">Requisition command center</div>'
+        '<div class="mm-page-sub">Build the mandate, control hard requirements, '
+        'inspect why people rank, and move the right candidates into shortlist.</div></div>'
+        f'<div class="mm-req-hero-badge">{html.escape(str(req.get("method", "rule")).upper())}'
+        '</div></div>',
+        unsafe_allow_html=True)
+    st.markdown(
+        '<div class="mm-req-metrics">'
+        f'<div><b>{len(ranked)}</b><span>ranked matches</span><small>kept after gates</small></div>'
+        f'<div><b>{len(excluded)}</b><span>gated out</span><small>visible with reasons</small></div>'
+        f'<div><b>{top_score:.3f}</b><span>top score</span><small>best composite fit</small></div>'
+        f'<div><b>{_req_count(pq.must_have)}</b><span>must-haves</span><small>hard constraints</small></div>'
+        f'<div><b>{_req_count(pq.preferences)}</b><span>preferences</span><small>ranking signals</small></div>'
+        f'<div><b>{latency_ms:.0f} ms</b><span>latency</span><small>current run</small></div>'
+        '</div>',
+        unsafe_allow_html=True)
+
+
+def _render_req_brief_builder(client, store) -> None:
+    st.markdown('<div class="mm-panel-heading"><span>Role brief</span>'
+                '<b>paste, parse, reuse</b></div>', unsafe_allow_html=True)
+
+    starter = st.selectbox("Starter mandate", ["Custom"] + list(JD_TEMPLATES),
+                           key="req_starter_template")
+    c1, c2 = st.columns(2)
+    if c1.button("Use starter", icon=":material/content_copy:", width="stretch",
+                 disabled=starter == "Custom", key="req_use_starter"):
+        from millennium.retrieval import parse_query_rules
+        st.session_state.req_jd_text = JD_TEMPLATES[starter]
+        st.session_state.requisition = {
+            "parsed": parse_query_rules(st.session_state.req_jd_text).output,
+            "raw": st.session_state.req_jd_text, "method": "rule",
+            "requirements": []}
+        st.rerun()
+    if c2.button("Reset sample", icon=":material/restart_alt:", width="stretch",
+                 key="req_reset_sample"):
+        from millennium.retrieval import parse_query_rules
+        st.session_state.req_jd_text = SAMPLE_JD
+        st.session_state.requisition = {
+            "parsed": parse_query_rules(SAMPLE_JD).output, "raw": SAMPLE_JD,
+            "method": "rule", "requirements": []}
+        st.rerun()
+
+    templates = store.list_templates()
+    with st.expander("Saved role templates", expanded=bool(templates)):
         if templates:
-            pick = tc[0].selectbox("Template", ["—"] + [t["name"] for t in templates],
-                                   label_visibility="collapsed")
-            if pick != "—":
+            pick = st.selectbox("Saved template", ["-"] + [t["name"] for t in templates],
+                                key="req_saved_template")
+            cols = st.columns(2)
+            if cols[0].button("Load", width="stretch", disabled=pick == "-",
+                              key="req_load_saved"):
                 rec = next(t for t in templates if t["name"] == pick)
-                if tc[1].button("Load", width="stretch"):
-                    if rec.get("weights"):
-                        st.session_state.weights = rec["weights"]
-                    st.session_state.requisition = {
-                        "parsed": _pq_from_dict(rec.get("parsed_query") or {}),
-                        "raw": rec.get("jd", ""), "method": "template",
-                        "requirements": rec.get("requirements") or []}
-                    st.rerun()
-                if tc[2].button("Delete", width="stretch"):
-                    store.delete_template(pick)
-                    st.rerun()
+                if rec.get("weights"):
+                    st.session_state.weights = rec["weights"]
+                    for k, v in rec["weights"].items():
+                        st.session_state[f"w_{k}"] = float(v)
+                st.session_state.req_jd_text = rec.get("jd", "") or SAMPLE_JD
+                st.session_state.requisition = {
+                    "parsed": _pq_from_dict(rec.get("parsed_query") or {}),
+                    "raw": st.session_state.req_jd_text, "method": "template",
+                    "requirements": rec.get("requirements") or []}
+                st.rerun()
+            if cols[1].button("Delete", width="stretch", disabled=pick == "-",
+                              key="req_delete_saved"):
+                store.delete_template(pick)
+                st.rerun()
         else:
-            tc[0].caption("No templates saved yet.")
-        tname = tc[3].text_input("Save as", placeholder="template name",
-                                 label_visibility="collapsed")
-        if tname.strip() and st.session_state.requisition:
-            if st.button(f"Save '{tname.strip()}' as a role template"):
-                r = st.session_state.requisition
-                store.save_template(
-                    tname.strip(), r.get("raw", ""), st.session_state.weights,
-                    {"semantic_text": r["parsed"].semantic_text,
-                     "must_have": r["parsed"].must_have,
-                     "preferences": r["parsed"].preferences,
-                     "exclusions": r["parsed"].exclusions,
-                     "interpretation": r["parsed"].interpretation},
-                    r.get("requirements", []))
-                st.success(f"Saved template '{tname.strip()}' with the current weights "
-                           f"and must-have set.")
+            st.caption("No templates saved yet.")
 
-    req = st.session_state.requisition
-    if not req:
-        st.info("Parse a requisition to see ranked candidates.")
-        return
+    jd = st.text_area("Job description", height=270, key="req_jd_text",
+                      placeholder="Paste the role, mandate, or search brief...")
+    p1, p2 = st.columns(2)
+    if p1.button("Parse with LLM", type="primary", icon=":material/auto_awesome:",
+                 width="stretch", key="req_parse_llm"):
+        st.session_state.requisition = _parse_req(client, jd)
+        st.rerun()
+    if p2.button("Use rules only", icon=":material/rule:", width="stretch",
+                 key="req_parse_rules"):
+        from millennium.retrieval import parse_query_rules
+        st.session_state.requisition = {
+            "parsed": parse_query_rules(jd).output, "raw": jd, "method": "rule",
+            "requirements": []}
+        st.rerun()
 
+
+def _render_req_weight_controls() -> ScoreWeights:
+    st.markdown('<div class="mm-panel-heading compact"><span>Scoring lens</span>'
+                '<b>weights normalize</b></div>', unsafe_allow_html=True)
+    lens = st.segmented_control("Scoring lens", list(REQ_WEIGHT_PRESETS), default="Balanced",
+                                key="req_weight_lens")
+    if st.button("Apply lens", icon=":material/tune:", width="stretch",
+                 key="req_apply_weight_lens"):
+        st.session_state.weights = dict(REQ_WEIGHT_PRESETS[lens])
+        for k, v in st.session_state.weights.items():
+            st.session_state[f"w_{k}"] = float(v)
+        st.rerun()
+
+    w = dict(st.session_state.weights)
+    for k, default in ScoreWeights().model_dump().items():
+        w.setdefault(k, default)
+    cols = st.columns(2)
+    for i, k in enumerate(ScoreWeights().model_dump()):
+        w[k] = cols[i % 2].slider(k, 0.0, 0.6, float(w[k]), 0.01,
+                                  key=f"w_{k}")
+    st.session_state.weights = w
+    total = sum(w.values()) or 1.0
+    st.markdown(
+        f'<div class="mm-req-note">Raw total {total:.2f}. Scores are normalized to '
+        '1.00 so one slider can move without manual rebalancing.</div>',
+        unsafe_allow_html=True)
+    return ScoreWeights(**w)
+
+
+def _render_req_requirement_editor(req) -> ParsedQuery:
     pq: ParsedQuery = req["parsed"]
+    st.markdown('<div class="mm-panel-heading compact"><span>Requirement control</span>'
+                '<b>hard vs soft</b></div>', unsafe_allow_html=True)
     if req.get("requirements"):
-        st.markdown("**Parsed requirements** — tick what is genuinely mandatory")
         edited = st.data_editor(
             pd.DataFrame(req["requirements"]), width="stretch", hide_index=True,
             column_config={"must_have": st.column_config.CheckboxColumn("Must have"),
                            "text": st.column_config.TextColumn("Requirement", width="large"),
                            "quote": st.column_config.TextColumn("Source quote", width="medium")},
             key="req_editor")
+        req["requirements"] = edited.to_dict("records")
         pq = _apply_requirement_edits(pq, edited)
+        req["parsed"] = pq
+    else:
+        st.markdown(
+            _req_chip_block("Must have", pq.must_have, "abstained") +
+            _req_chip_block("Preference", pq.preferences, "verified") +
+            _req_chip_block("Exclude", pq.exclusions, "conflicted"),
+            unsafe_allow_html=True)
+        st.caption("Use LLM parsing to edit individual requirement rows. The rule parser "
+                   "still exposes extracted hard and soft constraints here.")
+    return pq
 
-    weights = ScoreWeights(**st.session_state.weights)
+
+def _score_requisition(pool, index, pq: ParsedQuery, weights: ScoreWeights):
     sem = _semantic_scores(index, pq)
     t0 = time.perf_counter()
     out = rank(pool, pq, weights, sem).output
-    st.session_state.last_latency_ms = (time.perf_counter() - t0) * 1000
-    ranked, excluded = out["ranked"], out["excluded"]
-    byid = _byid(pool)
+    latency_ms = (time.perf_counter() - t0) * 1000
+    st.session_state.last_latency_ms = latency_ms
+    return out["ranked"], out["excluded"], sem, latency_ms
 
-    m = st.columns(4)
-    C.kpi(m[0], len(ranked), "ranked")
-    C.kpi(m[1], len(excluded), "gated out", "shown with reasons",
-          "#B45309" if excluded else theme.ACCENT)
-    C.kpi(m[2], f"{ranked[0].total:.3f}" if ranked else "—", "top score")
-    C.kpi(m[3], f"{st.session_state.last_latency_ms:.0f} ms", "match latency")
 
-    if ranked:
-        ac1, ac2 = st.columns([0.7, 0.3])
-        top_n = ac1.number_input(
-            "Add top N to shortlist", min_value=1, max_value=min(50, len(ranked)),
-            value=min(5, len(ranked)), key="req_top_n", label_visibility="collapsed")
-        if ac2.button(f"🤖 Add top {int(top_n)} to shortlist", width="stretch"):
-            sl = st.session_state.shortlist
-            added = 0
-            for i, r in enumerate(ranked[: int(top_n)], 1):
-                if r.candidate_id not in sl:
-                    sl[r.candidate_id] = {
-                        "note": "", "tags": "", "source": "ai",
-                        "basis": f"Ranked #{i} of {len(ranked)} for this requisition "
-                                f"(score {r.total:.3f}) — {pq.interpretation[:140]}"}
-                    added += 1
-            st.success(f"Added {added} candidate(s) — {int(top_n) - added} were "
-                      f"already on the shortlist. A human still approves every one "
-                      f"on the Shortlist page; this only proposes.")
-
-    st.divider()
-    for i, r in enumerate(ranked[:20], 1):
-        p = byid.get(r.candidate_id)
-        if p is None:
+def _shortlist_ranked(ranked, pq: ParsedQuery, top_n: int, min_score: float,
+                      tags: str = "jd-match") -> tuple[int, int]:
+    sl = st.session_state.shortlist
+    added = 0
+    skipped = 0
+    candidates = [r for r in ranked if r.total >= min_score][:top_n]
+    for i, r in enumerate(candidates, 1):
+        if r.candidate_id in sl:
+            skipped += 1
             continue
-        head = st.columns([0.05, 0.60, 0.35])
-        head[0].markdown(f"### {i}")
-        head[1].markdown(C.candidate_card(p, st.session_state.blind, r.total),
-                         unsafe_allow_html=True)
-        with head[2]:
+        sl[r.candidate_id] = {
+            "note": "", "tags": tags, "source": "ai",
+            "basis": f"Ranked #{i} of {len(ranked)} for this requisition "
+                     f"(score {r.total:.3f}) - {pq.interpretation[:140]}"}
+        added += 1
+    return added, skipped
+
+
+def _render_req_strategy_panel(pq: ParsedQuery, ranked, excluded, store, sem,
+                               weights: ScoreWeights, pool) -> tuple[int, float]:
+    st.markdown('<div class="mm-panel-heading"><span>Pool strategy</span>'
+                '<b>fit, actions, scenarios</b></div>', unsafe_allow_html=True)
+    top_score = ranked[0].total if ranked else 0.0
+    caveats = sum(1 for r in ranked if r.exclusion_reasons)
+    st.markdown(
+        '<div class="mm-req-fit-grid">'
+        f'<div><b>{top_score:.3f}</b><span>top fit</span></div>'
+        f'<div><b>{caveats}</b><span>needs proof</span></div>'
+        f'<div><b>{len(excluded)}</b><span>hard gated</span></div>'
+        f'<div><b>{len(st.session_state.shortlist)}</b><span>shortlist</span></div>'
+        '</div>',
+        unsafe_allow_html=True)
+    st.progress(min(1.0, max(0.0, top_score)), text="Top candidate fit")
+
+    if not ranked:
+        st.warning("No one survived the current hard requirements. Relax one must-have "
+                   "or use the gated-out list below to see which rule is too strict.")
+    elif len(excluded) > len(ranked):
+        st.info("The pool is being squeezed by hard requirements. Check gated-out "
+                "reasons before assuming the market is thin.")
+    elif caveats:
+        st.info("Some strong matches have unverified must-haves. Treat those as quick "
+                "research tasks, not automatic rejections.")
+    else:
+        st.success("The mandate has a clean ranked pool with visible scoring support.")
+
+    top_n = st.number_input("Shortlist top N", min_value=1,
+                            max_value=max(1, min(50, len(ranked) or 1)),
+                            value=max(1, min(5, len(ranked) or 1)),
+                            key="req_top_n")
+    min_score = st.slider("Minimum shortlist score", 0.0, 1.0, 0.0, 0.05,
+                          key="req_min_shortlist_score")
+    if st.button("Add ranked slate", type="primary", icon=":material/star:",
+                 width="stretch", disabled=not ranked, key="req_add_ranked_slate"):
+        added, skipped = _shortlist_ranked(ranked, pq, int(top_n), float(min_score))
+        st.success(f"Added {added} candidate(s); skipped {skipped} already listed.")
+
+    tname = st.text_input("Save current mandate as", placeholder="Template name",
+                          key="req_template_name")
+    if st.button("Save role template", icon=":material/bookmark_add:", width="stretch",
+                 disabled=not tname.strip(), key="req_save_template"):
+        store.save_template(
+            tname.strip(), st.session_state.requisition.get("raw", ""),
+            st.session_state.weights,
+            {"semantic_text": pq.semantic_text,
+             "must_have": pq.must_have,
+             "preferences": pq.preferences,
+             "exclusions": pq.exclusions,
+             "interpretation": pq.interpretation},
+            st.session_state.requisition.get("requirements", []))
+        st.success(f"Saved template '{tname.strip()}'.")
+
+    with st.expander("Parsed mandate summary", expanded=True):
+        st.markdown(
+            _req_chip_block("Must have", pq.must_have, "abstained") +
+            _req_chip_block("Preference", pq.preferences, "verified") +
+            _req_chip_block("Exclude", pq.exclusions, "conflicted"),
+            unsafe_allow_html=True)
+
+    with st.expander("Weight sensitivity"):
+        st.caption("Runs the match repeatedly with small weight changes to show whether "
+                   "the top slate is stable.")
+        if st.button("Run sensitivity sweep", icon=":material/network_check:",
+                     key="req_run_sensitivity"):
+            s = weight_sensitivity(pool, pq, weights, sem).output
+            df = pd.DataFrame(s["stability"])
+            if not df.empty:
+                byid = _byid(pool)
+                df["candidate"] = df["candidate_id"].map(
+                    lambda c: byid[c].display_name(st.session_state.blind) if c in byid else c)
+                st.dataframe(df[["candidate", "base_rank", "max_rank_shift",
+                                 "mean_abs_shift", "verdict"]],
+                             width="stretch", hide_index=True)
+    return int(top_n), float(min_score)
+
+
+def _render_req_match_card(i: int, r, p, pq: ParsedQuery, weights: ScoreWeights,
+                           sem: dict, pool) -> None:
+    with st.container(border=True, key=f"req_match_card_{r.candidate_id}"):
+        st.markdown(
+            f'<div class="mm-req-card-head"><div class="mm-req-rank">#{i}</div>'
+            f'<div class="mm-req-score"><b>{r.total:.3f}</b><span>match score</span></div>'
+            f'<div class="mm-req-components">{_req_top_components(r)}</div></div>',
+            unsafe_allow_html=True)
+        left, right = st.columns([0.62, 0.38])
+        with left:
+            st.markdown(C.candidate_card(p, st.session_state.blind, r.total),
+                        unsafe_allow_html=True)
+            if r.exclusion_reasons:
+                st.markdown(
+                    '<div class="mm-warn"><b>Unverified must-have.</b> '
+                    + html.escape("; ".join(x.replace("unverified: ", "")
+                                            for x in r.exclusion_reasons))
+                    + ' - kept visible because unknown is a research task, not a rejection.</div>',
+                    unsafe_allow_html=True)
+        with right:
             mx = max((c.contribution for c in r.components), default=0.35)
-            st.markdown("".join(C.score_bar(c.name, c.weight, c.score, c.contribution, mx)
+            st.markdown("".join(C.score_bar(c.name, c.weight, c.score,
+                                            c.contribution, mx)
                                 for c in r.components), unsafe_allow_html=True)
-        if r.exclusion_reasons:
-            st.markdown(
-                '<div class="mm-warn"><b>Unverified must-have.</b> '
-                + html.escape("; ".join(x.replace("unverified: ", "")
-                                        for x in r.exclusion_reasons))
-                + ' — the candidate was kept rather than gated out, because a CV that '
-                  'does not mention something is unverified, not unqualified. Thirty '
-                  'seconds of checking resolves it.</div>', unsafe_allow_html=True)
-        with st.expander("Gaps, evidence, and what would change this"):
+
+        actions = st.columns([0.22, 0.26, 0.26, 0.26])
+        if actions[0].button("Open", key=f"req_open_{r.candidate_id}",
+                             icon=":material/open_in_new:", width="stretch"):
+            st.session_state.selected = r.candidate_id
+            st.session_state.page = "Candidate"
+            st.rerun()
+        listed = r.candidate_id in st.session_state.shortlist
+        if actions[1].button("Listed" if listed else "Shortlist",
+                             key=f"req_shortlist_{r.candidate_id}",
+                             icon=":material/star:", width="stretch"):
+            if listed:
+                st.session_state.shortlist.pop(r.candidate_id)
+            else:
+                st.session_state.shortlist[r.candidate_id] = {
+                    "note": "", "tags": "jd-match", "source": "ai",
+                    "basis": f"Ranked #{i} for this requisition (score {r.total:.3f})"}
+            st.rerun()
+        if actions[2].button("Why not higher", key=f"req_why_{r.candidate_id}",
+                             icon=":material/troubleshoot:", width="stretch"):
+            res = minimal_edit(pool, pq, weights, r.candidate_id, sem).output
+            st.session_state[f"req_why_result_{r.candidate_id}"] = res
+        if actions[3].button("Open Shortlist", key=f"req_open_shortlist_{r.candidate_id}",
+                             icon=":material/list_alt:", width="stretch"):
+            st.session_state.page = "Shortlist"
+            st.rerun()
+
+        if f"req_why_result_{r.candidate_id}" in st.session_state:
+            res = st.session_state[f"req_why_result_{r.candidate_id}"]
+            if res["minimal"]:
+                e = res["minimal"]
+                st.success(f"Rank {e['from_rank']} to {e['new_rank']} if you {e['description']}.")
+            elif res["edits"]:
+                e = res["edits"][0]
+                st.info(f"Closest single change: {e['description']} gives rank {e['new_rank']}.")
+            else:
+                st.info("No single requirement change moves this candidate up.")
+
+        with st.expander("Gaps, unknowns, and evidence signals"):
             g = gap_analysis(r).output
             gc = st.columns(3)
-            gc[0].markdown("**Has**\n\n" + ("\n".join(f"- {x}" for x in g["has"]) or "—"))
-            gc[1].markdown("**Lacks**\n\n" + ("\n".join(f"- {x}" for x in g["lacks"]) or "—"))
-            gc[2].markdown("**Unknown**\n\n" + ("\n".join(f"- {x}" for x in g["unknown"]) or "—")
-                           + "\n\n*Unknown is a research task, not a rejection.*")
+            gc[0].markdown("**Has**\n\n" + ("\n".join(f"- {x}" for x in g["has"]) or "- none"))
+            gc[1].markdown("**Lacks**\n\n" + ("\n".join(f"- {x}" for x in g["lacks"]) or "- none"))
+            gc[2].markdown("**Unknown**\n\n" + ("\n".join(f"- {x}" for x in g["unknown"]) or "- none"))
             for c in r.components:
                 if c.note:
                     st.caption(f"{c.name}: {c.note}")
-            if st.button("Why not higher? (minimal edit)", key=f"cf_{r.candidate_id}"):
-                res = minimal_edit(pool, pq, weights, r.candidate_id, sem).output
-                if res["minimal"]:
-                    e = res["minimal"]
-                    st.success(f"Rank {e['from_rank']} → **{e['new_rank']}** if you "
-                               f"{e['description']}.")
-                elif res["edits"]:
-                    e = res["edits"][0]
-                    st.info(f"Closest single change: {e['description']} → rank {e['new_rank']}.")
-                else:
-                    st.info("No single requirement change moves this candidate up. "
-                            "The ranking is not being driven by one filter.")
-                st.caption(res["note"])
+
+
+def _render_req_results(ranked, excluded, pq: ParsedQuery, weights: ScoreWeights,
+                        sem: dict, pool, min_score: float) -> None:
+    byid = _byid(pool)
+    st.markdown('<div class="mm-results-bar"><div><span class="mm-results-bar-label">'
+                'Ranked talent slate</span><span class="mm-results-bar-meta">'
+                f'{len(ranked)} matches - {len(excluded)} gated out</span></div></div>',
+                unsafe_allow_html=True)
+    controls = st.columns([0.25, 0.25, 0.50])
+    show_n = controls[0].selectbox("Show", [5, 10, 20, 50], index=1,
+                                   key="req_show_ranked")
+    view = controls[1].segmented_control("View", ["Slate", "Table"], default="Slate",
+                                         key="req_results_view")
+    passing = [r for r in ranked if r.total >= min_score]
+    controls[2].caption(f"{len(passing)} match(es) at or above {min_score:.2f}")
+
+    if view == "Table":
+        rows = []
+        for i, r in enumerate(passing[: int(show_n)], 1):
+            p = byid.get(r.candidate_id)
+            if not p:
+                continue
+            rows.append({"Rank": i, "Candidate": p.display_name(st.session_state.blind),
+                         "Score": r.total, "Why": _match_why(r),
+                         "Caveat": "; ".join(r.exclusion_reasons)})
+        st.dataframe(
+            pd.DataFrame(rows), hide_index=True, width="stretch",
+            column_config={"Score": st.column_config.ProgressColumn(
+                min_value=0.0, max_value=1.0, format="%.3f"),
+                           "Why": st.column_config.TextColumn(width="large")})
+    else:
+        for i, r in enumerate(passing[: int(show_n)], 1):
+            p = byid.get(r.candidate_id)
+            if p:
+                _render_req_match_card(i, r, p, pq, weights, sem, pool)
 
     if excluded:
-        with st.expander(f"⊘ {len(excluded)} candidate(s) gated out by must-have requirements"):
+        with st.expander(f"{len(excluded)} gated out by must-have requirements"):
             for r in excluded:
                 p = byid.get(r.candidate_id)
-                st.markdown(f"**{html.escape(p.display_name(st.session_state.blind)) if p else r.candidate_id}** — "
+                nm = p.display_name(st.session_state.blind) if p else r.candidate_id
+                st.markdown(f"**{html.escape(nm)}** - "
                             + "; ".join(html.escape(x) for x in r.exclusion_reasons))
 
-    st.divider()
-    st.markdown("##### Weight sensitivity")
-    st.caption("Scenario analysis: each weight is perturbed ±0.10 and the ranking "
-               "re-run. A candidate whose rank survives every perturbation is a real "
-               "match; one that only appears at the top under one exact weight vector "
-               "is an artefact of that vector.")
-    if st.button("Run sensitivity sweep"):
-        s = weight_sensitivity(pool, pq, weights, sem).output
-        df = pd.DataFrame(s["stability"])
-        if not df.empty:
-            df["candidate"] = df["candidate_id"].map(
-                lambda c: byid[c].display_name(st.session_state.blind) if c in byid else c)
-            st.dataframe(df[["candidate", "base_rank", "max_rank_shift",
-                             "mean_abs_shift", "verdict"]],
-                         width="stretch", hide_index=True)
+
+def render_requisition(profiles, synth, pool, index, index_manifest, manifest, store,
+                       client, bench, evals):
+    _seed_requisition()
+
+    req = st.session_state.requisition
+    hero_slot = st.empty()
+    left, center, right = st.columns([0.27, 0.49, 0.24], gap="medium")
+    with left:
+        with st.container(border=True, key="req_brief_panel"):
+            _render_req_brief_builder(client, store)
+            weights = _render_req_weight_controls()
+            pq = _render_req_requirement_editor(req)
+
+    ranked, excluded, sem, latency_ms = _score_requisition(pool, index, pq, weights)
+    with hero_slot.container():
+        _render_req_hero(req, ranked, excluded, latency_ms)
+
+    with right:
+        with st.container(border=True, key="req_strategy_panel"):
+            _top_n, min_score = _render_req_strategy_panel(
+                pq, ranked, excluded, store, sem, weights, pool)
+    with center:
+        with st.container(border=True, key="req_results_panel"):
+            _render_req_results(ranked, excluded, pq, weights, sem, pool, min_score)
 
 
 def _parse_req(client, jd: str) -> dict:
@@ -1736,9 +2292,9 @@ def _results_actions(selected_ids: list[str]) -> None:
 
 
 _SOURCE_BADGE = {
-    "ai": ("🤖", "AI-ranked", "#0F766E"),
-    "human": ("☆", "Human-selected", "#475569"),
-    "assistant": ("💬", "Added via chat", "#1D4ED8"),
+    "ai": ("🤖", "AI-ranked", "#2DD4BF"),
+    "human": ("☆", "Human-selected", "#8B9CB3"),
+    "assistant": ("💬", "Added via chat", "#A78BFA"),
 }
 
 
@@ -1903,54 +2459,43 @@ def _render_inbox(sl: dict, byid: dict, store) -> None:
     st.dataframe(df, width="stretch", hide_index=True)
 
 
-# ========================================================================= SHORTLIST
-def render_shortlist(profiles, synth, pool, index, index_manifest, manifest, store,
-                     client, bench, evals):
-    byid = _byid(pool)
-    sl = st.session_state.shortlist
-    st.markdown(f"##### Shortlist · {len(sl)} candidate(s)")
-    if "match_flash" in st.session_state:
-        st.success(st.session_state.match_flash)
-        del st.session_state["match_flash"]
-    if not sl:
-        st.info("No candidates shortlisted yet. Add them from Search (tick rows, or "
-                "Match to JD), from the chat assistant, or in bulk from Requisition.")
-        return
-    st.caption("A human curates and approves this list. The tool ranks and drafts; "
-              "it does not decide or send anything on its own.")
+def _sl_initials(name: str) -> str:
+    return "".join(part[0] for part in name.replace("(", " ").split()
+                   if part[:1].isalpha())[:2].upper() or "?"
 
-    for cid in list(sl):
-        p = byid.get(cid)
-        if p is None:
-            continue
-        entry = sl[cid]
-        entry.setdefault("source", "human")
-        entry.setdefault("basis", "")
-        a, b = st.columns([0.45, 0.55])
-        with a:
-            st.markdown(C.candidate_card(p, st.session_state.blind), unsafe_allow_html=True)
-            icon, label, colour = _SOURCE_BADGE.get(entry["source"], _SOURCE_BADGE["human"])
-            st.markdown(f'<span class="mm-chip" style="background:{colour}18;'
-                       f'color:{colour};border-color:{colour}44">{icon} {label}</span>',
-                       unsafe_allow_html=True)
-            if entry["basis"]:
-                st.caption(entry["basis"])
-        with b:
-            sl[cid]["note"] = st.text_area("Recruiter note", sl[cid].get("note", ""),
-                                           key=f"n_{cid}", height=76)
-            sl[cid]["tags"] = st.text_input("Tags", sl[cid].get("tags", ""), key=f"t_{cid}",
-                                            placeholder="e.g. screen-call, backup, strong-fit")
-            if st.button("Remove", key=f"r_{cid}"):
-                sl.pop(cid)
-                st.rerun()
-        with st.expander(f"✉ Outreach & scheduling — "
-                         f"{p.display_name(st.session_state.blind)}"):
-            _render_outreach(p, store, client)
 
-    C.section_break("Inbox", 3)
-    _render_inbox(sl, byid, store)
+def _shortlist_source_badge(source: str) -> str:
+    icon, label, colour = _SOURCE_BADGE.get(source, _SOURCE_BADGE["human"])
+    return (f'<span class="mm-chip" style="background:{colour}18;'
+            f'color:{colour};border-color:{colour}44">{icon} {label}</span>')
 
-    C.section_break("Compare", 1)
+
+def _shortlist_stage(cid: str, entry: dict, store) -> tuple[str, str]:
+    kinds = {h["kind"] for h in store.list_communications(cid)}
+    tags = str(entry.get("tags", "")).lower()
+    if "interview_scheduled" in kinds or "interview" in tags:
+        return "Interview", "ok"
+    if "email_inbound" in kinds:
+        return "Reply", "accent"
+    if "email_sent" in kinds or "outreach" in tags or "screen" in tags:
+        return "Outreach", "warn"
+    if entry.get("note") or entry.get("basis"):
+        return "Review", "plain"
+    return "New", "plain"
+
+
+def _shortlist_priority(p, entry: dict, store) -> tuple[str, str]:
+    stage, _tone = _shortlist_stage(p.candidate_id, entry, store)
+    if p.quality.needs_human_review:
+        return "Needs review", "warn"
+    if stage in {"Interview", "Reply"}:
+        return "Active", "ok"
+    if p.quality.completeness >= 0.9 and p.quality.evidence_coverage >= 0.85:
+        return "Ready", "accent"
+    return "Check details", "plain"
+
+
+def _shortlist_table(sl: dict, byid: dict) -> pd.DataFrame:
     rows = []
     for cid in sl:
         p = byid.get(cid)
@@ -1970,18 +2515,259 @@ def render_shortlist(profiles, synth, pool, index, index_manifest, manifest, sto
                                for c in p.certifications if c.canonical),
             "Completeness": f"{p.quality.completeness:.0%}",
             "Review": "yes" if p.quality.needs_human_review else "no",
-            "Note": sl[cid].get("note", ""), "Tags": sl[cid].get("tags", ""),
+            "Note": sl[cid].get("note", ""),
+            "Tags": sl[cid].get("tags", ""),
         })
-    df = pd.DataFrame(rows)
-    st.dataframe(df, width="stretch", hide_index=True)
+    return pd.DataFrame(rows)
 
+
+def _render_shortlist_hero(sl: dict, byid: dict, store) -> None:
+    ids = [cid for cid in sl if cid in byid]
+    active = reviews = interviews = noted = touches = 0
+    for cid in ids:
+        p = byid[cid]
+        entry = sl[cid]
+        stage, _tone = _shortlist_stage(cid, entry, store)
+        active += int(stage in {"Outreach", "Reply", "Interview"})
+        interviews += int(stage == "Interview")
+        reviews += int(p.quality.needs_human_review)
+        noted += int(bool(entry.get("note")))
+        touches += len(store.list_communications(cid))
+    st.markdown(
+        '<div class="mm-sl-hero">'
+        '<div><div class="mm-page-title">Shortlist command center</div>'
+        '<div class="mm-page-sub">Curate the slate, keep outreach moving, compare '
+        'finalists, and export a clean decision pack.</div></div>'
+        '<div class="mm-sl-flow"><span>Slate</span><b></b><span>Outreach</span>'
+        '<b></b><span>Decision</span></div></div>',
+        unsafe_allow_html=True)
+    st.markdown(
+        '<div class="mm-sl-metrics">'
+        f'<div><b>{len(ids)}</b><span>shortlisted</span><small>current slate</small></div>'
+        f'<div><b>{active}</b><span>active</span><small>outreach or interview</small></div>'
+        f'<div><b>{interviews}</b><span>interviews</span><small>scheduled in app</small></div>'
+        f'<div><b>{reviews}</b><span>need review</span><small>before sharing</small></div>'
+        f'<div><b>{noted}</b><span>with notes</span><small>recruiter context</small></div>'
+        f'<div><b>{touches}</b><span>touchpoints</span><small>logged history</small></div>'
+        '</div>',
+        unsafe_allow_html=True)
+
+
+def _render_shortlist_empty(pool) -> None:
+    st.markdown(
+        '<div class="mm-sl-hero"><div><div class="mm-page-title">Shortlist command center</div>'
+        '<div class="mm-page-sub">Your slate will appear here once candidates are added '
+        'from Search, Candidate, chat, or Requisition.</div></div></div>',
+        unsafe_allow_html=True)
+    C.empty_state(
+        "No one on the shortlist",
+        "Add people from Search, from a profile, from the assistant, or in bulk from Requisition.")
+    c1, c2 = st.columns(2)
+    if c1.button("Open Search", type="primary", icon=":material/search:",
+                 key="sl_empty_search", width="stretch"):
+        st.session_state.page = "Search"
+        st.rerun()
+    if c2.button("Open Requisition", icon=":material/assignment:",
+                 key="sl_empty_req", width="stretch"):
+        st.session_state.page = "Requisition"
+        st.rerun()
+    if pool:
+        st.markdown('<div class="mm-panel-heading compact"><span>Strong starting points</span>'
+                    '<b>complete records</b></div>', unsafe_allow_html=True)
+        starters = sorted(pool, key=lambda p: (-p.quality.completeness,
+                                               -p.quality.evidence_coverage))[:3]
+        cols = st.columns(3)
+        for col, p in zip(cols, starters):
+            with col:
+                st.markdown(C.candidate_card(p, st.session_state.blind), unsafe_allow_html=True)
+                if st.button("Add", key=f"sl_empty_add_{p.candidate_id}",
+                             icon=":material/star:", width="stretch"):
+                    st.session_state.shortlist[p.candidate_id] = {
+                        "note": "", "tags": "", "source": "human",
+                        "basis": "Added from Shortlist starter suggestions"}
+                    st.rerun()
+
+
+def _render_shortlist_rail(sl: dict, byid: dict, store) -> None:
+    ids = [cid for cid in sl if cid in byid]
+    st.session_state.setdefault("shortlist_selected", ids[0])
+    if st.session_state.shortlist_selected not in ids:
+        st.session_state.shortlist_selected = ids[0]
+    st.markdown('<div class="mm-panel-heading"><span>Slate</span>'
+                f'<b>{len(ids)} people</b></div>', unsafe_allow_html=True)
+    q = st.text_input("Find in shortlist", "", key="sl_search",
+                      placeholder="Search name, tags, notes",
+                      label_visibility="collapsed")
+    stage_filter = st.segmented_control(
+        "Stage", ["All", "New", "Review", "Outreach", "Reply", "Interview"],
+        default="All", key="sl_stage_filter")
+    visible = []
+    needle = q.strip().lower()
+    for cid in ids:
+        p = byid[cid]
+        entry = sl[cid]
+        stage, tone = _shortlist_stage(cid, entry, store)
+        text = " ".join([p.display_name(st.session_state.blind),
+                         str(p.headline.display("")), entry.get("note", ""),
+                         entry.get("tags", ""), entry.get("basis", ""), stage]).lower()
+        if stage_filter != "All" and stage != stage_filter:
+            continue
+        if needle and needle not in text:
+            continue
+        visible.append((cid, p, entry, stage, tone))
+    if not visible:
+        st.markdown('<div class="mm-review-empty">No shortlisted candidate matches.</div>',
+                    unsafe_allow_html=True)
+        return
+    if st.session_state.shortlist_selected not in {cid for cid, *_ in visible}:
+        st.session_state.shortlist_selected = visible[0][0]
+        st.rerun()
+    for cid, p, entry, stage, tone in visible:
+        is_sel = cid == st.session_state.shortlist_selected
+        priority, _ptone = _shortlist_priority(p, entry, store)
+        name = p.display_name(st.session_state.blind)
+        headline = p.headline.display("No headline") or "No headline"
+        st.markdown(
+            f'<div class="mm-sl-pick {tone}{" is-selected" if is_sel else ""}">'
+            f'<div class="mm-review-avatar">{html.escape(_sl_initials(name))}</div>'
+            f'<div class="mm-sl-pick-body"><div class="mm-sl-pick-top">'
+            f'<span>{html.escape(name)}</span><b>{html.escape(stage)}</b></div>'
+            f'<div class="mm-sl-pick-sub">{html.escape(str(headline))}</div>'
+            f'<div class="mm-sl-pick-meta">{html.escape(priority)} · '
+            f'{html.escape(entry.get("tags", "") or "no tags")}</div></div></div>',
+            unsafe_allow_html=True)
+        if st.button("Selected" if is_sel else "Open", key=f"sl_select_{cid}",
+                     type="primary" if is_sel else "secondary", disabled=is_sel,
+                     width="stretch"):
+            st.session_state.shortlist_selected = cid
+            st.rerun()
+
+
+def _render_shortlist_profile(cid: str, p, sl: dict, store, client) -> None:
+    entry = sl[cid]
+    entry.setdefault("source", "human")
+    entry.setdefault("basis", "")
+    stage, tone = _shortlist_stage(cid, entry, store)
+    priority, _ptone = _shortlist_priority(p, entry, store)
+    name = p.display_name(st.session_state.blind)
+    current = p.current_role()
+    current_txt = (f"{current.title_raw.display('')} at {current.employer_raw.display('')}"
+                   if current else p.headline.display("No current role extracted"))
+    st.markdown(
+        f'<div class="mm-sl-profile-head {tone}">'
+        f'<div class="mm-review-avatar xl">{html.escape(_sl_initials(name))}</div>'
+        f'<div class="mm-sl-profile-title"><div class="mm-review-case-kicker">'
+        f'{html.escape(stage)} · {html.escape(priority)}</div>'
+        f'<h2>{html.escape(name)}</h2><p>{html.escape(str(current_txt))}</p>'
+        f'<div>{_shortlist_source_badge(entry["source"])}</div></div>'
+        f'<div class="mm-sl-profile-score"><b>{p.quality.completeness:.0%}</b>'
+        '<span>profile complete</span></div></div>',
+        unsafe_allow_html=True)
+    if entry["basis"]:
+        st.markdown(f'<div class="mm-sl-basis">{html.escape(entry["basis"])}</div>',
+                    unsafe_allow_html=True)
+
+    cols = st.columns(4)
+    C.kpi(cols[0], p.years_experience.display("unknown"), "Experience")
+    C.kpi(cols[1], tx.display("region", p.geo_region.label, "—") if p.geo_region else "—",
+          "Region")
+    C.kpi(cols[2], len([s for s in p.skills if s.depth == "core"]), "Core skills")
+    C.kpi(cols[3], "yes" if p.quality.needs_human_review else "no", "Needs review",
+          colour=theme.WARNING if p.quality.needs_human_review else theme.SUCCESS)
+
+    with st.container(border=True, key="sl_notes_panel"):
+        st.markdown('<div class="mm-panel-heading"><span>Recruiter decision notes</span>'
+                    '<b>saved in slate</b></div>', unsafe_allow_html=True)
+        n1, n2 = st.columns([0.62, 0.38])
+        sl[cid]["note"] = n1.text_area(
+            "Recruiter note", entry.get("note", ""), key=f"n_{cid}", height=108,
+            placeholder="Why this person belongs on the slate, concerns, next step...")
+        sl[cid]["tags"] = n2.text_input(
+            "Tags", entry.get("tags", ""), key=f"t_{cid}",
+            placeholder="screen-call, backup, strong-fit")
+        a1, a2, a3 = st.columns([0.28, 0.28, 0.44])
+        if a1.button("Open profile", key=f"sl_open_profile_{cid}",
+                     icon=":material/open_in_new:", width="stretch"):
+            st.session_state.selected = cid
+            st.session_state.page = "Candidate"
+            st.rerun()
+        if a2.button("Remove", key=f"r_{cid}", icon=":material/delete:",
+                     width="stretch"):
+            sl.pop(cid)
+            if "shortlist_selected" in st.session_state:
+                del st.session_state["shortlist_selected"]
+            st.rerun()
+        if a3.button("Open requisition matcher", key=f"sl_open_req_{cid}",
+                     icon=":material/assignment:", width="stretch"):
+            st.session_state.page = "Requisition"
+            st.rerun()
+
+    with st.container(border=True, key="sl_outreach_panel"):
+        st.markdown('<div class="mm-panel-heading"><span>Outreach and scheduling</span>'
+                    '<b>draft, log, invite</b></div>', unsafe_allow_html=True)
+        _render_outreach(p, store, client)
+
+
+def _render_shortlist_side(sl: dict, byid: dict, store) -> None:
+    st.markdown('<div class="mm-panel-heading"><span>Slate controls</span>'
+                '<b>compare & export</b></div>', unsafe_allow_html=True)
+    df = _shortlist_table(sl, byid)
+    if not df.empty:
+        avg_complete = sum(byid[cid].quality.completeness
+                           for cid in sl if cid in byid) / max(1, len(df))
+    else:
+        avg_complete = 0.0
+    st.markdown(
+        '<div class="mm-sl-side-grid">'
+        f'<div><b>{avg_complete:.0%}</b><span>avg complete</span></div>'
+        f'<div><b>{len(df)}</b><span>export rows</span></div></div>',
+        unsafe_allow_html=True)
+    if not df.empty:
+        st.dataframe(df[["Candidate", "Region", "Years", "Seniority", "Strategies",
+                         "Sectors", "Completeness", "Review"]],
+                     width="stretch", hide_index=True)
     d1, d2 = st.columns(2)
-    d1.download_button("Download comparison (CSV)", df.to_csv(index=False),
-                       "shortlist.csv", "text/csv", width="stretch")
+    d1.download_button("CSV", df.to_csv(index=False), "shortlist.csv", "text/csv",
+                       width="stretch")
     payload = {"shortlist": [
-        {"candidate_id": cid, "note": sl[cid].get("note", ""), "tags": sl[cid].get("tags", ""),
+        {"candidate_id": cid, "note": sl[cid].get("note", ""),
+         "tags": sl[cid].get("tags", ""),
          "profile": json.loads(byid[cid].model_dump_json(exclude={"raw_text"}))}
         for cid in sl if cid in byid]}
-    d2.download_button("Download full records (JSON)",
-                       json.dumps(payload, indent=1), "shortlist.json",
+    d2.download_button("JSON", json.dumps(payload, indent=1), "shortlist.json",
                        "application/json", width="stretch")
+    with st.expander("Inbox", expanded=True):
+        _render_inbox(sl, byid, store)
+
+
+# ========================================================================= SHORTLIST
+def render_shortlist(profiles, synth, pool, index, index_manifest, manifest, store,
+                     client, bench, evals):
+    byid = _byid(pool)
+    sl = st.session_state.shortlist
+    if "match_flash" in st.session_state:
+        st.success(st.session_state.match_flash)
+        del st.session_state["match_flash"]
+    if not sl:
+        _render_shortlist_empty(pool)
+        return
+    valid_ids = [cid for cid in sl if cid in byid]
+    if not valid_ids:
+        _render_shortlist_empty(pool)
+        return
+    st.session_state.setdefault("shortlist_selected", valid_ids[0])
+    if st.session_state.shortlist_selected not in valid_ids:
+        st.session_state.shortlist_selected = valid_ids[0]
+
+    _render_shortlist_hero(sl, byid, store)
+    left, center, right = st.columns([0.24, 0.50, 0.26], gap="medium")
+    with left:
+        with st.container(border=True, key="sl_rail_panel"):
+            _render_shortlist_rail(sl, byid, store)
+    selected = st.session_state.shortlist_selected
+    with center:
+        with st.container(border=True, key="sl_profile_panel"):
+            _render_shortlist_profile(selected, byid[selected], sl, store, client)
+    with right:
+        with st.container(border=True, key="sl_side_panel"):
+            _render_shortlist_side(sl, byid, store)

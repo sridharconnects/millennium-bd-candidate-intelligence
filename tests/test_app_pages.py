@@ -87,7 +87,7 @@ def test_search_hero_exposes_match_import_and_shortlist_actions(monkeypatch, sam
     assert "jump_shortlist_from_search" in keys
     at = _app(monkeypatch, sample_profiles, "Search")
     assert not _errors(at)
-    assert len(at.sidebar.multiselect) >= 5, "filter rail is missing facets"
+    assert len(at.multiselect) >= 5, "filter rail is missing facets"
     body = " ".join(m.value for m in at.markdown)
     # The results header reads "All N candidates" when browsing, or
     # "Showing X of N candidates" once a search/filter narrows the pool.

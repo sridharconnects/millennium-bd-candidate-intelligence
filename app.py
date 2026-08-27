@@ -9,7 +9,6 @@ Run:  streamlit run app.py
 """
 from __future__ import annotations
 
-import html
 import sys
 import time
 from pathlib import Path
@@ -20,7 +19,8 @@ sys.path.insert(0, str(ROOT / "src"))
 import streamlit as st
 
 st.set_page_config(page_title="Millennium BD · Candidate Intelligence",
-                   page_icon="◧", layout="wide", initial_sidebar_state="expanded")
+                   page_icon=":material/hub:", layout="wide",
+                   initial_sidebar_state="expanded")
 
 from millennium import app_data
 from millennium.config import SETTINGS, ScoreWeights
@@ -28,6 +28,7 @@ from millennium.llm import LLMClient
 from millennium.store import Store
 from ui import components as C
 from ui import theme
+from ui import shell
 from ui import pages_core, pages_intake, pages_ops, pages_overview, pages_workflow
 from ui import assistant_panel as pages_assistant
 
@@ -96,7 +97,7 @@ def _init_state() -> None:
         "include_synthetic": False, "requisition": None, "filters": {},
         "retrieval_mode": "hybrid", "last_latency_ms": 0.0, "corrections": {},
         "manual_profiles": [], "nav_history": [], "_last_page": None,
-        "hidden_ids": [],
+        "hidden_ids": [], "f_show_n": 50,
     }
     for k, v in d.items():
         st.session_state.setdefault(k, v)
@@ -177,190 +178,38 @@ index, index_manifest = _load_index(tuple(p.candidate_id for p in pool),
                                     tuple(p.candidate_id for p in manual))
 _boot.empty()
 
-# ---------------------------------------------------------------------- header
-# Title/subtitle and the KPI band each get the FULL page width, stacked, rather than
-# splitting the width and nesting 4 more columns inside the narrower half. The nested
-# version squeezed each KPI card to a sliver on real viewport widths -- narrow enough
-# that words wrapped one character per line -- which was invisible only because a
-# separate bug (Streamlit's own toolbar overlapping and clipping this whole region)
-# was hiding it. Fixing the clipping surfaced the squeeze; this fixes the squeeze.
 pages_assistant.init_state()
-# Title + KPI band stay on screen while the page scrolls -- the recruiter's
-# orientation (where am I, how big is the pool, what's waiting) never leaves the
-# viewport. `.st-key-app_chrome` is position:sticky in theme.py.
-with st.container(key="app_chrome"):
-    back_col, home_col, title_col = st.columns([0.05, 0.05, 0.90])
-    with back_col:
-        # Back: browser-style history over st.session_state.page. Disabled (but still
-        # visible, so the layout never jumps) until there is somewhere to go back to.
-        _hist = st.session_state.nav_history
-        st.button("←", key="back_btn", on_click=_nav_back, disabled=not _hist,
-                  help=f"Back to {_hist[-1]}" if _hist else "Nothing to go back to yet")
-    with home_col:
-        # Home: one click back to the core workspace (Search) from anywhere in the app.
-        if st.button("⌂", key="home_btn", help="Home — back to Search, the main "
-                     "workspace where you find and filter candidates"):
-            st.session_state.page = "Search"
-            st.rerun()
-    with title_col:
-        st.markdown(
-            '<div class="mm-row" style="gap:14px;align-items:center">'
-            '<span style="font-size:1.35rem;font-weight:700;letter-spacing:-0.02em">'
-            '◧ Millennium BD · Candidate Intelligence</span></div>'
-            '<div class="mm-sub">Recruiter decision support — every claim traces to a span '
-            'in a source document, and anything unprovable is refused rather than guessed. '
-            'A human approves every shortlist.</div>', unsafe_allow_html=True)
-    # The chat launcher floats fixed at the viewport's top-right corner (it is not part
-    # of the header's flow), so it needs no column of its own.
-    pages_assistant.render_toggle_button()
 
-    def _kpi_nav(label: str, target: str, key: str) -> None:
-        """A jump link at the bottom of a KPI popover to the page with the full story."""
-        if st.button(label, key=key, width="stretch"):
-            st.session_state.page = target
-            st.rerun()
+review_profiles = [p for p in profiles if p.quality.needs_human_review]
+review_n = len(review_profiles)
+abst = sum(p.quality.abstention_count for p in profiles)
+abst_profiles = [p for p in profiles if p.quality.abstention_count]
+_blind = st.session_state.blind
+_hist = st.session_state.nav_history
 
-    # Each KPI is a clickable card (an st.popover styled by theme.py): the number stays
-    # scannable at a glance, and clicking it opens WHAT is behind the number -- which
-    # records, which reasons -- plus a jump to the page that owns the detail.
-    review_profiles = [p for p in profiles if p.quality.needs_human_review]
-    review_n = len(review_profiles)
-    abst = sum(p.quality.abstention_count for p in profiles)
-    abst_profiles = [p for p in profiles if p.quality.abstention_count]
-    _blind = st.session_state.blind
 
-    with st.container(key="kpi_band"):
-        k = st.columns(4)
-        with k[0], st.popover(f"**{len(profiles) + len(manual)}**  \nCandidates  \n"
-                              f"_{f'real corpus + {len(manual)} uploaded' if manual else 'real corpus'}_",
-                              width="stretch"):
-            st.markdown(f"**{len(profiles)}** candidates parsed from the supplied resumes"
-                        + (f" plus **{len(manual)}** uploaded this session." if manual else "."))
-            for p in profiles + manual:
-                region = p.geo_region.label if p.geo_region else "region unknown"
-                st.markdown(f"- **{p.display_name(_blind)}** — "
-                            f"{p.seniority.label if p.seniority else '—'} · {region}")
-            _kpi_nav("Open Analytics for pool-wide insights", "Analytics", "kpi_go_analytics")
-        _rev_val = f":orange[**{review_n}**]" if review_n else f"**{review_n}**"
-        with k[1], st.popover(f"{_rev_val}  \nNeed review  \n_routed, not blocked_",
-                              width="stretch"):
-            if review_profiles:
-                st.markdown("Records the pipeline was **not confident enough to publish "
-                            "silently** — each is waiting for a human eye, not rejected:")
-                for p in review_profiles:
-                    why = p.quality.review_reasons[0] if p.quality.review_reasons else "flagged"
-                    st.markdown(f"- **{p.display_name(_blind)}** — {why}")
-            else:
-                st.markdown("Nothing is waiting for review right now.")
-            _kpi_nav("Open the Review queue", "Review", "kpi_go_review")
-        with k[2], st.popover(f"**{abst}**  \nAbstentions  \n_unprovable → refused_",
-                              width="stretch"):
-            st.markdown("An abstention is a value the LLM proposed **whose supporting "
-                        "quote could not be found in the document** — so it was discarded "
-                        "rather than guessed. A refusal here is a success state, not an "
-                        "error.")
-            if abst_profiles:
-                for p in abst_profiles:
-                    st.markdown(f"- **{p.display_name(_blind)}** — "
-                                f"{p.quality.abstention_count} field(s) abstained")
-                st.caption("Open a candidate's Evidence tab to see exactly which fields "
-                           "abstained and why.")
-            _kpi_nav("Open the Review queue", "Review", "kpi_go_review2")
-        with k[3], st.popover(f"**${manifest.get('cost_usd', 0):.3f}**  \nParse cost  \n"
-                              f"_one-off, cached_", width="stretch"):
-            n_parsed = max(len(profiles), 1)
-            st.markdown(f"Total LLM cost to parse the corpus: "
-                        f"**${manifest.get('cost_usd', 0):.3f}** "
-                        f"(≈ ${manifest.get('cost_usd', 0) / n_parsed:.3f} per resume).")
-            st.markdown("Every response is cached on disk, so re-runs and this demo "
-                        "replay for **$0.00** — the cost was paid exactly once.")
-            _kpi_nav("Open System for the full cost breakdown", "System", "kpi_go_system")
+def _reset_demo() -> None:
+    for key in ("query", "selected", "shortlist", "requisition", "filters",
+               "corrections", "manual_profiles", "hidden_ids",
+               "match_studio_open", "import_studio_open"):
+        st.session_state.pop(key, None)
+    st.cache_resource.clear()
+    st.cache_data.clear()
+    _init_state()
+    st.rerun()
 
-PAGE_PURPOSE = {
-    "Overview": "How the platform works, in one view — the candidate ontology "
-               "diagram: real pipeline stages, real evidence threads, real "
-               "relationships, not an illustration of them.",
-    "Workflow": "Every real pipeline, agent by agent — parsing, search, requisition "
-               "matching, analytics, the chat loop — each node labelled by exactly "
-               "what produces it: an LLM API call, a local model, or plain Python.",
-    "Search": "Find candidates by plain-English query or filter rail — the main "
-              "screen you land on and return to.",
-    "Candidate": "One person's full record: agent-extracted profile beside the real "
-                "original document, evidence, timeline, similar candidates.",
-    "Requisition": "Paste a job description, set which requirements are must-haves, "
-                  "and get a ranked, score-explained shortlist.",
-    "Shortlist": "Candidates you've saved across searches — add notes, compare "
-                "side by side, export.",
-    "Intake": "Upload new resumes and watch the pipeline parse them live, "
-             "including the agent trace.",
-    "Review": "Records the pipeline wasn't confident enough to publish silently — "
-             "correct a field or approve it.",
-    "Analytics": "Pool-wide distributions, coverage gaps, and data-quality metrics "
-                "across every candidate.",
-    "System": "How the platform works under the hood — agent registry, retrieval "
-             "ablation, fairness audit, cost.",
-}
 
-# --------------------------------------------------------------------- sidebar
 with st.sidebar:
-    st.markdown("#### Workspace")
-    pages = ["Overview", "Workflow", "Search", "Candidate", "Requisition", "Shortlist",
-             "Intake", "Review", "Analytics", "System"]
-    icons = {"Overview": "◈", "Workflow": "⛓", "Search": "⌕", "Candidate": "▤",
-             "Requisition": "▦", "Shortlist": "★", "Intake": "⬆", "Review": "⚑",
-             "Analytics": "▧", "System": "⚙"}
+    shell.render_sidebar(
+        shortlist_n=len(st.session_state.shortlist),
+        review_n=review_n, synth_n=len(synth), on_reset=_reset_demo)
 
-    # Two separate keys, not one. `page` is the logical "what to render" state, and is
-    # freely writable from anywhere (a candidate card's "Open" button, a table row
-    # click, a query-param on load). `nav_radio` is the widget's OWN key -- Streamlit
-    # forbids writing to a session-state key once a widget with that key has rendered,
-    # so `page` can never be that key too. Before the widget renders, `nav_radio` is
-    # synced FROM `page` (always legal, since the widget has not been instantiated yet
-    # this run); an on_change callback syncs the other direction for a direct click.
-    # NB: `.get()` is intentionally not used on st.session_state -- it is not
-    # implemented under the AppTest harness (only real dict-style `in`/`[]` are), and
-    # this file is exercised by both.
-    if "nav_radio" not in st.session_state or st.session_state["nav_radio"] != st.session_state.page:
-        st.session_state.nav_radio = st.session_state.page
-
-    def _sync_page_from_nav() -> None:
-        st.session_state.page = st.session_state.nav_radio
-
-    choice = st.radio("Navigation", pages, key="nav_radio", on_change=_sync_page_from_nav,
-                      label_visibility="collapsed",
-                      format_func=lambda p: f"{icons[p]}  {p}"
-                      + (f"  ({len(st.session_state.shortlist)})" if p == "Shortlist"
-                         and st.session_state.shortlist else "")
-                      + (f"  ({review_n})" if p == "Review" and review_n else ""))
-    # A new user landing on any page cannot know what it's for from a one-word label
-    # alone. This updates the instant a page is picked, immediately, in the flow of
-    # navigating -- not a tooltip that only the curious ever hover.
-    st.markdown(
-        f'<div class="mm-nav-purpose">{html.escape(PAGE_PURPOSE[st.session_state.page])}</div>',
-        unsafe_allow_html=True)
-    st.divider()
-    st.markdown("#### Display")
-    st.toggle("Blind review mode", key="blind",
-              help="Masks name and contact details. The scorer never sees them in any "
-                   "mode — this only changes what YOU see, so you can audit a ranking "
-                   "without knowing whose it is.")
-    st.toggle("Include synthetic corpus", key="include_synthetic",
-              help="Adds the LLM-generated benchmark corpus to the pool. Clearly "
-                   "labelled everywhere and excluded from all accuracy metrics.")
-    if st.session_state.include_synthetic and synth:
-        st.caption(f"⚠ {len(synth)} synthetic records active")
-    st.divider()
-    if st.button("↺ Reset demo", width="stretch"):
-        for key in ("query", "selected", "shortlist", "requisition", "filters",
-                   "corrections", "manual_profiles", "hidden_ids",
-                   "match_studio_open", "import_studio_open"):
-            st.session_state.pop(key, None)
-        st.cache_resource.clear()
-        st.cache_data.clear()
-        _init_state()
-        st.rerun()
-    st.caption(f"schema {SETTINGS.schema_version} · taxonomy {SETTINGS.taxonomy_version}")
-    st.caption(f"{'DEMO_MODE — offline replay' if SETTINGS.flags.demo_mode else 'LIVE API'}")
+shell.render_topbar(
+    n_pool=len(profiles) + len(manual), n_manual=len(manual),
+    review_n=review_n, abst=abst, cost=float(manifest.get("cost_usd", 0) or 0),
+    hist=_hist, on_back=_nav_back, review_profiles=review_profiles,
+    abst_profiles=abst_profiles, profiles=profiles, manual=manual, blind=_blind)
+pages_assistant.render_toggle_button()
 
 # ----------------------------------------------------------------------- route
 t0 = time.perf_counter()

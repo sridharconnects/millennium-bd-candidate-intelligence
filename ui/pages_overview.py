@@ -40,13 +40,10 @@ def _open_app_button(key: str, label: str = "Open the App →") -> bool:
 
 def render_overview(profiles, synth, pool, index, index_manifest, manifest, store,
                     client, bench, evals) -> None:
-    head, cta = st.columns([0.72, 0.28])
+    head, cta = st.columns([0.72, 0.28], vertical_alignment="center")
     with head:
-        st.markdown("##### Overview")
         st.caption("How ten resumes become a queryable, evidence-grounded candidate "
-                  "graph — every claim traceable to its source span. This is the "
-                  "same diagram published as a standalone artifact; it lives here "
-                  "too so it is part of the product, not a separate link.")
+                  "graph — every claim traceable to its source span.")
     with cta:
         st.markdown('<div style="height:6px"></div>', unsafe_allow_html=True)
         if _open_app_button("cta_top"):
