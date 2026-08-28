@@ -2459,15 +2459,69 @@ CSS = f"""
       border-color:{LINE} !important; background:{SURFACE};
       box-shadow:var(--shadow-sm);
   }}
-  .stTabs [data-baseweb="tab-list"] {{ gap:2px; border-bottom:1px solid {LINE}; }}
-  .stTabs [data-baseweb="tab"] {{
-      font-size:0.82rem; padding:8px 14px; font-weight:550; color:{MUTED};
-      border-radius:8px 8px 0 0;
+  .stTabs [data-baseweb="tab-list"] {{
+      gap:9px;
+      border-bottom:0;
+      padding:6px 0 10px;
+      flex-wrap:wrap;
   }}
-  .stTabs [data-baseweb="tab"]:hover {{ color:{INK}; background:rgba(9,9,11,.03); }}
-  .stTabs [aria-selected="true"] {{ color:{INK} !important; font-weight:700; }}
+  .stTabs [data-baseweb="tab"] {{
+      --tab-accent:{ACCENT};
+      --tab-soft:{ACCENT_SOFT};
+      --tab-border:#C7D2FE;
+      min-height:44px;
+      padding:8px 14px 8px 12px;
+      border:1px solid var(--tab-border);
+      border-left:4px solid var(--tab-accent);
+      border-radius:8px;
+      background:
+        linear-gradient(135deg, var(--tab-soft), rgba(255,255,255,.95) 68%);
+      box-shadow:var(--shadow-sm);
+      color:{INK};
+      transition:transform .18s cubic-bezier(.22,1,.36,1), box-shadow .18s ease,
+                 border-color .18s ease, background .18s ease;
+  }}
+  .stTabs [data-baseweb="tab"] p {{
+      color:{INK} !important;
+      font-size:0.9rem !important;
+      font-weight:720 !important;
+      line-height:1.2 !important;
+  }}
+  .stTabs [data-baseweb="tab"]::before {{
+      content:"";
+      display:inline-block;
+      width:8px;
+      height:8px;
+      margin-right:8px;
+      border-radius:999px;
+      background:var(--tab-accent);
+      box-shadow:0 0 0 4px color-mix(in srgb, var(--tab-accent) 12%, transparent);
+      vertical-align:middle;
+  }}
+  .stTabs [data-baseweb="tab"]:nth-child(2) {{ --tab-accent:#0891B2; --tab-soft:#ECFEFF; --tab-border:#A5F3FC; }}
+  .stTabs [data-baseweb="tab"]:nth-child(3) {{ --tab-accent:{SUCCESS}; --tab-soft:{SUCCESS_SOFT}; --tab-border:#BBF7D0; }}
+  .stTabs [data-baseweb="tab"]:nth-child(4) {{ --tab-accent:{WARNING}; --tab-soft:{WARNING_SOFT}; --tab-border:#FDE68A; }}
+  .stTabs [data-baseweb="tab"]:nth-child(5) {{ --tab-accent:#DB2777; --tab-soft:#FDF2F8; --tab-border:#FBCFE8; }}
+  .stTabs [data-baseweb="tab"]:nth-child(6) {{ --tab-accent:#7C3AED; --tab-soft:#F5F3FF; --tab-border:#DDD6FE; }}
+  .stTabs [data-baseweb="tab"]:hover {{
+      transform:translateY(-2px);
+      box-shadow:var(--shadow-md);
+      border-color:var(--tab-accent);
+  }}
+  .stTabs [aria-selected="true"] {{
+      background:
+        linear-gradient(135deg, var(--tab-accent), color-mix(in srgb, var(--tab-accent) 72%, #111827)) !important;
+      border-color:var(--tab-accent) !important;
+      box-shadow:0 10px 26px color-mix(in srgb, var(--tab-accent) 20%, transparent) !important;
+      transform:translateY(-2px);
+  }}
+  .stTabs [aria-selected="true"] p {{ color:#FFFFFF !important; font-weight:780 !important; }}
+  .stTabs [aria-selected="true"]::before {{
+      background:#FFFFFF;
+      box-shadow:0 0 0 4px rgba(255,255,255,.22);
+  }}
   .stTabs [data-baseweb="tab-highlight"] {{
-      background:{ACCENT} !important; height:2px !important; border-radius:2px;
+      background:transparent !important; height:0 !important;
   }}
   .stTabs [data-baseweb="tab-border"] {{ background:transparent !important; }}
   div[data-testid="stExpander"] details {{
