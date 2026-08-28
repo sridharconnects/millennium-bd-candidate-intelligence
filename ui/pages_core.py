@@ -1538,8 +1538,17 @@ def render_candidate(profiles, synth, pool, index, index_manifest, manifest, sto
                 st.markdown(f"- {html.escape(r)}")
 
     with tabs[5]:
-        st.caption(f"Extracted text after layout repair · {len(p.raw_text)} characters")
-        st.text_area("Source", p.raw_text, height=440, label_visibility="collapsed")
+        if p.raw_text:
+            st.caption(f"Extracted text after layout repair · {len(p.raw_text)} characters")
+            st.text_area("Source", p.raw_text, height=440, label_visibility="collapsed")
+        else:
+            C.empty_state(
+                "Source text not available in this session",
+                "The extracted profile above is intact, but the original document text "
+                "was not re-attached for this run — the per-run state file this session "
+                "expected has moved, been cleaned up, or belongs to an older process. "
+                "Restart the app or re-run `scripts/run_pipeline.py` to regenerate it.",
+                icon="⌀")
 
 
 def _timeline(p) -> None:
@@ -1777,6 +1786,15 @@ def _render_req_brief_builder(client, store) -> None:
         else:
             st.caption("No templates saved yet.")
 
+    st.markdown(
+        '<div class="mm-jd-paste-card">'
+        '<div><span class="mm-action-icon">contract_edit</span></div>'
+        '<div><b>Paste a JD or recruiter mandate</b>'
+        '<p>Use plain text. The parser will turn it into must-haves, preferences, '
+        'gates, and ranking signals.</p>'
+        '<small><span>LLM parse</span><span>Hard gates</span><span>Ranked slate</span></small>'
+        '</div></div>',
+        unsafe_allow_html=True)
     jd = st.text_area(
         "Paste job description / mandate",
         height=380,

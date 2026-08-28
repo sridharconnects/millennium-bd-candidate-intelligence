@@ -150,10 +150,12 @@ class Pipeline:
         res.trace += [r_sec, r_rules, r_id, r_emp, r_prof]
         res.stage_ms["parse"] = int((time.perf_counter() - t_stage) * 1000)
 
-        if not any(r.ok for r in (r_id, r_emp, r_prof)):
-            res.status = "failed"
-            res.error = (r_id.errors or ["LLM parsing unavailable"])[0]
-            return res
+        # If every LLM parsing subagent failed (typically DEMO_MODE with no cached
+        # response for a brand-new document), the document is NOT dropped. Rule-based
+        # contacts (`r_rules`) may still have found an email or phone, and everything
+        # below already degrades cleanly to `Tracked.missing()` / abstained fields --
+        # that is the documented contract (see agents/base.py), and a document with
+        # real extractable text deserves a record in Review, not silence.
 
         # ---- stage: merge + ground ----------------------------------------
         t_stage = time.perf_counter()
