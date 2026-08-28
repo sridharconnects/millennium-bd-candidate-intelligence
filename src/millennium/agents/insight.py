@@ -27,7 +27,7 @@ def distributions(profiles: list) -> AgentResult:
         if p.seniority:
             lvl = int(p.seniority.label[1:]) if p.seniority.label.startswith("L") else None
             if lvl:
-                d["seniority"][f"L{lvl} · {tx.display("seniority", lvl)}"] += 1
+                d["seniority"][f"L{lvl} · {tx.display('seniority', lvl)}"] += 1
         if p.quant_fundamental:
             d["approach"][p.quant_fundamental.label.title()] += 1
         if p.feeder_path:
@@ -121,7 +121,7 @@ def coverage_gaps(profiles: list, thin_threshold: int = 2) -> AgentResult:
                          "key": label, "count": n,
                          "severity": "none" if n == 0 else "thin"})
     gaps.sort(key=lambda g: (g["count"], g["dimension"]))
-    covered = [{"cell": f"{tx.display("strategy", a)} · {tx.display("sector", b) if b in tx.SECTORS else b} · {tx.REGION_DISPLAY.get(c, c)}",
+    covered = [{"cell": f"{tx.display('strategy', a)} · {tx.display('sector', b) if b in tx.SECTORS else b} · {tx.REGION_DISPLAY.get(c, c)}",
                 "count": n} for (a, b, c), n in grid.most_common(12)]
     return AgentResult(name="", output={"gaps": gaps, "strongest_cells": covered})
 

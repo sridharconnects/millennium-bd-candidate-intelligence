@@ -177,9 +177,10 @@ def _mode_popover(mode: str, evals: dict) -> None:
                 is_current = a["mode"].startswith(mode)
                 name = f"**{a['mode']}**" if is_current else a["mode"]
                 fmt = (lambda v: f"**{v}**") if is_current else (lambda v: v)
-                lines.append(f"| {name} | {fmt(f'{a['ndcg@10']:.3f}')} "
-                             f"| {fmt(f'{a['mrr']:.3f}')} "
-                             f"| {fmt(f'{a['latency_ms']:.1f} ms')} |")
+                ndcg = f"{a['ndcg@10']:.3f}"
+                mrr = f"{a['mrr']:.3f}"
+                latency = f"{a['latency_ms']:.1f} ms"
+                lines.append(f"| {name} | {fmt(ndcg)} | {fmt(mrr)} | {fmt(latency)} |")
             st.markdown("\n".join(lines))
             st.caption("Higher nDCG@10 / MRR = better ranking. Every result below "
                        "shows its own provenance (\"semantic #2 + keyword #1\"), so "

@@ -71,7 +71,7 @@ def flat_row(p: CandidateProfile, include_pii: bool = True) -> dict:
         "skills_core": "; ".join(s.canonical for s in p.skills if s.depth == "core"),
         "skills_all": "; ".join(s.canonical for s in p.skills),
         "certifications": "; ".join(
-            f"{tx.display("certification", c.canonical)}"
+            f"{tx.display('certification', c.canonical)}"
             + (f" ({c.status})" if c.status else "") for c in p.certifications if c.canonical),
         "languages": "; ".join(
             f"{l.language}" + (f" ({l.proficiency})" if l.proficiency else "")

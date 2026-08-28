@@ -172,7 +172,7 @@ def labels_row(profile: CandidateProfile, limit: int = 6) -> str:
                                                      profile.geo_region.label)))
     if profile.seniority and profile.seniority.label.startswith("L"):
         lvl = int(profile.seniority.label[1:])
-        bits.append(theme.chip(f"{profile.seniority.label} · {tx.display("seniority", lvl)}"))
+        bits.append(theme.chip(f"{profile.seniority.label} · {tx.display('seniority', lvl)}"))
     if profile.quant_fundamental:
         bits.append(theme.chip(profile.quant_fundamental.label.title()))
     for c in profile.strategies[:limit]:
@@ -191,7 +191,7 @@ def candidate_card(p: CandidateProfile, blind: bool = False, score: float | None
     if cur:
         role = f"{cur.title_raw.display('—')} · {cur.employer_canonical or cur.employer_raw.display('—')}"
         if cur.employer_tier and cur.employer_tier != "unknown":
-            role += f" ({tx.display("tier", cur.employer_tier)})"
+            role += f" ({tx.display('tier', cur.employer_tier)})"
     yrs = (f"{p.years_experience.value:.1f}y experience"
            if p.years_experience.is_known else "experience unknown")
     flags = []
