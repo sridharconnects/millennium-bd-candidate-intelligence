@@ -411,10 +411,14 @@ class CandidateProfile(BaseModel):
 
 
 def _lvl(c: Classification | None) -> int | None:
+    """Classification labels are produced as f"L{level}" (e.g. "L3"), never
+    "L_3" -- splitting on "_" left the leading "L" on the number and made
+    `int(...)` raise every time, so `seniority_level` was silently always
+    None and the must_have min_seniority gate in retrieval.py never gated."""
     if not c:
         return None
     try:
-        return int(c.label.split("_")[-1]) if c.label.startswith("L") else None
+        return int(c.label[1:]) if c.label.startswith("L") else None
     except ValueError:
         return None
 

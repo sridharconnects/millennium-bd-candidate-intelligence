@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import html
 import json
+import re
 import time
 import uuid
 from datetime import datetime, timedelta, timezone
@@ -524,23 +525,43 @@ def render_search(profiles, synth, pool, index, index_manifest, manifest, store,
         st.session_state.last_latency_ms = latency
         st.query_params["q"] = query
 
-        # Name lookup is deliberately layered ON TOP of, never INTO, retrieval: a
-        # recruiter typing a name they already know ("pull up Chen's profile") is
-        # doing navigation, not screening, so it is fine for the UI to float that
-        # person to the top. The actual scoring/ranking pipeline above never sees
-        # a name (see CandidateProfile.searchable_text) and that stays true here --
-        # this only reorders the already-computed `results`, in blind-review mode
-        # this is skipped entirely, so the fairness guarantee is untouched.
+        # Two UI-layer shortcuts on top of the already-computed `results`, never fed
+        # back into retrieval/scoring:
+        #  - a bare seniority code ("L3", "l4+") jumps straight to that level, since
+        #    neither query parser has vocabulary for taxonomy codes typed on their own;
+        #  - a name substring floats a known person to the top -- typing a name you
+        #    already know ("pull up Chen's profile") is navigation, not screening, and
+        #    CandidateProfile.searchable_text() never gives the scorer/embedder/BM25
+        #    index a name to begin with, so this only reorders what is already there.
+        # Both are skipped in blind-review mode, where identity and level are meant
+        # to stay out of view.
         if query.strip() and not st.session_state.blind:
             qlow = query.strip().lower()
-            name_hit_ids = {p.candidate_id for p, *_ in results
-                            if qlow in p.display_name(False).lower()}
-            if name_hit_ids:
-                name_matches = [
-                    (p, score, ("name match — " + explain if explain else "name match"), chunks)
-                    for p, score, explain, chunks in results if p.candidate_id in name_hit_ids]
-                rest = [t for t in results if t[0].candidate_id not in name_hit_ids]
-                results = name_matches + rest
+            boost_ids: set[str] = set()
+            boost_label = ""
+            m = re.fullmatch(r"l([1-7])(\+)?", qlow.replace(" ", ""))
+            if m:
+                lvl, at_least = int(m.group(1)), bool(m.group(2))
+                for p, *_ in results:
+                    if not p.seniority or not p.seniority.label.startswith("L"):
+                        continue
+                    try:
+                        plvl = int(p.seniority.label[1:])
+                    except ValueError:
+                        continue
+                    if plvl >= lvl if at_least else plvl == lvl:
+                        boost_ids.add(p.candidate_id)
+                boost_label = f"L{lvl}{'+' if at_least else ''} level match"
+            else:
+                boost_ids = {p.candidate_id for p, *_ in results
+                             if qlow in p.display_name(False).lower()}
+                boost_label = "name match"
+            if boost_ids:
+                boosted = [
+                    (p, score, (f"{boost_label} — {explain}" if explain else boost_label), chunks)
+                    for p, score, explain, chunks in results if p.candidate_id in boost_ids]
+                rest = [t for t in results if t[0].candidate_id not in boost_ids]
+                results = boosted + rest
 
         if "import_flash" in st.session_state:
             st.success(st.session_state.import_flash)
