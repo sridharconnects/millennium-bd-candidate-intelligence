@@ -336,18 +336,24 @@ def _resolve_original_file(p: CandidateProfile):
 
     The 10 documents supplied with the case study live in the project root next to
     app.py, and `provenance.source_file` is exactly their filename -- so for those
-    ten, and for anything else staged the same way, resolution is a straight lookup.
-    Records with no recoverable original (synthetic benchmark rows; a record from a
-    session where the uploaded original was never persisted) get None, handled by the
-    caller as a clearly-labelled unavailable state rather than a crash.
+    ten, resolution is a straight lookup there. Anything uploaded through Intake or
+    Search's Import studio is staged under `data/artifacts/uploads/` instead (see
+    `pages_intake._stage`), under a randomised name that IS what `source_file` holds
+    for those records -- so that directory has to be checked too, or every upload
+    outside the original ten always reports "no recoverable original" even though
+    the file is sitting right there. Records with no recoverable original (synthetic
+    benchmark rows; a record from a session where the uploaded original was actually
+    never persisted) get None, handled by the caller as a clearly-labelled
+    unavailable state rather than a crash.
     """
-    from pathlib import Path
-
     from millennium.config import SETTINGS
     if not p.provenance or not p.provenance.source_file:
         return None
-    candidate = SETTINGS.paths.root / p.provenance.source_file
-    return candidate if candidate.exists() and candidate.is_file() else None
+    for base in (SETTINGS.paths.root, SETTINGS.paths.artifacts / "uploads"):
+        candidate = base / p.provenance.source_file
+        if candidate.exists() and candidate.is_file():
+            return candidate
+    return None
 
 
 @st.cache_data(show_spinner=False)
