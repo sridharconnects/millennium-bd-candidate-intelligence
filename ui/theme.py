@@ -1310,6 +1310,52 @@ CSS = f"""
   .st-key-req_strategy_panel [data-baseweb="select"] * {{
       font-size:0.92rem !important;
   }}
+  .mm-jd-paste-card {{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      margin:2px 0 12px;
+      padding:14px 16px;
+      border-radius:10px;
+      border:1px solid #C7D2FE;
+      background:
+        linear-gradient(135deg, {ACCENT_SOFT} 0%, #ECFEFF 55%, #FFFFFF 100%);
+      box-shadow:0 10px 26px rgba(79,70,229,.10);
+  }}
+  .mm-jd-paste-card > div:first-child {{
+      flex:0 0 auto;
+  }}
+  .mm-jd-paste-card b {{
+      display:block;
+      color:{INK};
+      font-size:1.0rem;
+      font-weight:800;
+      line-height:1.25;
+      margin-bottom:3px;
+  }}
+  .mm-jd-paste-card p {{
+      margin:0 0 9px;
+      color:{MUTED};
+      font-size:0.83rem;
+      line-height:1.42;
+  }}
+  .mm-jd-paste-card small {{
+      display:flex;
+      gap:6px;
+      flex-wrap:wrap;
+  }}
+  .mm-jd-paste-card small span {{
+      font-size:0.66rem;
+      font-weight:780;
+      letter-spacing:.03em;
+      padding:3px 10px;
+      border-radius:999px;
+      color:#fff;
+      box-shadow:0 4px 10px rgba(9,9,11,.10);
+  }}
+  .mm-jd-paste-card small span:nth-child(1) {{ background:linear-gradient(135deg, {ACCENT}, #6D28D9); }}
+  .mm-jd-paste-card small span:nth-child(2) {{ background:linear-gradient(135deg, {WARNING}, #B45309); }}
+  .mm-jd-paste-card small span:nth-child(3) {{ background:linear-gradient(135deg, {SUCCESS}, #0F766E); }}
   .mm-req-note {{
       margin-top:8px;
       padding:8px 10px;
