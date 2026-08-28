@@ -66,7 +66,7 @@ CSS = f"""
 
   html, body, [class*="css"], .stApp {{
       font-family:var(--font) !important;
-      color:{INK}; font-size:14px; letter-spacing:0;
+      color:{INK}; font-size:15px; letter-spacing:0;
       -webkit-font-smoothing:antialiased;
   }}
   .stApp {{
@@ -591,10 +591,11 @@ CSS = f"""
       background:
         linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,255,255,.9)),
         linear-gradient(135deg, rgba(79,70,229,.055), transparent 44%) !important;
+      font-size:0.96rem;
   }}
   .st-key-review_queue_panel input,
   .st-key-review_case_panel input {{
-      font-size:0.82rem;
+      font-size:0.92rem;
   }}
   .mm-panel-heading {{
       display:flex;
@@ -701,18 +702,39 @@ CSS = f"""
   .mm-review-pick-reason {{
       margin-top:5px;
       color:{MUTED};
-      font-size:0.72rem;
+      font-size:0.8rem;
       line-height:1.32;
       display:-webkit-box;
       -webkit-line-clamp:2;
       -webkit-box-orient:vertical;
       overflow:hidden;
   }}
+  .mm-review-pick-action {{
+      display:flex;
+      align-items:center;
+      gap:7px;
+      margin-top:7px;
+      padding:6px 8px;
+      border-radius:8px;
+      border:1px solid rgba(79,70,229,.16);
+      background:rgba(238,242,255,.68);
+      color:{ACCENT_TEXT};
+      font-size:0.76rem;
+      font-weight:700;
+      line-height:1.25;
+  }}
+  .mm-review-pick-action b {{
+      color:{ACCENT_TEXT};
+      font-family:var(--mono);
+      font-size:0.58rem;
+      text-transform:uppercase;
+      letter-spacing:.07em;
+  }}
   .mm-review-pick-meta {{
       margin-top:7px;
       color:{FAINT};
       font-family:var(--mono);
-      font-size:0.62rem;
+      font-size:0.66rem;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
@@ -755,14 +777,14 @@ CSS = f"""
   }}
   .mm-review-case-title h2 {{
       margin:0;
-      font-size:1.25rem;
+      font-size:1.45rem;
       line-height:1.16;
       letter-spacing:0;
   }}
   .mm-review-case-title p {{
       margin:5px 0 0;
       color:{MUTED};
-      font-size:0.86rem;
+      font-size:0.98rem;
       line-height:1.4;
   }}
   .mm-review-source {{
@@ -806,7 +828,7 @@ CSS = f"""
       border-radius:8px;
       background:{WARNING_SOFT};
       color:#92400E;
-      font-size:0.8rem;
+      font-size:0.92rem;
       line-height:1.4;
   }}
   .mm-review-problem b {{
@@ -817,9 +839,47 @@ CSS = f"""
   }}
   .mm-review-subtitle {{
       color:{MUTED};
-      font-size:0.76rem;
+      font-size:0.86rem;
       font-weight:720;
       margin:2px 0 8px;
+  }}
+  .mm-review-action-grid {{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:10px;
+      margin:0 0 14px;
+  }}
+  .mm-review-action-grid div {{
+      min-width:0;
+      padding:11px 12px;
+      border-radius:8px;
+      border:1px solid rgba(79,70,229,.18);
+      border-left:4px solid {ACCENT};
+      background:
+        linear-gradient(135deg, rgba(238,242,255,.9), rgba(255,255,255,.92)),
+        linear-gradient(225deg, rgba(14,165,233,.08), transparent 45%);
+      box-shadow:var(--shadow-sm);
+  }}
+  .mm-review-action-grid b {{
+      display:block;
+      color:{ACCENT_TEXT};
+      font-size:0.88rem;
+      font-weight:780;
+      line-height:1.25;
+      margin-bottom:5px;
+  }}
+  .mm-review-action-grid span {{
+      display:block;
+      color:{INK};
+      font-size:0.82rem;
+      line-height:1.35;
+  }}
+  .mm-review-action-grid small {{
+      display:block;
+      margin-top:7px;
+      color:{MUTED};
+      font-size:0.76rem;
+      line-height:1.35;
   }}
   .st-key-review_editor_card {{
       padding:13px;
@@ -916,6 +976,9 @@ CSS = f"""
           grid-template-columns:1fr;
           gap:4px;
       }}
+      .mm-review-action-grid {{
+          grid-template-columns:1fr;
+      }}
   }}
 
   .mm-req-hero {{
@@ -923,14 +986,14 @@ CSS = f"""
       align-items:flex-start;
       justify-content:space-between;
       gap:18px;
-      padding:18px;
-      margin-bottom:10px;
-      border:1px solid {LINE};
+      padding:20px;
+      margin-bottom:12px;
+      border:1px solid #BAE6FD;
       border-radius:8px;
       background:
-        linear-gradient(135deg, rgba(14,165,233,.10), transparent 46%),
-        linear-gradient(225deg, rgba(22,163,74,.07), transparent 40%),
-        rgba(255,255,255,.94);
+        linear-gradient(135deg, rgba(14,165,233,.22), transparent 48%),
+        linear-gradient(225deg, rgba(22,163,74,.15), transparent 42%),
+        linear-gradient(180deg, #F8FDFF 0%, #F5FBF7 100%);
       box-shadow:var(--shadow-md);
       animation:mm-rise .34s cubic-bezier(.22,1,.36,1) both;
   }}
@@ -949,21 +1012,28 @@ CSS = f"""
   .mm-req-metrics {{
       display:grid;
       grid-template-columns:repeat(6, minmax(0, 1fr));
-      gap:9px;
+      gap:10px;
       margin-bottom:12px;
   }}
   .mm-req-metrics div {{
       min-width:0;
-      padding:11px 12px;
+      padding:13px 13px;
       border-radius:8px;
       border:1px solid {LINE};
-      background:{SURFACE};
+      border-top:3px solid {ACCENT};
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.98), rgba(248,250,252,.92));
       box-shadow:var(--shadow-sm);
   }}
+  .mm-req-metrics div:nth-child(2) {{ border-top-color:{WARNING}; background:linear-gradient(180deg, #FFFBEB, rgba(255,255,255,.94)); }}
+  .mm-req-metrics div:nth-child(3) {{ border-top-color:{SUCCESS}; background:linear-gradient(180deg, #F0FDF4, rgba(255,255,255,.94)); }}
+  .mm-req-metrics div:nth-child(4) {{ border-top-color:#0EA5E9; background:linear-gradient(180deg, #F0F9FF, rgba(255,255,255,.94)); }}
+  .mm-req-metrics div:nth-child(5) {{ border-top-color:#7C3AED; background:linear-gradient(180deg, #F5F3FF, rgba(255,255,255,.94)); }}
+  .mm-req-metrics div:nth-child(6) {{ border-top-color:#DB2777; background:linear-gradient(180deg, #FDF2F8, rgba(255,255,255,.94)); }}
   .mm-req-metrics b {{
       display:block;
       color:{INK};
-      font-size:1.2rem;
+      font-size:1.35rem;
       line-height:1;
       font-weight:760;
       font-variant-numeric:tabular-nums;
@@ -972,7 +1042,7 @@ CSS = f"""
       display:block;
       margin-top:7px;
       color:{MUTED};
-      font-size:0.62rem;
+      font-size:0.68rem;
       font-weight:760;
       text-transform:uppercase;
       letter-spacing:.07em;
@@ -984,8 +1054,52 @@ CSS = f"""
       display:block;
       margin-top:4px;
       color:{FAINT};
-      font-size:0.69rem;
+      font-size:0.76rem;
       line-height:1.25;
+  }}
+  .mm-req-stepbar {{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0, 1fr));
+      gap:10px;
+      margin:0 0 12px;
+  }}
+  .mm-req-stepbar div {{
+      min-width:0;
+      display:grid;
+      grid-template-columns:34px minmax(0, 1fr);
+      column-gap:10px;
+      align-items:center;
+      padding:10px 12px;
+      border-radius:8px;
+      border:1px solid rgba(14,165,233,.18);
+      background:
+        linear-gradient(135deg, rgba(240,249,255,.95), rgba(255,255,255,.92)),
+        linear-gradient(225deg, rgba(240,253,244,.65), transparent 48%);
+      box-shadow:var(--shadow-sm);
+  }}
+  .mm-req-stepbar b {{
+      grid-row:1 / span 2;
+      width:30px;
+      height:30px;
+      border-radius:8px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:{INK};
+      color:#fff;
+      font-family:var(--mono);
+      font-size:0.78rem;
+  }}
+  .mm-req-stepbar span {{
+      color:{INK};
+      font-size:0.88rem;
+      font-weight:780;
+      line-height:1.2;
+  }}
+  .mm-req-stepbar small {{
+      color:{MUTED};
+      font-size:0.74rem;
+      line-height:1.3;
   }}
   .st-key-req_brief_panel,
   .st-key-req_results_panel,
@@ -997,18 +1111,37 @@ CSS = f"""
   }}
   .st-key-req_brief_panel {{
       background:
-        linear-gradient(180deg, rgba(255,255,255,.97), rgba(255,255,255,.91)),
-        linear-gradient(135deg, rgba(14,165,233,.06), transparent 44%) !important;
+        linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,255,255,.88)),
+        linear-gradient(135deg, rgba(14,165,233,.13), transparent 46%),
+        linear-gradient(225deg, rgba(79,70,229,.08), transparent 42%) !important;
+      font-size:0.96rem;
+  }}
+  .st-key-req_results_panel {{
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.98), rgba(255,255,255,.92)),
+        linear-gradient(135deg, rgba(22,163,74,.08), transparent 48%),
+        linear-gradient(225deg, rgba(217,119,6,.075), transparent 40%) !important;
+      font-size:0.96rem;
   }}
   .st-key-req_strategy_panel {{
       background:
-        linear-gradient(180deg, rgba(255,255,255,.97), rgba(255,255,255,.9)),
-        linear-gradient(135deg, rgba(22,163,74,.055), transparent 42%) !important;
+        linear-gradient(180deg, rgba(255,255,255,.97), rgba(255,255,255,.88)),
+        linear-gradient(135deg, rgba(22,163,74,.12), transparent 42%),
+        linear-gradient(225deg, rgba(219,39,119,.07), transparent 44%) !important;
+      font-size:0.96rem;
   }}
   .st-key-req_brief_panel textarea {{
       min-height:260px !important;
-      font-size:0.83rem !important;
-      line-height:1.45 !important;
+      font-size:0.96rem !important;
+      line-height:1.55 !important;
+  }}
+  .st-key-req_brief_panel input,
+  .st-key-req_results_panel input,
+  .st-key-req_strategy_panel input,
+  .st-key-req_brief_panel [data-baseweb="select"] *,
+  .st-key-req_results_panel [data-baseweb="select"] *,
+  .st-key-req_strategy_panel [data-baseweb="select"] * {{
+      font-size:0.92rem !important;
   }}
   .mm-req-note {{
       margin-top:8px;
@@ -1017,7 +1150,7 @@ CSS = f"""
       border-radius:8px;
       background:{ELEVATED};
       color:{MUTED};
-      font-size:0.72rem;
+      font-size:0.82rem;
       line-height:1.45;
   }}
   .mm-req-chip-block {{
@@ -1051,7 +1184,7 @@ CSS = f"""
   .mm-req-fit-grid b {{
       display:block;
       color:{INK};
-      font-size:1.08rem;
+      font-size:1.22rem;
       line-height:1;
       font-weight:760;
       font-variant-numeric:tabular-nums;
@@ -1060,7 +1193,7 @@ CSS = f"""
       display:block;
       margin-top:7px;
       color:{MUTED};
-      font-size:0.62rem;
+      font-size:0.7rem;
       font-weight:760;
       text-transform:uppercase;
       letter-spacing:.07em;
@@ -1150,12 +1283,12 @@ CSS = f"""
       margin-top:5px;
       color:{INK};
       font-family:var(--mono);
-      font-size:0.8rem;
+      font-size:0.9rem;
       font-weight:650;
   }}
   [class*="st-key-req_match_card_"] .stButton>button {{
-      min-height:34px;
-      font-size:0.75rem;
+      min-height:38px;
+      font-size:0.84rem;
       padding-left:0.55rem;
       padding-right:0.55rem;
   }}
@@ -1184,7 +1317,8 @@ CSS = f"""
   }}
   @media (max-width: 760px) {{
       .mm-req-metrics,
-      .mm-req-components {{
+      .mm-req-components,
+      .mm-req-stepbar {{
           grid-template-columns:repeat(2, minmax(0, 1fr));
       }}
       .mm-req-card-head {{

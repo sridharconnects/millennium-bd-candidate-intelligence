@@ -1677,6 +1677,14 @@ def _render_req_hero(req, ranked, excluded, latency_ms: float) -> None:
         f'<div><b>{latency_ms:.0f} ms</b><span>latency</span><small>current run</small></div>'
         '</div>',
         unsafe_allow_html=True)
+    st.markdown(
+        '<div class="mm-req-stepbar">'
+        '<div><b>1</b><span>Paste JD</span><small>role, mandate, recruiter brief</small></div>'
+        '<div><b>2</b><span>Parse needs</span><small>LLM or deterministic rules</small></div>'
+        '<div><b>3</b><span>Check gates</span><small>must-haves stay visible</small></div>'
+        '<div><b>4</b><span>Build slate</span><small>shortlist ranked matches</small></div>'
+        '</div>',
+        unsafe_allow_html=True)
 
 
 def _render_req_brief_builder(client, store) -> None:

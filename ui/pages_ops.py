@@ -66,6 +66,64 @@ def _review_lane(p) -> str:
     return "Approve quality"
 
 
+def _review_action_from_text(text: str) -> tuple[str, str]:
+    low = text.lower()
+    if "timeline" in low or "date" in low or "degree" in low:
+        return (
+            "Verify chronology",
+            "Compare education dates and role dates against the source document, then correct the wrong date or approve the exception.",
+        )
+    if "contact" in low or "email" in low or "phone" in low or "name" in low:
+        return (
+            "Confirm identity fields",
+            "Check the highlighted source span and correct name, email, phone, or location if extraction merged the wrong value.",
+        )
+    if "span" in low or "evidence" in low or "unverified" in low:
+        return (
+            "Check source evidence",
+            "Open the evidence beside the field and only approve values that are directly supported by the uploaded resume.",
+        )
+    if "abstain" in low or "missing" in low:
+        return (
+            "Fill missing proof",
+            "Use the field selector to find abstained values; add the source-backed value or leave it blank if the resume never states it.",
+        )
+    return (
+        "Resolve validation flag",
+        "Read the routing note, inspect the source evidence, then correct the extracted value or approve it as a known exception.",
+    )
+
+
+def _review_action_items(p, fields=None) -> list[tuple[str, str, str]]:
+    items: list[tuple[str, str, str]] = []
+    for flag in p.quality.validation_flags:
+        title, action = _review_action_from_text(flag)
+        items.append((title, flag, action))
+    for reason in p.quality.review_reasons:
+        if reason not in {item[1] for item in items}:
+            title, action = _review_action_from_text(reason)
+            items.append((title, reason, action))
+    if fields:
+        for label, (_path, tracked) in fields.items():
+            if tracked.validation_status in {"abstained", "conflicted", "unverified"}:
+                title, action = _review_action_from_text(tracked.validation_status)
+                note = tracked.notes[0] if tracked.notes else tracked.validation_status
+                items.append((f"Review {label}", note, action))
+    if not items and p.quality.evidence_coverage < 0.85:
+        items.append((
+            "Check source evidence",
+            f"Evidence coverage is {p.quality.evidence_coverage:.0%}.",
+            "Inspect the field evidence before approving the profile.",
+        ))
+    if not items:
+        items.append((
+            "Approve profile",
+            "No unresolved extracted field is flagged.",
+            "Approve the profile or add a correction if you spot an issue in the source document.",
+        ))
+    return items[:5]
+
+
 def _render_ai_json_panel(data: dict, title: str) -> None:
     if data.get("_notice"):
         st.info(data["_notice"])
@@ -155,6 +213,7 @@ def _render_review_queue(queue):
         name = rec.display_name(st.session_state.blind)
         initials = _review_initials(name)
         reason = rec.quality.review_reasons[0] if rec.quality.review_reasons else _review_lane(rec)
+        todo = _review_action_items(rec)[0][0]
         st.markdown(
             f'<div class="mm-review-pick {tone}{" is-selected" if is_sel else ""}">'
             f'<div class="mm-review-avatar">{html.escape(initials)}</div>'
@@ -162,6 +221,7 @@ def _render_review_queue(queue):
             f'<div class="mm-review-pick-top"><span>{html.escape(name)}</span>'
             f'<b>{html.escape(sev)}</b></div>'
             f'<div class="mm-review-pick-reason">{html.escape(reason)}</div>'
+            f'<div class="mm-review-pick-action"><b>Next</b>{html.escape(todo)}</div>'
             f'<div class="mm-review-pick-meta">'
             f'{len(rec.quality.review_reasons)} reasons · '
             f'{len(rec.quality.validation_flags)} flags · '
@@ -182,6 +242,11 @@ def _render_review_case(p, fields, store, client):
     source = p.provenance.source_file or p.doc_id
     problem = (p.quality.review_reasons[0] if p.quality.review_reasons
                else "Record is waiting for a reviewer decision.")
+    action_items = _review_action_items(p, fields)
+    action_html = "".join(
+        f'<div><b>{html.escape(title)}</b><span>{html.escape(detail)}</span>'
+        f'<small>{html.escape(action)}</small></div>'
+        for title, detail, action in action_items[:3])
     st.markdown(
         f'<div class="mm-review-case-head {tone}">'
         f'<div class="mm-review-avatar xl">{html.escape(initials)}</div>'
@@ -193,7 +258,8 @@ def _render_review_case(p, fields, store, client):
         f'<div class="mm-review-severity"><span>{html.escape(sev)}</span>'
         f'<small>severity</small></div></div>'
         f'<div class="mm-review-problem"><b>What needs attention</b>'
-        f'<span>{html.escape(problem)}</span></div>',
+        f'<span>{html.escape(problem)}</span></div>'
+        f'<div class="mm-review-action-grid">{action_html}</div>',
         unsafe_allow_html=True)
 
     C.provenance_banner(p)
@@ -217,6 +283,10 @@ def _render_review_case(p, fields, store, client):
             for lbl, t in flagged_fields[:4]:
                 note = t.notes[0] if t.notes else t.validation_status
                 st.markdown(theme.flag_card(f"{lbl}: {note}"), unsafe_allow_html=True)
+        elif p.quality.validation_flags:
+            for flag in p.quality.validation_flags[:4]:
+                title, action = _review_action_from_text(flag)
+                st.markdown(theme.flag_card(f"{title}: {action}"), unsafe_allow_html=True)
         else:
             st.caption("No correctable field here is abstained, conflicted or unverified.")
 
