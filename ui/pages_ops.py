@@ -448,6 +448,56 @@ def render_review(profiles, synth, pool, index, index_manifest, manifest, store,
 
 
 # ========================================================================= ANALYTICS
+def _analytics_top_label(dist: dict, key: str, default: str = "Not enough data") -> str:
+    values = dist.get(key, {}) or {}
+    if not values:
+        return default
+    return max(values.items(), key=lambda kv: kv[1])[0]
+
+
+def _render_analytics_overview(dq: dict, dist: dict, gaps: dict) -> None:
+    strongest = gaps.get("strongest_cells", []) or []
+    open_gaps = [g for g in gaps.get("gaps", []) if g.get("count") == 0]
+    top_region = _analytics_top_label(dist, "region")
+    top_strategy = _analytics_top_label(dist, "strategy")
+    top_sector = _analytics_top_label(dist, "sector")
+    strongest_label = "No dense cell yet"
+    if strongest:
+        first = strongest[0]
+        strongest_label = str(first.get("cell") or first.get("label") or "No dense cell yet")
+
+    cards = [
+        ("Candidates", dq.get("candidates", 0), "working pool", "#4F46E5", "#EEF2FF", "#C7D2FE"),
+        ("Complete", f"{dq.get('mean_completeness', 0):.0%}", "mean profile quality", "#16A34A", "#F0FDF4", "#BBF7D0"),
+        ("Evidenced", f"{dq.get('mean_evidence_coverage', 0):.0%}", "source-backed fields", "#0891B2", "#ECFEFF", "#A5F3FC"),
+        ("Abstained", dq.get("total_abstentions", 0), "refused, not guessed", "#D97706", "#FFFBEB", "#FDE68A"),
+        ("Need review", dq.get("needs_review", 0), "human attention", "#DB2777", "#FDF2F8", "#FBCFE8"),
+    ]
+    card_html = "".join(
+        '<div class="mm-analytics-kpi" '
+        f'style="--a:{accent};--soft:{soft};--bd:{border}">'
+        f'<b>{html.escape(str(value))}</b><span>{html.escape(label)}</span>'
+        f'<small>{html.escape(hint)}</small></div>'
+        for label, value, hint, accent, soft, border in cards
+    )
+    st.markdown(
+        '<div class="mm-analytics-hero">'
+        '<div><div class="mm-page-kicker">Intelligence · Analytics</div>'
+        '<div class="mm-page-title">Pool intelligence</div>'
+        '<div class="mm-page-sub">Start with distributions, then inspect gaps, skills, '
+        'quality, LLM memo, and exports.</div></div>'
+        f'<div class="mm-analytics-spot"><b>{len(open_gaps)}</b><span>open coverage gaps</span></div>'
+        '</div>'
+        f'<div class="mm-analytics-kpi-grid">{card_html}</div>'
+        '<div class="mm-analytics-lens">'
+        f'<div><b>Top region</b><span>{html.escape(top_region)}</span></div>'
+        f'<div><b>Top strategy</b><span>{html.escape(top_strategy)}</span></div>'
+        f'<div><b>Top sector</b><span>{html.escape(top_sector)}</span></div>'
+        f'<div><b>Strongest cell</b><span>{html.escape(strongest_label)}</span></div>'
+        '</div>',
+        unsafe_allow_html=True)
+
+
 def render_analytics(profiles, synth, pool, index, index_manifest, manifest, store,
                      client, bench, evals):
     C.synthetic_banner(len(synth) if st.session_state.include_synthetic else 0)
@@ -455,22 +505,12 @@ def render_analytics(profiles, synth, pool, index, index_manifest, manifest, sto
     dq = data_quality(pool).output or {}
     gaps = coverage_gaps(pool).output or {}
 
-    C.section_header("Pool intelligence",
-                     subtitle="Coverage, gaps, and extraction quality across the working set")
-    k = st.columns(5)
-    C.kpi(k[0], dq.get("candidates", 0), "Candidates", "in working pool")
-    C.kpi(k[1], f"{dq.get('mean_completeness', 0):.0%}", "Mean complete",
-          delta=None)
-    C.kpi(k[2], f"{dq.get('mean_evidence_coverage', 0):.0%}", "Evidenced")
-    C.kpi(k[3], dq.get("total_abstentions", 0), "Abstained", "refused, not guessed",
-          colour=theme.WARNING if dq.get("total_abstentions", 0) else theme.SUCCESS)
-    C.kpi(k[4], dq.get("needs_review", 0), "Need review",
-          colour=theme.WARNING if dq.get("needs_review", 0) else theme.INK)
+    _render_analytics_overview(dq, dist, gaps)
 
-    tabs = st.tabs(["LLM memo", "Distributions", "Coverage gaps", "Skills",
-                    "Data quality", "Export"])
+    dist_tab, gaps_tab, skills_tab, quality_tab, memo_tab, export_tab = st.tabs(
+        ["Distributions", "Coverage gaps", "Skills", "Data quality", "LLM memo", "Export"])
 
-    with tabs[0]:
+    with memo_tab:
         st.markdown("##### LLM pool memo")
         C.llm_callout(
             "Pool memo",
@@ -491,7 +531,7 @@ def render_analytics(profiles, synth, pool, index, index_manifest, manifest, sto
                 '</div>',
                 unsafe_allow_html=True)
 
-    with tabs[1]:
+    with dist_tab:
         pairs = [("region", "Geographic market"), ("strategy", "Investment strategy"),
                  ("sector", "Sector coverage"), ("seniority", "Seniority level"),
                  ("experience_band", "Experience"), ("approach", "Investment approach"),
@@ -503,18 +543,21 @@ def render_analytics(profiles, synth, pool, index, index_manifest, manifest, sto
                 if not data:
                     continue
                 df = pd.DataFrame({"label": list(data), "n": list(data.values())})
-                fig = px.bar(df, x="n", y="label", orientation="h", text="n",
-                             color_discrete_sequence=[theme.SERIES[(i + j) % len(theme.SERIES)]],
-                             height=max(200, 32 * len(df) + 90))
-                fig.update_layout(title=title, title_font_size=13, showlegend=False,
-                                  margin=dict(l=0, r=10, t=34, b=0),
-                                  yaxis_title=None, xaxis_title=None, xaxis_visible=False,
-                                  yaxis=dict(autorange="reversed"),
-                                  plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
-                                  font=dict(size=11))
-                fig.update_traces(textposition="outside", cliponaxis=False)
-                cols[j].plotly_chart(theme.polish_fig(fig), width="stretch",
-                                     config={"displayModeBar": False})
+                with cols[j].container(border=True, key=f"analytics_dist_{key}"):
+                    fig = px.bar(df, x="n", y="label", orientation="h", text="n",
+                                 color_discrete_sequence=[
+                                     theme.SERIES[(i + j) % len(theme.SERIES)]],
+                                 height=max(210, 34 * len(df) + 96))
+                    fig.update_layout(title=title, title_font_size=15, showlegend=False,
+                                      margin=dict(l=0, r=12, t=38, b=0),
+                                      yaxis_title=None, xaxis_title=None, xaxis_visible=False,
+                                      yaxis=dict(autorange="reversed"),
+                                      plot_bgcolor="rgba(0,0,0,0)",
+                                      paper_bgcolor="rgba(0,0,0,0)",
+                                      font=dict(size=12))
+                    fig.update_traces(textposition="outside", cliponaxis=False)
+                    st.plotly_chart(theme.polish_fig(fig), width="stretch",
+                                    config={"displayModeBar": False})
 
         st.markdown("**Strategy × sector coverage**")
         cells = []
@@ -526,14 +569,17 @@ def render_analytics(profiles, synth, pool, index, index_manifest, manifest, sto
         if cells:
             piv = (pd.DataFrame(cells).value_counts().reset_index(name="n")
                    .pivot(index="strategy", columns="sector", values="n").fillna(0))
-            fig = px.imshow(piv, text_auto=True, aspect="auto",
-                            color_continuous_scale=["#EEF2FF", theme.ACCENT],
-                            height=90 + 34 * len(piv))
-            fig.update_layout(margin=dict(l=0, r=0, t=10, b=0), coloraxis_showscale=False,
-                              font=dict(size=11), xaxis_title=None, yaxis_title=None)
-            st.plotly_chart(theme.polish_fig(fig), width="stretch", config={"displayModeBar": False})
+            with st.container(border=True, key="analytics_heatmap"):
+                fig = px.imshow(piv, text_auto=True, aspect="auto",
+                                color_continuous_scale=["#ECFEFF", theme.ACCENT],
+                                height=110 + 38 * len(piv))
+                fig.update_layout(margin=dict(l=0, r=0, t=18, b=0),
+                                  coloraxis_showscale=False, font=dict(size=12),
+                                  xaxis_title=None, yaxis_title=None)
+                st.plotly_chart(theme.polish_fig(fig), width="stretch",
+                                config={"displayModeBar": False})
 
-    with tabs[2]:
+    with gaps_tab:
         st.markdown("##### Where you cannot currently hire")
         st.caption("The inverse of a distribution chart. A recruiter already knows most "
                    "of the pool is equity research; what they need is the list of "
@@ -560,7 +606,7 @@ def render_analytics(profiles, synth, pool, index, index_manifest, manifest, sto
         if strong:
             st.dataframe(pd.DataFrame(strong), width="stretch", hide_index=True)
 
-    with tabs[3]:
+    with skills_tab:
         a, b = st.columns([0.45, 0.55])
         with a:
             data = dist.get("skill", {})
@@ -589,7 +635,7 @@ def render_analytics(profiles, synth, pool, index, index_manifest, manifest, sto
                 st.dataframe(pd.DataFrame(co).head(20), width="stretch",
                              hide_index=True)
 
-    with tabs[4]:
+    with quality_tab:
         a, b = st.columns(2)
         with a:
             rows = [{"candidate": p.display_name(st.session_state.blind),
@@ -619,7 +665,7 @@ def render_analytics(profiles, synth, pool, index, index_manifest, manifest, sto
                        "number. In a hiring product a fabricated employer is worse than "
                        "a blank, so a refusal is a success state, not a failure.")
 
-    with tabs[5]:
+    with export_tab:
         _render_export_tab()
 
 
