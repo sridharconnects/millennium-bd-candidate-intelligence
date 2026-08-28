@@ -472,14 +472,6 @@ def render_search(profiles, synth, pool, index, index_manifest, manifest, store,
         mode = "hybrid"
         show_n = st.session_state["f_show_n"] if "f_show_n" in st.session_state else 50
         n_sl = len(st.session_state.shortlist)
-        _render_search_action_cards(n_sl)
-        query_llm_state = "enabled" if SETTINGS.flags.enable_llm_query_parse else "disabled"
-        C.llm_callout(
-            "Search intent understanding",
-            f"Plain-English queries can use the LLM to extract must-haves, "
-            f"preferences, and exclusions. Retrieval, filtering, and ranking stay "
-            f"local; LLM query parsing is currently {query_llm_state}.",
-            stage="query")
 
         # Filter widgets live in the results panel; read session keys here so Match
         # studio and retrieval see the same active filters.
@@ -544,12 +536,20 @@ def render_search(profiles, synth, pool, index, index_manifest, manifest, store,
                 unsafe_allow_html=True)
 
     shown = min(show_cap, len(results))
-    results_col, insight_col = st.columns([0.74, 0.26], gap="medium",
+    results_col, insight_col = st.columns([0.70, 0.30], gap="medium",
                                           vertical_alignment="top")
     with results_col:
         _render_results_panel(facets, store, shown, results, pool, latency, query,
                               caveats, excluded)
     with insight_col:
+        _render_search_action_cards(n_sl, vertical=True)
+        query_llm_state = "enabled" if SETTINGS.flags.enable_llm_query_parse else "disabled"
+        C.llm_callout(
+            "Search intent understanding",
+            f"Plain-English queries can use the LLM to extract must-haves, "
+            f"preferences, and exclusions. Retrieval, filtering, and ranking stay "
+            f"local; LLM query parsing is currently {query_llm_state}.",
+            stage="query")
         _render_pool_glance(results, shown, latency, pool)
 
 
@@ -765,8 +765,9 @@ def _render_pool_glance(results, shown: int, latency: float, pool) -> None:
         _right_rail_focus(results[:shown])
 
 
-def _render_search_action_cards(n_sl: int) -> None:
-    cards = st.columns([0.34, 0.33, 0.33], gap="medium")
+def _render_search_action_cards(n_sl: int, *, vertical: bool = False) -> None:
+    cards = [st.container(), st.container(), st.container()] if vertical else st.columns(
+        [0.34, 0.33, 0.33], gap="medium")
     match_active = _flag_on("match_studio_open")
     import_active = _flag_on("import_studio_open")
 

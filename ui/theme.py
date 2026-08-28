@@ -2047,7 +2047,7 @@ CSS = f"""
   .st-key-search_action_match,
   .st-key-search_action_import,
   .st-key-search_action_shortlist {{
-      min-height:166px;
+      min-height:132px;
       border-radius:8px !important;
       border:1px solid var(--action-border) !important;
       background:var(--action-bg) !important;
@@ -2081,8 +2081,8 @@ CSS = f"""
       display:flex;
       gap:12px;
       align-items:flex-start;
-      min-height:72px;
-      margin-bottom:8px;
+      min-height:58px;
+      margin-bottom:6px;
   }}
   .mm-action-icon {{
       font-family:'Material Symbols Rounded';
@@ -2111,14 +2111,14 @@ CSS = f"""
   }}
   .mm-action-card-head small {{
       display:block;
-      margin-top:5px;
+      margin-top:4px;
       color:{MUTED};
-      font-size:0.82rem;
-      line-height:1.35;
+      font-size:0.78rem;
+      line-height:1.32;
   }}
   .mm-action-card-state {{
       display:inline-flex;
-      margin:0 0 10px;
+      margin:0 0 8px;
       padding:4px 9px;
       border-radius:999px;
       border:1px solid color-mix(in srgb, var(--action-accent, {ACCENT}) 24%, #FFFFFF);
@@ -2132,7 +2132,7 @@ CSS = f"""
   .st-key-search_action_match .stButton>button,
   .st-key-search_action_import .stButton>button,
   .st-key-search_action_shortlist .stButton>button {{
-      min-height:40px;
+      min-height:38px;
       font-size:0.88rem;
       font-weight:750;
       border-color:var(--action-accent, {ACCENT}) !important;
