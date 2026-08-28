@@ -1637,7 +1637,7 @@ SAMPLE_JD = """Investment Analyst — Healthcare Long/Short (New York)
 Millennium is hiring a junior analyst for a fundamental healthcare long/short pod.
 
 Requirements:
-- 3-7 years of experience in healthcare equity research or healthcare investment banking
+- 3-9 years of experience in healthcare equity research or healthcare investment banking
 - Demonstrated financial modelling ability (three-statement, DCF)
 - Must be based in, or willing to relocate to, the United States
 - Bachelor's degree required
@@ -2284,7 +2284,7 @@ def _resume_match_studio(results, pool, index, client, query: str) -> None:
                          icon=":material/content_copy:"):
                 st.session_state.search_match_jd = query.strip()
                 st.rerun()
-        st.text_area("Job description", height=140, key="search_match_jd",
+        st.text_area("Job description", height=380, key="search_match_jd",
                      placeholder="Paste a job description or mandate…")
         n_cap = max(1, min(25, len(results) or 1))
         r1, r2, r3 = st.columns(3)
@@ -2362,13 +2362,17 @@ def _resume_match_studio(results, pool, index, client, query: str) -> None:
                     "Why": _match_why(r),
                     "Already": "yes" if r.candidate_id in st.session_state.shortlist else "",
                 })
-            st.dataframe(
-                pd.DataFrame(rows), hide_index=True, width="stretch",
-                column_config={
-                    "Score": st.column_config.ProgressColumn(
-                        min_value=0.0, max_value=1.0, format="%.3f"),
-                    "Why": st.column_config.TextColumn(width="large"),
-                })
+            if rows:
+                st.dataframe(
+                    pd.DataFrame(rows), hide_index=True, width="stretch",
+                    column_config={
+                        "Score": st.column_config.ProgressColumn(
+                            min_value=0.0, max_value=1.0, format="%.3f"),
+                        "Why": st.column_config.TextColumn(width="large"),
+                    })
+            else:
+                st.caption(f"{len(ranked)} candidate(s) ranked, but none reached the "
+                           f"{min_score:.2f} minimum score — lower \"Min score\" to see them.")
             if excluded:
                 with st.expander(f"{len(excluded)} gated out by must-haves"):
                     for r in excluded[:12]:
@@ -2399,7 +2403,28 @@ def _resume_match_studio(results, pool, index, client, query: str) -> None:
                 if jump:
                     st.session_state.page = "Shortlist"
                 st.rerun()
-        elif pq is None:
+        elif pq is not None:
+            # `ranked == []`: the mandate parsed and scoring ran, but every candidate
+            # in scope was gated out by a must-have. This used to render nothing at
+            # all -- indistinguishable from the button not having done anything.
+            byid = _byid(pool)
+            C.empty_state(
+                "No candidates match this mandate",
+                (f"All {len(excluded)} candidate(s) in scope were gated out by a "
+                 f"must-have requirement." if excluded else
+                 "Nobody was in scope to score — widen \"Score against\" to the "
+                 "whole pool, or clear filters.") +
+                " Relax a must-have on the Requirement control panel, or lower it "
+                "to a preference, and try again.",
+                icon="⌀")
+            if excluded:
+                with st.expander(f"{len(excluded)} gated out by must-haves"):
+                    for r in excluded[:12]:
+                        p = byid.get(r.candidate_id)
+                        nm = p.display_name(st.session_state.blind) if p else r.candidate_id
+                        st.markdown(f"**{html.escape(nm)}** — "
+                                    + html.escape("; ".join(r.exclusion_reasons)))
+        else:
             st.caption("Preview ranking to see scores before anything is shortlisted.")
 
 

@@ -2515,6 +2515,22 @@ CSS = f"""
       animation:mm-panel-open .34s cubic-bezier(.22,1,.36,1) both;
       box-shadow:var(--shadow-lg) !important;
   }}
+  .st-key-resume_match textarea {{
+      min-height:340px !important;
+      font-size:0.95rem !important;
+      line-height:1.55 !important;
+      border:1.5px solid #C7D2FE !important;
+      border-radius:8px !important;
+      background:
+        linear-gradient(180deg, #FFFFFF 0%, {ACCENT_SOFT} 160%) !important;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.8) !important;
+      transition:border-color .18s ease, box-shadow .18s ease;
+  }}
+  .st-key-resume_match textarea:focus {{
+      border-color:{ACCENT} !important;
+      box-shadow:0 0 0 4px {ACCENT_SOFT} !important;
+      background:#FFFFFF !important;
+  }}
   .st-key-pool_import {{
       border:1px solid #A5F3FC !important; border-radius:8px !important;
       background:
