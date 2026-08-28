@@ -2001,9 +2001,25 @@ CSS = f"""
       min-height:58px;
       padding:10px 11px;
       border-radius:8px;
-      border:1px solid {LINE};
-      background:rgba(255,255,255,.82);
+      border:1px solid #C7D2FE;
+      border-top:3px solid {ACCENT};
+      background:linear-gradient(180deg, rgba(238,242,255,.82), rgba(255,255,255,.96));
       box-shadow:var(--shadow-sm);
+  }}
+  .mm-profile-metrics div:nth-child(2) {{
+      border-color:#BBF7D0;
+      border-top-color:{SUCCESS};
+      background:linear-gradient(180deg, rgba(240,253,244,.9), rgba(255,255,255,.96));
+  }}
+  .mm-profile-metrics div:nth-child(3) {{
+      border-color:#A5F3FC;
+      border-top-color:#0891B2;
+      background:linear-gradient(180deg, rgba(236,254,255,.9), rgba(255,255,255,.96));
+  }}
+  .mm-profile-metrics div:nth-child(4) {{
+      border-color:#FDE68A;
+      border-top-color:{WARNING};
+      background:linear-gradient(180deg, rgba(255,251,235,.95), rgba(255,255,255,.96));
   }}
   .mm-profile-metrics b {{
       display:block;
@@ -2126,17 +2142,24 @@ CSS = f"""
   }}
   .st-key-profile_detail_panel {{
       background:
-        linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,255,255,.88)),
-        linear-gradient(135deg, rgba(22,163,74,.06), transparent 36%) !important;
+        linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,255,255,.9)),
+        linear-gradient(135deg, rgba(22,163,74,.1), transparent 34%),
+        linear-gradient(225deg, rgba(79,70,229,.08), transparent 38%) !important;
+      border-top:4px solid {SUCCESS} !important;
   }}
   .st-key-profile_source_panel {{
       overflow:hidden;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,255,255,.9)),
+        linear-gradient(135deg, rgba(14,165,233,.1), transparent 38%) !important;
+      border-top:4px solid #0EA5E9 !important;
   }}
   .st-key-profile_trust_panel {{
       margin-top:0.85rem !important;
       background:
         linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,255,255,.9)),
         linear-gradient(135deg, rgba(217,119,6,.07), transparent 42%) !important;
+      border-top:4px solid {WARNING} !important;
   }}
   .mm-profile-panel-title {{
       font-size:0.96rem;
@@ -2758,29 +2781,46 @@ CSS = f"""
       padding:3px 0 5px;
       flex-wrap:wrap;
   }}
-  .stTabs [data-baseweb="tab"] {{
+  .stTabs [role="tablist"] {{
+      gap:9px;
+      border-bottom:0 !important;
+      padding:5px 6px 7px;
+      margin:0 0 6px;
+      border-radius:8px;
+      background:
+        linear-gradient(135deg, rgba(238,242,255,.78), rgba(236,254,255,.58)),
+        rgba(255,255,255,.76);
+      box-shadow:inset 0 0 0 1px rgba(199,210,254,.55);
+      overflow-x:auto;
+   }}
+  .stTabs [data-baseweb="tab"],
+  .stTabs [role="tab"] {{
       --tab-accent:{ACCENT};
       --tab-soft:{ACCENT_SOFT};
       --tab-border:#C7D2FE;
       min-height:34px;
       padding:5px 12px 5px 10px;
-      border:1px solid var(--tab-border);
+      border:1px solid var(--tab-border) !important;
       border-left:4px solid var(--tab-accent);
       border-radius:8px;
       background:
-        linear-gradient(135deg, var(--tab-soft), rgba(255,255,255,.95) 68%);
-      box-shadow:var(--shadow-sm);
-      color:{INK};
+        linear-gradient(135deg, var(--tab-soft), rgba(255,255,255,.98) 70%) !important;
+      box-shadow:var(--shadow-sm) !important;
+      color:{INK} !important;
       transition:transform .18s cubic-bezier(.22,1,.36,1), box-shadow .18s ease,
                  border-color .18s ease, background .18s ease;
   }}
-  .stTabs [data-baseweb="tab"] p {{
+  .stTabs [data-baseweb="tab"] p,
+  .stTabs [role="tab"] p,
+  .stTabs [role="tab"] span {{
       color:{INK} !important;
       font-size:0.84rem !important;
       font-weight:720 !important;
       line-height:1.2 !important;
+      opacity:1 !important;
   }}
-  .stTabs [data-baseweb="tab"]::before {{
+  .stTabs [data-baseweb="tab"]::before,
+  .stTabs [role="tab"]::before {{
       content:"";
       display:inline-block;
       width:8px;
@@ -2791,27 +2831,43 @@ CSS = f"""
       box-shadow:0 0 0 4px color-mix(in srgb, var(--tab-accent) 12%, transparent);
       vertical-align:middle;
   }}
-  .stTabs [data-baseweb="tab"]:nth-child(2) {{ --tab-accent:#0891B2; --tab-soft:#ECFEFF; --tab-border:#A5F3FC; }}
-  .stTabs [data-baseweb="tab"]:nth-child(3) {{ --tab-accent:{SUCCESS}; --tab-soft:{SUCCESS_SOFT}; --tab-border:#BBF7D0; }}
-  .stTabs [data-baseweb="tab"]:nth-child(4) {{ --tab-accent:{WARNING}; --tab-soft:{WARNING_SOFT}; --tab-border:#FDE68A; }}
-  .stTabs [data-baseweb="tab"]:nth-child(5) {{ --tab-accent:#DB2777; --tab-soft:#FDF2F8; --tab-border:#FBCFE8; }}
-  .stTabs [data-baseweb="tab"]:nth-child(6) {{ --tab-accent:#7C3AED; --tab-soft:#F5F3FF; --tab-border:#DDD6FE; }}
-  .stTabs [data-baseweb="tab"]:hover {{
+  .stTabs [data-baseweb="tab"]:nth-child(2),
+  .stTabs [role="tab"]:nth-child(2) {{ --tab-accent:#0891B2; --tab-soft:#ECFEFF; --tab-border:#A5F3FC; }}
+  .stTabs [data-baseweb="tab"]:nth-child(3),
+  .stTabs [role="tab"]:nth-child(3) {{ --tab-accent:{SUCCESS}; --tab-soft:{SUCCESS_SOFT}; --tab-border:#BBF7D0; }}
+  .stTabs [data-baseweb="tab"]:nth-child(4),
+  .stTabs [role="tab"]:nth-child(4) {{ --tab-accent:{WARNING}; --tab-soft:{WARNING_SOFT}; --tab-border:#FDE68A; }}
+  .stTabs [data-baseweb="tab"]:nth-child(5),
+  .stTabs [role="tab"]:nth-child(5) {{ --tab-accent:#DB2777; --tab-soft:#FDF2F8; --tab-border:#FBCFE8; }}
+  .stTabs [data-baseweb="tab"]:nth-child(6),
+  .stTabs [role="tab"]:nth-child(6) {{ --tab-accent:#7C3AED; --tab-soft:#F5F3FF; --tab-border:#DDD6FE; }}
+  .stTabs [data-baseweb="tab"]:hover,
+  .stTabs [role="tab"]:hover {{
       transform:translateY(-2px);
-      box-shadow:var(--shadow-md);
-      border-color:var(--tab-accent);
+      box-shadow:var(--shadow-md) !important;
+      border-color:var(--tab-accent) !important;
   }}
-  .stTabs [aria-selected="true"] {{
+  .stTabs [aria-selected="true"],
+  .stTabs [role="tab"][aria-selected="true"] {{
       background:
         linear-gradient(135deg, var(--tab-accent), color-mix(in srgb, var(--tab-accent) 72%, #111827)) !important;
       border-color:var(--tab-accent) !important;
       box-shadow:0 10px 26px color-mix(in srgb, var(--tab-accent) 20%, transparent) !important;
       transform:translateY(-2px);
   }}
-  .stTabs [aria-selected="true"] p {{ color:#FFFFFF !important; font-weight:780 !important; }}
+  .stTabs [aria-selected="true"] p,
+  .stTabs [aria-selected="true"] span {{
+      color:#FFFFFF !important;
+      font-weight:780 !important;
+      opacity:1 !important;
+  }}
   .stTabs [aria-selected="true"]::before {{
       background:#FFFFFF;
       box-shadow:0 0 0 4px rgba(255,255,255,.22);
+  }}
+  .stTabs [data-baseweb="tab-panel"] {{
+      padding:10px 0 0;
+      border-top:1px solid rgba(199,210,254,.45);
   }}
   .stTabs [data-baseweb="tab-highlight"] {{
       background:transparent !important; height:0 !important;
