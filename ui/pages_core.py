@@ -315,6 +315,7 @@ def _render_filter_bar(facets: dict, store, *, n_shown: int | None = None,
                     "Years of experience", 0.0, 30.0, (0.0, 30.0), 0.5, key="f_years")
             F["include_unknown_years"] = st.checkbox(
                 "Include candidates whose experience is unknown", value=True,
+                key="f_include_unknown_years",
                 help="Unknown ≠ zero. Some CVs state tenure as a duration with no dates.")
             with st.expander("More filters"):
                 F["approach"] = st.multiselect("Approach", facets["approach"], key="f_approach")
@@ -325,8 +326,10 @@ def _render_filter_bar(facets: dict, store, *, n_shown: int | None = None,
                 F["degree"] = st.multiselect("Degree level", facets["degree"], key="f_degree")
                 F["language"] = st.multiselect("Language", facets["language"], key="f_language")
                 F["min_completeness"] = st.slider(
-                    "Minimum profile completeness", 0.0, 1.0, 0.0, 0.05)
-                F["review_only"] = st.checkbox("Only records flagged for review")
+                    "Minimum profile completeness", 0.0, 1.0, 0.0, 0.05,
+                    key="f_min_completeness")
+                F["review_only"] = st.checkbox("Only records flagged for review",
+                                                key="f_review_only")
             F.setdefault("min_completeness", 0.0)
             F.setdefault("review_only", False)
             F.setdefault("feeder", [])
@@ -367,9 +370,14 @@ def _render_filter_bar(facets: dict, store, *, n_shown: int | None = None,
                     "cert": st.session_state["f_cert"] if "f_cert" in st.session_state else [],
                     "degree": st.session_state["f_degree"] if "f_degree" in st.session_state else [],
                     "language": st.session_state["f_language"] if "f_language" in st.session_state else [],
+                    "include_unknown_years": st.session_state["f_include_unknown_years"]
+                    if "f_include_unknown_years" in st.session_state else True,
+                    "min_completeness": st.session_state["f_min_completeness"]
+                    if "f_min_completeness" in st.session_state else 0.0,
+                    "review_only": st.session_state["f_review_only"]
+                    if "f_review_only" in st.session_state else False,
                 }
-                store.save_search(nm.strip(), st.session_state.query, snap,
-                                  st.session_state.retrieval_mode)
+                store.save_search(nm.strip(), st.session_state.query, snap, "hybrid")
                 st.success(f"Saved '{nm.strip()}'")
 
     for key, label in (("f_region", "Region"), ("f_strategy", "Strategy"),
@@ -396,7 +404,8 @@ def _render_filter_bar(facets: dict, store, *, n_shown: int | None = None,
     F.setdefault("skill", st.session_state["f_skill"] if "f_skill" in st.session_state else [])
     F.setdefault("seniority", st.session_state["f_seniority"] if "f_seniority" in st.session_state else [])
     F.setdefault("years", years)
-    F.setdefault("include_unknown_years", True)
+    F.setdefault("include_unknown_years", st.session_state["f_include_unknown_years"]
+                 if "f_include_unknown_years" in st.session_state else True)
     F.setdefault("approach", st.session_state["f_approach"] if "f_approach" in st.session_state else [])
     F.setdefault("feeder", st.session_state["f_feeder"] if "f_feeder" in st.session_state else [])
     F.setdefault("employer", st.session_state["f_employer"] if "f_employer" in st.session_state else [])
@@ -404,8 +413,10 @@ def _render_filter_bar(facets: dict, store, *, n_shown: int | None = None,
     F.setdefault("cert", st.session_state["f_cert"] if "f_cert" in st.session_state else [])
     F.setdefault("degree", st.session_state["f_degree"] if "f_degree" in st.session_state else [])
     F.setdefault("language", st.session_state["f_language"] if "f_language" in st.session_state else [])
-    F.setdefault("min_completeness", 0.0)
-    F.setdefault("review_only", False)
+    F.setdefault("min_completeness", st.session_state["f_min_completeness"]
+                 if "f_min_completeness" in st.session_state else 0.0)
+    F.setdefault("review_only", st.session_state["f_review_only"]
+                 if "f_review_only" in st.session_state else False)
     return F
 
 
@@ -432,17 +443,22 @@ def render_search(profiles, synth, pool, index, index_manifest, manifest, store,
             st.session_state[f"f_{fk}"] = vals
         if isinstance(pending.get("years"), (list, tuple)) and len(pending["years"]) == 2:
             st.session_state["f_years"] = tuple(float(x) for x in pending["years"])
+        if "include_unknown_years" in pending:
+            st.session_state["f_include_unknown_years"] = bool(pending["include_unknown_years"])
+        if "min_completeness" in pending:
+            st.session_state["f_min_completeness"] = float(pending["min_completeness"])
+        if "review_only" in pending:
+            st.session_state["f_review_only"] = bool(pending["review_only"])
 
     hero = st.container(border=False, key="search_hero")
     with hero:
         from . import cc_surfaces
 
         show_n = st.session_state["f_show_n"] if "f_show_n" in st.session_state else 50
-        mode0 = st.session_state["retrieval_mode"] if "retrieval_mode" in st.session_state else "hybrid"
         q0 = st.session_state["query"] if "query" in st.session_state else ""
         cc_surfaces.command_bar(
             query=q0,
-            mode=mode0 or "hybrid",
+            mode="hybrid",
             show=show_n,
             examples=[{"label": k, "query": v} for k, v in EXAMPLES.items()],
             meta=f"{len(pool)} in pool",
@@ -456,13 +472,11 @@ def render_search(profiles, synth, pool, index, index_manifest, manifest, store,
             f"local; LLM query parsing is currently {query_llm_state}.",
             stage="query")
         query = st.session_state["query"] if "query" in st.session_state else ""
-        mode = st.session_state["retrieval_mode"] if "retrieval_mode" in st.session_state else "hybrid"
-        mode = mode or "hybrid"
+        mode = "hybrid"
         show_n = st.session_state["f_show_n"] if "f_show_n" in st.session_state else 50
         n_sl = len(st.session_state.shortlist)
         with st.container(horizontal=True, key="search_tools", gap="small",
                           vertical_alignment="center"):
-            _mode_popover(mode, evals)
             st.button("Match to JD", icon=":material/person_search:",
                       key="open_match_studio",
                       type="primary" if _flag_on("match_studio_open") else "secondary",
@@ -491,7 +505,8 @@ def render_search(profiles, synth, pool, index, index_manifest, manifest, store,
             "skill": st.session_state["f_skill"] if "f_skill" in st.session_state else [],
             "seniority": st.session_state["f_seniority"] if "f_seniority" in st.session_state else [],
             "years": st.session_state["f_years"] if "f_years" in st.session_state else (0.0, 30.0),
-            "include_unknown_years": True,
+            "include_unknown_years": st.session_state["f_include_unknown_years"]
+            if "f_include_unknown_years" in st.session_state else True,
             "approach": st.session_state["f_approach"] if "f_approach" in st.session_state else [],
             "feeder": st.session_state["f_feeder"] if "f_feeder" in st.session_state else [],
             "employer": st.session_state["f_employer"] if "f_employer" in st.session_state else [],
@@ -499,8 +514,10 @@ def render_search(profiles, synth, pool, index, index_manifest, manifest, store,
             "cert": st.session_state["f_cert"] if "f_cert" in st.session_state else [],
             "degree": st.session_state["f_degree"] if "f_degree" in st.session_state else [],
             "language": st.session_state["f_language"] if "f_language" in st.session_state else [],
-            "min_completeness": 0.0,
-            "review_only": False,
+            "min_completeness": st.session_state["f_min_completeness"]
+            if "f_min_completeness" in st.session_state else 0.0,
+            "review_only": st.session_state["f_review_only"]
+            if "f_review_only" in st.session_state else False,
         }
         show_cap = len(pool) if show_n == "All" else int(show_n)
         t0 = time.perf_counter()
@@ -509,7 +526,8 @@ def render_search(profiles, synth, pool, index, index_manifest, manifest, store,
         hits = []
         if query.strip():
             parsed, _presult = understand_query(query, client)
-            r = retrieve(index, parsed.semantic_text or query, mode, top_k=show_cap)
+            r = retrieve(index, parsed.semantic_text or query, mode,
+                         top_k=max(show_cap, len(pool)))
             hits = r.output or []
             allowed = {p.candidate_id for p in filtered}
             gated, excluded, caveats = apply_filters(filtered, parsed)
@@ -605,6 +623,8 @@ def _render_results_panel(facets, store, shown: int, results, pool, latency: flo
                            icon=":material/delete:"):
                 _remove_from_pool([p.candidate_id])
                 st.rerun()
+            with b[3].popover("Export", icon=":material/download:"):
+                _profile_downloads_compact(p, prefix=f"card_{p.candidate_id[:8]}")
             if chunks:
                 with st.expander(f"Why this matched · {explain}"):
                     for ch in chunks:
@@ -617,6 +637,8 @@ def _render_results_panel(facets, store, shown: int, results, pool, latency: flo
                             f'{html.escape(ch["text"])}<br>'
                             f'<span class="mm-sub mm-mono">{rk}</span></div>',
                             unsafe_allow_html=True)
+        if results:
+            _render_result_exports(results[:shown])
 
         if caveats:
             with st.expander(f"⚠ {len(caveats)} kept with an unverified must-have"):
@@ -689,6 +711,52 @@ def _render_result_list(results, shown: int, latency: float) -> None:
     cc_surfaces.candidate_list(
         rows, title=f"{shown} candidates", meta=f"{latency:.0f} ms",
         key="cc_candidate_list", on_action=_list_action)
+
+
+def _render_result_exports(results) -> None:
+    from millennium.export import flat_row
+
+    if not results:
+        return
+    with st.expander("Export results and profiles", expanded=False):
+        visible = [p for p, *_ in results]
+        include_pii = not st.session_state.blind
+        exclude_fields = {"raw_text"} if include_pii else {"raw_text", "sensitive"}
+        payload = {
+            "count": len(visible),
+            "blind_mode": st.session_state.blind,
+            "candidates": [
+                json.loads(p.model_dump_json(exclude=exclude_fields)) for p in visible
+            ],
+        }
+        c1, c2 = st.columns(2)
+        c1.download_button(
+            "Visible results JSON",
+            json.dumps(payload, indent=1, ensure_ascii=False),
+            "visible_search_results.json",
+            "application/json",
+            icon=":material/data_object:",
+            key="search_visible_json",
+            width="stretch")
+        c2.download_button(
+            "Visible results CSV",
+            pd.DataFrame([flat_row(p, include_pii=include_pii) for p in visible])
+            .to_csv(index=False),
+            "visible_search_results.csv",
+            "text/csv",
+            icon=":material/table:",
+            key="search_visible_csv",
+            width="stretch")
+        choices = {
+            f"{p.display_name(st.session_state.blind)} · {p.candidate_id[:6]}": p
+            for p in visible
+        }
+        pick = st.selectbox(
+            "Single profile export",
+            list(choices),
+            key="search_export_profile_pick")
+        picked = choices.get(pick, visible[0])
+        _profile_downloads_compact(picked, prefix="search_pick")
 
 
 def _render_pool_glance(results, shown: int, latency: float, pool) -> None:
@@ -913,7 +981,7 @@ def _profile_exports(p) -> None:
                 help="Editable .docx of the extracted profile")
 
 
-def _profile_downloads_compact(p) -> None:
+def _profile_downloads_compact(p, *, prefix: str = "dlc") -> None:
     from millennium.export import (
         profile_csv_bytes, profile_docx_bytes, profile_json_bytes,
         profile_pdf_bytes, profile_filename,
@@ -923,32 +991,32 @@ def _profile_downloads_compact(p) -> None:
     cid = p.candidate_id[:8]
     st.markdown('<div class="mm-console-title">Exports</div>', unsafe_allow_html=True)
     c1, c2 = st.columns(2)
-    with c1, st.container(key="dlc_json"):
+    with c1, st.container(key=f"{prefix}_json"):
         st.download_button(
             "JSON", profile_json_bytes(p, include_pii=include_pii),
             file_name=profile_filename(p, "json", st.session_state.blind),
             mime="application/json", icon=":material/data_object:",
-            key=f"dlc_json_{cid}", width="stretch")
-    with c2, st.container(key="dlc_csv"):
+            key=f"{prefix}_json_{cid}", width="stretch")
+    with c2, st.container(key=f"{prefix}_csv"):
         st.download_button(
             "CSV", profile_csv_bytes(p, include_pii=include_pii),
             file_name=profile_filename(p, "csv", st.session_state.blind),
             mime="text/csv", icon=":material/table:",
-            key=f"dlc_csv_{cid}", width="stretch")
+            key=f"{prefix}_csv_{cid}", width="stretch")
     c3, c4 = st.columns(2)
-    with c3, st.container(key="dlc_pdf"):
+    with c3, st.container(key=f"{prefix}_pdf"):
         st.download_button(
             "PDF", profile_pdf_bytes(p, include_pii=include_pii),
             file_name=profile_filename(p, "pdf", st.session_state.blind),
             mime="application/pdf", icon=":material/picture_as_pdf:",
-            key=f"dlc_pdf_{cid}", width="stretch")
-    with c4, st.container(key="dlc_docx"):
+            key=f"{prefix}_pdf_{cid}", width="stretch")
+    with c4, st.container(key=f"{prefix}_docx"):
         st.download_button(
             "Word", profile_docx_bytes(p, include_pii=include_pii),
             file_name=profile_filename(p, "docx", st.session_state.blind),
             mime="application/vnd.openxmlformats-officedocument."
                  "wordprocessingml.document",
-            icon=":material/description:", key=f"dlc_docx_{cid}",
+            icon=":material/description:", key=f"{prefix}_docx_{cid}",
             width="stretch")
 
 
@@ -1097,7 +1165,7 @@ def _render_candidate_command_center(p, ids: list[str], byid: dict, i: int,
     listed = p.candidate_id in st.session_state.shortlist
 
     with st.container(border=True, key="candidate_command"):
-        profile_col, console_col = st.columns([0.58, 0.42], gap="large",
+        profile_col, console_col = st.columns([0.25, 0.75], gap="large",
                                               vertical_alignment="top")
         with profile_col:
             st.markdown(
@@ -1122,34 +1190,43 @@ def _render_candidate_command_center(p, ids: list[str], byid: dict, i: int,
         with console_col:
             st.markdown('<div class="mm-console-title">Profile controls</div>',
                         unsafe_allow_html=True)
-            n1, n2, n3 = st.columns([0.2, 0.6, 0.2], vertical_alignment="bottom")
-            with n1:
-                st.button("Prev", icon=":material/chevron_left:", key="cand_prev",
-                          width="stretch", disabled=i == 0,
-                          on_click=_step_candidate, args=(-1,),
-                          help="Open the previous candidate")
-            with n2:
-                st.selectbox(
-                    "Switch candidate", ids, index=i, key="cand_switch_box",
-                    on_change=_sync_candidate_from_switch,
-                    label_visibility="collapsed",
-                    format_func=lambda cid: byid[cid].display_name(st.session_state.blind),
-                    help="Jump to another parsed profile")
-            with n3:
-                st.button("Next", icon=":material/chevron_right:", key="cand_next",
-                          width="stretch", disabled=i >= len(ids) - 1,
-                          on_click=_step_candidate, args=(1,),
-                          help="Open the next candidate")
-            st.markdown(
-                f'<div class="mm-console-note">{i + 1} of {len(ids)} in the working pool</div>',
-                unsafe_allow_html=True)
-            a1, a2 = st.columns(2)
-            with a1:
+            nav_col, action_col, export_col = st.columns([0.40, 0.25, 0.35],
+                                                         gap="medium",
+                                                         vertical_alignment="top")
+            with nav_col:
+                n1, n2, n3 = st.columns([0.16, 0.68, 0.16], vertical_alignment="bottom")
+                with n1:
+                    st.button("Prev", icon=":material/chevron_left:", key="cand_prev",
+                              width="stretch", disabled=i == 0,
+                              on_click=_step_candidate, args=(-1,),
+                              help="Open the previous candidate")
+                with n2:
+                    st.selectbox(
+                        "Switch candidate", ids, index=i, key="cand_switch_box",
+                        on_change=_sync_candidate_from_switch,
+                        label_visibility="collapsed",
+                        format_func=lambda cid: byid[cid].display_name(st.session_state.blind),
+                        help="Jump to another parsed profile")
+                with n3:
+                    st.button("Next", icon=":material/chevron_right:", key="cand_next",
+                              width="stretch", disabled=i >= len(ids) - 1,
+                              on_click=_step_candidate, args=(1,),
+                              help="Open the next candidate")
+                st.markdown(
+                    f'<div class="mm-console-note">{i + 1} of {len(ids)} in the working pool</div>',
+                    unsafe_allow_html=True)
+            with action_col:
+                st.markdown('<div class="mm-console-title">Actions</div>',
+                            unsafe_allow_html=True)
                 if listed:
                     if st.button("Remove", icon=":material/star:", key="cand_shortlist",
                                  width="stretch",
                                  help="Remove this person from the shortlist"):
                         st.session_state.shortlist.pop(p.candidate_id)
+                        st.rerun()
+                    if st.button("Open list", icon=":material/open_in_new:",
+                                 key="cand_go_sl", width="stretch"):
+                        st.session_state.page = "Shortlist"
                         st.rerun()
                 else:
                     if st.button("Shortlist", icon=":material/star:", type="primary",
@@ -1159,24 +1236,13 @@ def _render_candidate_command_center(p, ids: list[str], byid: dict, i: int,
                             "note": "", "tags": "", "source": "human",
                             "basis": "Manually shortlisted from the candidate profile"}
                         st.rerun()
-            with a2:
-                if listed and st.button("Open list", icon=":material/open_in_new:",
-                                        key="cand_go_sl", width="stretch"):
-                    st.session_state.page = "Shortlist"
-                    st.rerun()
-                elif not listed and st.button("Delete", icon=":material/delete:",
-                                              key="cand_remove", width="stretch",
-                                              help="Remove this profile from this session"):
+                if st.button("Delete", icon=":material/delete:", key="cand_remove",
+                             width="stretch", help="Remove this profile from this session"):
                     _remove_from_pool([st.session_state.selected])
                     st.session_state.page = "Search"
                     st.rerun()
-            if listed and st.button("Delete", icon=":material/delete:",
-                                    key="cand_remove", width="stretch",
-                                    help="Remove this profile from this session"):
-                _remove_from_pool([st.session_state.selected])
-                st.session_state.page = "Search"
-                st.rerun()
-            _profile_downloads_compact(p)
+            with export_col:
+                _profile_downloads_compact(p, prefix=f"cand_{p.candidate_id[:8]}")
             _render_candidate_ai_brief(client, p, pool)
 
 
@@ -1664,8 +1730,11 @@ def _render_req_brief_builder(client, store) -> None:
         else:
             st.caption("No templates saved yet.")
 
-    jd = st.text_area("Job description", height=270, key="req_jd_text",
-                      placeholder="Paste the role, mandate, or search brief...")
+    jd = st.text_area(
+        "Paste job description / mandate",
+        height=380,
+        key="req_jd_text",
+        placeholder="Paste the JD, recruiter brief, or mandate here...")
     C.llm_callout(
         "Requisition parser",
         "The primary parser sends the role brief to the LLM to structure "
@@ -1967,18 +2036,19 @@ def render_requisition(profiles, synth, pool, index, index_manifest, manifest, s
 
     req = st.session_state.requisition
     hero_slot = st.empty()
-    left, center, right = st.columns([0.27, 0.49, 0.24], gap="medium")
+    left, center = st.columns([0.40, 0.60], gap="medium")
     with left:
         with st.container(border=True, key="req_brief_panel"):
             _render_req_brief_builder(client, store)
-            weights = _render_req_weight_controls()
-            pq = _render_req_requirement_editor(req)
+            with st.expander("Scoring lens and requirement controls", expanded=False):
+                weights = _render_req_weight_controls()
+                pq = _render_req_requirement_editor(req)
 
     ranked, excluded, sem, latency_ms = _score_requisition(pool, index, pq, weights)
     with hero_slot.container():
         _render_req_hero(req, ranked, excluded, latency_ms)
 
-    with right:
+    with left:
         with st.container(border=True, key="req_strategy_panel"):
             _top_n, min_score = _render_req_strategy_panel(
                 pq, ranked, excluded, store, sem, weights, pool)
@@ -2764,6 +2834,11 @@ def _render_shortlist_profile(cid: str, p, sl: dict, store, client) -> None:
                      icon=":material/assignment:", width="stretch"):
             st.session_state.page = "Requisition"
             st.rerun()
+
+    with st.container(border=True, key="sl_profile_exports_panel"):
+        st.markdown('<div class="mm-panel-heading"><span>Profile export</span>'
+                    '<b>selected finalist</b></div>', unsafe_allow_html=True)
+        _profile_downloads_compact(p, prefix=f"sl_{cid[:8]}")
 
     with st.container(border=True, key="sl_outreach_panel"):
         st.markdown('<div class="mm-panel-heading"><span>Outreach and scheduling</span>'

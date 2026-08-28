@@ -19,7 +19,7 @@ _COMMAND_HTML = """
         <div class="mm-cmd-kicker">Workspace · Search</div>
         <div class="mm-cmd-title">Find candidates</div>
       </div>
-      <div class="mm-cmd-hint"><span class="mm-cmd-dot"></span> hybrid desk</div>
+      <div class="mm-cmd-hint"><span class="mm-cmd-dot"></span> NLP search</div>
     </div>
     <div class="mm-cmd-field">
       <span class="mm-cmd-ico" aria-hidden="true">⌕</span>
@@ -113,7 +113,7 @@ _COMMAND_CSS = """
 .mm-cmd-row {
   display: flex; align-items: center; gap: 8px; margin-top: 8px; flex-wrap: wrap;
 }
-.mm-seg { display: inline-flex; gap: 2px; padding: 3px; background: var(--elev);
+.mm-seg { display: none; gap: 2px; padding: 3px; background: var(--elev);
   border: 1px solid var(--line); border-radius: 999px; }
 .mm-seg button {
   border: 0; background: transparent; color: var(--muted); cursor: pointer;
@@ -181,7 +181,7 @@ export default function (component) {
   const examples = root.querySelector("#examples")
   const meta = root.querySelector("#meta")
 
-  const modeList = (data && data.modes) || ["hybrid", "dense", "lexical"]
+  const modeList = (data && data.modes) || []
   modes.innerHTML = ""
   modeList.forEach((m) => {
     const b = document.createElement("button")
@@ -520,7 +520,7 @@ def command_bar(
             "query": query,
             "mode": mode,
             "show": str(show),
-            "modes": ["hybrid", "dense", "lexical"],
+            "modes": [],
             "showOptions": [25, 50, 100, 250, "All"],
             "examples": examples,
             "meta": meta,
@@ -535,8 +535,7 @@ def command_bar(
 
     if getattr(result, "query", None) is not None:
         st.session_state.query = result.query
-    if getattr(result, "mode", None):
-        st.session_state.retrieval_mode = result.mode
+    st.session_state.retrieval_mode = "hybrid"
     if getattr(result, "show", None) is not None:
         raw = result.show
         st.session_state.f_show_n = "All" if str(raw) == "All" else int(raw)
@@ -544,8 +543,7 @@ def command_bar(
     if isinstance(submitted, dict):
         if "query" in submitted:
             st.session_state.query = submitted["query"]
-        if submitted.get("mode"):
-            st.session_state.retrieval_mode = submitted["mode"]
+        st.session_state.retrieval_mode = "hybrid"
         if submitted.get("show") is not None:
             raw = submitted["show"]
             st.session_state.f_show_n = "All" if str(raw) == "All" else int(raw)

@@ -258,6 +258,44 @@ def _render_chat_pipeline() -> None:
         'the Review page.</div>', unsafe_allow_html=True)
 
 
+# ========================================================== 6. advisory + exports
+_ADVISORY_EXPORT_MERMAID = r"""
+flowchart TD
+    classDef llm fill:#EEF2FF,color:#3730A3,stroke:#4F46E5,stroke-width:1.5px;
+    classDef rule fill:#FAFAFA,color:#52525B,stroke:#E4E4E7,stroke-width:1px;
+    classDef decision fill:#FFFBEB,color:#92400E,stroke:#D97706,stroke-width:1px;
+    classDef io fill:#18181B,color:#ffffff,stroke:#09090B;
+
+    P["Candidate / Review / Analytics / Shortlist buttons"]:::io --> ADV["LLM advisory panels\nbriefs, outreach, calibration notes,\nreview helper text"]:::llm
+    ADV --> HASKEY{"API key + DEMO_MODE allow live calls?"}:::decision
+    HASKEY -- "yes" --> LC["LLMClient.complete_json\nClaude / configured provider"]:::llm
+    HASKEY -- "no, or call fails" --> FB["deterministic fallback\nclearly labelled in the UI"]:::rule
+    LC --> UI["Advisory panel tagged\nUSES LLM / fallback"]:::io
+    FB --> UI
+
+    TOP["Any page top bar"]:::io --> GA["Global export all candidates\nJSON + CSV"]:::rule
+    SEARCH["Search results"]:::io --> SE["Visible results export\nJSON + CSV\nsingle-profile picker"]:::rule
+    PROFILE["Candidate and Shortlist profile"]:::io --> PE["Profile exports\nJSON / CSV / PDF / Word"]:::rule
+    GA --> PRIV{"Blind mode on?"}:::decision
+    SE --> PRIV
+    PE --> PRIV
+    PRIV -- "yes" --> B["omit PII from export payloads"]:::rule
+    PRIV -- "no" --> A["include recruiter-visible profile fields"]:::rule
+"""
+
+
+def _render_advisory_export_pipeline() -> None:
+    st.caption("cross-page surface · live only after deployment secrets are set · "
+              "exports are local deterministic serializers")
+    st.mermaid_chart(_ADVISORY_EXPORT_MERMAID)
+    st.markdown(
+        '<div class="mm-banner"><b>Deployment note:</b> live LLM features read '
+        '<code>ANTHROPIC_API_KEY</code> or <code>OPENAI_API_KEY</code> from '
+        'environment variables or Streamlit Cloud secrets. When a key is missing, '
+        'the UI now says exactly which LLM feature fell back instead of silently '
+        'pretending it used a model.</div>', unsafe_allow_html=True)
+
+
 # ==================================================================== registry table
 def _render_registry_section() -> None:
     rows = registry_table()
@@ -282,7 +320,7 @@ def _render_registry_section() -> None:
 def render_workflow(profiles, synth, pool, index, index_manifest, manifest, store,
                     client, bench, evals) -> None:
     st.caption(
-        "Five real pipelines run this platform. Each diagram is read off the code "
+        "Six real pipelines and product surfaces run this platform. Each diagram is read off the code "
         "that runs it — every node labelled by what produces it: an LLM API call, "
         "a local model, or deterministic Python.")
     legend = st.columns(4)
@@ -308,5 +346,7 @@ def render_workflow(profiles, synth, pool, index, index_manifest, manifest, stor
     _render_insight_pipeline()
     C.section_break("⑤ Chat assistant loop", 4)
     _render_chat_pipeline()
-    C.section_break("Full registry", 5)
+    C.section_break("⑥ LLM advisory and exports", 5)
+    _render_advisory_export_pipeline()
+    C.section_break("Full registry", 6)
     _render_registry_section()

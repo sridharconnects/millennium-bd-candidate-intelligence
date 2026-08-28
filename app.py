@@ -208,7 +208,8 @@ shell.render_topbar(
     n_pool=len(profiles) + len(manual), n_manual=len(manual),
     review_n=review_n, abst=abst, cost=float(manifest.get("cost_usd", 0) or 0),
     hist=_hist, on_back=_nav_back, review_profiles=review_profiles,
-    abst_profiles=abst_profiles, profiles=profiles, manual=manual, blind=_blind)
+    abst_profiles=abst_profiles, profiles=profiles, manual=manual, pool=pool,
+    blind=_blind)
 pages_assistant.render_toggle_button()
 
 # ----------------------------------------------------------------------- route

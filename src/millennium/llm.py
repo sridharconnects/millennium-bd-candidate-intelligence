@@ -123,7 +123,8 @@ class LLMClient:
             if not key:
                 raise LLMUnavailable(
                     "ANTHROPIC_API_KEY is not set. Either export it to run live parsing, "
-                    "or keep DEMO_MODE=1 to replay the committed cache.")
+                    "or keep DEMO_MODE=1 to replay the committed cache. On Streamlit "
+                    "Cloud, add ANTHROPIC_API_KEY under Manage app -> Settings -> Secrets.")
             self._client = anthropic.Anthropic(api_key=key, timeout=self.cfg.timeout_s)
         else:
             from openai import OpenAI

@@ -344,7 +344,13 @@ def _render_review_context(p, fields, store, index):
 def render_review(profiles, synth, pool, index, index_manifest, manifest, store,
                   client, bench, evals):
     queue = [p for p in profiles if p.quality.needs_human_review]
-    _render_review_summary(queue, profiles, store)
+    st.markdown(
+        '<div class="mm-review-hero compact">'
+        '<div><div class="mm-page-title">Review workbench</div>'
+        '<div class="mm-page-sub">Queue, source evidence, correction, approve. '
+        'Only the fields that need a human eye stay in the main workspace.</div></div>'
+        f'<div class="mm-review-flow"><span>{len(queue)} waiting</span></div></div>',
+        unsafe_allow_html=True)
 
     if not queue:
         C.empty_state("Nothing needs review",
@@ -360,15 +366,14 @@ def render_review(profiles, synth, pool, index, index_manifest, manifest, store,
     p = byid[st.session_state["review_selected"]]
     fields = _review_fields(p)
 
-    left, center, right = st.columns([0.22, 0.52, 0.26], gap="medium")
+    left, center = st.columns([0.24, 0.76], gap="medium")
     with left:
         with st.container(border=True, key="review_queue_panel"):
             _render_review_queue(queue)
     with center:
         with st.container(border=True, key="review_case_panel"):
             _render_review_case(p, fields, store, client)
-    with right:
-        with st.container(border=True, key="review_context_panel"):
+        with st.expander("Audit, quality, and erasure controls", expanded=False):
             _render_review_context(p, fields, store, index)
 
 

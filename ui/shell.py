@@ -6,10 +6,13 @@ programmatic `page = ...` write depend on that split). Visual grouping is CSS.
 from __future__ import annotations
 
 import html
+import json
 
+import pandas as pd
 import streamlit as st
 
 from millennium.config import SETTINGS
+from millennium.export import flat_row
 
 # Desk first. Pipeline next. Intelligence last.
 NAV_PAGES = [
@@ -98,7 +101,7 @@ def render_sidebar(*, shortlist_n: int, review_n: int, synth_n: int,
 
 def render_topbar(*, n_pool: int, n_manual: int, review_n: int, abst: int,
                   cost: float, hist: list, on_back, review_profiles, abst_profiles,
-                  profiles, manual, blind: bool) -> None:
+                  profiles, manual, pool, blind: bool) -> None:
     """Sticky product bar: history, page identity, compact status pills."""
     page = st.session_state.page
     title, subtitle = PAGE_META.get(page, (page, ""))
@@ -126,11 +129,11 @@ def render_topbar(*, n_pool: int, n_manual: int, review_n: int, abst: int,
                 unsafe_allow_html=True)
         with stat_c:
             _status_pills(n_pool, n_manual, review_n, abst, cost, review_profiles,
-                          abst_profiles, profiles, manual, blind)
+                          abst_profiles, profiles, manual, pool, blind)
 
 
 def _status_pills(n_pool, n_manual, review_n, abst, cost, review_profiles,
-                  abst_profiles, profiles, manual, blind) -> None:
+                  abst_profiles, profiles, manual, pool, blind) -> None:
     """Tiny popovers — pool facts without a second dashboard row."""
 
     def _go(label: str, target: str, key: str) -> None:
@@ -170,3 +173,34 @@ def _status_pills(n_pool, n_manual, review_n, abst, cost, review_profiles,
             st.markdown(f"Parse cost **${cost:.3f}** (≈ ${cost / n:.3f} / resume). "
                         "Cached on disk — this demo replays for $0.00.")
             _go("Open System", "System", "kpi_go_system")
+        with st.popover("Export all", icon=":material/download:"):
+            include_pii = not blind
+            export_pool = list(pool or profiles)
+            exclude_fields = {"raw_text"} if include_pii else {"raw_text", "sensitive"}
+            payload = {
+                "count": len(export_pool),
+                "blind_mode": blind,
+                "candidates": [
+                    json.loads(p.model_dump_json(exclude=exclude_fields))
+                    for p in export_pool
+                ],
+            }
+            csv_df = pd.DataFrame([flat_row(p, include_pii=include_pii)
+                                   for p in export_pool])
+            st.caption("Exports the current working pool from any page.")
+            st.download_button(
+                "All candidates JSON",
+                json.dumps(payload, indent=1, ensure_ascii=False),
+                "all_candidates.json",
+                "application/json",
+                icon=":material/data_object:",
+                key="global_export_json",
+                width="stretch")
+            st.download_button(
+                "All candidates CSV",
+                csv_df.to_csv(index=False),
+                "all_candidates.csv",
+                "text/csv",
+                icon=":material/table:",
+                key="global_export_csv",
+                width="stretch")

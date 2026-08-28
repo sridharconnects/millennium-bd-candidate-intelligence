@@ -22,6 +22,24 @@ except ImportError:  # dotenv is a convenience, not a requirement
     pass
 
 
+def _hydrate_streamlit_secrets() -> None:
+    """Expose Streamlit Cloud secrets through os.environ for non-Streamlit modules."""
+    try:
+        import streamlit as st
+        secrets = st.secrets
+        for key in (
+            "ANTHROPIC_API_KEY", "OPENAI_API_KEY", "DEMO_MODE", "LLM_PROVIDER",
+            "LLM_MODEL", "ENABLE_LLM_QUERY", "ENABLE_SEMANTIC",
+        ):
+            if key in secrets and os.getenv(key) is None:
+                os.environ[key] = str(secrets[key])
+    except Exception:
+        return
+
+
+_hydrate_streamlit_secrets()
+
+
 def _flag(name: str, default: bool) -> bool:
     raw = os.getenv(name)
     if raw is None:

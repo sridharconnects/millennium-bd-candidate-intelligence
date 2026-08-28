@@ -354,7 +354,9 @@ def _get_client():
         raise AssistantUnavailable(
             "ANTHROPIC_API_KEY is not set. The assistant makes live, unpredictable "
             "replies and cannot replay from the deterministic demo cache the way the "
-            "rest of the app can -- export a key to use it.")
+            "rest of the app can. On Streamlit Cloud, add ANTHROPIC_API_KEY in "
+            "Manage app -> Settings -> Secrets. To let every LLM feature call the "
+            "API live, also set DEMO_MODE=\"0\".")
     import anthropic
     return anthropic.Anthropic(api_key=key, timeout=30)
 

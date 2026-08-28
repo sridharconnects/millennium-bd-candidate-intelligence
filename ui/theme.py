@@ -1609,13 +1609,13 @@ CSS = f"""
   }}
   .mm-profile-metrics {{
       display:grid;
-      grid-template-columns:repeat(4, minmax(0, 1fr));
-      gap:9px;
-      margin-top:18px;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:7px;
+      margin-top:12px;
   }}
   .mm-profile-metrics div {{
-      min-height:76px;
-      padding:13px 12px;
+      min-height:58px;
+      padding:10px 11px;
       border-radius:8px;
       border:1px solid {LINE};
       background:rgba(255,255,255,.82);
@@ -1623,7 +1623,7 @@ CSS = f"""
   }}
   .mm-profile-metrics b {{
       display:block;
-      font-size:1.45rem;
+      font-size:1.1rem;
       line-height:1;
       font-weight:750;
       color:{INK};
@@ -1631,7 +1631,7 @@ CSS = f"""
   }}
   .mm-profile-metrics span {{
       display:block;
-      margin-top:9px;
+      margin-top:7px;
       color:{MUTED};
       font-size:0.64rem;
       font-weight:750;
@@ -1657,7 +1657,7 @@ CSS = f"""
   }}
   .st-key-candidate_command .stButton>button,
   .st-key-candidate_command [data-testid="stDownloadButton"] button {{
-      min-height:36px;
+      min-height:34px;
       font-size:0.78rem;
   }}
   .st-key-candidate_command .st-key-cand_prev button,

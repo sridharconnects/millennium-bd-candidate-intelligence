@@ -291,71 +291,60 @@ def render_intake(profiles, synth, pool, index, index_manifest, manifest, store,
     C.page_kicker("Intake",
                   "Parse a resume through the live pipeline, or import structured CSV/JSON.")
 
-    C.section_break("Resume upload — PDF / Word", 0)
-    st.caption("Type is verified by magic bytes, not by extension; filenames are "
-              "randomised before anything is written; and the injection scanner "
-              "runs before any text reaches the model.")
-    C.llm_callout(
-        "Resume parsing",
-        "Uses the LLM to extract structured candidate fields from uploaded resumes "
-        "after file safety checks and prompt-injection scanning.",
-        stage="ingest")
+    upload_col, side_col = st.columns([0.62, 0.38], gap="medium",
+                                      vertical_alignment="top")
+    with upload_col:
+        with st.container(border=True, key="intake_upload_panel"):
+            st.markdown('<div class="mm-panel-heading"><span>Upload resumes</span>'
+                        '<b>PDF / Word</b></div>', unsafe_allow_html=True)
+            st.caption("Files are checked, renamed, scanned for prompt injection, then "
+                       "parsed into structured candidate profiles.")
+            C.llm_callout(
+                "Resume parsing",
+                "Uses the LLM to extract structured candidate fields from uploaded "
+                "resumes after file safety checks and prompt-injection scanning.",
+                stage="ingest")
 
-    if SETTINGS.flags.demo_mode:
-        st.markdown(
-            '<div class="mm-banner"><b>DEMO_MODE is on.</b> Parsing replays committed '
-            'LLM responses from <code>data/llm_cache/</code>, so a document that has '
-            'not been parsed before will report an LLM cache miss and degrade to '
-            'abstained fields — deliberately, rather than crashing. To parse a new '
-            'document live, set <code>DEMO_MODE=0</code> with an API key configured.'
-            '</div>', unsafe_allow_html=True)
+            if SETTINGS.flags.demo_mode:
+                st.info("DEMO_MODE is on. Cached resumes replay without cost; new "
+                        "resumes need DEMO_MODE=0 and ANTHROPIC_API_KEY in Streamlit "
+                        "secrets to parse live.")
 
-    orch = st.radio(
-        "Orchestration", [ORCH_PYTHON, ORCH_LANGCHAIN], horizontal=True,
-        help=f"{ORCH_PYTHON}: the deterministic pipeline every test, the notebook and "
-             f"the deployed app run on — same input, byte-identical output, replayable "
-             f"offline for free. {ORCH_LANGCHAIN}: a real LangChain `AgentExecutor` "
-             f"decides which pipeline stage to call next and whether the conditional "
-             f"conflict-adjudication step is worth invoking. It never sees resume "
-             f"content directly — every tool takes an opaque document handle and "
-             f"returns a short structured summary, never raw text. Needs a live API "
-             f"key; its own routing decisions cannot replay from the demo cache.")
-    is_langchain = orch == ORCH_LANGCHAIN
-    if is_langchain:
-        st.markdown(
-            '<div class="mm-banner">🔗 <b>LangChain orchestration mode.</b> A real '
-            'tool-calling agent will decide the call order live — watch the trace '
-            'below to see exactly which tool it called, in what order, and why. '
-            'Limited to one document per run and needs a live '
-            '<code>ANTHROPIC_API_KEY</code> (not replayable from the demo cache, '
-            'since the agent\'s own decisions are themselves live model calls).'
-            '</div>', unsafe_allow_html=True)
+            orch = st.radio(
+                "Orchestration", [ORCH_PYTHON, ORCH_LANGCHAIN], horizontal=True,
+                help=f"{ORCH_PYTHON}: reliable production path. {ORCH_LANGCHAIN}: "
+                     "optional live tool-calling demonstration; requires API key.")
+            is_langchain = orch == ORCH_LANGCHAIN
+            if is_langchain:
+                st.markdown(
+                    "**LangChain orchestration mode** uses the same resume parser "
+                    "through a live tool-calling agent. Upload one file and run it "
+                    "only after the deployment secret is set.")
+            up = st.file_uploader("Drop resumes here", type=["pdf", "docx"],
+                                  accept_multiple_files=not is_langchain)
+            if is_langchain and up and not isinstance(up, list):
+                up = [up]
 
-    up = st.file_uploader("Resumes", type=["pdf", "docx"],
-                          accept_multiple_files=not is_langchain,
-                          label_visibility="collapsed")
-    if is_langchain and up and not isinstance(up, list):
-        up = [up]
+            demo_col, run_col = st.columns([0.5, 0.5])
+            use_fixture = (not is_langchain) and demo_col.checkbox(
+                "Include injection test resume",
+                help="Adds the test file used to demonstrate prompt-injection scanning.")
+            key_missing = is_langchain and not os.getenv("ANTHROPIC_API_KEY")
+            go = run_col.button("Run parsing pipeline", type="primary", width="stretch",
+                                disabled=not (up or use_fixture) or key_missing)
+            if key_missing:
+                st.caption("ANTHROPIC_API_KEY is not set. Add it in Streamlit Cloud "
+                           "Secrets to run the live LangChain mode.")
 
-    demo_col, run_col = st.columns([0.5, 0.5])
-    use_fixture = (not is_langchain) and demo_col.checkbox(
-        "Include the poisoned test resume",
-        help="tests/fixtures/injected_resume.pdf carries five prompt-injection attack "
-             "families, two of which are invisible to a human reader. Watch them get "
-             "caught, and watch the legitimate content survive.")
-    key_missing = is_langchain and not os.getenv("ANTHROPIC_API_KEY")
-    go = run_col.button("Run pipeline", type="primary", width="stretch",
-                        disabled=not (up or use_fixture) or key_missing)
-    if key_missing:
-        st.caption("⚠ ANTHROPIC_API_KEY is not set — the LangChain agent needs a live "
-                  "key even when DEMO_MODE is on for the rest of the app.")
-
-    C.section_break("Bulk import — CSV / JSON", 1)
-    _render_bulk_import()
+    with side_col:
+        with st.container(border=True, key="intake_import_panel"):
+            st.markdown('<div class="mm-panel-heading"><span>Bulk import</span>'
+                        '<b>CSV / JSON</b></div>', unsafe_allow_html=True)
+            _render_bulk_import()
+        with st.expander("How resume parsing works", expanded=False):
+            _explain_pipeline()
 
     if not go:
-        C.section_break("How resume parsing works", 3)
-        _explain_pipeline()
         return
 
     paths: list[tuple[str, Path]] = []
