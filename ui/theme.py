@@ -392,19 +392,28 @@ CSS = f"""
   .mm-card:hover {{
       border-color:{LINE_STRONG}; box-shadow:var(--shadow-md); transform:translateY(-1px);
   }}
-  .mm-cand {{ display:flex; gap:14px; align-items:flex-start; }}
+  .mm-cand {{
+      display:flex; gap:14px; align-items:flex-start;
+      border-color:var(--cand-border, {LINE}) !important;
+      border-left:4px solid var(--cand-accent, {ACCENT});
+      background:
+        linear-gradient(135deg, var(--cand-soft, #EEF2FF), rgba(255,255,255,.94) 42%),
+        {SURFACE};
+  }}
   .mm-cand-avatar {{
       flex:0 0 40px; width:40px; height:40px; border-radius:11px;
-      background:linear-gradient(145deg, {ACCENT_SOFT}, #E0E7FF);
-      border:1px solid #C7D2FE; color:{ACCENT_TEXT};
+      background:linear-gradient(145deg, var(--cand-accent, {ACCENT}), #111827);
+      border:1px solid var(--cand-border, #C7D2FE); color:#fff;
       font-weight:700; font-size:0.72rem; letter-spacing:.04em;
       display:flex; align-items:center; justify-content:center;
+      box-shadow:0 8px 18px color-mix(in srgb, var(--cand-accent, {ACCENT}) 22%, transparent);
   }}
   .mm-cand-body {{ flex:1 1 auto; min-width:0; }}
   .mm-cand-score {{
       flex:0 0 auto; font-variant-numeric:tabular-nums;
-      background:{ACCENT_SOFT}; border:1px solid #C7D2FE;
-      color:{ACCENT_TEXT}; border-radius:999px; padding:3px 10px;
+      background:var(--cand-soft, {ACCENT_SOFT});
+      border:1px solid var(--cand-border, #C7D2FE);
+      color:var(--cand-accent, {ACCENT_TEXT}); border-radius:999px; padding:3px 10px;
       font-size:0.72rem; font-weight:700;
   }}
   .mm-row {{ display:flex; gap:8px; align-items:baseline; flex-wrap:wrap; }}
@@ -2035,27 +2044,150 @@ CSS = f"""
       background:{ELEVATED}; border:1px solid {LINE}; border-radius:6px;
       padding:2px 6px; margin-left:6px;
   }}
-  .st-key-open_match_studio button {{
-      background:{ACCENT_SOFT}; color:{ACCENT_TEXT}; border:1px solid #C7D2FE; font-weight:650;
+  .st-key-search_action_match,
+  .st-key-search_action_import,
+  .st-key-search_action_shortlist {{
+      min-height:166px;
+      border-radius:8px !important;
+      border:1px solid var(--action-border) !important;
+      background:var(--action-bg) !important;
+      box-shadow:var(--shadow-md) !important;
+      transition:transform .18s cubic-bezier(.22,1,.36,1), box-shadow .18s ease,
+                 border-color .18s ease;
+      animation:mm-rise .34s cubic-bezier(.22,1,.36,1) both;
   }}
-  .st-key-open_match_studio button:hover {{
-      background:#E0E7FF; border-color:{ACCENT};
+  .st-key-search_action_match:hover,
+  .st-key-search_action_import:hover,
+  .st-key-search_action_shortlist:hover {{
+      transform:translateY(-2px);
+      box-shadow:var(--shadow-lg) !important;
   }}
-  .st-key-open_import_studio button {{
-      background:{SURFACE}; color:{INK}; border:1px solid {LINE}; font-weight:650;
+  .st-key-search_action_match {{
+      --action-accent:{ACCENT};
+      --action-border:#C7D2FE;
+      --action-bg:linear-gradient(135deg, #EEF2FF 0%, rgba(255,255,255,.96) 72%);
   }}
-  .st-key-jump_shortlist_from_search button {{
-      background:{WARNING_SOFT}; color:#92400E; border:1px solid #FDE68A; font-weight:650;
+  .st-key-search_action_import {{
+      --action-accent:#0891B2;
+      --action-border:#A5F3FC;
+      --action-bg:linear-gradient(135deg, #ECFEFF 0%, rgba(255,255,255,.96) 72%);
+  }}
+  .st-key-search_action_shortlist {{
+      --action-accent:{WARNING};
+      --action-border:#FDE68A;
+      --action-bg:linear-gradient(135deg, #FFFBEB 0%, rgba(255,255,255,.96) 72%);
+  }}
+  .mm-action-card-head {{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      min-height:72px;
+      margin-bottom:8px;
+  }}
+  .mm-action-icon {{
+      font-family:'Material Symbols Rounded';
+      font-weight:400;
+      font-style:normal;
+      font-size:1.25rem;
+      line-height:1;
+      width:38px;
+      height:38px;
+      flex:0 0 38px;
+      border-radius:8px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      background:linear-gradient(145deg, var(--action-accent, {ACCENT}), #111827);
+      box-shadow:0 10px 24px rgba(15,23,42,.16);
+  }}
+  .mm-action-card-head b {{
+      display:block;
+      color:{INK};
+      font-size:1.0rem;
+      line-height:1.2;
+      font-weight:790;
+      margin-top:1px;
+  }}
+  .mm-action-card-head small {{
+      display:block;
+      margin-top:5px;
+      color:{MUTED};
+      font-size:0.82rem;
+      line-height:1.35;
+  }}
+  .mm-action-card-state {{
+      display:inline-flex;
+      margin:0 0 10px;
+      padding:4px 9px;
+      border-radius:999px;
+      border:1px solid color-mix(in srgb, var(--action-accent, {ACCENT}) 24%, #FFFFFF);
+      background:rgba(255,255,255,.72);
+      color:var(--action-accent, {ACCENT});
+      font-size:0.68rem;
+      font-weight:780;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+  }}
+  .st-key-search_action_match .stButton>button,
+  .st-key-search_action_import .stButton>button,
+  .st-key-search_action_shortlist .stButton>button {{
+      min-height:40px;
+      font-size:0.88rem;
+      font-weight:750;
+      border-color:var(--action-accent, {ACCENT}) !important;
+      color:var(--action-accent, {ACCENT}) !important;
+      background:#FFFFFF !important;
+  }}
+  .st-key-search_action_match .stButton>button:hover,
+  .st-key-search_action_import .stButton>button:hover,
+  .st-key-search_action_shortlist .stButton>button:hover {{
+      background:var(--action-accent, {ACCENT}) !important;
+      color:#FFFFFF !important;
   }}
   .st-key-resume_match {{
-      background:linear-gradient(180deg, {ACCENT_SOFT} 0%, {SURFACE} 48px) !important;
+      background:
+        linear-gradient(135deg, rgba(238,242,255,.92), rgba(255,255,255,.95) 54%),
+        linear-gradient(225deg, rgba(14,165,233,.10), transparent 45%) !important;
       border:1px solid #C7D2FE !important; border-radius:8px !important;
-      animation:mm-rise .32s cubic-bezier(.22,1,.36,1) both;
+      animation:mm-panel-open .34s cubic-bezier(.22,1,.36,1) both;
+      box-shadow:var(--shadow-lg) !important;
   }}
   .st-key-pool_import {{
-      border:1px dashed {LINE_STRONG} !important; border-radius:8px !important;
-      background:{ELEVATED} !important;
-      animation:mm-rise .32s cubic-bezier(.22,1,.36,1) both;
+      border:1px solid #A5F3FC !important; border-radius:8px !important;
+      background:
+        linear-gradient(135deg, rgba(236,254,255,.94), rgba(255,255,255,.95) 54%),
+        linear-gradient(225deg, rgba(22,163,74,.10), transparent 45%) !important;
+      animation:mm-panel-open .34s cubic-bezier(.22,1,.36,1) both;
+      box-shadow:var(--shadow-lg) !important;
+  }}
+  .mm-studio-title {{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      margin-bottom:8px;
+  }}
+  .mm-studio-title.match {{ --action-accent:{ACCENT}; }}
+  .mm-studio-title.import {{ --action-accent:#0891B2; }}
+  .mm-studio-title b {{
+      display:block;
+      color:{INK};
+      font-size:1.08rem;
+      line-height:1.2;
+      font-weight:790;
+  }}
+  .mm-studio-title small {{
+      display:block;
+      margin-top:5px;
+      color:{MUTED};
+      font-size:0.86rem;
+      line-height:1.4;
+  }}
+  .st-key-close_match_studio button,
+  .st-key-close_import_studio button {{
+      min-height:36px;
+      border-color:{LINE} !important;
+      background:rgba(255,255,255,.82) !important;
   }}
   .st-key-pool_glance {{
       overflow:auto; min-height:160px;
@@ -2183,6 +2315,10 @@ CSS = f"""
       from {{ opacity:0; transform:translateY(10px); }}
       to {{ opacity:1; transform:translateY(0); }}
   }}
+  @keyframes mm-panel-open {{
+      from {{ opacity:0; transform:translateY(-8px) scale(.992); }}
+      to {{ opacity:1; transform:translateY(0) scale(1); }}
+  }}
   @keyframes mm-fade {{
       from {{ opacity:0; }}
       to {{ opacity:1; }}
@@ -2190,6 +2326,8 @@ CSS = f"""
   @media (prefers-reduced-motion: reduce) {{
       .st-key-search_hero, .st-key-results_panel, .st-key-pool_glance,
       .st-key-resume_match, .st-key-pool_import,
+      .st-key-search_action_match, .st-key-search_action_import,
+      .st-key-search_action_shortlist,
       .st-key-results_panel [data-testid="stDataFrame"],
       .mm-filter-chip-row {{
           animation:none !important;

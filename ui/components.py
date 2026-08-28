@@ -206,8 +206,18 @@ def candidate_card(p: CandidateProfile, blind: bool = False, score: float | None
     sc = (f'<span class="mm-cand-score">{score:.3f}</span>' if score is not None else "")
     name = p.display_name(blind)
     initials = "".join(part[0] for part in name.replace("(", " ").split() if part[:1].isalpha())[:2].upper() or "·"
+    palette = [
+        ("#4F46E5", "#EEF2FF", "#C7D2FE"),
+        ("#0891B2", "#ECFEFF", "#A5F3FC"),
+        ("#16A34A", "#F0FDF4", "#BBF7D0"),
+        ("#D97706", "#FFFBEB", "#FDE68A"),
+        ("#DB2777", "#FDF2F8", "#FBCFE8"),
+        ("#7C3AED", "#F5F3FF", "#DDD6FE"),
+    ]
+    accent, soft, border = palette[sum(ord(c) for c in p.candidate_id) % len(palette)]
+    style = f'--cand-accent:{accent};--cand-soft:{soft};--cand-border:{border};'
     return (
-        f'<div class="mm-card mm-cand">'
+        f'<div class="mm-card mm-cand" style="{style}">'
         f'<div class="mm-cand-avatar">{html.escape(initials)}</div>'
         f'<div class="mm-cand-body">'
         f'<div class="mm-row" style="justify-content:space-between;align-items:center">'

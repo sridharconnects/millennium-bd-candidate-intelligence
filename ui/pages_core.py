@@ -93,6 +93,10 @@ def _toggle_studio(which: str) -> None:
     st.session_state[key] = not currently
 
 
+def _close_studio(which: str) -> None:
+    st.session_state[f"{which}_studio_open"] = False
+
+
 def _remove_from_pool(cids: list[str]) -> int:
     """Drop profiles from this session's working pool.
 
@@ -464,6 +468,11 @@ def render_search(profiles, synth, pool, index, index_manifest, manifest, store,
             meta=f"{len(pool)} in pool",
             key="cc_command",
         )
+        query = st.session_state["query"] if "query" in st.session_state else ""
+        mode = "hybrid"
+        show_n = st.session_state["f_show_n"] if "f_show_n" in st.session_state else 50
+        n_sl = len(st.session_state.shortlist)
+        _render_search_action_cards(n_sl)
         query_llm_state = "enabled" if SETTINGS.flags.enable_llm_query_parse else "disabled"
         C.llm_callout(
             "Search intent understanding",
@@ -471,30 +480,6 @@ def render_search(profiles, synth, pool, index, index_manifest, manifest, store,
             f"preferences, and exclusions. Retrieval, filtering, and ranking stay "
             f"local; LLM query parsing is currently {query_llm_state}.",
             stage="query")
-        query = st.session_state["query"] if "query" in st.session_state else ""
-        mode = "hybrid"
-        show_n = st.session_state["f_show_n"] if "f_show_n" in st.session_state else 50
-        n_sl = len(st.session_state.shortlist)
-        with st.container(horizontal=True, key="search_tools", gap="small",
-                          vertical_alignment="center"):
-            st.button("Match to JD", icon=":material/person_search:",
-                      key="open_match_studio",
-                      type="primary" if _flag_on("match_studio_open") else "secondary",
-                      on_click=_toggle_studio, args=("match",),
-                      help="Score resumes against a job description and shortlist "
-                           "the top matches.")
-            st.button("Import", icon=":material/upload_file:",
-                      key="open_import_studio",
-                      type="primary" if _flag_on("import_studio_open") else "secondary",
-                      on_click=_toggle_studio, args=("import",),
-                      help="Add PDF, Word, JSON, or CSV profiles to the pool.")
-            if st.button(
-                    f"Shortlist ({n_sl})" if n_sl else "Shortlist",
-                    icon=":material/star:", key="jump_shortlist_from_search",
-                    disabled=not n_sl,
-                    help="Open the Shortlist tab."):
-                st.session_state.page = "Shortlist"
-                st.rerun()
 
         # Filter widgets live in the results panel; read session keys here so Match
         # studio and retrieval see the same active filters.
@@ -778,6 +763,55 @@ def _render_pool_glance(results, shown: int, latency: float, pool) -> None:
             C.metric_card(len(pool), "pool")
         _mini_charts(results)
         _right_rail_focus(results[:shown])
+
+
+def _render_search_action_cards(n_sl: int) -> None:
+    cards = st.columns([0.34, 0.33, 0.33], gap="medium")
+    match_active = _flag_on("match_studio_open")
+    import_active = _flag_on("import_studio_open")
+
+    with cards[0], st.container(border=True, key="search_action_match"):
+        st.markdown(
+            '<div class="mm-action-card-head">'
+            '<span class="mm-action-icon">person_search</span>'
+            '<div><b>Match to JD</b><small>Paste a mandate, score candidates, shortlist top fits.</small></div>'
+            '</div>'
+            f'<div class="mm-action-card-state">{"Open now" if match_active else "Recommended next step"}</div>',
+            unsafe_allow_html=True)
+        st.button("Match to JD", icon=":material/person_search:",
+                  key="open_match_studio",
+                  type="primary" if match_active else "secondary",
+                  on_click=_toggle_studio, args=("match",), width="stretch",
+                  help="Score resumes against a job description and shortlist the top matches.")
+
+    with cards[1], st.container(border=True, key="search_action_import"):
+        st.markdown(
+            '<div class="mm-action-card-head">'
+            '<span class="mm-action-icon">upload_file</span>'
+            '<div><b>Import profiles</b><small>Add PDFs, Word resumes, JSON, or CSV into this pool.</small></div>'
+            '</div>'
+            f'<div class="mm-action-card-state">{"Open now" if import_active else "Fast pool expansion"}</div>',
+            unsafe_allow_html=True)
+        st.button("Import", icon=":material/upload_file:",
+                  key="open_import_studio",
+                  type="primary" if import_active else "secondary",
+                  on_click=_toggle_studio, args=("import",), width="stretch",
+                  help="Add PDF, Word, JSON, or CSV profiles to the pool.")
+
+    with cards[2], st.container(border=True, key="search_action_shortlist"):
+        st.markdown(
+            '<div class="mm-action-card-head">'
+            '<span class="mm-action-icon">star</span>'
+            '<div><b>Shortlist</b><small>Review the slate, add notes, export profiles, draft outreach.</small></div>'
+            '</div>'
+            f'<div class="mm-action-card-state">{n_sl} selected candidate{"s" if n_sl != 1 else ""}</div>',
+            unsafe_allow_html=True)
+        if st.button(f"Open Shortlist ({n_sl})" if n_sl else "Shortlist",
+                     icon=":material/star:", key="jump_shortlist_from_search",
+                     disabled=not n_sl, width="stretch",
+                     help="Open the Shortlist tab."):
+            st.session_state.page = "Shortlist"
+            st.rerun()
 
 
 def _right_rail_focus(results) -> None:
@@ -2167,12 +2201,19 @@ def _resume_match_studio(results, pool, index, client, query: str) -> None:
         st.session_state.shortlist = {}
 
     with st.container(border=True, key="resume_match"):
-        st.markdown("##### :material/person_search: Resume matching")
-        st.caption(
-            f"Ranks the **{len(results)}** candidate(s) currently in view (search + "
-            f"filters). Must-haves gate before scoring; gated-out people stay visible. "
-            f"**Match & shortlist** writes the top N to the Shortlist tab."
-        )
+        head, close = st.columns([0.88, 0.12], vertical_alignment="top")
+        with head:
+            st.markdown(
+                '<div class="mm-studio-title match">'
+                '<span class="mm-action-icon">person_search</span>'
+                '<div><b>Match to JD workspace</b>'
+                f'<small>Scores {len(results)} visible candidate(s); gated-out people stay explainable.</small></div>'
+                '</div>',
+                unsafe_allow_html=True)
+        if close.button("Close", icon=":material/close:", key="close_match_studio",
+                        width="stretch", help="Close Match to JD"):
+            _close_studio("match")
+            st.rerun()
         st.pills("JD templates", list(JD_TEMPLATES), key="jd_templates",
                  on_change=_apply_jd_template,
                  help="Load a ready-made mandate, then edit it.")
@@ -2311,13 +2352,19 @@ def _pool_import_studio(client) -> None:
     from .pages_intake import _merge_into_pool, _parse_import_file, _stage
 
     with st.container(border=True, key="pool_import"):
-        st.markdown("##### :material/upload_file: Import profiles")
-        st.caption(
-            "PDF and Word run through the extraction pipeline. JSON and CSV are mapped "
-            "as **human / unverified** (they never claim to be span-verified). Added "
-            "records join the working pool on this rerun — Search, Requisition, and "
-            "Analytics pick them up immediately."
-        )
+        head, close = st.columns([0.88, 0.12], vertical_alignment="top")
+        with head:
+            st.markdown(
+                '<div class="mm-studio-title import">'
+                '<span class="mm-action-icon">upload_file</span>'
+                '<div><b>Import profiles workspace</b>'
+                '<small>PDF and Word parse through the resume pipeline; JSON and CSV join as human-unverified records.</small></div>'
+                '</div>',
+                unsafe_allow_html=True)
+        if close.button("Close", icon=":material/close:", key="close_import_studio",
+                        width="stretch", help="Close Import"):
+            _close_studio("import")
+            st.rerun()
         if SETTINGS.flags.demo_mode:
             st.caption("DEMO_MODE is on: a resume that is not in the LLM cache will "
                        "degrade to abstained fields rather than call the API.")
