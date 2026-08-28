@@ -1637,7 +1637,7 @@ SAMPLE_JD = """Investment Analyst — Healthcare Long/Short (New York)
 Millennium is hiring a junior analyst for a fundamental healthcare long/short pod.
 
 Requirements:
-- 3-9 years of experience in healthcare equity research or healthcare investment banking
+- 3-10 years of experience in healthcare equity research or healthcare investment banking
 - Demonstrated financial modelling ability (three-statement, DCF)
 - Must be based in, or willing to relocate to, the United States
 - Bachelor's degree required
