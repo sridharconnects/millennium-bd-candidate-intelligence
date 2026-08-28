@@ -1195,39 +1195,29 @@ def _render_candidate_command_center(p, ids: list[str], byid: dict, i: int,
     review = p.quality.needs_human_review
     status = "Human review" if review else "Ready for recruiter review"
     status_tone = "warn" if review else "ok"
-    source = p.provenance.source_file if p.provenance else "source document"
-    y = f"{p.years_experience.value:.1f}" if p.years_experience.is_known else "—"
     listed = p.candidate_id in st.session_state.shortlist
 
     with st.container(border=True, key="candidate_command"):
-        profile_col, console_col = st.columns([0.25, 0.75], gap="large",
+        profile_col, console_col = st.columns([0.38, 0.62], gap="medium",
                                               vertical_alignment="top")
         with profile_col:
             st.markdown(
                 f'<div class="mm-profile-command-head">'
                 f'<div class="mm-cand-avatar mm-hud-avatar">{html.escape(initials)}</div>'
                 f'<div class="mm-profile-command-body">'
-                f'<div class="mm-profile-status {status_tone}">{html.escape(status)}</div>'
+                f'<div class="mm-profile-name-line">'
                 f'<div class="mm-hud-name">{html.escape(name)}</div>'
+                f'<div class="mm-profile-status {status_tone}">{html.escape(status)}</div>'
+                f'</div>'
                 f'<div class="mm-profile-role">{html.escape(current or p.headline.display(""))}</div>'
-                f'<div class="mm-profile-source">Source · {html.escape(source)}</div>'
-                f'<div class="mm-profile-labels">{C.labels_row(p, 10)}</div>'
                 f'</div></div>',
                 unsafe_allow_html=True)
-            metric_html = (
-                '<div class="mm-profile-metrics">'
-                f'<div><b>{html.escape(y)}</b><span>years exp</span></div>'
-                f'<div><b>{p.quality.completeness:.0%}</b><span>complete</span></div>'
-                f'<div><b>{p.quality.evidence_coverage:.0%}</b><span>evidenced</span></div>'
-                f'<div><b>{p.quality.abstention_count}</b><span>abstained</span></div>'
-                '</div>')
-            st.markdown(metric_html, unsafe_allow_html=True)
         with console_col:
-            st.markdown('<div class="mm-console-title">Profile controls</div>',
-                        unsafe_allow_html=True)
-            nav_col, action_col, export_col = st.columns([0.40, 0.25, 0.35],
-                                                         gap="medium",
-                                                         vertical_alignment="top")
+            st.markdown(
+                f'<div class="mm-console-title">Profile controls · {i + 1} of {len(ids)}</div>',
+                unsafe_allow_html=True)
+            nav_col, short_col, export_col = st.columns(
+                [0.62, 0.20, 0.18], gap="small", vertical_alignment="bottom")
             with nav_col:
                 n1, n2, n3 = st.columns([0.16, 0.68, 0.16], vertical_alignment="bottom")
                 with n1:
@@ -1247,12 +1237,7 @@ def _render_candidate_command_center(p, ids: list[str], byid: dict, i: int,
                               width="stretch", disabled=i >= len(ids) - 1,
                               on_click=_step_candidate, args=(1,),
                               help="Open the next candidate")
-                st.markdown(
-                    f'<div class="mm-console-note">{i + 1} of {len(ids)} in the working pool</div>',
-                    unsafe_allow_html=True)
-            with action_col:
-                st.markdown('<div class="mm-console-title">Actions</div>',
-                            unsafe_allow_html=True)
+            with short_col:
                 if listed:
                     if st.button("Remove", icon=":material/star:", key="cand_shortlist",
                                  width="stretch",
@@ -1271,17 +1256,21 @@ def _render_candidate_command_center(p, ids: list[str], byid: dict, i: int,
                             "note": "", "tags": "", "source": "human",
                             "basis": "Manually shortlisted from the candidate profile"}
                         st.rerun()
-                if st.button("Delete", icon=":material/delete:", key="cand_remove",
-                             width="stretch", help="Remove this profile from this session"):
-                    _remove_from_pool([st.session_state.selected])
-                    st.session_state.page = "Search"
-                    st.rerun()
             with export_col:
-                _profile_downloads_compact(p, prefix=f"cand_{p.candidate_id[:8]}")
-            _render_candidate_ai_brief(client, p, pool)
+                with st.popover("Export", icon=":material/download:"):
+                    _profile_downloads_compact(p, prefix=f"cand_{p.candidate_id[:8]}")
+                    st.divider()
+                    if st.button("Delete profile", icon=":material/delete:", key="cand_remove",
+                                 width="stretch",
+                                 help="Remove this profile from this session"):
+                        _remove_from_pool([st.session_state.selected])
+                        st.session_state.page = "Search"
+                        st.rerun()
 
 
-def _render_profile_tab(p, pool) -> None:
+def _render_profile_tab(p, pool, client) -> None:
+    source = p.provenance.source_file if p.provenance else "source document"
+    y = f"{p.years_experience.value:.1f}" if p.years_experience.is_known else "—"
     detail_col, source_col = st.columns([0.58, 0.42], gap="large",
                                         vertical_alignment="top")
     with detail_col:
@@ -1290,6 +1279,19 @@ def _render_profile_tab(p, pool) -> None:
                 '<div class="mm-profile-panel-title">Agent-extracted profile</div>'
                 '<div class="mm-profile-panel-sub">Verified fields, work history, '
                 'skills, and education in the order a reviewer needs them.</div>',
+                unsafe_allow_html=True)
+            st.markdown(
+                '<div class="mm-profile-body-snapshot">'
+                f'<span>Source: {html.escape(source)}</span>'
+                f'<span>{html.escape(y)}y exp</span>'
+                f'<span>{p.quality.completeness:.0%} complete</span>'
+                f'<span>{p.quality.evidence_coverage:.0%} evidenced</span>'
+                f'<span>{p.quality.abstention_count} abstained</span>'
+                '</div>',
+                unsafe_allow_html=True)
+            st.markdown(
+                f'<div class="mm-profile-labels mm-profile-body-labels">'
+                f'{C.labels_row(p, 10)}</div>',
                 unsafe_allow_html=True)
             if p.summary.is_known:
                 st.markdown(
@@ -1383,6 +1385,8 @@ def _render_profile_tab(p, pool) -> None:
                                     unsafe_allow_html=True)
             else:
                 st.success("No validation flags on this record.")
+            with st.expander("Candidate brief · LLM", expanded=False):
+                _render_candidate_ai_brief(client, p, pool)
 
     C.section_break("Profile intelligence", 1)
     _profile_insights(p, pool)
@@ -1469,7 +1473,7 @@ def render_candidate(profiles, synth, pool, index, index_manifest, manifest, sto
                     "Lineage", "Source Text"])
 
     with tabs[0]:
-        _render_profile_tab(p, pool)
+        _render_profile_tab(p, pool, client)
 
     with tabs[1]:
         st.caption("Click any field to see the exact text it came from. This is the "

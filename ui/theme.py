@@ -1840,20 +1840,41 @@ CSS = f"""
         {SURFACE} !important;
       border-radius:8px !important;
       box-shadow:var(--shadow-md) !important;
-      margin-bottom:0.9rem !important;
+      margin-bottom:0.55rem !important;
   }}
   .st-key-candidate_command > div > div[data-testid="stVerticalBlock"] {{
-      gap:0.75rem;
+      gap:0.45rem;
   }}
   .mm-profile-command-head {{
       display:flex;
-      gap:16px;
+      gap:12px;
       align-items:flex-start;
       min-width:0;
   }}
   .mm-profile-command-body {{
       min-width:0;
       flex:1 1 auto;
+  }}
+  .mm-profile-name-line {{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      min-width:0;
+      flex-wrap:wrap;
+  }}
+  .st-key-candidate_command .mm-hud-avatar {{
+      width:42px;
+      height:42px;
+      flex-basis:42px;
+      font-size:0.78rem;
+      border-radius:8px;
+  }}
+  .st-key-candidate_command .mm-hud-name {{
+      font-size:1.12rem;
+      line-height:1.05;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
   }}
   .mm-profile-status {{
       display:inline-flex;
@@ -1865,7 +1886,7 @@ CSS = f"""
       font-weight:750;
       text-transform:uppercase;
       letter-spacing:.06em;
-      margin-bottom:9px;
+      margin-bottom:6px;
   }}
   .mm-profile-status::before {{
       content:"";
@@ -1892,7 +1913,10 @@ CSS = f"""
       color:{MUTED};
       font-size:0.9rem;
       margin-top:4px;
-      line-height:1.45;
+      line-height:1.25;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
   }}
   .mm-profile-source {{
       margin-top:5px;
@@ -1905,8 +1929,67 @@ CSS = f"""
       max-width:100%;
   }}
   .mm-profile-labels {{
-      margin-top:12px;
+      margin-top:8px;
       max-width:100%;
+      max-height:56px;
+      overflow:hidden;
+  }}
+  .mm-profile-body-labels {{
+      max-height:none;
+      overflow:visible;
+      margin:2px 0 12px;
+  }}
+  .mm-profile-body-snapshot {{
+      display:flex;
+      flex-wrap:wrap;
+      gap:7px;
+      margin:0 0 10px;
+  }}
+  .mm-profile-body-snapshot span {{
+      display:inline-flex;
+      align-items:center;
+      min-height:24px;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid #C7D2FE;
+      background:linear-gradient(135deg, #EEF2FF 0%, #ECFEFF 100%);
+      color:{ACCENT_TEXT};
+      font-size:0.68rem;
+      font-weight:730;
+      line-height:1.15;
+  }}
+  .mm-profile-body-snapshot span:nth-child(3) {{
+      border-color:#BBF7D0;
+      background:{SUCCESS_SOFT};
+      color:#15803D;
+  }}
+  .mm-profile-body-snapshot span:nth-child(4) {{
+      border-color:#A5F3FC;
+      background:#ECFEFF;
+      color:#0E7490;
+  }}
+  .mm-profile-body-snapshot span:nth-child(5) {{
+      border-color:#FDE68A;
+      background:{WARNING_SOFT};
+      color:#B45309;
+  }}
+  .mm-profile-quickline {{
+      display:inline-flex;
+      align-items:center;
+      max-width:100%;
+      margin-top:7px;
+      padding:5px 8px;
+      border-radius:8px;
+      border:1px solid #C7D2FE;
+      background:linear-gradient(135deg, #EEF2FF 0%, #ECFEFF 100%);
+      color:{ACCENT_TEXT};
+      font-size:0.68rem;
+      font-weight:730;
+      line-height:1.2;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      box-shadow:0 1px 2px rgba(79,70,229,.08);
   }}
   .mm-profile-metrics {{
       display:grid;
@@ -1939,6 +2022,56 @@ CSS = f"""
       text-transform:uppercase;
       letter-spacing:.07em;
   }}
+  .mm-profile-statline {{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0, 1fr));
+      gap:6px;
+      margin-top:8px;
+  }}
+  .mm-profile-statline div {{
+      min-width:0;
+      padding:7px 8px;
+      border-radius:8px;
+      border:1px solid #C7D2FE;
+      border-top:3px solid {ACCENT};
+      background:linear-gradient(180deg, rgba(238,242,255,.82), rgba(255,255,255,.94));
+      box-shadow:var(--shadow-sm);
+  }}
+  .mm-profile-statline div:nth-child(2) {{
+      border-color:#BBF7D0;
+      border-top-color:{SUCCESS};
+      background:linear-gradient(180deg, rgba(240,253,244,.86), rgba(255,255,255,.94));
+  }}
+  .mm-profile-statline div:nth-child(3) {{
+      border-color:#A5F3FC;
+      border-top-color:#0891B2;
+      background:linear-gradient(180deg, rgba(236,254,255,.88), rgba(255,255,255,.94));
+  }}
+  .mm-profile-statline div:nth-child(4) {{
+      border-color:#FDE68A;
+      border-top-color:{WARNING};
+      background:linear-gradient(180deg, rgba(255,251,235,.9), rgba(255,255,255,.94));
+  }}
+  .mm-profile-statline b {{
+      display:block;
+      color:{INK};
+      font-size:1.0rem;
+      line-height:1;
+      font-weight:780;
+      font-variant-numeric:tabular-nums;
+  }}
+  .mm-profile-statline span {{
+      display:block;
+      margin-top:5px;
+      color:{MUTED};
+      font-size:0.58rem;
+      font-weight:760;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+  }}
   .mm-console-title {{
       font-size:0.68rem;
       font-weight:750;
@@ -1954,11 +2087,13 @@ CSS = f"""
       margin:-2px 0 9px;
   }}
   .st-key-candidate_command .stSelectbox [data-baseweb="select"] > div {{
-      min-height:36px;
+      min-height:34px;
   }}
   .st-key-candidate_command .stButton>button,
-  .st-key-candidate_command [data-testid="stDownloadButton"] button {{
-      min-height:34px;
+  .st-key-candidate_command [data-testid="stDownloadButton"] button,
+  .st-key-candidate_command [data-testid="stPopoverButton"] {{
+      min-height:32px;
+      height:32px;
       font-size:0.78rem;
   }}
   .st-key-candidate_command .st-key-cand_prev button,
@@ -2620,15 +2755,15 @@ CSS = f"""
   .stTabs [data-baseweb="tab-list"] {{
       gap:9px;
       border-bottom:0;
-      padding:6px 0 10px;
+      padding:3px 0 5px;
       flex-wrap:wrap;
   }}
   .stTabs [data-baseweb="tab"] {{
       --tab-accent:{ACCENT};
       --tab-soft:{ACCENT_SOFT};
       --tab-border:#C7D2FE;
-      min-height:44px;
-      padding:8px 14px 8px 12px;
+      min-height:34px;
+      padding:5px 12px 5px 10px;
       border:1px solid var(--tab-border);
       border-left:4px solid var(--tab-accent);
       border-radius:8px;
@@ -2641,7 +2776,7 @@ CSS = f"""
   }}
   .stTabs [data-baseweb="tab"] p {{
       color:{INK} !important;
-      font-size:0.9rem !important;
+      font-size:0.84rem !important;
       font-weight:720 !important;
       line-height:1.2 !important;
   }}
@@ -2650,7 +2785,7 @@ CSS = f"""
       display:inline-block;
       width:8px;
       height:8px;
-      margin-right:8px;
+      margin-right:7px;
       border-radius:999px;
       background:var(--tab-accent);
       box-shadow:0 0 0 4px color-mix(in srgb, var(--tab-accent) 12%, transparent);
@@ -2854,8 +2989,8 @@ CSS = f"""
   }}
 
   .st-key-app_chrome {{
-      padding:4px 0 6px;
-      margin:0 0 8px;
+      padding:3px 0 5px;
+      margin:0 0 5px;
       background:rgba(248,250,252,.9);
       border-bottom:1px solid #DEE4EE;
   }}
@@ -2926,25 +3061,72 @@ CSS = f"""
       margin-top:4px;
   }}
   .st-key-candidate_command {{
-      padding:12px 14px !important;
-      margin-bottom:10px !important;
+      padding:10px 12px !important;
+      margin-bottom:0 !important;
+  }}
+  div[data-testid="stVerticalBlockBorderWrapper"]:has(.st-key-candidate_command) {{
+      margin-bottom:4px !important;
   }}
   .st-key-candidate_command > div > div[data-testid="stVerticalBlock"] {{
-      gap:0.55rem;
+      gap:0.35rem;
   }}
   .mm-profile-command-head {{
-      margin-bottom:8px;
+      margin-bottom:4px;
   }}
   .mm-profile-status {{
-      padding:4px 9px;
-      font-size:0.66rem;
+      padding:3px 8px;
+      font-size:0.62rem;
+  }}
+  .st-key-candidate_command .mm-hud-avatar {{
+      width:40px;
+      height:40px;
+      flex-basis:40px;
+  }}
+  .st-key-candidate_command .mm-hud-name {{
+      font-size:1.06rem;
   }}
   .mm-profile-role {{
-      font-size:1.04rem;
+      font-size:0.9rem;
       margin-top:4px;
   }}
   .mm-profile-source {{
       margin-top:4px;
+  }}
+  .mm-profile-labels {{
+      margin-top:6px;
+      max-height:48px;
+  }}
+  .mm-profile-body-labels {{
+      max-height:none;
+      margin:2px 0 10px;
+  }}
+  .mm-profile-body-snapshot {{
+      gap:6px;
+      margin-bottom:8px;
+  }}
+  .mm-profile-body-snapshot span {{
+      min-height:22px;
+      padding:3px 7px;
+      font-size:0.64rem;
+  }}
+  .mm-profile-quickline {{
+      margin-top:5px;
+      padding:4px 7px;
+      font-size:0.64rem;
+  }}
+  .mm-profile-statline {{
+      gap:6px;
+      margin-top:6px;
+  }}
+  .mm-profile-statline div {{
+      padding:6px 7px;
+  }}
+  .mm-profile-statline b {{
+      font-size:0.96rem;
+  }}
+  .mm-profile-statline span {{
+      margin-top:4px;
+      font-size:0.55rem;
   }}
 
   .st-key-search_hero > div > div[data-testid="stVerticalBlock"] {{

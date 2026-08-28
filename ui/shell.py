@@ -108,7 +108,7 @@ def render_topbar(*, n_pool: int, n_manual: int, review_n: int, abst: int,
     crumb = hist[-1] if hist else ""
 
     with st.container(key="app_chrome"):
-        nav_c, title_c, stat_c = st.columns([0.13, 0.42, 0.45], vertical_alignment="center")
+        nav_c, title_c, stat_c = st.columns([0.20, 0.22, 0.58], vertical_alignment="center")
         with nav_c:
             with st.container(horizontal=True, gap="small"):
                 st.button("Back", icon=":material/arrow_back:", key="back_btn",
@@ -173,7 +173,7 @@ def _status_pills(n_pool, n_manual, review_n, abst, cost, review_profiles,
             st.markdown(f"Parse cost **${cost:.3f}** (≈ ${cost / n:.3f} / resume). "
                         "Cached on disk — this demo replays for $0.00.")
             _go("Open System", "System", "kpi_go_system")
-        with st.popover("Export all", icon=":material/download:"):
+        with st.popover("Export", icon=":material/download:"):
             include_pii = not blind
             export_pool = list(pool or profiles)
             exclude_fields = {"raw_text"} if include_pii else {"raw_text", "sensitive"}
