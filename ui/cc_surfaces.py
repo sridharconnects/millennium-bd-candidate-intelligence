@@ -222,8 +222,12 @@ export default function (component) {
     examples.appendChild(b)
   })
 
-  const emitQuery = () => setStateValue("query", q.value)
-  q.oninput = emitQuery
+  // Deliberately NOT wired to oninput: pushing state (and triggering a Streamlit
+  // rerun) on every keystroke means a fast typist outruns the round-trip and
+  // characters arrive out of order or get dropped when the rerun re-hydrates this
+  // field mid-word. The query only needs to reach the server on submit (Enter /
+  // Run / an example pill) -- all three already read q.value directly -- so typing
+  // stays entirely local until then.
   q.onkeydown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault()

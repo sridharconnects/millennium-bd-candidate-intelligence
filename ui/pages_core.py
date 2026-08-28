@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import html
 import json
+import re
 import time
 import uuid
 from datetime import datetime, timedelta, timezone
@@ -523,6 +524,44 @@ def render_search(profiles, synth, pool, index, index_manifest, manifest, store,
         latency = (time.perf_counter() - t0) * 1000
         st.session_state.last_latency_ms = latency
         st.query_params["q"] = query
+
+        # Two UI-layer shortcuts on top of the already-computed `results`, never fed
+        # back into retrieval/scoring:
+        #  - a bare seniority code ("L3", "l4+") jumps straight to that level, since
+        #    neither query parser has vocabulary for taxonomy codes typed on their own;
+        #  - a name substring floats a known person to the top -- typing a name you
+        #    already know ("pull up Chen's profile") is navigation, not screening, and
+        #    CandidateProfile.searchable_text() never gives the scorer/embedder/BM25
+        #    index a name to begin with, so this only reorders what is already there.
+        # Both are skipped in blind-review mode, where identity and level are meant
+        # to stay out of view.
+        if query.strip() and not st.session_state.blind:
+            qlow = query.strip().lower()
+            boost_ids: set[str] = set()
+            boost_label = ""
+            m = re.fullmatch(r"l([1-7])(\+)?", qlow.replace(" ", ""))
+            if m:
+                lvl, at_least = int(m.group(1)), bool(m.group(2))
+                for p, *_ in results:
+                    if not p.seniority or not p.seniority.label.startswith("L"):
+                        continue
+                    try:
+                        plvl = int(p.seniority.label[1:])
+                    except ValueError:
+                        continue
+                    if plvl >= lvl if at_least else plvl == lvl:
+                        boost_ids.add(p.candidate_id)
+                boost_label = f"L{lvl}{'+' if at_least else ''} level match"
+            else:
+                boost_ids = {p.candidate_id for p, *_ in results
+                             if qlow in p.display_name(False).lower()}
+                boost_label = "name match"
+            if boost_ids:
+                boosted = [
+                    (p, score, (f"{boost_label} — {explain}" if explain else boost_label), chunks)
+                    for p, score, explain, chunks in results if p.candidate_id in boost_ids]
+                rest = [t for t in results if t[0].candidate_id not in boost_ids]
+                results = boosted + rest
 
         if "import_flash" in st.session_state:
             st.success(st.session_state.import_flash)
@@ -1598,7 +1637,7 @@ SAMPLE_JD = """Investment Analyst — Healthcare Long/Short (New York)
 Millennium is hiring a junior analyst for a fundamental healthcare long/short pod.
 
 Requirements:
-- 3-7 years of experience in healthcare equity research or healthcare investment banking
+- 3-10 years of experience in healthcare equity research or healthcare investment banking
 - Demonstrated financial modelling ability (three-statement, DCF)
 - Must be based in, or willing to relocate to, the United States
 - Bachelor's degree required
@@ -2245,7 +2284,7 @@ def _resume_match_studio(results, pool, index, client, query: str) -> None:
                          icon=":material/content_copy:"):
                 st.session_state.search_match_jd = query.strip()
                 st.rerun()
-        st.text_area("Job description", height=140, key="search_match_jd",
+        st.text_area("Job description", height=380, key="search_match_jd",
                      placeholder="Paste a job description or mandate…")
         n_cap = max(1, min(25, len(results) or 1))
         r1, r2, r3 = st.columns(3)
@@ -2323,13 +2362,17 @@ def _resume_match_studio(results, pool, index, client, query: str) -> None:
                     "Why": _match_why(r),
                     "Already": "yes" if r.candidate_id in st.session_state.shortlist else "",
                 })
-            st.dataframe(
-                pd.DataFrame(rows), hide_index=True, width="stretch",
-                column_config={
-                    "Score": st.column_config.ProgressColumn(
-                        min_value=0.0, max_value=1.0, format="%.3f"),
-                    "Why": st.column_config.TextColumn(width="large"),
-                })
+            if rows:
+                st.dataframe(
+                    pd.DataFrame(rows), hide_index=True, width="stretch",
+                    column_config={
+                        "Score": st.column_config.ProgressColumn(
+                            min_value=0.0, max_value=1.0, format="%.3f"),
+                        "Why": st.column_config.TextColumn(width="large"),
+                    })
+            else:
+                st.caption(f"{len(ranked)} candidate(s) ranked, but none reached the "
+                           f"{min_score:.2f} minimum score — lower \"Min score\" to see them.")
             if excluded:
                 with st.expander(f"{len(excluded)} gated out by must-haves"):
                     for r in excluded[:12]:
@@ -2360,7 +2403,28 @@ def _resume_match_studio(results, pool, index, client, query: str) -> None:
                 if jump:
                     st.session_state.page = "Shortlist"
                 st.rerun()
-        elif pq is None:
+        elif pq is not None:
+            # `ranked == []`: the mandate parsed and scoring ran, but every candidate
+            # in scope was gated out by a must-have. This used to render nothing at
+            # all -- indistinguishable from the button not having done anything.
+            byid = _byid(pool)
+            C.empty_state(
+                "No candidates match this mandate",
+                (f"All {len(excluded)} candidate(s) in scope were gated out by a "
+                 f"must-have requirement." if excluded else
+                 "Nobody was in scope to score — widen \"Score against\" to the "
+                 "whole pool, or clear filters.") +
+                " Relax a must-have on the Requirement control panel, or lower it "
+                "to a preference, and try again.",
+                icon="⌀")
+            if excluded:
+                with st.expander(f"{len(excluded)} gated out by must-haves"):
+                    for r in excluded[:12]:
+                        p = byid.get(r.candidate_id)
+                        nm = p.display_name(st.session_state.blind) if p else r.candidate_id
+                        st.markdown(f"**{html.escape(nm)}** — "
+                                    + html.escape("; ".join(r.exclusion_reasons)))
+        else:
             st.caption("Preview ranking to see scores before anything is shortlisted.")
 
 
